@@ -1,1 +1,0 @@
-# pets_project_client
