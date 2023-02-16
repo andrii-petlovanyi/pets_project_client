@@ -2,6 +2,7 @@ import React from "react"
 import { Suspense } from "react"
 import { Route, Routes } from "react-router-dom"
 import { Layout } from "./layout/Layout"
+import './index.css'
 
 import Login from "./pages/Login"
 import News from "./pages/News"
