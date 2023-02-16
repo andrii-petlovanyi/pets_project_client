@@ -3,14 +3,7 @@ import { Suspense } from "react"
 import { Route, Routes } from "react-router-dom"
 import { Layout } from "./layout/Layout"
 import './index.css'
-
-import Login from "./pages/Login"
-import News from "./pages/News"
-import NotFound from "./pages/NotFound"
-import Notices from "./pages/Notices"
-import OurFriends from "./pages/OurFriends"
-import Register from "./pages/Register"
-import UserDashboard from "./pages/UserDashboard"
+import { Login, News, NotFound, Notices, OurFriends, Register, UserDashboard } from "./pages"
 
 function App() {
 
