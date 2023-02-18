@@ -50,7 +50,7 @@ const search = defineStyle({
 
     color: '#535353',
     backgroundColor: 'white',
-    boxShadow: 'inputShadow',
+    boxShadow: 'mainShadow',
 
     fontFamily: 'Inter',
     fontWeight: '500',

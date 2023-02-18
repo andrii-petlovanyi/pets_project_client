@@ -11,8 +11,8 @@ const breakpoints = {
 };
 
 const shadows = {
-  cardShadow: 'rgba(0, 0, 0, 0.3) 0px 1px 4px',
-  inputShadow: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+  mainShadow: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+  secondShadow: '7px 4px 14px rgba(0, 0, 0, 0.11)',
 };
 
 const colors = {
@@ -25,6 +25,7 @@ const colors = {
   labelColor: 'rgba(17, 17, 17, 0.6)',
 
   blurBadge: 'rgba(255, 255, 255, 0.6)',
+  backdropFilter: 'blur(10px)',
 };
 
 const styles = {
