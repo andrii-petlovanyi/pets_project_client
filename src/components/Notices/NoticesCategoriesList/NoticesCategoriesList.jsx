@@ -1,17 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { NoticeCategoryItem } from '../NoticeCategoryItem/NoticeCategoryItem';
+// import React from 'react';
+// import PropTypes from 'prop-types';
 
-export const NoticesCategoriesList = () => {
-  const petCards = useSelector(); // жду редакс
-  const visiblePetCards = useSelector(); // жду редакс
+// // import { useSelector } from 'react-redux';
+// import { NoticeCategoryItem } from '../../Notices';
 
-  return (
-    <div>
-      {petCards &&
-        visiblePetCards.map(item => (
-          <NoticeCategoryItem key={item._id} item={item} />
-        ))}
-    </div>
-  );
-};
+// export const NoticesCategoriesList = ({ itemList }) => {
+//   return (
+//     <ul>
+//       {/* {itemList?.map(item => (
+//           <NoticeCategoryItem key={item._id} item={item} />
+//         ))} */}
+//     </ul>
+//   );
+// };
+
+// NoticesCategoriesList.propTypes = {
+//   itemList: PropTypes.object,
+// };
