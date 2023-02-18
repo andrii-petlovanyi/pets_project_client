@@ -15,6 +15,16 @@ const theme = createTheme({
     },
   },
 
+  breakpoints: {
+    values: {
+      xs: 320,
+      sm: 480,
+      md: 768,
+      lg: 960,
+      xl: 1280,
+    },
+  },
+
   components: {
     MuiButton: {
       variants: [

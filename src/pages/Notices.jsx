@@ -5,6 +5,7 @@ import {
   NoticesSearch,
 } from '../components/Notices';
 
+
 const Notices = () => {
   const [, setCategory] = useState('sell'); /** category */
   const [, setSearch] = useState(''); /** search */
@@ -28,6 +29,7 @@ const Notices = () => {
       <NoticesSearch onSubmit={onSubmit} />
       <NoticesCategoriesNav onClick={onClick} />
       {/* <NoticesCategoriesList itemList={category + search} /> */}
+
     </div>
   );
 };
