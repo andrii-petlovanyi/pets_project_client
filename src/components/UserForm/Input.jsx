@@ -1,10 +1,17 @@
-// import React from 'react';
+// import * as React from 'react';
+import { styled } from '@mui/system';
 
-// const Input = ({ label, register, required }) => (
-//   <>
-//     <label>{label}</label>
-//     <input {...register(label, { required })} />
-//   </>
-// );
+export const Input = styled('input')({
+  //   color: 'darkslategray',
+  //     backgroundColor: 'aliceblue',
+  width: 216,
+  height: 32,
+  paddingTop: 4,
+  paddingBottom: 4,
+  paddingLeft: 12,
+  borderRadius: 40,
+});
 
-// export default Input;
+// export default function BasicUsage() {
+//   return <Input>Styled input</Input>;
+// }
