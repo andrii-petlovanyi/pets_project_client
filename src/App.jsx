@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom"
 import { Layout } from "./layout/Layout"
 import './index.css'
 import { Login, News, NotFound, Notices, OurFriends, Register, UserDashboard } from "./pages"
+import UiKit from "./pages/UiKit"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
             <Route path="news" element={<News />} />
             <Route path="notices" element={<Notices />} />
             <Route path="partners" element={<OurFriends />} />
+            <Route path="uikit" element={<UiKit />} />
             {/* </Route> */}
 
             {/* <Route element={<PublicRoute />}> */}
