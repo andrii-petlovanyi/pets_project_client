@@ -1,11 +1,11 @@
+import { Box, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import {
-  //   NoticesCategoriesList,
+  NoticesCategoriesList,
   NoticesCategoriesNav,
   NoticesSearch,
 } from '../components/Notices';
 import { useGetNoticesListQuery } from '../redux/notices/noticesApiSlice';
-
 
 const Notices = () => {
   const [category, setCategory] = useState('sell'); /** category */
@@ -15,7 +15,7 @@ const Notices = () => {
     page: 1,
     limit: 10,
     search,
-    category
+    category,
   });
   const { notices } = data || [];
 
@@ -33,19 +33,21 @@ const Notices = () => {
   };
 
   return (
-    <div>
-      <h1>Find your favorite pet</h1>
+    <Box as="section">
+      <Heading as="h1" variant={'main'}>
+        Find your favorite pet
+      </Heading>
 
       <NoticesSearch onSubmit={onSubmit} />
       <NoticesCategoriesNav onClick={onClick} />
-      {/* <NoticesCategoriesList itemList={category + search} /> */}
+      <NoticesCategoriesList itemList={notices} />
 
-      {!isLoading
-        ? notices.length > 0 && notices.map(n => <h2 key={n._id}>{n.title}</h2>)
-        : <>Loading...</>
-      }
-
-    </div>
+      {!isLoading ? (
+        notices.length > 0 && notices.map(n => <h2 key={n._id}>{n.title}</h2>)
+      ) : (
+        <>Loading...</>
+      )}
+    </Box>
   );
 };
 
