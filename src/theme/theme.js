@@ -66,7 +66,7 @@ const components = {
       dialog: {
         // maxWidth: ['95%', '95%', '95%'],
         // minWidth: '95%',
-        bg: '',
+        bg: 'mainColor',
       },
     },
   },
