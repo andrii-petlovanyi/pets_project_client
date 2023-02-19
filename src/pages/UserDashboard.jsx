@@ -33,7 +33,7 @@ const UserDashboard = () => {
         <Typography color={'primary'}>Test 1</Typography>
         <Typography color={'secondary'}>Test 1</Typography>
       </Box>
-      <form
+      {/* <form
         onSubmit={handleSubmit(onSubmit)}
         style={{
           display: 'flex',
@@ -76,7 +76,7 @@ const UserDashboard = () => {
           register={register}
           error={errors.city}
         ></FormInput>
-      </form>
+      </form> */}
     </div>
   );
 };
