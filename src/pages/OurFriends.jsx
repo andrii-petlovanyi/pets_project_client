@@ -52,7 +52,8 @@ const OurFriends = () => {
                   fontSize={{ base: '12px', lg: '18px', xl: '20px' }}
                   fontWeight={'700'}
                   lineHeight={{ base: '14px', lg: '22px', xl: '27px' }}
-                  key={f.url}
+                  href={f.url}
+                  target={'_blank'}
                 >
                   {f.title}
                 </Link>
