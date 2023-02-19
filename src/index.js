@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@mui/system';
+import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -15,9 +15,9 @@ root.render(
     <BrowserRouter basename="/">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <ThemeProvider theme={theme}>
+          <ChakraProvider theme={theme}>
             <App />
-          </ThemeProvider>
+          </ChakraProvider>
         </PersistGate>
       </Provider>
     </BrowserRouter>

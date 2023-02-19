@@ -6,18 +6,18 @@ const initialState = {
   isLoggedIn: false,
 };
 
-const authSlice = createSlice({
-  name: 'auth',
+const usersSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
     register(state, { payload }) {
       state.user = payload.user;
-      state.token = payload.token;
+      state.token = payload.user.accessToken;
       state.isLoggedIn = true;
     },
     logIn: (state, { payload }) => {
       state.user = payload.user;
-      state.token = payload.token;
+      state.token = payload.user.accessToken;
       state.isLoggedIn = true;
     },
     logOut: state => {
@@ -31,5 +31,5 @@ const authSlice = createSlice({
     },
   },
 });
-export const { register, logIn, logOut, refresh } = authSlice.actions;
-export default authSlice.reducer;
+export const { register, logIn, logOut, refresh } = usersSlice.actions;
+export default usersSlice.reducer;

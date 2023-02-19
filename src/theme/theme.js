@@ -1,103 +1,87 @@
-import { createTheme } from '@mui/material/styles';
+import { extendTheme } from '@chakra-ui/react';
+import { buttonTheme } from './components/buttons.extend';
+import { inputTheme } from './components/inputs.extend';
+import { textareaTheme } from './components/textarea.extend';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#111111',
-      background: '#FDF7F2',
+const breakpoints = {
+  sm: '320px',
+  md: '480px',
+  lg: '768px',
+  xl: '1280px',
+};
+
+const shadows = {
+  mainShadow: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+  secondShadow: '7px 4px 14px rgba(0, 0, 0, 0.11)',
+};
+
+const colors = {
+  white: '#FFFFFF',
+  mainColor: '#FDF7F2',
+  mainOrange: '#F59256',
+  accentOrange: '#FF6101',
+  textColor: '#111111',
+  secondaryTextColor: '#111321',
+  labelColor: 'rgba(17, 17, 17, 0.6)',
+
+  blurBadge: 'rgba(255, 255, 255, 0.6)',
+  backdropFilter: 'blur(10px)',
+};
+
+const styles = {
+  global: () => ({
+    body: {
+      bg: 'mainColor',
+      color: 'textColor',
     },
-    secondary: {
-      main: '#F59256',
-      background: '#ffffff',
+  }),
+};
+
+const fonts = {
+  heading: `'Manrope', sans-serif`,
+  body: `'Manrope', sans-serif`,
+};
+
+const components = {
+  Link: {
+    baseStyle: {},
+    variants: {
+      activeLink: {
+        color: 'primaryTextColor',
+        textDecoration: 'none',
+        transition: '350ms ease',
+        _hover: { textDecoration: 'none', color: 'hoverColor' },
+        _focus: { boxShadow: 'none' },
+        _activeLink: {
+          color: '#fff',
+        },
+      },
+      secondary: {
+        //...define other variants
+      },
     },
-    custom: {
-      subTitle: '#F59256',
+  },
+  Modal: {
+    baseStyle: {
+      dialog: {
+        // maxWidth: ['95%', '95%', '95%'],
+        // minWidth: '95%',
+        bg: 'mainColor',
+      },
     },
   },
 
-  components: {
-    MuiButton: {
-      variants: [
-        {
-          props: { variant: 'outlineBG' },
-          style: {
-            textTransform: 'none',
-            background: '#ffffff',
-            border: '2px solid #F59256',
-            borderRadius: '40px',
-            padding: '8px 28px',
-            fontFamily: 'Manrope',
-            fontWeight: 500,
-            fontSize: '20px',
-            lineHeight: '1.35',
-            letterSpacing: '0.04em',
+  Input: inputTheme,
+  Textarea: textareaTheme,
+  Button: buttonTheme,
+};
 
-            '&:hover': {
-              borderColor: '#FF6101',
-              background: '#ffffff',
-            },
-          },
-        },
-        {
-          props: { variant: 'outlineBGActive' },
-          style: {
-            textTransform: 'none',
-            background: '#F59256',
-            color: '#ffffff',
-            border: '2px solid #F59256',
-            borderRadius: '40px',
-            padding: '8px 28px',
-            fontFamily: 'Manrope',
-            fontWeight: 500,
-            fontSize: '20px',
-            lineHeight: '1.35',
-            letterSpacing: '0.04em',
-
-            '&:hover': {
-              borderColor: '#FF6101',
-              background: '#FF6101',
-            },
-          },
-        },
-
-        {
-          props: { variant: 'outline' },
-          style: {
-            width: '248px',
-            height: '38px',
-            display: 'flex',
-            alignItems: 'center',
-
-            textTransform: 'none',
-            fontFamily: 'Manrope',
-            fontWeight: 500,
-            fontSize: '16px',
-            lineHeight: '1.37',
-            letterSpacing: '0.04em',
-            color: '#F59256',
-            border: '2px solid #F59256',
-            borderRadius: '40px',
-
-            '&:hover': {
-              borderColor: '#FF6101',
-              color: '#FF6101',
-              background: 'none',
-            },
-          },
-        },
-      ],
-    },
-    MuiIconButton: {
-      variants: [
-        {
-          props: { variant: 'custom' },
-          style: {
-            border: ``,
-          },
-        },
-      ],
-    },
-  },
+const theme = extendTheme({
+  colors,
+  shadows,
+  styles,
+  components,
+  breakpoints,
+  fonts,
 });
-
 export default theme;

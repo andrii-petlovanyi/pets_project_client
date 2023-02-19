@@ -10,9 +10,12 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import authApiSlice from './auth/authApiSlice';
-import authReducer from './auth/authSlice';
+import userApiSlice from './user/userApiSlice';
+import userReducer from './user/userSlice';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import newsApiSlice from './news/newsApisSlice';
+import noticesApiSlice from './notices/noticesApiSlice';
+import friendsApiSlice from './friends/friendsApiSlice';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -20,18 +23,24 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  authApiSlice.middleware,
+  userApiSlice.middleware,
+  newsApiSlice.middleware,
+  noticesApiSlice.middleware,
+  friendsApiSlice.middleware,
 ];
 
-const authPersistConfig = {
-  key: 'auth',
+const userPersistConfig = {
+  key: 'user',
   storage,
   whitelist: ['token'],
 };
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authPersistConfig, authReducer),
-    [authApiSlice.reducerPath]: authApiSlice.reducer,
+    auth: persistReducer(userPersistConfig, userReducer),
+    [userApiSlice.reducerPath]: userApiSlice.reducer,
+    [noticesApiSlice.reducerPath]: noticesApiSlice.reducer,
+    [newsApiSlice.reducerPath]: newsApiSlice.reducer,
+    [friendsApiSlice.reducerPath]: friendsApiSlice.reducer,
   },
   middleware,
 });

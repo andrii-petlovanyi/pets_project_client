@@ -9,6 +9,8 @@ const Header = () => {
                 <NavLink to='news'>News</NavLink>
                 <NavLink to='notices'>Find pet</NavLink>
                 <NavLink to='partners'>Our friends</NavLink>
+                <NavLink to='uikit'>UI Kit</NavLink>
+
             </nav>
 
             <div style={{ marginLeft: 'auto' }}>
