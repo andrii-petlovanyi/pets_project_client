@@ -32,6 +32,7 @@ export const NoticesSearch = ({ onSubmit }) => {
         height={{ base: '40px', lg: '44px' }}
         my={{ base: '28px', lg: '40px' }}
         type="submit"
+        _hover={{ cursor: 'pointer' }}
       >
         <AiOutlineSearch size={'24'} />
       </InputRightElement>
