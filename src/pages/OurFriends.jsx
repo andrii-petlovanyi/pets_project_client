@@ -26,24 +26,22 @@ const OurFriends = () => {
       >
         Our friends
       </Heading>
-      <Flex flexWrap={'wrap'} gap={{ base: '12px', lg: '32px', xl: '27px' }} >
+      <Flex flexWrap={'wrap'} gap={{ base: '12px', lg: '32px', xl: '27px' }}>
         {!isLoading ? (
           friends.length > 0 &&
           friends.map(f => (
             <Card
               w={{
                 base: '280px',
-                sm: '280px',
                 lg: '336px',
                 xl: '395px',
               }}
               h={{
-                sm: '192px',
+                base: '192px',
                 lg: '246px',
                 xl: '287px',
               }}
-                  key={f._id}
-                  
+              key={f._id}
             >
               <CardHeader
                 align={'center'}
