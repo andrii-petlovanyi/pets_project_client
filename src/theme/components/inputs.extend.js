@@ -61,7 +61,7 @@ const search = defineStyle({
 
     _focus: {
       borderColor: 'accentOrange',
-      boxShadow: '0 0 1px 1px #D3D3D333',
+      boxShadow: 'mainShadow',
     },
     _hover: {
       borderColor: 'accentOrange',
