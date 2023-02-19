@@ -17,7 +17,9 @@ import { useGetUserQuery } from './redux/user/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import userSelectors from './redux/user/user-selectors';
 import { refresh } from './redux/user/userSlice';
-// import { NoticesCategoriesList } from './components/Notices';
+import { NoticesCategoriesList } from './components/Notices/NoticesLists/NoticesCategoriesList';
+import { NoticesFavoritesList } from './components/Notices/NoticesLists/NoticesFavoritesList';
+import { NoticesOwnerList } from './components/Notices/NoticesLists/NoticesOwnerList';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,14 +43,23 @@ function App() {
             <Route index element={<UserDashboard />} />
             <Route path="news" element={<News />} />
             <Route path="notices" element={<Notices />}>
-              <Route path="sell" element={<Notices prop={'sell'} />} />
+              <Route path="sell" element={<NoticesCategoriesList category={'sell'} />} />
               <Route
                 path="lost-found"
-                element={<Notices prop={'lost-found'} />}
+                element={<NoticesCategoriesList category={'lost-found'} />}
               />
-              {/* <Route path="sell" element={<NoticesCategoriesList />} />
-              <Route path="sell" element={<NoticesCategoriesList />} />
-              <Route path="sell" element={<NoticesCategoriesList />} /> */}
+              <Route
+                path="free"
+                element={<NoticesCategoriesList category={'free'} />}
+              />
+              <Route
+                path="favorites"
+                element={<NoticesFavoritesList />}
+              />
+              <Route
+                path="owner"
+                element={<NoticesOwnerList />}
+              />
             </Route>
             <Route path="partners" element={<OurFriends />} />
             <Route path="uikit" element={<UiKit />} />
