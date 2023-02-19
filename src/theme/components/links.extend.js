@@ -27,7 +27,7 @@ const tabLink = defineStyle({
   lineHeight: '1.37',
   letterSpacing: '0.04em',
 
-  transition: 'background 500ms ease-in-out, color 250ms ease-in-out',
+  transition: 'background 250ms ease-in-out, color 250ms ease-in-out',
 
   _hover: {
     borderColor: 'accentOrange',
