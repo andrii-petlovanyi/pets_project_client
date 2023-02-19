@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { useSearchParams } from 'react-router-dom';
 
 export const NoticesSearch = ({ onSubmit }) => {
-  const [inputValue, setInputValue] = useState();
+  // const [inputValue, setInputValue] = useState('');
+  const [, setSearchParams] = useSearchParams()
 
   const onInputChange = e => {
+    e.preventDefault()
     const { value } = e.target;
-    setInputValue(() => value);
+    // setInputValue(() => value);
+    setSearchParams({ search: value })
   };
 
   return (
@@ -21,7 +25,7 @@ export const NoticesSearch = ({ onSubmit }) => {
     >
       <Input
         variant={'search'}
-        value={inputValue}
+        // value={inputValue}
         onChange={onInputChange}
         type="text"
         title="Input part of notice title"
