@@ -1,19 +1,29 @@
 import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Input } from '../components/UserForm/Input';
-// import BasicUsage from '../components/UserForm/Input';
-// import { BasicUsage } from '../../src/components/UserForm/Input';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { FormInput } from '../components/UserForm/FormInput';
+
+const schema = yup
+  .object({
+    name: yup.string().max(20).required(),
+    // age: yup.number().positive().integer().required(),
+  })
+  .required();
 
 const UserDashboard = () => {
   const {
     register,
     handleSubmit,
-    // watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   // console.log(register);
+
   const onSubmit = data => console.log(data);
+
   return (
     <div>
       <Button variant="outlineBG">sell</Button>
@@ -23,24 +33,49 @@ const UserDashboard = () => {
         <Typography color={'primary'}>Test 1</Typography>
         <Typography color={'secondary'}>Test 1</Typography>
       </Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="name">Name</label>
-        <Input id="name" {...register('name', { required: true })} />
-        {errors.exampleRequired && <span>This field is required</span>}
-        {/* <p>{errors.firstName?.message}</p> */}
-        {/* <Button type="submit"></Button> */}
-        {/* <input type="submit" />
-        <input {...register('email', { required: true })} />
-        <p>{errors.firstName?.message}</p>
-        <input type="submit" />
-        <input {...register('birthday')} />
-        <input type="submit" />
-        <input {...register('phone')} />
-        <input type="submit" />
-        <input {...register('city', { required: true })} />
-        {errors.exampleRequired && <span>This field is required</span>}
-        <input type="submit" /> */}
-        {/* include validation with required or other standard HTML validation rules */}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          background: '#FFFFFF',
+          boxShadow: '7px 4px 14px rgba(0, 0, 0, 0.11)',
+          borderRadius: '0px 40px 40px 0px',
+        }}
+      >
+        <FormInput
+          id="name"
+          type="name"
+          name="name"
+          label="Name"
+          register={register}
+          error={errors.name}
+        ></FormInput>
+
+        <FormInput
+          id="email"
+          type="email"
+          name="email"
+          label="Email"
+          register={register}
+          error={errors.email}
+        ></FormInput>
+        <FormInput
+          id="phone"
+          type="phone"
+          name="phone"
+          label="Phone"
+          register={register}
+          error={errors.phone}
+        ></FormInput>
+        <FormInput
+          id="city"
+          type="city"
+          name="city"
+          label="City"
+          register={register}
+          error={errors.city}
+        ></FormInput>
       </form>
     </div>
   );
