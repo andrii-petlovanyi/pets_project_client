@@ -19,7 +19,7 @@ const noticesApiSlice = createApi({
   tagTypes: ['notices'],
   endpoints: builder => ({
     getNoticesList: builder.query({
-      query: ({ page = 1, limit = 10, search, category = 'sel' }) =>
+      query: ({ page = 1, limit = 10, search, category = 'sell' }) =>
         `/?category=${category}&limit=${limit}&page=${page}${
           search ? '&search=' + search : ''
         }`,

@@ -5,6 +5,7 @@ const main = defineStyle({
   fontFamily: 'Manrope',
   fontWeight: '700',
   lineHeight: '1.37',
+  marginTop: () => ({ base: '42px', lg: '88px', xl: '59px' }),
   fontSize: () => ({ base: '24px', lg: '48px' }),
 });
 

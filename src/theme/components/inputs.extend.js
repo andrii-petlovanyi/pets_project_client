@@ -42,7 +42,8 @@ const search = defineStyle({
     display: 'flex',
     alignItems: 'center',
     padding: '10px 20px',
-    height: '44px',
+    height: () => ({ base: '40px', lg: '44px' }),
+    marginY: () => ({ base: '28px', lg: '40px' }),
 
     borderRadius: '20px',
     border: '1px solid',
