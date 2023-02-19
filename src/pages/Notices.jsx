@@ -4,11 +4,20 @@ import {
   NoticesCategoriesNav,
   NoticesSearch,
 } from '../components/Notices';
+import { useGetNoticesListQuery } from '../redux/notices/noticesApiSlice';
 
 
 const Notices = () => {
-  const [, setCategory] = useState('sell'); /** category */
-  const [, setSearch] = useState(''); /** search */
+  const [category, setCategory] = useState('sell'); /** category */
+  const [search, setSearch] = useState(''); /** search */
+
+  const { data, isLoading } = useGetNoticesListQuery({
+    page: 1,
+    limit: 10,
+    search,
+    category
+  });
+  const { notices } = data || [];
 
   const onClick = e => {
     e.preventDefault();
@@ -26,9 +35,15 @@ const Notices = () => {
   return (
     <div>
       <h1>Find your favorite pet</h1>
+
       <NoticesSearch onSubmit={onSubmit} />
       <NoticesCategoriesNav onClick={onClick} />
       {/* <NoticesCategoriesList itemList={category + search} /> */}
+
+      {!isLoading
+        ? notices.length > 0 && notices.map(n => <h2 key={n._id}>{n.title}</h2>)
+        : <>Loading...</>
+      }
 
     </div>
   );
