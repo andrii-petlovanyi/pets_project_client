@@ -6,15 +6,6 @@ import PropTypes from 'prop-types';
 
 export const ButtonUserForm = ({ handleClick, name, flag }) => {
   return (
-    // {
-    //   name: true,
-    //   email: false,
-    //   birthday: true,
-    //   phone: true,
-    //   city: true,
-    // }
-
-    //name=phone
     <>
       <IconButton
         onClick={flag[name] ? () => handleClick(name) : () => handleClick()}
@@ -46,5 +37,11 @@ export const ButtonUserForm = ({ handleClick, name, flag }) => {
 ButtonUserForm.propTypes = {
   handleClick: PropTypes.func,
   name: PropTypes.string,
-  flag: PropTypes.any,
+  flag: PropTypes.shape({
+    name: PropTypes.bool.isRequired,
+    email: PropTypes.bool.isRequired,
+    birthday: PropTypes.bool,
+    phone: PropTypes.bool,
+    city: PropTypes.bool.isRequired,
+  }),
 };

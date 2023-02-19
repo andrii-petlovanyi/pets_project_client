@@ -7,6 +7,9 @@ import { MdPhotoCamera } from 'react-icons/md';
 import { IoIosLogOut } from 'react-icons/io';
 import React, { useState } from 'react';
 import { ButtonUserForm } from '../components/UserForm/IconButton';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { calendarFunc } from '../components/UserForm/Calendar';
 
 const UserDashboard = () => {
   const { control, handleSubmit } = useForm({
@@ -35,7 +38,10 @@ const UserDashboard = () => {
     setIsDisabled({ ...INITIAL_DISABLED, [data]: false });
   };
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    console.log(data);
+    setIsDisabled({ ...INITIAL_DISABLED });
+  };
 
   return (
     <div>
@@ -100,7 +106,15 @@ const UserDashboard = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  variant={'form'}
+                  backgroundColor={isDisabled.name ? 'white' : 'mainColor'}
+                  border={
+                    isDisabled.name
+                      ? 'white'
+                      : '1px solid rgba(245, 146, 86, 0.5)'
+                  }
+                  borderRadius={'40px'}
+                  // outline={'0'}
+                  _hover={{ cursor: 'auto', backgroundColor: 'white' }}
                   maxW={'216'}
                   maxH={'32'}
                   p={'4px 12px'}
@@ -108,6 +122,7 @@ const UserDashboard = () => {
                 />
               )}
             />
+
             {isDisabled.name ? (
               <ButtonUserForm
                 handleClick={handleEdit}
@@ -168,11 +183,16 @@ const UserDashboard = () => {
           justifyContent={'space-around'}
           mb={'15'}
         >
-          <FormLabel display={'flex'} alignItems={'center'} m={'0'}>
+          <FormLabel
+            htmlFor={'birthday'}
+            display={'flex'}
+            alignItems={'center'}
+            m={'0'}
+          >
             <Text mb={'0'} mr={'0'} w={'107px'}>
               Birthday:
             </Text>
-            <Controller
+            {/* <Controller
               name="birthday"
               control={control}
               render={({ field }) => (
@@ -185,7 +205,24 @@ const UserDashboard = () => {
                   disabled={isDisabled.birthday}
                 />
               )}
+              
+            /> */}
+            <Controller
+              name="birthday"
+              control={control}
+              render={({ field }) => (
+                // <Calendar />
+                <DatePicker
+                  renderCustomHeader={calendarFunc}
+                  disabled={isDisabled.birthday}
+                  onChange={date => field.onChange(date)}
+                  selected={field.value}
+                  dateFormat="dd.MM.yyyy"
+                  maxDate={Date.now()}
+                />
+              )}
             />
+
             {isDisabled.birthday ? (
               <ButtonUserForm
                 handleClick={handleEdit}
