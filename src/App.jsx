@@ -1,14 +1,23 @@
-import React, { useEffect } from "react"
-import { Suspense } from "react"
-import { Route, Routes } from "react-router-dom"
-import { Layout } from "./layout/Layout"
-import './index.css'
-import { Login, News, NotFound, Notices, OurFriends, Register, UserDashboard } from "./pages"
-import UiKit from "./pages/UiKit"
-import { useGetUserQuery } from "./redux/user/userApiSlice"
-import { useDispatch, useSelector } from "react-redux"
-import userSelectors from "./redux/user/user-selectors"
-import { refresh } from "./redux/user/userSlice"
+import React, { useEffect } from 'react';
+import { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './layout/Layout';
+import './index.css';
+import {
+  Login,
+  News,
+  NotFound,
+  Notices,
+  OurFriends,
+  Register,
+  UserDashboard,
+} from './pages';
+import UiKit from './pages/UiKit';
+import { useGetUserQuery } from './redux/user/userApiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import userSelectors from './redux/user/user-selectors';
+import { refresh } from './redux/user/userSlice';
+// import { NoticesCategoriesList } from './components/Notices';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,14 +33,23 @@ function App() {
   }, [data]);
 
   return (
-    (!isLoading && (
+    !isLoading && (
       <Suspense fallback={false}>
         <Routes>
           <Route path="/" element={<Layout />}>
             {/* <Route element={<PrivateRoute />}> */}
             <Route index element={<UserDashboard />} />
             <Route path="news" element={<News />} />
-            <Route path="notices" element={<Notices />} />
+            <Route path="notices" element={<Notices />}>
+              <Route path="sell" element={<Notices prop={'sell'} />} />
+              <Route
+                path="lost-found"
+                element={<Notices prop={'lost-found'} />}
+              />
+              {/* <Route path="sell" element={<NoticesCategoriesList />} />
+              <Route path="sell" element={<NoticesCategoriesList />} />
+              <Route path="sell" element={<NoticesCategoriesList />} /> */}
+            </Route>
             <Route path="partners" element={<OurFriends />} />
             <Route path="uikit" element={<UiKit />} />
             {/* </Route> */}
@@ -44,8 +62,8 @@ function App() {
           </Route>
         </Routes>
       </Suspense>
-    ))
-  )
+    )
+  );
 }
 
-export default App
+export default App;
