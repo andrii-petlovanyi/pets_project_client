@@ -5,14 +5,12 @@ import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useSearchParams } from 'react-router-dom';
 
 export const NoticesSearch = ({ onSubmit }) => {
-  // const [inputValue, setInputValue] = useState('');
-  const [, setSearchParams] = useSearchParams()
+  const [, setSearchParams] = useSearchParams();
 
   const onInputChange = e => {
-    e.preventDefault()
+    e.preventDefault();
     const { value } = e.target;
-    // setInputValue(() => value);
-    setSearchParams({ search: value })
+    setSearchParams({ search: value });
   };
 
   return (
@@ -25,7 +23,6 @@ export const NoticesSearch = ({ onSubmit }) => {
     >
       <Input
         variant={'search'}
-        // value={inputValue}
         onChange={onInputChange}
         type="text"
         title="Input part of notice title"

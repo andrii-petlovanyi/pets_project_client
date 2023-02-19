@@ -43,23 +43,20 @@ function App() {
             <Route index element={<UserDashboard />} />
             <Route path="news" element={<News />} />
             <Route path="notices" element={<Notices />}>
-              <Route path="sell" element={<NoticesCategoriesList category={'sell'} />} />
+              <Route
+                path="sell"
+                element={<NoticesCategoriesList category={'sell'} />}
+              />
               <Route
                 path="lost-found"
                 element={<NoticesCategoriesList category={'lost-found'} />}
               />
               <Route
-                path="free"
-                element={<NoticesCategoriesList category={'free'} />}
+                path="for-free"
+                element={<NoticesCategoriesList category={'for-free'} />}
               />
-              <Route
-                path="favorites"
-                element={<NoticesFavoritesList />}
-              />
-              <Route
-                path="owner"
-                element={<NoticesOwnerList />}
-              />
+              <Route path="favorite" element={<NoticesFavoritesList />} />
+              <Route path="own" element={<NoticesOwnerList />} />
             </Route>
             <Route path="partners" element={<OurFriends />} />
             <Route path="uikit" element={<UiKit />} />

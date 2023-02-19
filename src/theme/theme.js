@@ -46,7 +46,9 @@ const fonts = {
 };
 
 const components = {
+
   Link: linksTheme,
+
   Modal: {
     baseStyle: {
       dialog: {
