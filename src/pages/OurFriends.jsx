@@ -18,28 +18,32 @@ const OurFriends = () => {
 
   return (
     <>
-      <Heading>Our friends</Heading>
-      <Flex flexWrap={'wrap'} gap={{ base: '12px', lg: '32px', xl: '27px' }}>
+      <Heading
+        fontSize={{ base: '24px', lg: '48px' }}
+        align={'center'}
+        mt={{ base: '42px', lg: '88px', xl: '61px' }}
+        mb={{ base: '28px', lg: '40px', xl: '60px' }}
+      >
+        Our friends
+      </Heading>
+      <Flex flexWrap={'wrap'} gap={{ base: '12px', lg: '32px', xl: '27px' }} >
         {!isLoading ? (
           friends.length > 0 &&
           friends.map(f => (
             <Card
-             
-              w={
-                {
-                  base: '280px',
-                  sm: '280px',
-                  lg: '336px',
-                  xl: '395px',
-                }
-               
-              }
+              w={{
+                base: '280px',
+                sm: '280px',
+                lg: '336px',
+                xl: '395px',
+              }}
               h={{
                 sm: '192px',
                 lg: '246px',
                 xl: '287px',
               }}
-              key={f._id}
+                  key={f._id}
+                  
             >
               <CardHeader
                 align={'center'}
