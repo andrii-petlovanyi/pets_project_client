@@ -2,6 +2,7 @@ import { extendTheme } from '@chakra-ui/react';
 import { buttonTheme } from './components/buttons.extend';
 import { headingTheme } from './components/heading.extend';
 import { inputTheme } from './components/inputs.extend';
+import { linksTheme } from './components/links.extend';
 import { textareaTheme } from './components/textarea.extend';
 
 const breakpoints = {
@@ -18,6 +19,7 @@ const shadows = {
 
 const colors = {
   white: '#FFFFFF',
+  black: '#000000',
   mainColor: '#FDF7F2',
   mainOrange: '#F59256',
   accentOrange: '#FF6101',
@@ -44,53 +46,9 @@ const fonts = {
 };
 
 const components = {
-  Link: {
-    baseStyle: {},
-    variants: {
-      activeLink: {
-        color: 'primaryTextColor',
-        textDecoration: 'none',
-        transition: '350ms ease',
-        _hover: { textDecoration: 'none', color: 'hoverColor' },
-        _focus: { boxShadow: 'none' },
-        _activeLink: {
-          color: '#fff',
-        },
-      },
-      tabLink: {
-        display: 'flex',
-        justifyContent: 'center',
 
-        background: 'white',
-        color: 'textColor',
+  Link: linksTheme,
 
-        border: '2px solid',
-        borderColor: 'mainOrange',
-        borderRadius: '40px',
-        padding: () => ({ base: '8px 28px', lg: '10px 28px' }),
-
-        fontFamily: 'Manrope',
-        fontWeight: '500',
-        fontSize: () => ({ base: '14px', lg: '20px' }),
-        lineHeight: '1.37',
-        letterSpacing: '0.04em',
-
-        transition: 'background 500ms ease-in-out, color 500ms ease-in-out',
-
-        _hover: {
-          borderColor: 'accentOrange',
-          textDecoration: 'none',
-        },
-        _activeLink: {
-          background: 'mainOrange',
-          color: 'white',
-        },
-      },
-      secondary: {
-        //...define other variants
-      },
-    },
-  },
   Modal: {
     baseStyle: {
       dialog: {

@@ -23,6 +23,7 @@ export const NoticesFavoritesList = () => {
         <>Loading...</>
       )}
     </div>
+
     // <ul>
     //   {itemList?.map(item => (
     //     <NoticeCategoryItem key={item._id} item={item} />
