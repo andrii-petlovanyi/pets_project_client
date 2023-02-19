@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  NoticeCategoryItem,
   //   NoticesCategoriesList,
   NoticesCategoriesNav,
   NoticesSearch,
@@ -38,6 +39,7 @@ const Notices = () => {
 
       <NoticesSearch onSubmit={onSubmit} />
       <NoticesCategoriesNav onClick={onClick} />
+      <NoticeCategoryItem />
       {/* <NoticesCategoriesList itemList={category + search} /> */}
 
       {!isLoading
