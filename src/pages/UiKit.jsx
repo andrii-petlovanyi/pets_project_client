@@ -63,10 +63,19 @@ const UiKit = () => {
 
       <Textarea width={'395px'} minH={'119px'} placeholder='Example textarea' variant={'custom'} />
 
-      <Button variant={'clearAddBtn'}>
+      <Box
+        color={'textColor'}
+        fontWeight={'500'}
+        fontSize={'20px'}
+        lineHeight={'27px'}
+        display={'flex'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        gap={'12px'}
+      >
         Add pet
         <IconButton variant={'mainIB'} icon={<HiPlus />} />
-      </Button>
+      </Box>
 
       <Flex
         bg={'white'}
@@ -80,11 +89,11 @@ const UiKit = () => {
       >
         <Text>Input for UserProfile</Text>
         <Flex gap={'10px'} alignItems={'center'}>
-          <Input value={'Andrii'} variant={'userInfoActive'} />
+          <Input defaultValue={'Andrii'} variant={'userInfoActive'} />
           <IconButton variant={'userEditIB'} size={'sm'} icon={<MdCheck size={'25px'} />} />
         </Flex>
         <Flex gap={'10px'} alignItems={'center'}>
-          <Input value={'Andrii'} variant={'userInfoDisabled'} />
+          <Input defaultValue={'Andrii'} variant={'userInfoDisabled'} />
           <IconButton variant={'userEditDisabledIB'} size={'sm'} icon={<MdEdit size={'20px'} />} />
         </Flex>
       </Flex>
