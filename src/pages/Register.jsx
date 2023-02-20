@@ -15,11 +15,16 @@ import {
     Button,
     Text
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
 import extraTheme from '../theme/theme';
+import FinalRegister from '../pages/FinalRegister'
 const {colors} = extraTheme;
-const history = useNavigate();
-console.log(history)
+
+
+const navigateToFinReg = () => {
+  return(FinalRegister)
+}
+
+console.log(FinalRegister);
 
 const Register = () => {
 
@@ -79,7 +84,7 @@ const RegisterForm = () => {
             <FormLabel></FormLabel>
             <Input type='password' placeholder='Confirm Password' />
           </FormControl>
-          <Button background={colors.mainOrange} color={colors.white} width='full' mt={4} onClick={handleClick}>Next</Button>
+          <Button background={colors.mainOrange} color={colors.white} width='full' mt={4}  onClick={navigateToFinReg}>Next</Button>
           <Stack isInline justifyContent='center' mt={4}>
               <Box>
                 <Text>Already have an account? </Text>
@@ -93,11 +98,6 @@ const RegisterForm = () => {
         )
 }
 
-const handleClick = () => {
-    // manually refetch
-    //href='FinalRegister'
-    console.log('FinalRegister');
-    //history.push('FinalRegister');
-  };
+
 
 export default Register
