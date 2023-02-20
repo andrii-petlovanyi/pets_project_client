@@ -78,6 +78,7 @@ const LoginSubBlock =() => {
             borderRadius={4}
             textAlign='center'
             boxShadow='lg'
+            pt='42px'
           >
             <Box p={4}>
               <LoginHeader />

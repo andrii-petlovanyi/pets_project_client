@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import extraTheme from '../theme/theme';
-import FinalRegister from '../pages/FinalRegister'
+
 const {colors} = extraTheme;
 
 
@@ -30,7 +30,6 @@ const Register = () => {
         <ColorModeProvider>
           <CSSReset />
           <RegisterSubBlock />
-          <FinalRegister/>
         </ColorModeProvider>
       </ThemeProvider>
     )
