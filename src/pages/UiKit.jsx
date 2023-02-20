@@ -58,9 +58,14 @@ const UiKit = () => {
         </InputRightElement>
       </InputGroup>
 
-            <Textarea width={'395px'} minH={'119px'} placeholder='Example textarea' variant={'custom'} />
-        </Box>
-    )
+      <Textarea width={'395px'} minH={'119px'} placeholder='Example textarea' variant={'custom'} />
+
+      <Button variant={'clearAddBtn'}>
+        Add pet
+        <IconButton variant={'mainIB'} icon={<HiPlus />} />
+      </Button>
+    </Box>
+  )
 }
 
 export default UiKit;

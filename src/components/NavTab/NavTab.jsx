@@ -4,20 +4,22 @@ import { Flex, IconButton } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { GrFormClose } from 'react-icons/gr';
 import { NavLink } from 'react-router-dom';
-import Logo from '../logo/Logo';
+import { Logo } from '../Logo/Logo';
 import { IconContext } from 'react-icons';
 import { AuthNav } from '../AuthNav/AuthNav';
 import userSelectors from '../../redux/user/user-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { useSelector } from 'react-redux';
-export const NavTab = () => {
+export const NavTab = ({ ...props }) => {
   const { isAuth } = userSelectors;
   const isLoggedIn = useSelector(isAuth);
   const [display, changeDisplay] = useState('none');
 
   return (
     <>
-      <Flex>
+      <Flex
+        {...props}
+      >
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
         <Flex position="fixed" top="1rem" right="1rem" align="center">
           <IconButton
@@ -25,7 +27,7 @@ export const NavTab = () => {
             size="lg"
             icon={<HamburgerIcon />}
             onClick={() => changeDisplay('flex')}
-            // display={['flex', 'flex', 'flex', 'flex']}
+          // display={['flex', 'flex', 'flex', 'flex']}
           />
         </Flex>
 
