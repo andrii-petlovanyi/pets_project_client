@@ -1,34 +1,20 @@
 import React from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { HiUserCircle } from 'react-icons/hi';
-import { IoIosLogOut } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Text } from '@chakra-ui/react';
 import userSelectors from '../../redux/user/user-selectors';
+import { LogOut } from '../Popover/Popover';
 
 export const UserMenu = () => {
   const { name } = useSelector(userSelectors.user);
   return (
-    <Box
-      display={'flex'}
-      gap={'10px'}
-    >
+    <Box display={'flex'} gap={'12px'} marginRight={{ lg: '60px', xl: '0' }}>
       <Button as={Link} to="/" variant="fullBGBtn" gap="12px">
         <HiUserCircle size={'28px'} />
         {name}
       </Button>
-      <Button
-        type="button"
-        variant="clearBtn"
-      >
-        <IoIosLogOut size={'24px'} />
-        <Text
-          color="labelColor"
-        >
-          Log Out
-        </Text>
-      </Button>
+      <LogOut />
     </Box>
   );
 };

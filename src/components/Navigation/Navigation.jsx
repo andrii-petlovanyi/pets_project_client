@@ -1,91 +1,91 @@
-import React from 'react';
-import { useState } from 'react';
-import { Flex, IconButton } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
-import { GrFormClose } from 'react-icons/gr';
-import { NavLink } from 'react-router-dom';
-import Logo from '../Logo/Logo';
-import { IconContext } from 'react-icons';
-import { NavDesk } from '../NavDesk/NavDesk';
+// import React from 'react';
+// import { useState } from 'react';
+// import { Flex, IconButton } from '@chakra-ui/react';
+// import { HamburgerIcon } from '@chakra-ui/icons';
+// import { GrFormClose } from 'react-icons/gr';
+// import { NavLink } from 'react-router-dom';
+// import Logo from '../Logo/Logo';
+// import { IconContext } from 'react-icons';
+// import { NavDesk } from '../NavDesk/NavDesk';
 
-export const Navigation = () => {
-  const [display, changeDisplay] = useState('none');
-  return (
-    <>
-      <NavDesk />
+// export const Navigation = () => {
+//   const [display, changeDisplay] = useState('none');
+//   return (
+//     <>
+//       <NavDesk />
 
-      <Flex>
-        <Flex position="fixed" top="1rem" right="1rem" align="center">
-          {/* Mobile */}
-          <IconButton
-            aria-label="Open Menu"
-            size="lg"
-            icon={<HamburgerIcon />}
-            onClick={() => changeDisplay('flex')}
-            display={['flex', 'flex', 'none', 'none']}
-          />
-        </Flex>
+//       <Flex>
+//         <Flex position="fixed" top="1rem" right="1rem" align="center">
+//           {/* Mobile */}
+//           <IconButton
+//             aria-label="Open Menu"
+//             size="lg"
+//             icon={<HamburgerIcon />}
+//             onClick={() => changeDisplay('flex')}
+//             display={['flex', 'flex', 'none', 'none']}
+//           />
+//         </Flex>
 
-        {/* Mobile Content */}
-        <Flex
-          w="100vw"
-          display={display}
-          bgColor="mainColor"
-          zIndex={20}
-          h="100vh"
-          pos="fixed"
-          top="0"
-          left="0"
-          overflowY="auto"
-          flexDir="column"
-        >
-          <Flex pt="24px" pr="32px" pl="32px" flexDir="column">
-            <Flex justify="space-between" alignItems="center" mb="88px">
-              <Logo />
-              <IconButton
-                variant="outline"
-                border="none"
-                aria-label="Open Menu"
-                icon={
-                  <IconContext.Provider
-                    value={{
-                      color: 'accentTextColor',
-                      size: '40px',
-                    }}
-                  >
-                    <GrFormClose />
-                  </IconContext.Provider>
-                }
-                onClick={() => changeDisplay('none')}
-              />
-            </Flex>
+//         {/* Mobile Content */}
+//         <Flex
+//           w="100vw"
+//           display={display}
+//           bgColor="mainColor"
+//           zIndex={20}
+//           h="100vh"
+//           pos="fixed"
+//           top="0"
+//           left="0"
+//           overflowY="auto"
+//           flexDir="column"
+//         >
+//           <Flex pt="24px" pr="32px" pl="32px" flexDir="column">
+//             <Flex justify="space-between" alignItems="center" mb="88px">
+//               <Logo />
+//               <IconButton
+//                 variant="outline"
+//                 border="none"
+//                 aria-label="Open Menu"
+//                 icon={
+//                   <IconContext.Provider
+//                     value={{
+//                       color: 'accentTextColor',
+//                       size: '40px',
+//                     }}
+//                   >
+//                     <GrFormClose />
+//                   </IconContext.Provider>
+//                 }
+//                 onClick={() => changeDisplay('none')}
+//               />
+//             </Flex>
 
-            <Flex
-              flexDir="column"
-              align="center"
-              gap="60px"
-              fontFamily="Manrope"
-              color="thirdTextColor"
-              fontWeight="500"
-              fontSize="48px"
-              lineHeight="1.35"
-            >
-              <NavLink to="news" onClick={() => changeDisplay('none')}>
-                News
-              </NavLink>
-              <NavLink to="notices" onClick={() => changeDisplay('none')}>
-                Find pet
-              </NavLink>
-              <NavLink to="partners" onClick={() => changeDisplay('none')}>
-                Our friends
-              </NavLink>
-              <NavLink to="uikit" onClick={() => changeDisplay('none')}>
-                UI Kit
-              </NavLink>
-            </Flex>
-          </Flex>
-        </Flex>
-      </Flex>
-    </>
-  );
-};
+//             <Flex
+//               flexDir="column"
+//               align="center"
+//               gap="60px"
+//               fontFamily="Manrope"
+//               color="thirdTextColor"
+//               fontWeight="500"
+//               fontSize="48px"
+//               lineHeight="1.35"
+//             >
+//               <NavLink to="news" onClick={() => changeDisplay('none')}>
+//                 News
+//               </NavLink>
+//               <NavLink to="notices" onClick={() => changeDisplay('none')}>
+//                 Find pet
+//               </NavLink>
+//               <NavLink to="partners" onClick={() => changeDisplay('none')}>
+//                 Our friends
+//               </NavLink>
+//               <NavLink to="uikit" onClick={() => changeDisplay('none')}>
+//                 UI Kit
+//               </NavLink>
+//             </Flex>
+//           </Flex>
+//         </Flex>
+//       </Flex>
+//     </>
+//   );
+// };
