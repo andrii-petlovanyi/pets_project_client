@@ -64,7 +64,22 @@ const UiKit = () => {
         Add pet
         <IconButton variant={'mainIB'} icon={<HiPlus />} />
       </Button>
-    </Box>
+
+      <Flex
+        bg={'white'}
+        p={'20px'}
+        borderRadius={'20px'}
+        w={'400px'}
+        flexDirection={'column'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        gap={'10px'}
+      >
+        <Text>Input for UserProfile</Text>
+        <Input value={'Andrii'} variant={'form'} />
+        <Input value={'Andrii'} variant={'formDisabled'} />
+      </Flex>
+    </Box >
   )
 }
 
