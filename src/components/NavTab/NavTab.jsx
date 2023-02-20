@@ -4,7 +4,7 @@ import { Flex, IconButton } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { GrFormClose } from 'react-icons/gr';
 import { NavLink } from 'react-router-dom';
-import { Logo } from '../Logo1/Logo';
+import { Logo } from '../Logo/Logo';
 import { IconContext } from 'react-icons';
 import { AuthNav } from '../AuthNav/AuthNav';
 import userSelectors from '../../redux/user/user-selectors';
