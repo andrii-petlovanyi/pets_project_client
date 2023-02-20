@@ -14,7 +14,6 @@ const Header = () => {
   const { isAuth } = userSelectors;
   const isLoggedIn = useSelector(isAuth);
   const isDesk = useMedia('(min-width: 1280px)');
-  //   const isTab = useMedia('(min-width: 768px)');
   const isMob = useMedia('(max-width: 767px)');
 
   if (isMob) {
@@ -52,6 +51,7 @@ const Header = () => {
             <Logo />
           </div>
           <NavDesk display={{ base: 'none', xl: 'flex' }} />
+
           <div
             style={{
               display: 'flex',
@@ -77,6 +77,3 @@ const Header = () => {
   }
 };
 export default Header;
-
-
-

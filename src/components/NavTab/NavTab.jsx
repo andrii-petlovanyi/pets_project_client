@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Flex, IconButton } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
 import { GrFormClose } from 'react-icons/gr';
 import { NavLink } from 'react-router-dom';
 import { Logo } from '../Logo/Logo';
@@ -10,6 +9,7 @@ import { AuthNav } from '../AuthNav/AuthNav';
 import userSelectors from '../../redux/user/user-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { useSelector } from 'react-redux';
+import { HiMenu } from 'react-icons/hi';
 export const NavTab = ({ ...props }) => {
   const { isAuth } = userSelectors;
   const isLoggedIn = useSelector(isAuth);
@@ -17,17 +17,17 @@ export const NavTab = ({ ...props }) => {
 
   return (
     <>
-      <Flex
-        {...props}
-      >
+      <Flex {...props}>
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
         <Flex position="fixed" top="1rem" right="1rem" align="center">
           <IconButton
             aria-label="Open Menu"
             size="lg"
-            icon={<HamburgerIcon />}
+            icon={<HiMenu size="40px" />}
             onClick={() => changeDisplay('flex')}
-          // display={['flex', 'flex', 'flex', 'flex']}
+            variant="clearBtn"
+            color={'212121'}
+            display={'inline'}
           />
         </Flex>
 
