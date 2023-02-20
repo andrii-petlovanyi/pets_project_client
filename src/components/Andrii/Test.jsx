@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import {
     FormControl,
     FormLabel,
@@ -12,19 +14,26 @@ import {
     Box,
     Text,
     Textarea,
-    Flex,
 } from "@chakra-ui/react";
 
-export default function AddMyPet() {
+const schema = yup.object().shape({
+    petName: yup.string().required("Pet name is required"),
+    birthday: yup.string().required("Birthday is required"),
+    breed: yup.string().required("Breed is required"),
+    comments: yup.string(),
+});
+
+export default function TwoStepForm() {
     const [step, setStep] = useState(1);
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
 
     const onSubmit = (data) => {
-        //заглушка
         console.log(data);
     };
 
@@ -46,29 +55,20 @@ export default function AddMyPet() {
                     <Stack spacing="4" w="100%" as="form" onSubmit={handleSubmit(nextStep)}>
                         <FormControl isInvalid={errors.petName}>
                             <FormLabel htmlFor="petName">Pet Name</FormLabel>
-                            <Input variant={'addPetsForm'} placeholder={'Type name pet'} {...register("petName", { required: true })} />
-                            <FormErrorMessage>
-                                {errors.petName && "Pet name is required"}
-                            </FormErrorMessage>
+                            <Input variant={'addPetsForm'} placeholder={'Type name pet'} {...register("petName")} />
+                            <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
                         </FormControl>
                         <FormControl isInvalid={errors.birthday}>
-                            <FormLabel htmlFor="birthday">Date of birth</FormLabel>
-                            <Input variant={'addPetsForm'} placeholder={'Type date of birth'} type="date" {...register("birthday", { required: true })} />
-                            <FormErrorMessage>
-                                {errors.birthday && "Birthday is required"}
-                            </FormErrorMessage>
+                            <FormLabel htmlFor="birthday">Birthday</FormLabel>
+                            <Input variant={'addPetsForm'} placeholder={'Type date of birth'} type="date" {...register("birthday")} />
+                            <FormErrorMessage>{errors.birthday?.message}</FormErrorMessage>
                         </FormControl>
                         <FormControl isInvalid={errors.breed}>
                             <FormLabel htmlFor="breed">Breed</FormLabel>
-                            <Input variant={'addPetsForm'} placeholder={'Type breed'} {...register("breed", { required: true })} />
-                            <FormErrorMessage>
-                                {errors.breed && "Breed is required"}
-                            </FormErrorMessage>
+                            <Input variant={'addPetsForm'} placeholder={'Type bread'} {...register("breed")} />
+                            <FormErrorMessage>{errors.breed?.message}</FormErrorMessage>
                         </FormControl>
-                        <Flex direction={'row'} justifyContent={'center'} gap={'24px'}>
-                            <Button type="button" variant={'outlineTabBtn'}>Cancel</Button>
-                            <Button type="submit" variant={'fullBGBtn'}>Next</Button>
-                        </Flex>
+                        <Button type="submit" variant={'fullBGBtn'}>Next</Button>
                     </Stack>
                 )}
                 {step === 2 && (
@@ -81,10 +81,10 @@ export default function AddMyPet() {
                             <FormLabel htmlFor="comments">Comments</FormLabel>
                             <Textarea {...register("comments")} />
                         </FormControl>
-                        <Flex direction="row" justify="space-between">
+                        <Stack direction="row" justify="space-between">
                             <Button onClick={prevStep}>Previous</Button>
                             <Button type="submit">Submit</Button>
-                        </Flex>
+                        </Stack>
                     </Stack>
                 )}
             </VStack>
