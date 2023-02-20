@@ -1,6 +1,7 @@
 import { Box, Heading } from '@chakra-ui/react';
 import React, { Suspense, useEffect } from 'react';
 import {
+  NoticeCategoryItem,
   NoticesCategoriesNav,
   NoticesSearch,
 } from '../components/Notices';
@@ -36,6 +37,7 @@ const Notices = () => {
       <Heading as="h1" variant={'main'}>
         Find your favorite pet
       </Heading>
+      <NoticeCategoryItem />
 
       <NoticesSearch onSubmit={onSubmit} />
       <NoticesCategoriesNav />

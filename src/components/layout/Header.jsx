@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthNav } from '../AuthNav/AuthNav';
-import Logo from '../logo/Logo';
+import { Logo } from '../Logo/Logo';
 import userSelectors from '../../redux/user/user-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { useSelector } from 'react-redux';
@@ -34,7 +34,7 @@ const Header = () => {
           <div style={{ marginRight: '80px' }}>
             <Logo />
           </div>
-          <NavDesk />
+          <NavDesk display={{ base: 'none', xl: 'flex' }} />
           <div
             style={{
               display: 'flex',
@@ -59,3 +59,6 @@ const Header = () => {
   }
 };
 export default Header;
+
+
+

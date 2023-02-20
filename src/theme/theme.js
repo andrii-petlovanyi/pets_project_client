@@ -3,6 +3,7 @@ import { buttonTheme } from './components/buttons.extend';
 import { headingTheme } from './components/heading.extend';
 import { inputTheme } from './components/inputs.extend';
 import { linksTheme } from './components/links.extend';
+import { textTheme } from './components/text.extend';
 import { textareaTheme } from './components/textarea.extend';
 
 const breakpoints = {
@@ -49,7 +50,7 @@ const fonts = {
 
 const components = {
   Link: linksTheme,
-
+  Text: textTheme,
   Modal: {
     baseStyle: {
       dialog: {
@@ -63,6 +64,7 @@ const components = {
   Input: inputTheme,
   Textarea: textareaTheme,
   Button: buttonTheme,
+  IconButton: buttonTheme,
   Heading: headingTheme,
 };
 

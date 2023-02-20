@@ -46,6 +46,11 @@ const UserDashboard = () => {
 
   return (
     <>
+      {/* <FormControl>
+        <Input value={'data'} variant={open ? 'userInfoActive' : 'userInfoDisabled'} />
+        <IconButton variant={'style'} color={!oneInput ?? 'grey'} icon={open ? <MdPlace /> : <Md10K />} />
+      </FormControl> */}
+
       <FormControl
         onSubmit={handleSubmit(onSubmit)}
         display={'flex'}

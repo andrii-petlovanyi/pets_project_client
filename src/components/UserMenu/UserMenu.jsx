@@ -4,12 +4,11 @@ import { HiUserCircle } from 'react-icons/hi';
 import { IoIosLogOut } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import { IconContext } from 'react-icons';
 import { Text } from '@chakra-ui/react';
 import userSelectors from '../../redux/user/user-selectors';
 
 export const UserMenu = () => {
-  const user = useSelector(userSelectors.user);
+  const { name } = useSelector(userSelectors.user);
   return (
     <Box
       display={'flex'}
@@ -17,7 +16,7 @@ export const UserMenu = () => {
     >
       <Button as={Link} to="/" variant="fullBGBtn" gap="12px">
         <HiUserCircle size={'28px'} />
-        {user.name}
+        {name}
       </Button>
       <Button
         type="button"
