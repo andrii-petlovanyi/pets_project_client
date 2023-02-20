@@ -10,6 +10,7 @@ import {
   Notices,
   OurFriends,
   Register,
+  FinalRegister,
   UserDashboard,
 } from './pages';
 import UiKit from './pages/UiKit';
@@ -65,6 +66,7 @@ function App() {
             {/* <Route element={<PublicRoute />}> */}
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="finalregister" element={<FinalRegister />} />
             {/* </Route> */}
             <Route path="*" element={<NotFound />} />
           </Route>

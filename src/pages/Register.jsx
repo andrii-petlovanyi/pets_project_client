@@ -7,7 +7,6 @@ import {
     Box,
     Flex,
     Heading,
-    Link,
     FormControl,
     FormLabel,
     Input,
@@ -15,6 +14,7 @@ import {
     Button,
     Text
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import extraTheme from '../theme/theme';
 import FinalRegister from '../pages/FinalRegister'
 const {colors} = extraTheme;
@@ -84,13 +84,13 @@ const RegisterForm = () => {
           </FormControl>
 
 
-          <Button as={Link} to="/finalregister" background={colors.mainOrange} color={colors.white} width='full' mt={4}  >Next</Button>
+          <Button as={Link} to="../finalregister" background={colors.mainOrange} color={colors.white} width='full' mt={4} >Next</Button>
           <Stack isInline justifyContent='center' mt={4}>
               <Box>
                 <Text>Already have an account? </Text>
               </Box>
               <Box>
-                <Link color={'blue.500'} href={`Login`}>Login</Link>
+                <Text as={Link} to="../login" color={'blue.500'} href={`Login`}>Login</Text>
               </Box>
 
           </Stack>

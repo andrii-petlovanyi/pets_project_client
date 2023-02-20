@@ -7,7 +7,6 @@ import {
     Box,
     Flex,
     Heading,
-    Link,
     FormControl,
     FormLabel,
     Input,
@@ -16,8 +15,9 @@ import {
     Text
 } from '@chakra-ui/react';
 import extraTheme from '../theme/theme';
-const {colors} = extraTheme;
+import { Link } from 'react-router-dom';
 
+const {colors} = extraTheme;
 const FinalRegister = () => {
 
     return (
@@ -77,13 +77,13 @@ const RegisterForm = () => {
             <Input type='number' placeholder='Mobile Phone' />
           </FormControl>
           <Button background={colors.mainOrange} color={colors.white} width='full' mt={4}>Register</Button>
-          <Button background={colors.white}  width='full' mt={4}>Back</Button>
+          <Button as={Link} to="../register" background={colors.white}  width='full' mt={4}>Back</Button>
           <Stack isInline justifyContent='center' mt={4}>
               <Box>
                 <Text>Already have an account? </Text>
               </Box>
               <Box>
-                <Link color={'blue.500'} href={`Login`}>Login</Link>
+                <Text as={Link} to="../login" color={'blue.500'} href={`Login`}>Login</Text>
               </Box>
           </Stack>
         </form>
