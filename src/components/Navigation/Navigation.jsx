@@ -30,7 +30,7 @@ export const Navigation = () => {
         <Flex
           w="100vw"
           display={display}
-          bgColor="#FDF7F2"
+          bgColor="mainColor"
           zIndex={20}
           h="100vh"
           pos="fixed"
@@ -49,7 +49,7 @@ export const Navigation = () => {
                 icon={
                   <IconContext.Provider
                     value={{
-                      color: '#212121',
+                      color: 'accentTextColor',
                       size: '40px',
                     }}
                   >
@@ -65,11 +65,10 @@ export const Navigation = () => {
               align="center"
               gap="60px"
               fontFamily="Manrope"
-              color="#181C27"
+              color="thirdTextColor"
               fontWeight="500"
               fontSize="48px"
               lineHeight="1.35"
-              letterSpacing="0.04em"
             >
               <NavLink to="news" onClick={() => changeDisplay('none')}>
                 News
