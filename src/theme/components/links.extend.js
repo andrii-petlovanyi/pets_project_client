@@ -39,6 +39,11 @@ const tabLink = defineStyle({
   },
 });
 
+const logo = defineStyle({
+
+
+});
+
 export const linksTheme = defineStyleConfig({
-  variants: { friends, tabLink },
+  variants: { friends, tabLink, logo },
 });

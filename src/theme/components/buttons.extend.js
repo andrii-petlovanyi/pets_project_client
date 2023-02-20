@@ -83,6 +83,16 @@ const clearBtn = defineStyle({
   },
 });
 
+const clearAddBtn = defineStyle({
+  fontFamily: 'Manrope',
+  fontWeight: '500',
+  fontSize: '20px',
+  lineHeight: '27px',
+  color: 'textColor',
+
+  gap: '12px',
+});
+
 const outlineCardBtn = defineStyle({
   display: 'flex',
   alignItems: 'center',
@@ -161,5 +171,6 @@ export const buttonTheme = defineStyleConfig({
     mainIB,
     fullBGBtn,
     clearBtn,
+    clearAddBtn,
   },
 });

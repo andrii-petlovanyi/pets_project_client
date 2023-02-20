@@ -77,6 +77,10 @@ const search = defineStyle({
   },
 });
 
+const userInfoActive = defineStyle({});
+
+const userInfoDisabled = defineStyle({});
+
 export const inputTheme = defineStyleConfig({
-  variants: { form, search },
+  variants: { form, search, userInfoActive, userInfoDisabled },
 });
