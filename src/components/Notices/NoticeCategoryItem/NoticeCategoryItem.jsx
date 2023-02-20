@@ -34,7 +34,9 @@ export const NoticeCategoryItem = () => {
                     <IconButton type="button" variant={'cardFavIB'} icon={<MdOutlineFavoriteBorder />} css={{
                         position: 'absolute', right: 12, top: 12,
                     }} />
-                    {/* <IconButton variant={'cardFavIB'} icon={<MdFavorite />} /> */}
+                    {/* <IconButton variant={'cardFavIB'} icon={<MdFavorite />} css={{
+                        position: 'absolute', right: 12, top: 12,
+                    }}/> */}
                 </Box>
 
                 <Container mt='5' pl="5" >
