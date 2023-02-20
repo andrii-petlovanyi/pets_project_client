@@ -91,4 +91,4 @@ const RegisterForm = () => {
         )
 }
 
-export default FinalRegister
+export default  FinalRegister 

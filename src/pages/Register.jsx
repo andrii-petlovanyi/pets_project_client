@@ -20,19 +20,17 @@ import FinalRegister from '../pages/FinalRegister'
 const {colors} = extraTheme;
 
 
-const navigateToFinReg = () => {
-  return(FinalRegister)
-}
 
-console.log(FinalRegister);
+
+
 
 const Register = () => {
-
     return (
         <ThemeProvider theme={theme}>
         <ColorModeProvider>
           <CSSReset />
           <RegisterSubBlock />
+          <FinalRegister/>
         </ColorModeProvider>
       </ThemeProvider>
     )
@@ -84,7 +82,9 @@ const RegisterForm = () => {
             <FormLabel></FormLabel>
             <Input type='password' placeholder='Confirm Password' />
           </FormControl>
-          <Button background={colors.mainOrange} color={colors.white} width='full' mt={4}  onClick={navigateToFinReg}>Next</Button>
+
+
+          <Button as={Link} to="/finalregister" background={colors.mainOrange} color={colors.white} width='full' mt={4}  >Next</Button>
           <Stack isInline justifyContent='center' mt={4}>
               <Box>
                 <Text>Already have an account? </Text>
@@ -92,6 +92,7 @@ const RegisterForm = () => {
               <Box>
                 <Link color={'blue.500'} href={`Login`}>Login</Link>
               </Box>
+
           </Stack>
         </form>
       </Box>    
