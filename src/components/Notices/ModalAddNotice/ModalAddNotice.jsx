@@ -52,19 +52,19 @@ const ModalAddNotice = ({ isOpen, onClose }) => {
                   <Stack direction="row" spacing={4}>
                     <Button
                       onClick={() => setSelectedCategory("lost/found")}
-                      colorScheme={selectedCategory === "lost/found" ? "orange" : "gray"}
+                      variant={selectedCategory === "lost/found" ? "fullBGBtn" : "outlineTabBtn"}
                     >
                      lost/found
                     </Button>
                     <Button
                       onClick={() => setSelectedCategory("in good hands")}
-                      colorScheme={selectedCategory === "in good hands" ? "orange" : "gray"}
+                      variant={selectedCategory === "in good hands" ? "fullBGBtn" : "outlineTabBtn"}
                     >
                      in good hands
                     </Button>
                     <Button
                       onClick={() => setSelectedCategory("sell")}
-                      colorScheme={selectedCategory === "sell" ? "orange" : "gray"}
+                      variant={selectedCategory === "sell" ? "fullBGBtn" : "outlineTabBtn"}
                     >
                       sell
                     </Button>
@@ -72,24 +72,25 @@ const ModalAddNotice = ({ isOpen, onClose }) => {
                 </FormControl>
                 <FormControl>
                   <FormLabel>Tittle of add</FormLabel>
-                  <Input placeholder="Type name" value={TittleAdd} onChange={(e) => setTittleAdd(e.target.value)} />
+                  <Input variant={'addPetsForm'} placeholder="Type name" value={TittleAdd} onChange={(e) => setTittleAdd(e.target.value)} />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Name pet</FormLabel>
-                  <Input placeholder="Type name pet" value={petName} onChange={(e) => setPetName(e.target.value)} />
+                  <Input variant={'addPetsForm'} placeholder="Type name pet" value={petName} onChange={(e) => setPetName(e.target.value)} />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Date of birth</FormLabel>
-                  <Input placeholder="Type date of birth" value={petBirdth} onChange={(e) => setPetBirdth(e.target.value)} />
+                  <Input variant={'addPetsForm'} placeholder="Type date of birth" value={petBirdth} onChange={(e) => setPetBirdth(e.target.value)} />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Breed</FormLabel>
-                  <Input placeholder="Type breed" value={petBreed} onChange={(e) => setPetBreed(e.target.value)} />
+                  <Input variant={'addPetsForm'} placeholder="Type breed" value={petBreed} onChange={(e) => setPetBreed(e.target.value)} />
                 </FormControl>
               </Stack>
             ) : step === 2 ? (
               <Stack spacing={4}>
                <FormControl>
+               <FormLabel>The sex*:</FormLabel>
                   <Stack direction="row" spacing={4}>
                     <Button
                       onClick={() => setPetSex("male")}
@@ -107,11 +108,11 @@ const ModalAddNotice = ({ isOpen, onClose }) => {
                 </FormControl>
                 <FormControl>
                   <FormLabel>Location*:</FormLabel>
-                  <Input placeholder="Type location" value={location} onChange={(e) => setLocation(e.target.value)} />
+                  <Input variant={'addPetsForm'} placeholder="Type location" value={location} onChange={(e) => setLocation(e.target.value)} />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Price*:</FormLabel>
-                  <Input placeholder="Type price" value={price} onChange={(e) => setPrice(e.target.value)} />
+                  <Input variant={'addPetsForm'} placeholder="Type price" value={price} onChange={(e) => setPrice(e.target.value)} />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Load the pet’s image:</FormLabel>
@@ -130,22 +131,22 @@ const ModalAddNotice = ({ isOpen, onClose }) => {
       </ModalBody>
       <ModalFooter>
         {step === 1 && (
-          <Button mr={3} onClick={onClose}>
+          <Button mr={3} onClick={onClose} variant={"outlineTabBtn"}>
             Cancel
           </Button>
         )}
         {step > 1 && (
-          <Button mr={3} onClick={handlePreviousStep}>
+          <Button mr={3} onClick={handlePreviousStep} variant={"outlineTabBtn"}>
             Back
           </Button>
         )}
         {step < 2 ? (
-          <Button colorScheme="green" onClick={handleNextStep}>
+          <Button variant={'fullBGBtn'} onClick={handleNextStep}>
             Next
           </Button>
         ) : (
-          <Button type="submit" colorScheme="green">
-            Submit
+          <Button type="submit" variant={'fullBGBtn'}>
+            Done
           </Button>
         )}
       </ModalFooter>
