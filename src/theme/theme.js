@@ -64,6 +64,7 @@ const components = {
   Input: inputTheme,
   Textarea: textareaTheme,
   Button: buttonTheme,
+  IconButton: buttonTheme,
   Heading: headingTheme,
 };
 

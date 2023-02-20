@@ -1,7 +1,4 @@
-import {
-  Flex,
-  Heading
-} from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 import React from 'react';
 import { FriendsCard } from '../components/OurFriends/FriendsCard';
 import { useGetFriendsListQuery } from '../redux/friends/friendsApiSlice';
@@ -21,12 +18,14 @@ const OurFriends = () => {
       >
         Our friends
       </Heading>
-      <Flex justifyContent={'center'} flexWrap={'wrap'} gap={{ base: '12px', lg: '32px', xl: '27px' }}>
+      <Flex
+        justifyContent={'center'}
+        flexWrap={'wrap'}
+        gap={{ base: '12px', lg: '32px', xl: '27px' }}
+      >
         {!isLoading ? (
           friends.length > 0 &&
-          friends.map(f => (
-            <FriendsCard key={f._id} friend={f} />
-          ))
+          friends.map(f => <FriendsCard key={f._id} friend={f} />)
         ) : (
           <>Loading...</>
         )}
