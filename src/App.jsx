@@ -17,9 +17,11 @@ import { useGetUserQuery } from './redux/user/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import userSelectors from './redux/user/user-selectors';
 import { refresh } from './redux/user/userSlice';
-import { NoticesCategoriesList } from './components/Notices/NoticesLists/NoticesCategoriesList';
-import { NoticesFavoritesList } from './components/Notices/NoticesLists/NoticesFavoritesList';
-import { NoticesOwnerList } from './components/Notices/NoticesLists/NoticesOwnerList';
+import {
+  NoticesCategoriesList,
+  NoticesFavoritesList,
+  NoticesOwnerList,
+} from './components/Notices';
 
 function App() {
   const dispatch = useDispatch();
