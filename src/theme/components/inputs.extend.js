@@ -138,6 +138,35 @@ const search = defineStyle({
   },
 });
 
+const addPetsForm = defineStyle({
+  field: {
+    background: 'mainColor',
+    border: '1px solid rgba(245, 146, 86, 0.5)',
+    borderRadius: '40px',
+
+    backgroundColor: 'mainColor',
+    color: 'labelColor',
+
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: '16px',
+    lineHeight: '26px',
+    /* identical to box height, or 166% */
+
+    display: 'flex',
+    alignItems: 'center',
+
+    _placeholder: {
+      color: 'labelColor',
+
+      fontFamily: 'Manrope',
+      fontWeight: '400',
+      fontSize: '16px',
+      lineHeight: '26px',
+    },
+  },
+});
+
 export const inputTheme = defineStyleConfig({
-  variants: { form, search, userInfoActive, userInfoDisabled },
+  variants: { form, search, userInfoActive, userInfoDisabled, addPetsForm },
 });
