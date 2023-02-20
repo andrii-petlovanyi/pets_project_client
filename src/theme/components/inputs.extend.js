@@ -42,6 +42,7 @@ const userInfoActive = defineStyle({
     display: 'flex',
     alignItems: 'center',
     padding: '3px 12px',
+    width: '216px',
     height: '32px',
     borderRadius: '40px',
     border: '1px solid',
@@ -76,6 +77,7 @@ const userInfoActive = defineStyle({
 
 const userInfoDisabled = defineStyle({
   field: {
+    width: '216px',
     height: '32px',
     fontFamily: 'Manrope',
     fontWeight: '400',
