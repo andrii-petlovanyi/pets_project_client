@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { MdPhotoCamera } from 'react-icons/md';
+// import { MdPhotoCamera } from 'react-icons/md';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input, InputGroup } from '@chakra-ui/input';
-import { Button, HStack, Image, Box, Text, Icon } from '@chakra-ui/react';
+import {
+  Box,
+  // Button, HStack, Image, Box, Icon,
+  Text,
+} from '@chakra-ui/react';
 import { calendarFunc } from '../UserForm/Calendar';
 import { ButtonUserForm } from '../UserForm/IconButton';
 import { schema } from './validation/validation';
+import Avatar from './Avatar';
 
 const UserForm = () => {
   const {
@@ -63,34 +68,7 @@ const UserForm = () => {
         boxShadow={'7px 4px 14px rgba(49, 21, 4, 0.07)'}
         borderRadius={'0px 40px 40px 0px'}
       >
-        <Box
-          display={'flex'}
-          alignItems={'flex-end'}
-          justifyContent={'flex-end'}
-          mb={'32px'}
-        >
-          <Image
-            borderRadius="full"
-            fallbackSrc="https://via.placeholder.com/233"
-          />
-          <HStack>
-            <Button
-              display={'flex'}
-              justifyContent={'flex-start'}
-              alignItems={'center'}
-              padding={'0px'}
-              position="relative"
-              right={'11px'}
-              backgroundColor={'white'}
-              w={'100%'}
-            >
-              <Icon as={MdPhotoCamera} boxSize={5} color={'#F59256'} />
-              <Text fontWeight={'400'} fontSize={'12px'} lineHeight={'1.8'}>
-                Edit photo
-              </Text>
-            </Button>
-          </HStack>
-        </Box>
+        <Avatar />
         <InputGroup
           display={'flex'}
           flexDirection={'column'}
@@ -193,18 +171,25 @@ const UserForm = () => {
               control={control}
               render={({ field }) => (
                 // <Calendar />
-                <DatePicker
-                  renderCustomHeader={calendarFunc}
-                  disabled={isDisabled.birthday}
-                  onChange={date => field.onChange(date)}
-                  selected={field.value}
-                  dateFormat="dd.MM.yyyy"
-                  maxDate={Date.now()}
-                  //   borderRadius={'40px'}
-                  //   variant={
-                  //     isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
-                  //   }
-                />
+                <Box
+                  style={{ width: '216px', height: '32px' }}
+                  // variant={
+                  //   isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
+                  // }
+                >
+                  <DatePicker
+                    renderCustomHeader={calendarFunc}
+                    disabled={isDisabled.birthday}
+                    onChange={date => field.onChange(date)}
+                    selected={field.value}
+                    dateFormat="dd.MM.yyyy"
+                    maxDate={Date.now()}
+                    //   borderRadius={'40px'}
+                    //   variant={
+                    //     isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
+                    //   }
+                  />
+                </Box>
               )}
             />
 

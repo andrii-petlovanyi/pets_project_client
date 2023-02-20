@@ -1,5 +1,7 @@
 import * as yup from 'yup';
 
+const phoneRegExp =
+  /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 export const schema = yup.object({
   name: yup
     .string()
@@ -10,7 +12,11 @@ export const schema = yup.object({
     .required(),
   email: yup.string().email('must be a valid email').required(),
   birthday: yup.string(),
-  phone: yup.string().min(10, 'must be more than 10 characters'),
+  phone: yup
+    .string()
+    .min(12)
+    .max(15)
+    .matches(phoneRegExp, 'phone number is not valid'),
   city: yup
     .string()
     .trim('the city cannot include leading and trailing spaces')
