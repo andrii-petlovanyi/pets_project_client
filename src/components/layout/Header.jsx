@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthNav } from '../AuthNav/AuthNav';
-import { Logo } from '../Logo/Logo';
+import { Logo } from '../Logo1/Logo';
 import userSelectors from '../../redux/user/user-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { useSelector } from 'react-redux';

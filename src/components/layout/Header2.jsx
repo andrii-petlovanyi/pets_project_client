@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo } from '../Logo/Logo';
+import { Logo } from '../Logo1/Logo';
 import userSelectors from '../../redux/user/user-selectors';
 import { useSelector } from 'react-redux';
 import { NavMob } from '../NavMob/NavMob';
