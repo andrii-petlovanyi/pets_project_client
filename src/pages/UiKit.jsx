@@ -11,6 +11,8 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import {
+  MdCheck,
+  MdEdit,
   MdFavorite,
   MdOutlineDeleteOutline,
   MdOutlineFavoriteBorder,
@@ -76,8 +78,14 @@ const UiKit = () => {
         gap={'10px'}
       >
         <Text>Input for UserProfile</Text>
-        <Input value={'Andrii'} variant={'form'} />
-        <Input value={'Andrii'} variant={'formDisabled'} />
+        <Flex gap={'10px'} alignItems={'center'}>
+          <Input value={'Andrii'} variant={'userInfoActive'} />
+          <IconButton variant={'userEditIB'} size={'sm'} icon={<MdCheck size={'25px'} />} />
+        </Flex>
+        <Flex gap={'10px'} alignItems={'center'}>
+          <Input value={'Andrii'} variant={'userInfoDisabled'} />
+          <IconButton variant={'userEditDisabledIB'} size={'sm'} icon={<MdEdit size={'20px'} />} />
+        </Flex>
       </Flex>
     </Box >
   )

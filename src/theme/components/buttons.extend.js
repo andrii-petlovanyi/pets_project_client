@@ -161,6 +161,34 @@ const secondIB = defineStyle({
   },
 });
 
+const userEditIB = defineStyle({
+  background: 'mainColor',
+  borderRadius: 'full',
+  padding: '6px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: 'mainOrange',
+
+  _hover: {
+    color: 'accentOrange',
+  },
+});
+
+const userEditDisabledIB = defineStyle({
+  background: 'mainColor',
+  borderRadius: 'full',
+  padding: '6px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: 'labelColor',
+
+  _hover: {
+    color: 'black',
+  },
+});
+
 export const buttonTheme = defineStyleConfig({
   variants: {
     outlineCardBtn,
@@ -172,5 +200,7 @@ export const buttonTheme = defineStyleConfig({
     fullBGBtn,
     clearBtn,
     clearAddBtn,
+    userEditIB,
+    userEditDisabledIB,
   },
 });

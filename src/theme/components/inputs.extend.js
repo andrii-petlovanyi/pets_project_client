@@ -37,18 +37,65 @@ const form = defineStyle({
   },
 });
 
-const formDisabled = defineStyle({
-  fontFamily: 'Manrope',
-  fontWeight: '400',
-  fontSize: '18px',
-  lineHeight: '25px',
-  border: 'none',
-  backgroundColor: 'white',
+const userInfoActive = defineStyle({
+  field: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '3px 12px',
+    height: '32px',
+    borderRadius: '40px',
+    border: '1px solid',
+    borderColor: 'rgba(245, 146, 86, 0.5)',
 
-  display: 'flex',
-  alignItems: 'center',
+    color: 'textColor',
+    backgroundColor: 'mainColor',
 
-  color: 'textColor',
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: '18px',
+    lineHeight: '25px',
+    letterSpacing: '0.04em',
+
+    _focus: {
+      borderColor: 'accentOrange',
+      boxShadow: '0 0 1px 1px #D3D3D333',
+    },
+    _hover: {
+      borderColor: 'accentOrange',
+    },
+    _placeholder: {
+      fontFamily: 'Manrope',
+      fontWeight: '400',
+      fontSize: '18px',
+      lineHeight: '25px',
+      letterSpacing: '0.04em',
+      color: 'labelColor',
+    },
+  },
+});
+
+const userInfoDisabled = defineStyle({
+  field: {
+    height: '32px',
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: '18px',
+    lineHeight: '25px',
+    border: 'none',
+    backgroundColor: 'white',
+    padding: '3px 12px',
+
+    display: 'flex',
+    alignItems: 'center',
+
+    color: 'textColor',
+    opacity: '1',
+
+    pointerEvents: 'none',
+    _hover: {
+      cursor: 'auto',
+    },
+  },
 });
 
 const search = defineStyle({
@@ -92,5 +139,5 @@ const search = defineStyle({
 });
 
 export const inputTheme = defineStyleConfig({
-  variants: { form, formDisabled, search },
+  variants: { form, search, userInfoActive, userInfoDisabled },
 });
