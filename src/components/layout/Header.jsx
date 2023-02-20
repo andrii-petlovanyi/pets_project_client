@@ -10,11 +10,14 @@ const Header = () => {
                 <NavLink to='notices'>Find pet</NavLink>
                 <NavLink to='partners'>Our friends</NavLink>
                 <NavLink to='uikit'>UI Kit</NavLink>
+                
 
             </nav>
 
-            <div style={{ marginLeft: 'auto' }}>
+            <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px'}}>
                 <NavLink to='/'>Cabinet</NavLink>
+                <NavLink to='login'>Login</NavLink>
+                <NavLink to='register'>Registration</NavLink>
             </div>
         </header>
     )

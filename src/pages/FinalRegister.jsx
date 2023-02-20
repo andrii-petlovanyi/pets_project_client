@@ -15,13 +15,10 @@ import {
     Button,
     Text
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
 import extraTheme from '../theme/theme';
 const {colors} = extraTheme;
-const history = useNavigate();
-console.log(history)
 
-const Register = () => {
+const FinalRegister = () => {
 
     return (
         <ThemeProvider theme={theme}>
@@ -67,19 +64,20 @@ const RegisterForm = () => {
         <form>
           <FormControl>
             <FormLabel></FormLabel>
-            <Input type='email' placeholder='Email' />
+            <Input type='text' placeholder='Name' />
           </FormControl>
   
           <FormControl mt={4}>
             <FormLabel></FormLabel>
-            <Input type='password' placeholder='Password' />
+            <Input type='text' placeholder='City,region' />
           </FormControl>
   
           <FormControl mt={4}>
             <FormLabel></FormLabel>
-            <Input type='password' placeholder='Confirm Password' />
+            <Input type='number' placeholder='Mobile Phone' />
           </FormControl>
-          <Button background={colors.mainOrange} color={colors.white} width='full' mt={4} onClick={handleClick}>Next</Button>
+          <Button background={colors.mainOrange} color={colors.white} width='full' mt={4}>Register</Button>
+          <Button background={colors.white}  width='full' mt={4}>Back</Button>
           <Stack isInline justifyContent='center' mt={4}>
               <Box>
                 <Text>Already have an account? </Text>
@@ -93,11 +91,4 @@ const RegisterForm = () => {
         )
 }
 
-const handleClick = () => {
-    // manually refetch
-    //href='FinalRegister'
-    console.log('FinalRegister');
-    //history.push('FinalRegister');
-  };
-
-export default Register
+export default FinalRegister
