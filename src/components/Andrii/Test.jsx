@@ -14,7 +14,11 @@ import {
     Box,
     Text,
     Textarea,
+    Image,
+    Icon
 } from "@chakra-ui/react";
+import { TfiPlus } from 'react-icons/tfi'
+
 
 const schema = yup.object().shape({
     petName: yup.string().required("Pet name is required"),
@@ -24,6 +28,7 @@ const schema = yup.object().shape({
 });
 
 export default function TwoStepForm() {
+    const [imagePreview, setImagePreview] = useState(null);
     const [step, setStep] = useState(1);
     const {
         register,
@@ -43,6 +48,17 @@ export default function TwoStepForm() {
 
     const prevStep = () => {
         setStep(step - 1);
+    };
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                setImagePreview(reader.result);
+            };
+        }
     };
 
     return (
@@ -73,9 +89,11 @@ export default function TwoStepForm() {
                 )}
                 {step === 2 && (
                     <Stack spacing="4" w="100%" as="form" onSubmit={handleSubmit(onSubmit)}>
-                        <FormControl>
+                        <FormControl display={'flex'} justifyContent={'center'} position={'relative'}>
                             <FormLabel htmlFor="image">Image</FormLabel>
-                            <Input type="file" {...register("image")} />
+                            <Input width={'182px'} height={'182px'} bg={'mainColor'} color={'mainColor'} _placeholder={{ color: 'mainColor' }} borderRadius={'40px'} type="file" {...register("image")} onChange={handleImageChange} />
+                            {!imagePreview && <Icon as={TfiPlus} pointerEvents={'none'} position={'absolute'} top={'50%'} left={'50%'} transform={'translate(-50%, -50%)'} fontSize={'48px'} />}
+                            {imagePreview && <Image pointerEvents={'none'} borderRadius={'40px'} position={'absolute'} top={'50%'} left={'50%'} transform={'translate(-50%, -50%)'} width={'182px'} height={'182px'} src={imagePreview} boxSize="182px" objectFit="cover" />}
                         </FormControl>
                         <FormControl>
                             <FormLabel htmlFor="comments">Comments</FormLabel>
@@ -88,6 +106,6 @@ export default function TwoStepForm() {
                     </Stack>
                 )}
             </VStack>
-        </Box>
+        </Box >
     );
 }
