@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '@chakra-ui/react';
+import { IconButton, Icon } from '@chakra-ui/react';
 import { RiPencilFill } from 'react-icons/ri';
 import { GoCheck } from 'react-icons/go';
 import PropTypes from 'prop-types';
@@ -18,15 +18,17 @@ export const ButtonUserForm = ({ handleClick, name, flag }) => {
         border="none"
         icon={
           flag[name] ? (
-            <RiPencilFill
+            <Icon
+              as={RiPencilFill}
+              boxSize={5}
               color={
                 Object.values(flag).includes(false)
-                  ? 'rgba(17, 17, 17, 0.6)'
-                  : 'rgba(245, 146, 86, 1)'
+                  ? 'labelColor'
+                  : 'mainOrange'
               }
             />
           ) : (
-            <GoCheck color="rgba(245, 146, 86, 1)" />
+            <Icon as={GoCheck} boxSize={5} color="mainOrange" />
           )
         }
       />

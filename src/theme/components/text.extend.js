@@ -9,6 +9,18 @@ const logo = defineStyle({
   display: 'flex',
 });
 
+const textLabelUserForm = defineStyle({
+  mb: '0',
+  mr: '0',
+  width: '107px',
+  fontFamily: 'Manrope',
+  fontWeight: '500',
+  fontSize: '18px',
+  lineHeight: '1.4',
+  letterSpacing: '0.04em',
+  color: 'textColor',
+});
+
 export const textTheme = defineStyleConfig({
-  variants: { logo },
+  variants: { logo, textLabelUserForm },
 });

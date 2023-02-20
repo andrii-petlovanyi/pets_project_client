@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+// import { Box } from '@chakra-ui/react';
 import { getMonth, getYear } from 'date-fns';
 import React from 'react';
 
@@ -40,10 +40,12 @@ export const calendarFunc = ({
   prevMonthButtonDisabled,
   nextMonthButtonDisabled,
 }) => (
-  <Box
-    margin={'10px'}
-    display={'flex'}
-    justifyContent={'center'}
+  <div
+    style={{
+      margin: 10,
+      display: 'flex',
+      justifyContent: 'center',
+    }}
   >
     <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
       {'<'}
@@ -73,5 +75,5 @@ export const calendarFunc = ({
     <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
       {'>'}
     </button>
-  </Box>
+  </div>
 );
