@@ -1,26 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box, Link } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
-export const NoticesCategoriesNav = ({ onClick }) => {
+export const NoticesCategoriesNav = () => {
   return (
     <div>
-      <nav>
-        <button type="button" onClick={onClick} data-set="sell">
+      <Box as="nav" display={'flex'} flexWrap={'wrap'} gap={'12px'}>
+        <Link as={NavLink} to="sell" variant={'tabLink'}>
           sell
-        </button>
-        <button type="button" onClick={onClick} data-set="lost-found">
+        </Link>
+        <Link as={NavLink} to="lost-found" variant={'tabLink'}>
           lost/found
-        </button>
-        <button type="button" onClick={onClick} data-set="for-free">
+        </Link>
+        <Link as={NavLink} to="for-free" variant={'tabLink'}>
           in good hands
-        </button>
-        <button type="button" onClick={onClick} data-set="favorite">
+        </Link>
+        <Link as={NavLink} to="favorite" variant={'tabLink'}>
           favorite ads
-        </button>
-        <button type="button" onClick={onClick} data-set="own">
+        </Link>
+        <Link as={NavLink} to="own" variant={'tabLink'}>
           my ads
-        </button>
-      </nav>
+        </Link>
+      </Box>
     </div>
   );
 };

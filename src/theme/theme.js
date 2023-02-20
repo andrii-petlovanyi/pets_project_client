@@ -1,6 +1,8 @@
 import { extendTheme } from '@chakra-ui/react';
 import { buttonTheme } from './components/buttons.extend';
+import { headingTheme } from './components/heading.extend';
 import { inputTheme } from './components/inputs.extend';
+import { linksTheme } from './components/links.extend';
 import { textareaTheme } from './components/textarea.extend';
 
 const breakpoints = {
@@ -17,11 +19,14 @@ const shadows = {
 
 const colors = {
   white: '#FFFFFF',
+  black: '#000000',
   mainColor: '#FDF7F2',
   mainOrange: '#F59256',
   accentOrange: '#FF6101',
   textColor: '#111111',
   secondaryTextColor: '#111321',
+  thirdTextColor: '#181C27',
+  accentTextColor: '#212121',
   labelColor: 'rgba(17, 17, 17, 0.6)',
 
   blurBadge: 'rgba(255, 255, 255, 0.6)',
@@ -43,24 +48,8 @@ const fonts = {
 };
 
 const components = {
-  Link: {
-    baseStyle: {},
-    variants: {
-      activeLink: {
-        color: 'primaryTextColor',
-        textDecoration: 'none',
-        transition: '350ms ease',
-        _hover: { textDecoration: 'none', color: 'hoverColor' },
-        _focus: { boxShadow: 'none' },
-        _activeLink: {
-          color: '#fff',
-        },
-      },
-      secondary: {
-        //...define other variants
-      },
-    },
-  },
+  Link: linksTheme,
+
   Modal: {
     baseStyle: {
       dialog: {
@@ -74,6 +63,7 @@ const components = {
   Input: inputTheme,
   Textarea: textareaTheme,
   Button: buttonTheme,
+  Heading: headingTheme,
 };
 
 const theme = extendTheme({
