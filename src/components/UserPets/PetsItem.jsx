@@ -8,12 +8,8 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
-import { useSelector } from 'react-redux';
-import userSelectors from '../../redux/user/user-selectors';
 
-export const UserPetsList = () => {
-  const { pets } = useSelector(userSelectors.user);
-  console.log(pets);
+export const UserPetsItem = ({ name, birth, breed, avatarURL, comment }) => {
   return (
     <Card
       direction={{ base: 'column', lg: 'row' }}
@@ -27,21 +23,15 @@ export const UserPetsList = () => {
         width={{ lg: '161px', base: '240px' }}
         mx="auto"
         objectFit={'cover'}
-        src={
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPWqWnGvr_WwE82AWFri7NS4nJ1IvQpJBFOA&usqp=CAU'
-        }
-        alt="Cat"
+        src={avatarURL}
+        alt={breed}
       />
       <CardBody>
         <Stack>
-          <Text>NAME: Jack </Text>
-          <Text>Date of birth: 22.04.2018 </Text>
-          <Text>Breed: Persian cat </Text>
-          <Text>
-            Comments: Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor
-            sit amet, consectetur Lorem ipsum dolor sit amet, consectetur Lorem
-            ipsum dolor sit amet, consectetur{' '}
-          </Text>
+          <Text>NAME: {name} </Text>
+          <Text>Date of birth: {birth} </Text>
+          <Text>Breed: {breed} </Text>
+          <Text>{comment}</Text>
         </Stack>
         <IconButton
           variant={'secondIB'}
@@ -55,4 +45,4 @@ export const UserPetsList = () => {
     </Card>
   );
 };
-export default UserPetsList;
+export default UserPetsItem;
