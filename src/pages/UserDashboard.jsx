@@ -12,6 +12,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { calendarFunc } from '../components/UserForm/Calendar';
 
 const UserDashboard = () => {
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       name: '',
@@ -44,14 +45,19 @@ const UserDashboard = () => {
   };
 
   return (
-    <div>
+    <>
+      {/* <FormControl>
+        <Input value={'data'} variant={open ? 'userInfoActive' : 'userInfoDisabled'} />
+        <IconButton variant={'style'} color={!oneInput ?? 'grey'} icon={open ? <MdPlace /> : <Md10K />} />
+      </FormControl> */}
+
       <FormControl
         onSubmit={handleSubmit(onSubmit)}
         display={'flex'}
         flexDirection={'column'}
         maxW={'411'}
         p={'20px 16px'}
-        background={'#FFFFFF'}
+        background={'mainColor'}
         boxShadow={'7px 4px 14px rgba(49, 21, 4, 0.07)'}
         borderRadius={'0px 40px 40px 0px'}
       >
@@ -205,7 +211,7 @@ const UserDashboard = () => {
                   disabled={isDisabled.birthday}
                 />
               )}
-              
+
             /> */}
             <Controller
               name="birthday"
@@ -337,7 +343,7 @@ const UserDashboard = () => {
           </Button>
         </HStack>
       </FormControl>
-    </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import { buttonTheme } from './components/buttons.extend';
 import { headingTheme } from './components/heading.extend';
 import { inputTheme } from './components/inputs.extend';
 import { linksTheme } from './components/links.extend';
+import { textTheme } from './components/text.extend';
 import { textareaTheme } from './components/textarea.extend';
 
 const breakpoints = {
@@ -25,6 +26,8 @@ const colors = {
   accentOrange: '#FF6101',
   textColor: '#111111',
   secondaryTextColor: '#111321',
+  thirdTextColor: '#181C27',
+  accentTextColor: '#212121',
   labelColor: 'rgba(17, 17, 17, 0.6)',
 
   blurBadge: 'rgba(255, 255, 255, 0.6)',
@@ -46,9 +49,8 @@ const fonts = {
 };
 
 const components = {
-
   Link: linksTheme,
-
+  Text: textTheme,
   Modal: {
     baseStyle: {
       dialog: {

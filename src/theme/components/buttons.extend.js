@@ -42,6 +42,57 @@ const outlineTabActive = defineStyle({
   letterSpacing: '0.04em',
 });
 
+const fullBGBtn = defineStyle({
+  display: 'flex',
+  alignItems: 'center',
+
+  background: 'mainOrange',
+  color: 'white',
+
+  border: '2px solid',
+  borderColor: 'mainOrange',
+  borderRadius: '40px',
+  padding: '10px 28px',
+
+  fontFamily: 'Manrope',
+  fontWeight: '500',
+  fontSize: '20px',
+  lineHeight: '27p',
+  letterSpacing: '0.04em',
+
+  _hover: {
+    borderColor: 'accentOrange',
+    background: 'accentOrange',
+  },
+});
+
+const clearBtn = defineStyle({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+
+  color: 'mainOrange',
+
+  fontFamily: 'Manrope',
+  fontWeight: '500',
+  fontSize: '16px',
+  lineHeight: '1.4',
+
+  _hover: {
+    color: 'accentOrange',
+  },
+});
+
+const clearAddBtn = defineStyle({
+  fontFamily: 'Manrope',
+  fontWeight: '500',
+  fontSize: '20px',
+  lineHeight: '27px',
+  color: 'textColor',
+
+  gap: '12px',
+});
+
 const outlineCardBtn = defineStyle({
   display: 'flex',
   alignItems: 'center',
@@ -118,5 +169,8 @@ export const buttonTheme = defineStyleConfig({
     cardFavIB,
     secondIB,
     mainIB,
+    fullBGBtn,
+    clearBtn,
+    clearAddBtn,
   },
 });

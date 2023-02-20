@@ -37,6 +37,20 @@ const form = defineStyle({
   },
 });
 
+const formDisabled = defineStyle({
+  fontFamily: 'Manrope',
+  fontWeight: '400',
+  fontSize: '18px',
+  lineHeight: '25px',
+  border: 'none',
+  backgroundColor: 'white',
+
+  display: 'flex',
+  alignItems: 'center',
+
+  color: 'textColor',
+});
+
 const search = defineStyle({
   field: {
     display: 'flex',
@@ -61,7 +75,7 @@ const search = defineStyle({
 
     _focus: {
       borderColor: 'accentOrange',
-      boxShadow: '0 0 1px 1px #D3D3D333',
+      boxShadow: 'mainShadow',
     },
     _hover: {
       borderColor: 'accentOrange',
@@ -78,5 +92,5 @@ const search = defineStyle({
 });
 
 export const inputTheme = defineStyleConfig({
-  variants: { form, search },
+  variants: { form, formDisabled, search },
 });
