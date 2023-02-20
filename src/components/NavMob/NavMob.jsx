@@ -11,7 +11,6 @@ import userSelectors from '../../redux/user/user-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { useSelector } from 'react-redux';
 
-
 export const NavMob = ({ ...props }) => {
   const { isAuth } = userSelectors;
   const isLoggedIn = useSelector(isAuth);
@@ -19,9 +18,7 @@ export const NavMob = ({ ...props }) => {
 
   {
     return (
-      <Flex
-        {...props}
-      >
+      <Flex {...props}>
         <Flex position="fixed" top="1rem" right="1rem" align="center">
           <IconButton
             aria-label="Open Menu"
