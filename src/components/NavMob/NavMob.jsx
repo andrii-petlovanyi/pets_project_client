@@ -31,7 +31,7 @@ export const NavMob = () => {
           <Flex
             w="100vw"
             display={display}
-            bgColor="#FDF7F2"
+            bgColor="mainColor"
             zIndex={20}
             h="100vh"
             pos="fixed"
@@ -50,7 +50,7 @@ export const NavMob = () => {
                   icon={
                     <IconContext.Provider
                       value={{
-                        color: '#212121',
+                        color: 'accentTextColor',
                         size: '40px',
                       }}
                     >
@@ -66,7 +66,7 @@ export const NavMob = () => {
                 align="center"
                 gap="60px"
                 fontFamily="Manrope"
-                color="#181C27"
+                color="thirdTextColor"
                 fontWeight="500"
                 fontSize="48px"
                 lineHeight="1.35"

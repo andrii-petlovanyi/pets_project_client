@@ -25,6 +25,8 @@ const colors = {
   accentOrange: '#FF6101',
   textColor: '#111111',
   secondaryTextColor: '#111321',
+  thirdTextColor: '#181C27',
+  accentTextColor: '#212121',
   labelColor: 'rgba(17, 17, 17, 0.6)',
 
   blurBadge: 'rgba(255, 255, 255, 0.6)',
@@ -46,7 +48,6 @@ const fonts = {
 };
 
 const components = {
-
   Link: linksTheme,
 
   Modal: {
