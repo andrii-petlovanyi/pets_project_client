@@ -1,6 +1,7 @@
 import { Box, Heading } from '@chakra-ui/react';
 import React, { Suspense, useEffect } from 'react';
 import {
+  NoticeCategoryItem,
   NoticesCategoriesNav,
   NoticesSearch,
 } from '../components/Notices';
@@ -33,21 +34,12 @@ const Notices = () => {
       alignItems={'center'}
       flexDirection={'column'}
     >
-      <div>
-        <Heading as="h1" variant={'main'}>
-          Find your favorite pet
-        </Heading>
+      <Heading as="h1" variant={'main'}>
+        Find your favorite pet
+      </Heading>
+      <NoticeCategoryItem />
 
-        <NoticesSearch onSubmit={onSubmit} />
-        <NoticesCategoriesNav onClick={onClick} />
-        {/* <NoticesCategoriesList itemList={category + search} /> */}
-
-        {!isLoading
-          ? notices.length > 0 && notices.map(n => <h2 key={n._id}>{n.title}</h2>)
-          : <>Loading...</>
-        }
-
-      </div>
+      <NoticesSearch onSubmit={onSubmit} />
       <NoticesCategoriesNav />
       {/* <NoticesCategoriesList itemList={notices} /> */}
       <Suspense fallback={false}>
