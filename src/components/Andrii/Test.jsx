@@ -15,7 +15,8 @@ import {
     Text,
     Textarea,
     Image,
-    Icon
+    Icon,
+    Heading
 } from "@chakra-ui/react";
 import { TfiPlus } from 'react-icons/tfi'
 
@@ -89,9 +90,10 @@ export default function TwoStepForm() {
                 )}
                 {step === 2 && (
                     <Stack spacing="4" w="100%" as="form" onSubmit={handleSubmit(onSubmit)}>
+                        <Heading as={'h2'} mx={'auto'} fontSize={'20px'}>Add photo and some comments</Heading>
                         <FormControl display={'flex'} justifyContent={'center'} position={'relative'}>
-                            <FormLabel htmlFor="image">Image</FormLabel>
-                            <Input width={'182px'} height={'182px'} bg={'mainColor'} color={'mainColor'} _placeholder={{ color: 'mainColor' }} borderRadius={'40px'} type="file" {...register("image")} onChange={handleImageChange} />
+                            <FormLabel htmlFor="image" width={'182px'} height={'182px'} bg={'mainColor'} borderRadius={'40px'} margin={'0'}></FormLabel>
+                            <Input id="image" display={'none'} type="file" {...register("image")} onChange={handleImageChange} />
                             {!imagePreview && <Icon as={TfiPlus} pointerEvents={'none'} position={'absolute'} top={'50%'} left={'50%'} transform={'translate(-50%, -50%)'} fontSize={'48px'} />}
                             {imagePreview && <Image pointerEvents={'none'} borderRadius={'40px'} position={'absolute'} top={'50%'} left={'50%'} transform={'translate(-50%, -50%)'} width={'182px'} height={'182px'} src={imagePreview} boxSize="182px" objectFit="cover" />}
                         </FormControl>
