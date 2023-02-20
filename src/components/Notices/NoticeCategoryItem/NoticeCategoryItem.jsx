@@ -20,10 +20,12 @@ import PropTypes from 'prop-types';
 
 import notice from '../notice.json';
 // import { useSelector } from 'react-redux';
+// import userSelectors from '../../../redux/user/user-selectors';
 
 export const NoticeCategoryItem = () => {
   console.log('noticeItem:', notice);
-  //   const user = useSelector(auth => auth.user._id);
+  //   const {_id: userId } = useSelector(userSelectors.user);
+
   const {
     category,
     title,
@@ -157,7 +159,7 @@ export const NoticeCategoryItem = () => {
         <Button type="button" variant={'outlineCardBtn'} m="0 auto">
           Learn more
         </Button>
-        {/* {user === owner ? (
+        {/* {userId === owner ? (
           <Button type="button" m="0 auto" mt="12px" variant={'outlineCardBtn'}>
             <Text mr={'13px'}>Delete</Text>{' '}
             <MdOutlineDeleteOutline size={'20px'} />
