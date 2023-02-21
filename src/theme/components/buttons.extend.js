@@ -161,6 +161,47 @@ const secondIB = defineStyle({
   },
 });
 
+const userEditIB = defineStyle({
+  background: 'mainColor',
+  borderRadius: 'full',
+  padding: '6px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: 'mainOrange',
+
+  _hover: {
+    color: 'accentOrange',
+  },
+});
+
+const userEditDisabledIB = defineStyle({
+  background: 'mainColor',
+  borderRadius: 'full',
+  padding: '6px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: 'labelColor',
+
+  _hover: {
+    color: 'black',
+  },
+});
+
+const authFormIcon = defineStyle({
+  borderRadius: 'full',
+  width: () => ({ base: '30px', lg: '44px' }),
+  height: () => ({ base: '30px', lg: '44px' }),
+  padding: () => ({ base: '7px', lg: '10px' }),
+  color: 'labelColor',
+  fontSize: () => ({ base: '20', lg: '24px' }),
+
+  _hover: {
+    color: 'textColor',
+  },
+});
+
 export const buttonTheme = defineStyleConfig({
   variants: {
     outlineCardBtn,
@@ -172,5 +213,8 @@ export const buttonTheme = defineStyleConfig({
     fullBGBtn,
     clearBtn,
     clearAddBtn,
+    userEditIB,
+    userEditDisabledIB,
+    authFormIcon,
   },
 });

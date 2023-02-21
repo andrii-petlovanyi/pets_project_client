@@ -6,7 +6,7 @@ export const Logo = () => {
     <Text variant={'logo'} to={'/'}
     >
       pe
-      <Text color={'mainOrange'}>
+      <Text as={'span'} color={'mainOrange'}>
         t
       </Text>
       ly

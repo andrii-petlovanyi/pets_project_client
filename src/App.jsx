@@ -3,24 +3,19 @@ import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './layout/Layout';
 import './index.css';
-import {
-  Login,
-  News,
-  NotFound,
-  Notices,
-  OurFriends,
-  Register,
-  FinalRegister,
-  UserDashboard,
-} from './pages';
+import { News, NotFound, Notices, OurFriends, UserDashboard } from './pages';
 import UiKit from './pages/UiKit';
 import { useGetUserQuery } from './redux/user/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import userSelectors from './redux/user/user-selectors';
 import { refresh } from './redux/user/userSlice';
-import { NoticesCategoriesList } from './components/Notices/NoticesLists/NoticesCategoriesList';
-import { NoticesFavoritesList } from './components/Notices/NoticesLists/NoticesFavoritesList';
-import { NoticesOwnerList } from './components/Notices/NoticesLists/NoticesOwnerList';
+import {
+  NoticesCategoriesList,
+  NoticesFavoritesList,
+  NoticesOwnerList,
+} from './components/Notices';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             {/* <Route element={<PrivateRoute />}> */}
-            <Route index element={<UserDashboard />} />
+            <Route index path="/user" element={<UserDashboard />} />
             <Route path="news" element={<News />} />
             <Route path="notices" element={<Notices />}>
               <Route
@@ -66,7 +61,6 @@ function App() {
             {/* <Route element={<PublicRoute />}> */}
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="finalregister" element={<FinalRegister />} />
             {/* </Route> */}
             <Route path="*" element={<NotFound />} />
           </Route>

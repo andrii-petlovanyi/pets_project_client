@@ -1,103 +1,32 @@
-import React from 'react'
-import {
-    ThemeProvider,
-    theme,
-    ColorModeProvider,
-    CSSReset,
-    Box,
-    Flex,
-    Heading,
-    FormControl,
-    FormLabel,
-    Input,
-    Stack,
-    Button,
-    Text
-} from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import extraTheme from '../theme/theme';
-
-const {colors} = extraTheme;
-
-
-
-
-
+import { Box } from '@chakra-ui/react';
+import React from 'react';
+import bg from '../assets/authBg.webp';
+import RegisterForm from '../components/Auth/RegisterForm';
 
 const Register = () => {
-    return (
-        <ThemeProvider theme={theme}>
-        <ColorModeProvider>
-          <CSSReset />
-          <RegisterSubBlock />
-        </ColorModeProvider>
-      </ThemeProvider>
-    )
-}
+  return (
+    <Box
+      minH={'calc(100vh - 64px)'}
+      display={'flex'}
+      justifyContent={'center'}
+      alignItems={'center'}
+      _after={{
+        content: '""',
+        position: 'absolute',
+        backgroundImage: bg,
+        backgroundPositionY: 'bottom',
+        bgRepeat: 'no-repeat',
+        bgSize: '100%',
+        bottom: '0',
+        top: '0',
+        right: 0,
+        left: 0,
+        zIndex: -1,
+      }}
+    >
+      <RegisterForm />
+    </Box>
+  );
+};
 
-const RegisterSubBlock = () => {
-    return(
-        <Flex minHeight='100vh' width='full' align='center' justifyContent='center'>
-        <Box 
-          borderWidth={1}
-          px={4}
-          width='full'
-          maxWidth='500px'
-          borderRadius={4}
-          textAlign='center'
-          boxShadow='lg'
-        >
-          <Box p={4}>
-            <RegisterHeader />
-            <RegisterForm />
-          </Box>
-        </Box>
-      </Flex>
-    )
-}
-
-const RegisterHeader = () => {
-    return(            
-    <Box textAlign='center'>
-        <Heading>Registration</Heading>
-    </Box>)
-}
-
-const RegisterForm = () => {
-    return(
-        <Box my={8} textAlign='left'>
-        <form>
-          <FormControl>
-            <FormLabel></FormLabel>
-            <Input type='email' placeholder='Email' />
-          </FormControl>
-  
-          <FormControl mt={4}>
-            <FormLabel></FormLabel>
-            <Input type='password' placeholder='Password' />
-          </FormControl>
-  
-          <FormControl mt={4}>
-            <FormLabel></FormLabel>
-            <Input type='password' placeholder='Confirm Password' />
-          </FormControl>
-
-
-          <Button as={Link} to="../finalregister" background={colors.mainOrange} color={colors.white} width='full' mt={4} >Next</Button>
-          <Stack isInline justifyContent='center' mt={4}>
-              <Box>
-                <Text>Already have an account? </Text>
-              </Box>
-              <Box>
-                <Text as={Link} to="../login" color={'blue.500'} href={`Login`}>Login</Text>
-              </Box>
-
-          </Stack>
-        </form>
-      </Box>    
-        )
-}
-
-
-
-export default Register
+export default Register;

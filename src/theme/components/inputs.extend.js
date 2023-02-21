@@ -37,18 +37,67 @@ const form = defineStyle({
   },
 });
 
-const formDisabled = defineStyle({
-  fontFamily: 'Manrope',
-  fontWeight: '400',
-  fontSize: '18px',
-  lineHeight: '25px',
-  border: 'none',
-  backgroundColor: 'white',
+const userInfoActive = defineStyle({
+  field: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '3px 12px',
+    width: '216px',
+    height: '32px',
+    borderRadius: '40px',
+    border: '1px solid',
+    borderColor: 'rgba(245, 146, 86, 0.5)',
 
-  display: 'flex',
-  alignItems: 'center',
+    color: 'textColor',
+    backgroundColor: 'mainColor',
 
-  color: 'textColor',
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: '18px',
+    lineHeight: '25px',
+    letterSpacing: '0.04em',
+
+    _focus: {
+      borderColor: 'accentOrange',
+      boxShadow: '0 0 1px 1px #D3D3D333',
+    },
+    _hover: {
+      borderColor: 'accentOrange',
+    },
+    _placeholder: {
+      fontFamily: 'Manrope',
+      fontWeight: '400',
+      fontSize: '18px',
+      lineHeight: '25px',
+      letterSpacing: '0.04em',
+      color: 'labelColor',
+    },
+  },
+});
+
+const userInfoDisabled = defineStyle({
+  field: {
+    width: '216px',
+    height: '32px',
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: '18px',
+    lineHeight: '25px',
+    border: 'none',
+    backgroundColor: 'white',
+    padding: '3px 12px',
+
+    display: 'flex',
+    alignItems: 'center',
+
+    color: 'textColor',
+    opacity: '1',
+
+    pointerEvents: 'none',
+    _hover: {
+      cursor: 'auto',
+    },
+  },
 });
 
 const search = defineStyle({
@@ -91,6 +140,63 @@ const search = defineStyle({
   },
 });
 
+const addPetsForm = defineStyle({
+  field: {
+    background: 'mainColor',
+    border: '1px solid rgba(245, 146, 86, 0.5)',
+    borderRadius: '40px',
+
+    backgroundColor: 'mainColor',
+    color: 'labelColor',
+
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: '16px',
+    lineHeight: '26px',
+    /* identical to box height, or 166% */
+
+    display: 'flex',
+    alignItems: 'center',
+
+    _placeholder: {
+      color: 'labelColor',
+
+      fontFamily: 'Manrope',
+      fontWeight: '400',
+      fontSize: '16px',
+      lineHeight: '26px',
+    },
+  },
+});
+
+const authForm = defineStyle({
+  field: {
+    height: () => ({ base: '40px', lg: '52px' }),
+
+    background: 'mainColor',
+    padding: () => ({ base: '11px 14px', lg: '14px 32px' }),
+    border: '1px solid',
+    borderColor: 'rgba(245, 146, 86, 0.5)',
+    borderRadius: '40px',
+
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: () => ({ base: '14px', lg: '18px' }),
+    lineHeight: () => ({ base: '19px', lg: '25px' }),
+
+    _placeholder: {
+      color: 'labelColor',
+    },
+  },
+});
+
 export const inputTheme = defineStyleConfig({
-  variants: { form, formDisabled, search },
+  variants: {
+    form,
+    search,
+    userInfoActive,
+    userInfoDisabled,
+    addPetsForm,
+    authForm,
+  },
 });

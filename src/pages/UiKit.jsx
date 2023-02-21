@@ -11,12 +11,15 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import {
+  MdCheck,
+  MdEdit,
   MdFavorite,
   MdOutlineDeleteOutline,
   MdOutlineFavoriteBorder,
   MdSearch,
 } from 'react-icons/md';
 import { HiPlus } from 'react-icons/hi';
+import AddPets from '../components/UserPets/AddPets';
 
 const UiKit = () => {
   return (
@@ -58,27 +61,44 @@ const UiKit = () => {
         </InputRightElement>
       </InputGroup>
 
-      <Textarea width={'395px'} minH={'119px'} placeholder='Example textarea' variant={'custom'} />
+      <Textarea width={'195px'} minH={'119px'} placeholder='Example textarea' variant={'custom'} />
 
-      <Button variant={'clearAddBtn'}>
+      <Box
+        color={'textColor'}
+        fontWeight={'500'}
+        fontSize={'20px'}
+        lineHeight={'27px'}
+        display={'flex'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        gap={'12px'}
+      >
         Add pet
         <IconButton variant={'mainIB'} icon={<HiPlus />} />
-      </Button>
+      </Box>
 
       <Flex
         bg={'white'}
         p={'20px'}
         borderRadius={'20px'}
-        w={'400px'}
+        // w={'400px'}
         flexDirection={'column'}
         alignItems={'center'}
         justifyContent={'center'}
         gap={'10px'}
       >
         <Text>Input for UserProfile</Text>
-        <Input value={'Andrii'} variant={'form'} />
-        <Input value={'Andrii'} variant={'formDisabled'} />
+        <Flex gap={'10px'} alignItems={'center'}>
+          <Input defaultValue={'Andrii'} variant={'userInfoActive'} />
+          <IconButton variant={'userEditIB'} size={'sm'} icon={<MdCheck size={'25px'} />} />
+        </Flex>
+        <Flex gap={'10px'} alignItems={'center'}>
+          <Input defaultValue={'Andrii'} variant={'userInfoDisabled'} />
+          <IconButton variant={'userEditDisabledIB'} size={'sm'} icon={<MdEdit size={'20px'} />} />
+        </Flex>
       </Flex>
+
+      <AddPets />
     </Box >
   )
 }

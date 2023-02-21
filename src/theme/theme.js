@@ -56,7 +56,17 @@ const components = {
       dialog: {
         // maxWidth: ['95%', '95%', '95%'],
         // minWidth: '95%',
-        bg: 'mainColor',
+        padding: () => ({ base: '40px 23px', md: '40px 80px' }),
+        maxWidth: () => ({ base: '608px' }),
+        // width: '100%',
+        bg: 'white',
+      },
+    },
+    sizes: {
+      custom: {
+        content: {
+          maxWidth: '608px',
+        },
       },
     },
   },
@@ -64,6 +74,7 @@ const components = {
   Input: inputTheme,
   Textarea: textareaTheme,
   Button: buttonTheme,
+  IconButton: buttonTheme,
   Heading: headingTheme,
 };
 
