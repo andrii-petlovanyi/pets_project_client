@@ -43,7 +43,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             {/* <Route element={<PrivateRoute />}> */}
-            <Route index element={<UserDashboard />} />
+            <Route index path='/user' element={<UserDashboard />} />
             <Route path="news" element={<News />} />
             <Route path="notices" element={<Notices />}>
               <Route
