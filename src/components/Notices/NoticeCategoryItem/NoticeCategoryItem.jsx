@@ -126,6 +126,7 @@ export const NoticeCategoryItem = ({ notice }) => {
             </Text>
             <Text ml="52px" fontSize="16px" fontWeight="500" lineHeight="22px">
               {calculateAnimalAge(birth)}
+              {/* {birth} */}
             </Text>
           </Flex>
           {category === 'sell' ? (

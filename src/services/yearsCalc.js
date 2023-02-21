@@ -1,23 +1,16 @@
 export function calculateAnimalAge(birthday) {
-  // Get today's date
   const today = new Date();
-  //
-  const [day, month, year] = birthday.split('.');
+  const [day, month, year] = String(birthday).split('.');
   const date = new Date(year, month - 1, day);
-  // Calculate the difference in milliseconds between the birthday and today's date
   const diffMs = today.getTime() - date.getTime();
   console.log('diffMs:', diffMs);
 
-  // Convert the difference to years
   const diffYears = diffMs / (1000 * 60 * 60 * 24 * 365);
 
-  // Round the result down to the nearest integer
   const age = Math.floor(diffYears);
 
-  // Convert the age to a string of words
   let ageWords = '';
   if (age === 0) {
-    // If the animal is less than one year old, express the age in months
     const diffMonths = Math.round(diffYears * 12);
     if (diffMonths === 1) {
       ageWords = '1 month old';
@@ -25,14 +18,11 @@ export function calculateAnimalAge(birthday) {
       ageWords = `${diffMonths} months old`;
     }
   } else if (age === 1) {
-    // If the animal is exactly one year old, express the age as "1 year old"
     ageWords = '1 year old';
   } else {
-    // If the animal is more than one year old, express the age in years
     ageWords = `${age} years old`;
   }
 
-  // Replace the number of years with the word equivalent
   ageWords = ageWords.replace(/\d+/, function (match) {
     const num = parseInt(match, 10);
     const units = [
@@ -79,6 +69,5 @@ export function calculateAnimalAge(birthday) {
     }
   });
 
-  // Return the age as a string of words
   return ageWords;
 }

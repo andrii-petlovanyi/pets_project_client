@@ -27,9 +27,10 @@ export const NoticesCategoriesList = ({ category }) => {
     // </div>
     <Flex as={'ul'} gap={'20px'}>
       {!isLoading ? (
-        notices?.map(notice => {
-          <NoticeCategoryItem key={notice._id} notice={notice} />;
-        })
+        notices?.length > 0 &&
+        notices?.map(notice => (
+          <NoticeCategoryItem key={notice._id} notice={notice} />
+        ))
       ) : (
         <>Loading...</>
       )}
