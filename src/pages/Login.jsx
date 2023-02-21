@@ -71,14 +71,19 @@ const LoginSubBlock =() => {
     return (
         <Flex minHeight='100vh' width='full' align='center' justifyContent='center'>
           <Box 
-            borderWidth={1}
-            px={4}
-            width='full'
-            maxWidth='500px'
-            borderRadius={4}
-            textAlign='center'
-            boxShadow='lg'
-            pt='42px'
+
+            
+            boxShadow={{ base: '0', lg: shadows.mainShadow}}
+            top={{lg:'18%', xl:'17%'}}
+            width={{ base: '280px', lg: '608px', xl: '618px' }}
+            px={{ base: '0', lg: '20' }}
+            pt={{ base: '22px', lg: '60px' }}
+            pb={{ base: '0', lg: '10', xl: '60px' }}
+            borderRadius="40px"
+            
+            bgColor={{ base: colors.mainColor, lg: colors.white }}
+            mx="auto"
+            
           >
             <Box p={4}>
               <LoginHeader />
@@ -91,9 +96,13 @@ const LoginSubBlock =() => {
 
 const LoginHeader = () => {
     return(    
-            <Box textAlign='center'>
-                <Heading>Login</Heading>
-            </Box>)
+            
+            <Heading textAlign='center'         
+            as="h1"
+            mb="10"
+            mt={{ base: '0' }}
+            fontWeight="medium">Login</Heading>
+            )
 }
 
 const LoginForm =() =>{
@@ -102,14 +111,24 @@ const LoginForm =() =>{
         <form>
           <FormControl>
             <FormLabel></FormLabel>
-            <Input type='email' placeholder='Email' />
+            <Input type='email' placeholder='Email'  position="relative"
+            width={{ base: '280px', lg: '448px', xl: '458px' }} />
           </FormControl>
   
           <FormControl mt={4}>
             <FormLabel></FormLabel>
-            <Input type='password' placeholder='Password' />
+            <Input type='password' placeholder='Password'  position="relative"
+            width={{ base: '280px', lg: '448px', xl: '458px' }} />
           </FormControl>
-          <Button background={colors.mainOrange} color={colors.white} width='full' mt={4}>Login</Button>
+          <Button background={colors.mainOrange} color={colors.white} mt={4}
+                        type="submit"
+                        controle="secondary"
+                        mb="40px"
+                        h={{ base: '44px', xl: '48px' }}
+                        width={{ base: '280px', lg: '448px', xl: '458px' }}
+                        loadingText={'Login'}
+                        aria-label="login"
+          >Login</Button>
 
           <Stack isInline justifyContent='center' mt={4}>
               <Box>
