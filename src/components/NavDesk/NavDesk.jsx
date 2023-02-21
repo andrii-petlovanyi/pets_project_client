@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Link } from '@chakra-ui/react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 export const NavDesk = ({ ...props }) => {
@@ -9,15 +9,20 @@ export const NavDesk = ({ ...props }) => {
       gap={'80px'}
       alignItems={'center'}
       fontFamily={'Manrope'}
-      color={'thirdTextColor'}
-      fontWeight={'500'}
-      lineHeight={'1.35'}
       {...props}
     >
-      <NavLink to="news">News</NavLink>
-      <NavLink to="notices">Find pet</NavLink>
-      <NavLink to="partners">Our friends</NavLink>
-      <NavLink to="uikit">UI Kit</NavLink>
+      <Link variant={'headerLink'} as={NavLink} to="news">
+        News
+      </Link>
+      <Link variant={'headerLink'} as={NavLink} to="notices">
+        Find pet
+      </Link>
+      <Link variant={'headerLink'} as={NavLink} to="partners">
+        Our friends
+      </Link>
+      <Link variant={'headerLink'} as={NavLink} to="uikit">
+        UI Kit
+      </Link>
     </Box>
   );
 };

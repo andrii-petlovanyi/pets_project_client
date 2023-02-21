@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Flex, IconButton } from '@chakra-ui/react';
+import { Flex, IconButton, Link } from '@chakra-ui/react';
 // import { HamburgerIcon } from '@chakra-ui/icons';
 import { GrFormClose } from 'react-icons/gr';
 import { HiMenu } from 'react-icons/hi';
@@ -64,31 +64,45 @@ export const NavMob = ({ ...props }) => {
               />
             </Flex>
             <Flex justifyContent={'center'} mb={'60px'}>
-              {isLoggedIn ? <UserMenu changeDisplay={changeDisplay} /> : <AuthNav gap={{ mb: '12px' }} />}
+              {isLoggedIn ? (
+                <UserMenu changeDisplay={changeDisplay} />
+              ) : (
+                <AuthNav gap={{ mb: '12px' }} />
+              )}
             </Flex>
-            <Flex
-              flexDir="column"
-              align="center"
-              gap="40px"
-              fontFamily="Manrope"
-              color="thirdTextColor"
-              fontWeight="500"
-              fontSize="32px"
-              lineHeight="1.35"
-              letterSpacing="0.04em"
-            >
-              <NavLink to="news" onClick={() => changeDisplay('none')}>
+            <Flex flexDir="column" align="center" gap="40px">
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="news"
+                onClick={() => changeDisplay('none')}
+              >
                 News
-              </NavLink>
-              <NavLink to="notices" onClick={() => changeDisplay('none')}>
+              </Link>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="notices"
+                onClick={() => changeDisplay('none')}
+              >
                 Find pet
-              </NavLink>
-              <NavLink to="partners" onClick={() => changeDisplay('none')}>
+              </Link>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="partners"
+                onClick={() => changeDisplay('none')}
+              >
                 Our friends
-              </NavLink>
-              <NavLink to="uikit" onClick={() => changeDisplay('none')}>
+              </Link>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="uikit"
+                onClick={() => changeDisplay('none')}
+              >
                 UI Kit
-              </NavLink>
+              </Link>
             </Flex>
           </Flex>
         </Flex>
