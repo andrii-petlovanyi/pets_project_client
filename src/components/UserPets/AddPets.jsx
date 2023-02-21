@@ -91,7 +91,7 @@ const AddPets = () => {
             <Modal isOpen={isOpen} onClose={onClose} size={'custom'}>
                 <ModalOverlay />
                 <ModalContent bg={'white'} borderRadius={{ base: '20px', md: '40px' }}>
-                    <IconButton position={'absolute'} top={{ base: '20px', xl: '24px' }} right={{ base: '20px', xl: '24px' }} icon={<MdClose />} variant={'secondIB'} />
+                    <IconButton position={'absolute'} top={{ base: '20px', xl: '24px' }} right={{ base: '20px', xl: '24px' }} icon={<MdClose />} variant={'secondIB'} onClick={onClose} />
                     <Heading as={'h2'} variant={'modalAddTitle'} textAlign={'center'} mb={{ base: '28px', lg: '40px' }}>
                         Add pet
                     </Heading>

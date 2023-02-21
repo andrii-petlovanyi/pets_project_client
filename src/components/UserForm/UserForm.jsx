@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { calendarFunc } from '../UserForm/Calendar';
 import { ButtonUserForm } from '../UserForm/IconButton';
-import { schema } from './validation/validation';
+import { userFormSchema } from '../../services/validation';
 import Avatar from './Avatar';
 
 const UserForm = () => {
@@ -29,7 +29,7 @@ const UserForm = () => {
       phone: '',
       city: '',
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(userFormSchema),
   });
 
   const INITIAL_DISABLED = {
@@ -173,9 +173,9 @@ const UserForm = () => {
                 // <Calendar />
                 <Box
                   style={{ width: '216px', height: '32px' }}
-                  // variant={
-                  //   isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
-                  // }
+                // variant={
+                //   isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
+                // }
                 >
                   <DatePicker
                     renderCustomHeader={calendarFunc}
@@ -184,10 +184,10 @@ const UserForm = () => {
                     selected={field.value}
                     dateFormat="dd.MM.yyyy"
                     maxDate={Date.now()}
-                    //   borderRadius={'40px'}
-                    //   variant={
-                    //     isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
-                    //   }
+                  //   borderRadius={'40px'}
+                  //   variant={
+                  //     isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
+                  //   }
                   />
                 </Box>
               )}

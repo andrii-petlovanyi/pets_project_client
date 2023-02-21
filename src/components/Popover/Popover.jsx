@@ -1,7 +1,7 @@
 import {
   Popover,
   PopoverTrigger,
-  IconButton,
+  Icon,
   PopoverContent,
   PopoverBody,
   Text,
@@ -19,13 +19,26 @@ export const LogOut = () => {
         {({ onClose }) => (
           <>
             <PopoverTrigger>
-              <Button type="button" variant="clearBtn">
-                <IconButton
-                  variant="clearBtn"
-                  icon={<IoIosLogOut size="24px" />}
+              <Box
+                as='button'
+                color={'textColor'}
+                fontWeight={'500'}
+                fontSize={'20px'}
+                lineHeight={'27px'}
+                display={'flex'}
+                justifyContent={'center'}
+                alignItems={'center'}
+                gap={'12px'}
+              >
+                <Icon
+                  color={'mainOrange'}
+                  width={'24px'}
+                  height={'24px'}
+                  as={IoIosLogOut}
+                  _hover={{ color: 'accentOrange' }}
                 />
                 <Text color="labelColor">Log Out</Text>
-              </Button>
+              </Box>
             </PopoverTrigger>
             <Portal>
               <PopoverContent>
@@ -53,7 +66,7 @@ export const LogOut = () => {
                       Yes
                     </Button>
                     <Button
-                      variant={'outlineTabActive'}
+                      variant={'fullBGBtn'}
                       size="sm"
                       onClick={onClose}
                     >
