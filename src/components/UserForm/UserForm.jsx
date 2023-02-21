@@ -20,49 +20,61 @@ import { userFormSchema } from '../../services/validation';
 import './Calendar/Calendar.styled.css';
 
 import UserAvatar from './Avatar';
+import userSelectors from '../../redux/user/user-selectors';
+import { useSelector } from 'react-redux';
+import { useUpdateUserMutation } from '../../redux/user/userApiSlice';
+
+const INITIAL_DISABLED = {
+  name: true,
+  email: true,
+  birthday: true,
+  phone: true,
+  city: true,
+};
 
 const UserForm = () => {
+  const [isDisabled, setIsDisabled] = useState(INITIAL_DISABLED);
+  const [updateUser] = useUpdateUserMutation();
+
+  const user = useSelector(userSelectors.user);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: '',
-      email: '',
-      birthday: '',
-      phone: '',
-      city: '',
+      name: user.name,
+      email: user.email,
+      birthday: new Date(user.birthday),
+      // birthday: new Date(user.birthday.split('.').reverse().join('-')),
+      phone: user.phone,
+      city: user.city,
     },
     resolver: yupResolver(userFormSchema),
   });
-
-  const INITIAL_DISABLED = {
-    name: true,
-    email: true,
-    birthday: true,
-    phone: true,
-    city: true,
-  };
-
-  const [isDisabled, setIsDisabled] = useState(INITIAL_DISABLED);
 
   const handleEdit = data => {
     // console.log(data);
     setIsDisabled({ ...INITIAL_DISABLED, [data]: false });
   };
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = async data => {
+    const newData = {
+      ...data,
+      birthday: new Date(data.birthday).toISOString().split('T')[0],
+      // .split('-')
+      // .reverse()
+      // .join('.'),
+    };
+    console.log(newData);
+    const { data: res, error } = await updateUser(newData);
+    console.log(res);
+    if (error) return console.log(error);
     setIsDisabled({ ...INITIAL_DISABLED });
   };
 
   return (
     <>
-      {/* <FormControl>
-        <Input value={'data'} variant={open ? 'userInfoActive' : 'userInfoDisabled'} />
-        <IconButton variant={'style'} color={!oneInput ?? 'grey'} icon={open ? <MdPlace /> : <Md10K />} />
-      </FormControl> */}
       <Flex flexDirection={'column'} width={'100%'}>
         <Heading mb={'24px'}>My information:</Heading>
         <FormControl
@@ -184,25 +196,18 @@ const UserForm = () => {
                 name="birthday"
                 control={control}
                 render={({ field }) => (
-                  // <Calendar />
-                  <Box
-                    style={{ width: '216px', height: '32px' }}
-                    // variant={
-                    //   isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
-                    // }
-                  >
+                  <Box style={{ width: '216px', height: '32px' }}>
                     <DatePicker
                       renderCustomHeader={calendarFunc}
                       disabled={isDisabled.birthday}
-                      onChange={date => field.onChange(date)}
+                      onChange={date => {
+                        // console.log(console.log(field));
+                        field.onChange(date);
+                      }}
                       selected={field.value}
                       dateFormat="dd.MM.yyyy"
                       maxDate={Date.now()}
-                      wrapperClassName="datePicker"
-                      //   borderRadius={'40px'}
-                      //   variant={
-                      //     isDisabled.birthday ? 'userInfoDisabled' : 'userInfoActive'
-                      //   }
+                      wrapperClassName="date__picker"
                     />
                   </Box>
                 )}
