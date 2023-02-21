@@ -189,6 +189,19 @@ const userEditDisabledIB = defineStyle({
   },
 });
 
+const authFormIcon = defineStyle({
+  borderRadius: 'full',
+  width: () => ({ base: '30px', lg: '44px' }),
+  height: () => ({ base: '30px', lg: '44px' }),
+  padding: () => ({ base: '7px', lg: '10px' }),
+  color: 'labelColor',
+  fontSize: () => ({ base: '20', lg: '24px' }),
+
+  _hover: {
+    color: 'textColor',
+  },
+});
+
 export const buttonTheme = defineStyleConfig({
   variants: {
     outlineCardBtn,
@@ -202,5 +215,6 @@ export const buttonTheme = defineStyleConfig({
     clearAddBtn,
     userEditIB,
     userEditDisabledIB,
+    authFormIcon,
   },
 });

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRegisterUserMutation } from '../../redux/user/userApiSlice';
 import * as yup from 'yup';
 import {
   Button,
@@ -12,8 +13,14 @@ import {
   Stack,
   Heading,
   Text,
+  InputGroup,
+  InputRightElement,
+  IconButton,
 } from '@chakra-ui/react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { BiShow, BiHide } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+import { register as userRegister } from '../../redux/user/userSlice';
 
 const schemaStep1 = yup.object().shape({
   email: yup
@@ -50,18 +57,35 @@ const schemaStep2 = yup.object().shape({
 
 const RegisterForm = () => {
   const [step, setStep] = useState(1);
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
+
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // reset,
+    reset,
   } = useForm({
     resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
   });
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = async data => {
+    delete data.cpassword;
+
+    try {
+      const { data: res, error } = await registerUser(data);
+      if (error) return console.log(error);
+      console.log(res);
+      dispatch(userRegister(res.user));
+      reset();
+      navigate('/user');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const nextStep = () => {
@@ -102,21 +126,45 @@ const RegisterForm = () => {
               <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
             </FormControl>
             <FormControl isInvalid={errors.password}>
-              <Input
-                variant={'authForm'}
-                placeholder={'Password'}
-                type="password"
-                {...register('password')}
-              />
+              <InputGroup>
+                <Input
+                  variant={'authForm'}
+                  placeholder={'Password'}
+                  type={show ? 'text' : 'password'}
+                  {...register('password')}
+                />
+                <InputRightElement>
+                  <IconButton
+                    mt={{ base: '0', lg: '10px' }}
+                    mr={'10px'}
+                    // fontSize={'20px'}
+                    variant={'authFormIcon'}
+                    icon={show ? <BiShow /> : <BiHide />}
+                    onClick={handleClick}
+                  />
+                </InputRightElement>
+              </InputGroup>
               <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
             </FormControl>
             <FormControl isInvalid={errors.cpassword}>
-              <Input
-                variant={'authForm'}
-                placeholder={'Confirm password'}
-                type="password"
-                {...register('cpassword')}
-              />
+              <InputGroup>
+                <Input
+                  variant={'authForm'}
+                  placeholder={'Confirm password'}
+                  type={show ? 'text' : 'password'}
+                  {...register('cpassword')}
+                />
+                <InputRightElement>
+                  <IconButton
+                    mt={{ base: '0', lg: '10px' }}
+                    mr={'10px'}
+                    // fontSize={'20px'}
+                    variant={'authFormIcon'}
+                    icon={show ? <BiShow /> : <BiHide />}
+                    onClick={handleClick}
+                  />
+                </InputRightElement>
+              </InputGroup>
               <FormErrorMessage>{errors.cpassword?.message}</FormErrorMessage>
             </FormControl>
 
@@ -136,12 +184,7 @@ const RegisterForm = () => {
             as="form"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <FormControl
-              display={'flex'}
-              justifyContent={'center'}
-              position={'relative'}
-              isInvalid={errors.name}
-            >
+            <FormControl isInvalid={errors.name}>
               <Input
                 variant={'authForm'}
                 type={'text'}
@@ -179,6 +222,7 @@ const RegisterForm = () => {
                 width={'100%'}
                 variant={'fullBGBtn'}
                 type="submit"
+                isLoading={isLoading}
               >
                 Register
               </Button>
