@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import {
+  // Avatar,
   //   Button,
   FormControl,
   FormLabel,
   HStack,
+  Image,
   Input,
 } from '@chakra-ui/react';
+// import { AiOutlineUser } from 'react-icons/ai';
+import UserPic from '../../assets/abstract_user.svg';
+// import { FaRegUserCircle } from 'react-icons/fa';
 import { MdPhotoCamera } from 'react-icons/md';
-import { Image, Box, Icon, Text } from '@chakra-ui/react';
+
+import { Box, Icon, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-const Avatar = () => {
+const UserAvatar = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const {
     register,
@@ -38,17 +44,19 @@ const Avatar = () => {
     >
       <Box
         display={'flex'}
-        alignItems={'flex-end'}
-        justifyContent={'flex-end'}
+        alignItems={'center'}
+        justifyContent={'center'}
         mb={'32px'}
         w={'233px'}
         h={'233px'}
+        backgroundColor={'#d9d7d7'}
+        borderRadius={'50%'}
       >
         <Image
           borderRadius="full"
-          fallbackSrc="https://via.placeholder.com/233"
-          src={imagePreview}
-          width={'233px'}
+          // color="labelColor"
+          src={imagePreview ? imagePreview : UserPic}
+          width={'233x'}
           height={'233px'}
           boxSize="233px"
           objectFit="cover"
@@ -121,7 +129,7 @@ const Avatar = () => {
   );
 };
 
-export default Avatar;
+export default UserAvatar;
 
 {
   /* <HStack>

@@ -1,0 +1,36 @@
+.date__picker input {
+  width: 216px;
+  height: 32px;
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  border: none;
+  padding: 3px 12px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  border-radius: 40px;
+  border: 1px solid;
+  border-color: rgba(245, 146, 86, 0.5);
+  background-color: #fdf7f2;
+  opacity: 1;
+  cursor: auto;
+}
+
+.date__picker input:disabled {
+  width: 216px;
+  height: 32px;
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  border: none;
+  padding: 3px 12px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background-color: white;
+  opacity: 1;
+  cursor: auto;
+}
