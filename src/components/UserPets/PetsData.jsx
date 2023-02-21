@@ -5,8 +5,8 @@ import AddPets from './AddPets';
 
 export const UserPetsData = () => {
   return (
-    <Flex flexDirection={'column'} >
-      <Flex justifyContent={'space-between'}>
+    <Flex flexDirection={'column'} width={'100%'}>
+      <Flex justifyContent={'space-between'} >
         <Heading mb={'20px'}>My pets:</Heading>
         <AddPets />
       </Flex>
