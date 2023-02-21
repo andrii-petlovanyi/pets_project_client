@@ -31,6 +31,7 @@ import userApiSlice, {
   useAddMyPetsMutation,
 } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
+import { birthdayRegExp } from '../../services/validation';
 
 const schemaStep1 = yup.object().shape({
   name: yup
@@ -39,7 +40,10 @@ const schemaStep1 = yup.object().shape({
     .min(2, 'Minimal pet name length is 2 symbols')
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
-  birthday: yup.string().required('Birthday is required'),
+  birthday: yup
+    .string()
+    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
+    .required('Birthday is required'),
   breed: yup
     .string()
     .trim()

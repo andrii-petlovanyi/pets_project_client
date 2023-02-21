@@ -1,10 +1,11 @@
 import * as yup from 'yup';
 
-export const locationRegExp = /^\w+,\s*\w+$/;
+export const locationRegExp = /^\p{L}{3,},\s*\p{L}{3,}$/u;
 export const phoneRegExp =
   /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 
 export const passRegexp = /^(?=.{8,32}$)([0-9A-Za-z])*$/;
+export const birthdayRegExp = /^\d{2}\.\d{2}\.\d{4}$/;
 export const birthDay =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 
