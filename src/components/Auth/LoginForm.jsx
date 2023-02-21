@@ -21,7 +21,6 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { useLogInUserMutation } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/user/userSlice';
-import { passRegexp } from '../../services/validation';
 
 const schema = yup.object().shape({
   email: yup
@@ -34,7 +33,6 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .trim()
-    .matches(passRegexp, 'Password must be contain words and numbers')
     .min(8, 'Minimal password length is 8 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Password is required'),

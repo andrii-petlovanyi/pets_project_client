@@ -38,14 +38,14 @@ const schemaStep1 = yup.object().shape({
   password: yup
     .string()
     .trim()
-    .matches(passRegexp, 'Password must be contain words and numbers')
+    .matches(passRegexp, 'Password must be contain letters and numbers')
     .min(8, 'Minimal password length is 8 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Password is required'),
   cpassword: yup
     .string()
     .trim()
-    .matches(passRegexp, 'Password must be contain words and numbers')
+    .matches(passRegexp, 'Password must be contain letters and numbers')
     .min(8, 'Minimal password length is 8 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Please repeat password')
