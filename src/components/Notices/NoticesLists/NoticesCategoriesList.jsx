@@ -28,7 +28,7 @@ export const NoticesCategoriesList = ({ category }) => {
     <Flex as={'ul'} gap={'20px'}>
       {!isLoading ? (
         notices?.map(notice => {
-          return <NoticeCategoryItem key={notice._id} notice={notice} />;
+          <NoticeCategoryItem key={notice._id} notice={notice} />;
         })
       ) : (
         <>Loading...</>
