@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { useGetNewsListQuery } from '../redux/news/newsApisSlice';
 import { AiOutlineSearch } from 'react-icons/ai';
 import NewCard from '../components/News/NewCard';
+import NewsLoader from '../components/Loaders/News';
 
 const News = () => {
   const [search, setSearch] = useState('');
@@ -71,7 +72,13 @@ const News = () => {
           news.length > 0 &&
           news.map(news => <NewCard key={news.title} news={news} />)
         ) : (
-          <>Loading...</>
+          <>
+            {Array(9)
+              .fill(0)
+              .map((_, index) => (
+                <NewsLoader key={index} />
+              ))}
+          </>
         )}
       </Flex>
     </>
