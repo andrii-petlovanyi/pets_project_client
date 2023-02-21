@@ -169,6 +169,39 @@ const addPetsForm = defineStyle({
   },
 });
 
+const addNoticeForm = defineStyle({
+  field: {
+    background: 'mainColor',
+    border: '1px solid #F5925680',
+    borderRadius: '40px',
+    filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
+    width:{base: '240px', lg: '448px' },
+    height:{ base: '40px', lg: '48px' },
+    
+
+    backgroundColor: 'mainColor',
+    
+
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize:{base: '14px', lg: '16px' },
+    lineHeight: '26px',
+
+
+    display: 'flex',
+    alignItems: 'center',
+
+    _placeholder: {
+      color: 'labelColor',
+
+      fontFamily: 'Manrope',
+      fontWeight: '400',
+      fontSize:{base: '14px', lg: '16px' },
+      lineHeight: '26px',
+   },
+  },
+});
+
 const authForm = defineStyle({
   field: {
     height: () => ({ base: '40px', lg: '52px' }),
@@ -198,5 +231,6 @@ export const inputTheme = defineStyleConfig({
     userInfoDisabled,
     addPetsForm,
     authForm,
+    addNoticeForm,
   },
 });
