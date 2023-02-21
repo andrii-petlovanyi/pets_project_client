@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useGetNoticesListQuery } from '../../../redux/notices/noticesApiSlice';
 import { useLocation } from 'react-router-dom';
 import { NoticeCategoryItem } from '../../Notices';
+import { Flex } from '@chakra-ui/react';
 
 export const NoticesCategoriesList = ({ category }) => {
   const params = useLocation();
@@ -24,16 +25,15 @@ export const NoticesCategoriesList = ({ category }) => {
     //     <>Loading...</>
     //   )}
     // </div>
-    <ul>
+    <Flex as={'ul'} gap={'20px'}>
       {!isLoading ? (
         notices?.map(notice => {
-          console.log('noticeList:', notice);
           return <NoticeCategoryItem key={notice._id} notice={notice} />;
         })
       ) : (
         <>Loading...</>
       )}
-    </ul>
+    </Flex>
   );
 };
 
