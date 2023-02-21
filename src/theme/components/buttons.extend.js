@@ -189,6 +189,23 @@ const userEditDisabledIB = defineStyle({
   },
 });
 
+const noticePetSexBtn = defineStyle({
+  width: '90px',
+  height: '120px',
+  background: 'transparent',
+  borderRadius: 'full',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '0px',
+  
+
+  _hover: {
+    textColor: 'accentOrange',
+  },
+});
+
 export const buttonTheme = defineStyleConfig({
   variants: {
     outlineCardBtn,
@@ -202,5 +219,6 @@ export const buttonTheme = defineStyleConfig({
     clearAddBtn,
     userEditIB,
     userEditDisabledIB,
+    noticePetSexBtn
   },
 });
