@@ -32,13 +32,14 @@ const News = () => {
         textAlign={'center'}
         mr={'auto'}
         ml={'auto'}
+        mt={{ base: '42px', lg: '88px', xl: '61px' }}
+        mb={{ base: '28px', lg: '40px', xl: '40px' }}
         fontSize={{ base: '24px', lg: '48px' }}
       >
         News
       </Heading>
-
       <InputGroup
-        m={'0 auto'}
+        m={{ base: '20px auto' }}
         as="form"
         maxW={{ base: '280px', lg: '608px' }}
         display={'flex'}
