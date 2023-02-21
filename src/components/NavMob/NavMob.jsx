@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { Flex, IconButton } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
+import { Flex, IconButton, Link } from '@chakra-ui/react';
 import { GrFormClose } from 'react-icons/gr';
+import { HiMenu } from 'react-icons/hi';
+
 import { NavLink } from 'react-router-dom';
 import { Logo } from '../Logo/Logo';
 import { IconContext } from 'react-icons';
@@ -11,7 +12,6 @@ import userSelectors from '../../redux/user/user-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { useSelector } from 'react-redux';
 
-
 export const NavMob = ({ ...props }) => {
   const { isAuth } = userSelectors;
   const isLoggedIn = useSelector(isAuth);
@@ -19,15 +19,15 @@ export const NavMob = ({ ...props }) => {
 
   {
     return (
-      <Flex
-        {...props}
-      >
+      <Flex {...props}>
         <Flex position="fixed" top="1rem" right="1rem" align="center">
           <IconButton
             aria-label="Open Menu"
-            size="lg"
-            icon={<HamburgerIcon />}
+            icon={<HiMenu size="40px" />}
             onClick={() => changeDisplay('flex')}
+            variant="clearBtn"
+            color={'212121'}
+            display={'inline'}
           />
         </Flex>
 
@@ -43,12 +43,11 @@ export const NavMob = ({ ...props }) => {
           overflowY="auto"
           flexDir="column"
         >
-          <Flex pt="24px" pr="32px" pl="32px" flexDir="column">
-            <Flex justify="space-between" alignItems="center" mb="88px">
+          <Flex pt="16px" pr="20px" pl="16px" flexDir="column">
+            <Flex justify="space-between" alignItems="center" mb="46px">
               <Logo />
               <IconButton
-                variant="outline"
-                border="none"
+                variant="clearBtn"
                 aria-label="Open Menu"
                 icon={
                   <IconContext.Provider
@@ -63,30 +62,38 @@ export const NavMob = ({ ...props }) => {
                 onClick={() => changeDisplay('none')}
               />
             </Flex>
-            {isLoggedIn ? <UserMenu /> : <AuthNav />}
-            <Flex
-              flexDir="column"
-              align="center"
-              gap="60px"
-              fontFamily="Manrope"
-              color="thirdTextColor"
-              fontWeight="500"
-              fontSize="48px"
-              lineHeight="1.35"
-              letterSpacing="0.04em"
-            >
-              <NavLink to="news" onClick={() => changeDisplay('none')}>
+            <Flex justifyContent={'center'} mb={'60px'}>
+              {isLoggedIn ? (
+                <UserMenu changeDisplay={changeDisplay} />
+              ) : (
+                <AuthNav gap={{ mb: '12px' }} />
+              )}
+            </Flex>
+            <Flex flexDir="column" align="center" gap="40px">
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="news"
+                onClick={() => changeDisplay('none')}
+              >
                 News
-              </NavLink>
-              <NavLink to="notices" onClick={() => changeDisplay('none')}>
+              </Link>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="notices"
+                onClick={() => changeDisplay('none')}
+              >
                 Find pet
-              </NavLink>
-              <NavLink to="partners" onClick={() => changeDisplay('none')}>
+              </Link>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="partners"
+                onClick={() => changeDisplay('none')}
+              >
                 Our friends
-              </NavLink>
-              <NavLink to="uikit" onClick={() => changeDisplay('none')}>
-                UI Kit
-              </NavLink>
+              </Link>
             </Flex>
           </Flex>
         </Flex>

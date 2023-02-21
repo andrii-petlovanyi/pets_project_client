@@ -9,10 +9,6 @@ const logo = defineStyle({
   display: 'flex',
 });
 
-<<<<<<< Updated upstream
-export const textTheme = defineStyleConfig({
-  variants: { logo },
-=======
 const textLabelUserForm = defineStyle({
   mb: '0',
   mr: '0',
@@ -48,9 +44,20 @@ const noticesInputsHead = defineStyle({
   marginTop: {base: '12px', lg: '24px' },
   marginBottom: {base: '8px', lg: '12px' }
 
-})
+});
+
+const textLabelUserForm = defineStyle({
+  mb: '0',
+  mr: '0',
+  width: '107px',
+  fontFamily: 'Manrope',
+  fontWeight: '500',
+  fontSize: '18px',
+  lineHeight: '1.4',
+  letterSpacing: '0.04em',
+  color: 'textColor',
+});
 
 export const textTheme = defineStyleConfig({
-  variants: { logo, textLabelUserForm, noticeModalText, noticesInputsHead},
->>>>>>> Stashed changes
+  variants: { logo, textLabelUserForm, noticeModalText, noticesInputsHead },
 });

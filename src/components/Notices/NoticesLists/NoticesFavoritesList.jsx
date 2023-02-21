@@ -4,8 +4,8 @@ import { useGetFavoritesListQuery } from '../../../redux/user/userApiSlice';
 // import { NoticeCategoryItem } from '../../Notices';
 
 export const NoticesFavoritesList = () => {
-  const params = useLocation()
-  let search = params.search.split('=').at(-1)
+  const params = useLocation();
+  let search = params.search.split('=').at(-1);
 
   const { data, isLoading } = useGetFavoritesListQuery({
     page: 1,
@@ -16,7 +16,6 @@ export const NoticesFavoritesList = () => {
 
   return (
     <div>
-
       {!isLoading ? (
         notices?.length > 0 && notices.map(n => <h2 key={n._id}>{n.title}</h2>)
       ) : (
@@ -25,8 +24,8 @@ export const NoticesFavoritesList = () => {
     </div>
 
     // <ul>
-    //   {itemList?.map(item => (
-    //     <NoticeCategoryItem key={item._id} item={item} />
+    //   {notices?.map(notice => (
+    //     <NoticeCategoryItem key={notice._id} notice={notice} />
     //   ))}
     // </ul>
   );
@@ -35,4 +34,3 @@ export const NoticesFavoritesList = () => {
 // {
 //   itemList;
 // }
-
