@@ -11,8 +11,8 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     register(state, { payload }) {
-      state.user = payload.user;
-      state.token = payload.user.accessToken;
+      state.user = payload;
+      state.token = payload.accessToken;
       state.isLoggedIn = true;
     },
     logIn: (state, { payload }) => {

@@ -11,8 +11,8 @@ import {
 } from '@chakra-ui/react';
 import { IoIosLogOut } from 'react-icons/io';
 import React from 'react';
-
-export const LogOut = () => {
+import PropTypes from 'prop-types';
+export const PopoverLogOut = ({ handleLogOut, display }) => {
   return (
     <>
       <Popover>
@@ -20,12 +20,12 @@ export const LogOut = () => {
           <>
             <PopoverTrigger>
               <Box
-                as='button'
+                as="button"
                 color={'textColor'}
                 fontWeight={'500'}
                 fontSize={'20px'}
                 lineHeight={'27px'}
-                display={'flex'}
+                display={display}
                 justifyContent={'center'}
                 alignItems={'center'}
                 gap={'12px'}
@@ -62,14 +62,14 @@ export const LogOut = () => {
                     textAlign="center"
                     gap="20px"
                   >
-                    <Button variant={'outlineTabBtn'} size="sm">
+                    <Button
+                      variant={'outlineTabBtn'}
+                      size="sm"
+                      onClick={handleLogOut}
+                    >
                       Yes
                     </Button>
-                    <Button
-                      variant={'fullBGBtn'}
-                      size="sm"
-                      onClick={onClose}
-                    >
+                    <Button variant={'fullBGBtn'} size="sm" onClick={onClose}>
                       No
                     </Button>
                   </Box>
@@ -81,4 +81,9 @@ export const LogOut = () => {
       </Popover>
     </>
   );
+};
+
+PopoverLogOut.propTypes = {
+  handleLogOut: PropTypes.func,
+  display: PropTypes.object,
 };

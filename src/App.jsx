@@ -4,15 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from './layout/Layout';
 import './index.css';
 import {
-  Login,
+  Home,
   News,
   NotFound,
   Notices,
   OurFriends,
-  Register,
   UserDashboard,
 } from './pages';
-import UiKit from './pages/UiKit';
 import { useGetUserQuery } from './redux/user/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import userSelectors from './redux/user/user-selectors';
@@ -22,6 +20,10 @@ import {
   NoticesFavoritesList,
   NoticesOwnerList,
 } from './components/Notices';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import PrivateRoute from './components/Routes/PrivateRoute';
+import PublicRoute from './components/Routes/PublicRoute';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,8 +43,10 @@ function App() {
       <Suspense fallback={false}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            {/* <Route element={<PrivateRoute />}> */}
-            <Route index path='/user' element={<UserDashboard />} />
+            <Route index element={<Home />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/user" element={<UserDashboard />} />
+            </Route>
             <Route path="news" element={<News />} />
             <Route path="notices" element={<Notices />}>
               <Route
@@ -57,17 +61,17 @@ function App() {
                 path="for-free"
                 element={<NoticesCategoriesList category={'for-free'} />}
               />
-              <Route path="favorite" element={<NoticesFavoritesList />} />
-              <Route path="own" element={<NoticesOwnerList />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="favorite" element={<NoticesFavoritesList />} />
+                <Route path="own" element={<NoticesOwnerList />} />
+              </Route>
             </Route>
             <Route path="partners" element={<OurFriends />} />
-            <Route path="uikit" element={<UiKit />} />
-            {/* </Route> */}
 
-            {/* <Route element={<PublicRoute />}> */}
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            {/* </Route> */}
+            <Route element={<PublicRoute />}>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

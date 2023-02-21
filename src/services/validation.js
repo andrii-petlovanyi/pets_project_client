@@ -1,7 +1,12 @@
 import * as yup from 'yup';
 
-const phoneRegExp =
+export const locationRegExp = /^\w+,\s*\w+$/;
+export const phoneRegExp =
   /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
+
+export const passRegexp = /^(?=.{8,32}$)([0-9A-Za-z])*$/;
+export const birthDay =
+  /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 
 export const userFormSchema = yup.object({
   name: yup
