@@ -43,7 +43,9 @@ function App() {
       <Suspense fallback={false}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route element={<PublicRoute />}>
+              <Route index element={<Home />} />
+            </Route>
             <Route element={<PrivateRoute />}>
               <Route path="/user" element={<UserDashboard />} />
             </Route>
