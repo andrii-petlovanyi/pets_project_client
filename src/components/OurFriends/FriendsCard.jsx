@@ -1,3 +1,5 @@
+import { getDay } from 'date-fns';
+
 import {
   Box,
   Card,
@@ -18,8 +20,11 @@ import PropTypes from 'prop-types';
 // import { ScheduleMenu } from './ScheduleMenu';
 
 export const FriendsCard = ({ friend = {} }) => {
-    const { title, url, imageUrl, address, email, phone, workDays } = friend;
-    const dayNames = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU']
+  const { title, url, imageUrl, address, email, phone, workDays } = friend;
+  const dayNames = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+  const result = getDay(new Date(Date.now()))-1;
+  
+ 
 
   return (
     <Card
@@ -70,20 +75,26 @@ export const FriendsCard = ({ friend = {} }) => {
           pt={0}
         >
           <Box>
+            <Text>Time:</Text>
             <Menu>
-              <MenuButton>Time:</MenuButton>
+              <MenuButton _active={{color: 'mainOrange' }}>
+                {workDays?.length > 0 && workDays[result]?.isOpen
+                  ? ` ${workDays[result].from} - ${workDays[result].to}`
+                  : 'Closed'}
+              </MenuButton>
+
               <Portal>
                 <MenuList>
                   {workDays
                     ? workDays.length > 0 &&
-                      workDays.map((day, index )=> (
+                      workDays.map((day, index) => (
                         <MenuItem key={index}>
                           {day?.isOpen
                             ? `${dayNames[index]} ${day.from} - ${day.to}`
                             : 'Closed'}
                         </MenuItem>
                       ))
-                    : 'Work-days data are missing'}
+                    : `  Work-days data are missing`}
                 </MenuList>
               </Portal>
             </Menu>
@@ -114,6 +125,6 @@ FriendsCard.propTypes = {
     address: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
-    workDays: PropTypes.array,
+    workDays: PropTypes.arrayOf(PropTypes.object),
   }),
 };
