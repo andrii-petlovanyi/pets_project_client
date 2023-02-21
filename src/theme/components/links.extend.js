@@ -39,11 +39,26 @@ const tabLink = defineStyle({
   },
 });
 
-const logo = defineStyle({
+const logo = defineStyle({});
 
-
+const headerLink = defineStyle({
+  fontFamily: 'Manrope',
+  color: 'thirdTextColor',
+  fontWeight: '500',
+  lineHeight: '1.35',
+  fontSize: () => ({ base: '32px', lg: '48px', xl: '20px' }),
+  letterSpacing: '0.04em',
+  transition: 'background 250ms ease-in-out, color 250ms ease-in-out',
+  _hover: {
+    textDecoration: 'underline',
+    color: 'mainOrange',
+  },
+  _activeLink: {
+    color: 'mainOrange',
+    textDecoration: 'underline',
+  },
 });
 
 export const linksTheme = defineStyleConfig({
-  variants: { friends, tabLink, logo },
+  variants: { friends, tabLink, logo, headerLink },
 });
