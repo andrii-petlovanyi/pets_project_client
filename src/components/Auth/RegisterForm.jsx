@@ -75,8 +75,8 @@ const schemaStep2 = yup.object().shape({
 
 const RegisterForm = () => {
   const [step, setStep] = useState(1);
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  const [showPass1, setShowPass1] = useState(false);
+  const [showPass2, setShowPass2] = useState(false);
 
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const dispatch = useDispatch();
@@ -148,17 +148,16 @@ const RegisterForm = () => {
                 <Input
                   variant={'authForm'}
                   placeholder={'Password'}
-                  type={show ? 'text' : 'password'}
+                  type={showPass1 ? 'text' : 'password'}
                   {...register('password')}
                 />
                 <InputRightElement>
                   <IconButton
                     mt={{ base: '0', lg: '10px' }}
                     mr={'10px'}
-                    // fontSize={'20px'}
                     variant={'authFormIcon'}
-                    icon={show ? <BiShow /> : <BiHide />}
-                    onClick={handleClick}
+                    icon={showPass1 ? <BiShow /> : <BiHide />}
+                    onClick={() => setShowPass1(!showPass1)}
                   />
                 </InputRightElement>
               </InputGroup>
@@ -169,17 +168,16 @@ const RegisterForm = () => {
                 <Input
                   variant={'authForm'}
                   placeholder={'Confirm password'}
-                  type={show ? 'text' : 'password'}
+                  type={showPass2 ? 'text' : 'password'}
                   {...register('cpassword')}
                 />
                 <InputRightElement>
                   <IconButton
                     mt={{ base: '0', lg: '10px' }}
                     mr={'10px'}
-                    // fontSize={'20px'}
                     variant={'authFormIcon'}
-                    icon={show ? <BiShow /> : <BiHide />}
-                    onClick={handleClick}
+                    icon={showPass2 ? <BiShow /> : <BiHide />}
+                    onClick={() => setShowPass2(!showPass2)}
                   />
                 </InputRightElement>
               </InputGroup>
