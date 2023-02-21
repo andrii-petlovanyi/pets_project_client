@@ -2,6 +2,7 @@ import { Flex, Heading } from '@chakra-ui/react';
 import React from 'react';
 import { FriendsCard } from '../components/OurFriends/FriendsCard';
 import { useGetFriendsListQuery } from '../redux/friends/friendsApiSlice';
+import OfferLoader from '../components/Loaders/CardLoader';
 
 const OurFriends = () => {
   const { data, isLoading } = useGetFriendsListQuery();
@@ -27,7 +28,13 @@ const OurFriends = () => {
           friends.length > 0 &&
           friends.map(f => <FriendsCard key={f._id} friend={f} />)
         ) : (
-          <>Loading...</>
+          <>
+            {Array(9)
+              .fill(0)
+              .map((_, index) => (
+                <OfferLoader key={index} />
+              ))}
+          </>
         )}
       </Flex>
     </>

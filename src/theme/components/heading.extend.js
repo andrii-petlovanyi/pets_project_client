@@ -18,6 +18,19 @@ const modalAddTitle = defineStyle({
   color: 'black',
 });
 
+const authForm = defineStyle({
+  display: 'flex',
+  alignItems: 'center',
+  textAlign: 'center',
+
+  color: 'textColor',
+
+  fontFamily: 'Manrope',
+  fontWeight: () => ({ base: 700, md: 500 }),
+  fontSize: () => ({ base: '24px', md: '36px' }),
+  lineHeight: () => ({ base: '33px', md: '49px' }),
+});
+
 export const headingTheme = defineStyleConfig({
-  variants: { main, modalAddTitle },
+  variants: { main, modalAddTitle, authForm },
 });

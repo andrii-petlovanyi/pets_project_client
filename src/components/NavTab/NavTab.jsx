@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import { Flex, IconButton } from '@chakra-ui/react';
+import { Flex, IconButton, Link } from '@chakra-ui/react';
 import { GrFormClose } from 'react-icons/gr';
 import { NavLink } from 'react-router-dom';
 import { Logo } from '../Logo/Logo';
-import { IconContext } from 'react-icons';
+// import { IconContext } from 'react-icons';
 import { AuthNav } from '../AuthNav/AuthNav';
 import userSelectors from '../../redux/user/user-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
@@ -19,7 +19,7 @@ export const NavTab = ({ ...props }) => {
     <>
       <Flex {...props}>
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
-        <Flex position="fixed" top="1rem" right="1rem" align="center">
+        <Flex position="fixed" right="1rem" align="center">
           <IconButton
             aria-label="Open Menu"
             size="lg"
@@ -27,7 +27,6 @@ export const NavTab = ({ ...props }) => {
             onClick={() => changeDisplay('flex')}
             variant="clearBtn"
             color={'212121'}
-            display={'inline'}
           />
         </Flex>
 
@@ -47,20 +46,11 @@ export const NavTab = ({ ...props }) => {
             <Flex justify="space-between" alignItems="center" mb="88px">
               <Logo />
               <IconButton
-                variant="outline"
                 border="none"
                 aria-label="Open Menu"
-                icon={
-                  <IconContext.Provider
-                    value={{
-                      color: 'accentTextColor',
-                      size: '40px',
-                    }}
-                  >
-                    <GrFormClose />
-                  </IconContext.Provider>
-                }
+                icon={<GrFormClose size="40px" />}
                 onClick={() => changeDisplay('none')}
+                variant="clearBtn"
               />
             </Flex>
 
@@ -75,18 +65,38 @@ export const NavTab = ({ ...props }) => {
               lineHeight="1.35"
               letterSpacing="0.04em"
             >
-              <NavLink to="news" onClick={() => changeDisplay('none')}>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="news"
+                onClick={() => changeDisplay('none')}
+              >
                 News
-              </NavLink>
-              <NavLink to="notices" onClick={() => changeDisplay('none')}>
+              </Link>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="notices"
+                onClick={() => changeDisplay('none')}
+              >
                 Find pet
-              </NavLink>
-              <NavLink to="partners" onClick={() => changeDisplay('none')}>
+              </Link>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="partners"
+                onClick={() => changeDisplay('none')}
+              >
                 Our friends
-              </NavLink>
-              <NavLink to="uikit" onClick={() => changeDisplay('none')}>
+              </Link>
+              <Link
+                variant={'headerLink'}
+                as={NavLink}
+                to="uikit"
+                onClick={() => changeDisplay('none')}
+              >
                 UI Kit
-              </NavLink>
+              </Link>
             </Flex>
           </Flex>
         </Flex>

@@ -14,7 +14,11 @@ export const HeaderNew = () => {
   const isLoggedIn = useSelector(isAuth);
 
   return (
-    <header style={{ display: 'flex', gap: '10px', paddingTop: '16px' }}>
+    <Flex
+      as={'header'}
+      paddingTop={{ base: '16px', lg: '24px', xl: '16px' }}
+      // style={{ display: 'flex', gap: '10px', paddingTop: '16px' }}
+    >
       <Flex mr={{ xl: '80px' }}>
         <Logo />
       </Flex>
@@ -32,6 +36,6 @@ export const HeaderNew = () => {
         marginLeft={'auto'}
         alignItems={'center'}
       />
-    </header>
+    </Flex>
   );
 };

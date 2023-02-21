@@ -6,7 +6,9 @@ import { HeaderNew } from '../components/layout/Header2';
 
 export const Layout = () => {
   return (
-    <Container maxW={'1280px'}>
+    <Container maxW={'1280px'}
+      position={'relative'}
+    >
       {/* <Header /> */}
       <HeaderNew />
       <Suspense fallback={false}>

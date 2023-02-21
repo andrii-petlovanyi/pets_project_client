@@ -169,6 +169,34 @@ const addPetsForm = defineStyle({
   },
 });
 
+const authForm = defineStyle({
+  field: {
+    height: () => ({ base: '40px', lg: '52px' }),
+
+    background: 'mainColor',
+    padding: () => ({ base: '11px 14px', lg: '14px 32px' }),
+    border: '1px solid',
+    borderColor: 'rgba(245, 146, 86, 0.5)',
+    borderRadius: '40px',
+
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: () => ({ base: '14px', lg: '18px' }),
+    lineHeight: () => ({ base: '19px', lg: '25px' }),
+
+    _placeholder: {
+      color: 'labelColor',
+    },
+  },
+});
+
 export const inputTheme = defineStyleConfig({
-  variants: { form, search, userInfoActive, userInfoDisabled, addPetsForm },
+  variants: {
+    form,
+    search,
+    userInfoActive,
+    userInfoDisabled,
+    addPetsForm,
+    authForm,
+  },
 });
