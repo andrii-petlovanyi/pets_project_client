@@ -1,8 +1,8 @@
 import { Heading, Image, Box } from '@chakra-ui/react';
 import React from 'react';
-import girlWithDog from '../img/homePage/girlWithDog.png';
-import frame from '../img/homePage/frame.png';
-import vector from '../img/homePage/vector.png';
+import girlWithDog from '../img/homePage/girlWithDog.webp';
+import frame from '../img/homePage/frame.webp';
+import vector from '../img/homePage/vector.webp';
 
 const Home = () => {
   return (

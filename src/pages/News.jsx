@@ -38,9 +38,8 @@ const News = () => {
       >
         News
       </Heading>
-
       <InputGroup
-        m={'0 auto'}
+        m={{ base: '20px auto' }}
         as="form"
         maxW={{ base: '280px', lg: '608px' }}
         display={'flex'}
