@@ -107,18 +107,45 @@ const LoginHeader = () => {
 
 const LoginForm =() =>{
     return(
-        <Box my={8} textAlign='left'>
+        <Box my={8} textAlign='left'
+        >
         <form>
+              
           <FormControl>
             <FormLabel></FormLabel>
             <Input type='email' placeholder='Email'  position="relative"
-            width={{ base: '280px', lg: '448px', xl: '458px' }} />
+            width={{ base: '280px', lg: '448px', xl: '458px' }}
+
+            h={{ base: '10', lg: '52px' }}
+              p={{ base: '11px 14px', lg: '14px 32px' }}
+              fontSize={{ base: 'md', lg: '18px' }}
+              lineHeight={'short'}
+              
+              bg={colors.mainColor}
+              border="1px solid rgba(245, 146, 86, 0.5)"
+              borderRadius="40px"
+              _placeholder={{ color: colors.econdaryTextColor}}
+
+            
+            />
           </FormControl>
   
           <FormControl mt={4}>
-            <FormLabel></FormLabel>
+            <FormLabel ></FormLabel>
             <Input type='password' placeholder='Password'  position="relative"
-            width={{ base: '280px', lg: '448px', xl: '458px' }} />
+
+            
+            width={{ base: '280px', lg: '448px', xl: '458px' }}
+
+            h={{ base: '10', lg: '52px' }}
+              p={{ base: '11px 14px', lg: '14px 32px' }}
+              fontSize={{ base: 'md', lg: '18px' }}
+              lineHeight={'short'}
+              
+              bg={colors.mainColor}
+              border="1px solid rgba(245, 146, 86, 0.5)"
+              borderRadius="40px"
+              _placeholder={{ color: colors.econdaryTextColor}}/>
           </FormControl>
           <Button background={colors.mainOrange} color={colors.white} mt={4}
                         type="submit"
@@ -128,6 +155,7 @@ const LoginForm =() =>{
                         width={{ base: '280px', lg: '448px', xl: '458px' }}
                         loadingText={'Login'}
                         aria-label="login"
+                        borderRadius="40px"
           >Login</Button>
 
           <Stack isInline justifyContent='center' mt={4}>
