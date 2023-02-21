@@ -19,8 +19,7 @@ import {
   MdSearch,
 } from 'react-icons/md';
 import { HiPlus } from 'react-icons/hi';
-import AddMyPet from '../components/Andrii/Test';
-import AddPets from '../components/Andrii/AddPets';
+import AddPets from '../components/UserPets/AddPets';
 
 const UiKit = () => {
   return (
@@ -97,10 +96,6 @@ const UiKit = () => {
           <Input defaultValue={'Andrii'} variant={'userInfoDisabled'} />
           <IconButton variant={'userEditDisabledIB'} size={'sm'} icon={<MdEdit size={'20px'} />} />
         </Flex>
-      </Flex>
-
-      <Flex bg={'white'} width={'200px'} borderRadius={'40px'} padding={'0 20px'}>
-        <AddMyPet />
       </Flex>
 
       <AddPets />
