@@ -21,20 +21,31 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { register as userRegister } from '../../redux/user/userSlice';
+import {
+  locationRegExp,
+  passRegexp,
+  phoneRegExp,
+} from '../../services/validation';
 
 const schemaStep1 = yup.object().shape({
   email: yup
     .string()
+    .trim()
+    .email('Email must be in format: email@domain.com')
     .min(6, 'Minimal email length is 6 symbols')
     .max(32, 'Max email length is 32 symbols')
     .required('Email is required'),
   password: yup
     .string()
+    .trim()
+    .matches(passRegexp, 'Password must be contain words and numbers')
     .min(8, 'Minimal password length is 8 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Password is required'),
   cpassword: yup
     .string()
+    .trim()
+    .matches(passRegexp, 'Password must be contain words and numbers')
     .min(8, 'Minimal password length is 8 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Please repeat password')
@@ -44,15 +55,22 @@ const schemaStep1 = yup.object().shape({
 const schemaStep2 = yup.object().shape({
   name: yup
     .string()
+    .trim()
     .min(3, 'Minimal name length is 3 symbols')
     .max(32, 'Max name length is 32 symbols')
     .required('Name is required'),
   city: yup
     .string()
+    .trim()
+    .matches(locationRegExp, 'City must be in format: City, Region')
     .min(3, 'Minimal city length is 3 symbols')
     .max(32, 'Max city length is 32 symbols')
     .required('City is required'),
-  phone: yup.string().required('Phone number is required'),
+  phone: yup
+    .string()
+    .trim()
+    .matches(phoneRegExp, 'Phone number must be in format +380990001122')
+    .required('Phone number is required'),
 });
 
 const RegisterForm = () => {
