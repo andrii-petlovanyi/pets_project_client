@@ -10,7 +10,7 @@ const Home = () => {
       display={'flex'}
       justifyContent={'space-between'}
       pt={'60px'}
-      h="100vh"
+      minH={'calc(100vh - 64px)'}
       flexDirection={{ base: 'column', xl: 'row' }}
       _after={{
         content: '""',
@@ -23,6 +23,7 @@ const Home = () => {
         top: '0',
         right: 0,
         left: 0,
+        zIndex: '-1',
       }}
     >
       <Heading
@@ -33,7 +34,6 @@ const Home = () => {
         alignSelf={{ base: 'flex-start' }}
         fontSize={{ base: '32px', lg: '68px' }}
         lineHeight={'1,47'}
-        zIndex={'2'}
       >
         Take good care of your small pets
       </Heading>
@@ -44,7 +44,6 @@ const Home = () => {
         w={{ base: '320px', lg: '645px', xl: '590px' }}
         h={{ base: '350px', lg: '715px', xl: '640px' }}
         objectFit="cover"
-        zIndex={'2'}
       />
     </Box>
   );

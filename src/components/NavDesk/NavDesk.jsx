@@ -20,9 +20,6 @@ export const NavDesk = ({ ...props }) => {
       <Link variant={'headerLink'} as={NavLink} to="partners">
         Our friends
       </Link>
-      <Link variant={'headerLink'} as={NavLink} to="uikit">
-        UI Kit
-      </Link>
     </Box>
   );
 };
