@@ -10,7 +10,11 @@ export const UserPetsList = () => {
   console.log(pets);
 
   return (
-    <Flex width={'100%'}>
+    <Flex
+      width={'100%'}
+      flexDirection={'column'}
+      gap={{ base: '20px', xl: '22px' }}
+    >
       {pets?.length > 0
         ? pets.map(pet => <UserPetsItem key={pet.avatarURL} pet={pet} />)
         : 'Sorry, no pets...'}

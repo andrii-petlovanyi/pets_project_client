@@ -13,29 +13,21 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import {
-  //   MdOutlineDeleteOutline,
+  MdOutlineDeleteOutline,
   MdOutlineFavoriteBorder,
 } from 'react-icons/md';
 import PropTypes from 'prop-types';
+import { calculateAnimalAge } from '../../../services/yearsCalc';
 
-import notice from '../notice.json';
-// import { useSelector } from 'react-redux';
-// import userSelectors from '../../../redux/user/user-selectors';
+import { useSelector } from 'react-redux';
+import userSelectors from '../../../redux/user/user-selectors';
 
-export const NoticeCategoryItem = () => {
-  console.log('noticeItem:', notice);
-  //   const {_id: userId } = useSelector(userSelectors.user);
+export const NoticeCategoryItem = ({ notice }) => {
+  console.log('notice:', notice);
+  const { _id: userId } = useSelector(userSelectors.user);
 
-  const {
-    category,
-    title,
-    // birth,
-    breed,
-    location,
-    price,
-    petImage,
-    // owner,
-  } = notice;
+  const { category, title, birth, breed, location, price, petImage, owner } =
+    notice;
 
   const changeCategoryName = category => {
     switch (category) {
@@ -133,7 +125,7 @@ export const NoticeCategoryItem = () => {
               Age:
             </Text>
             <Text ml="52px" fontSize="16px" fontWeight="500" lineHeight="22px">
-              one year
+              {calculateAnimalAge(birth)}
             </Text>
           </Flex>
           {category === 'sell' ? (
@@ -155,18 +147,18 @@ export const NoticeCategoryItem = () => {
           )}
         </Container>
       </CardBody>
-      <CardFooter pb="30px">
+      <CardFooter display={'flex'} flexDirection={'column'} pb="30px">
         <Button type="button" variant={'outlineCardBtn'} m="0 auto">
           Learn more
         </Button>
-        {/* {userId === owner ? (
+        {userId === owner ? (
           <Button type="button" m="0 auto" mt="12px" variant={'outlineCardBtn'}>
             <Text mr={'13px'}>Delete</Text>{' '}
             <MdOutlineDeleteOutline size={'20px'} />
           </Button>
         ) : (
           ''
-        )} */}
+        )}
       </CardFooter>
     </Card>
   );
