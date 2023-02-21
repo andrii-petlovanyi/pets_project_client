@@ -7,3 +7,4 @@ export const NotFound = lazy(() => import('./NotFound'));
 export const Notices = lazy(() => import('./Notices'));
 export const OurFriends = lazy(() => import('./OurFriends'));
 export const UserDashboard = lazy(() => import('./UserDashboard'));
+export const Home = lazy(() => import('./Home'));

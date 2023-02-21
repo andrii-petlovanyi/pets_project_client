@@ -13,9 +13,8 @@ export const HeaderNew = () => {
   const { isAuth } = userSelectors;
   const isLoggedIn = useSelector(isAuth);
 
-
   return (
-    <header style={{ display: 'flex', gap: '10px', padding: '10px 0' }}>
+    <header style={{ display: 'flex', gap: '10px', paddingTop: '16px' }}>
       <Flex mr={{ xl: '80px' }}>
         <Logo />
       </Flex>
@@ -31,13 +30,8 @@ export const HeaderNew = () => {
       <NavTab
         display={{ base: 'none', lg: 'flex', xl: 'none' }}
         marginLeft={'auto'}
-        marginRight={'50px'}
         alignItems={'center'}
       />
-    </header >
+    </header>
   );
-
-}
-
-
-
+};

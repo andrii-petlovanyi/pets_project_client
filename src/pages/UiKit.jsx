@@ -19,7 +19,7 @@ import {
   MdSearch,
 } from 'react-icons/md';
 import { HiPlus } from 'react-icons/hi';
-import AddMyPet from '../components/Andrii/Test';
+import AddPets from '../components/UserPets/AddPets';
 
 const UiKit = () => {
   return (
@@ -61,7 +61,7 @@ const UiKit = () => {
         </InputRightElement>
       </InputGroup>
 
-      <Textarea width={'395px'} minH={'119px'} placeholder='Example textarea' variant={'custom'} />
+      <Textarea width={'195px'} minH={'119px'} placeholder='Example textarea' variant={'custom'} />
 
       <Box
         color={'textColor'}
@@ -81,7 +81,7 @@ const UiKit = () => {
         bg={'white'}
         p={'20px'}
         borderRadius={'20px'}
-        w={'400px'}
+        // w={'400px'}
         flexDirection={'column'}
         alignItems={'center'}
         justifyContent={'center'}
@@ -98,9 +98,7 @@ const UiKit = () => {
         </Flex>
       </Flex>
 
-      <Flex bg={'white'} width={'400px'} borderRadius={'40px'} padding={'0 20px'}>
-        <AddMyPet />
-      </Flex>
+      <AddPets />
     </Box >
   )
 }

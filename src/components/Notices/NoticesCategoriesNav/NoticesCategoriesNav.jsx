@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Link } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { useState } from "react";
-import { Button, IconButton } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 import ModalAddNotice from '../ModalAddNotice/ModalAddNotice';
 import { HiPlus } from 'react-icons/hi';
 
@@ -31,7 +31,20 @@ export const NoticesCategoriesNav = () => {
         <Link as={NavLink} to="own" variant={'tabLink'}>
           my ads
         </Link>
-        <Button variant={'clearAddBtn'} onClick={handleOpenModal}>Add pet<IconButton variant={'mainIB'} icon={<HiPlus />} /></Button>
+        <Box
+          color={'textColor'}
+          fontWeight={'500'}
+          fontSize={'20px'}
+          lineHeight={'27px'}
+          display={'flex'}
+          justifyContent={'center'}
+          alignItems={'center'}
+          gap={'12px'}
+          onClick={handleOpenModal}
+        >
+          Add pet
+          <IconButton variant={'mainIB'} icon={<HiPlus />} />
+        </Box>
         <ModalAddNotice isOpen={isModalOpen} onClose={handleCloseModal} />
       </Box>
     </div>
