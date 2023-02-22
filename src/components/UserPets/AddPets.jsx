@@ -79,6 +79,7 @@ const AddPets = () => {
   } = useForm({
     resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
   });
+
   const newImage = watch('avatarURL');
 
   const onSubmit = async data => {
