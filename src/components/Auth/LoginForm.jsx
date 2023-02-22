@@ -21,6 +21,7 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { useLogInUserMutation } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/user/userSlice';
+import Toast from '../../hooks/toast';
 
 const schema = yup.object().shape({
   email: yup
@@ -45,6 +46,7 @@ const LoginForm = () => {
   const [logInUser, { isLoading }] = useLogInUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { addToast } = Toast();
 
   const {
     register,
@@ -58,13 +60,13 @@ const LoginForm = () => {
   const onSubmit = async data => {
     try {
       const { data: res, error } = await logInUser(data);
-      if (error) return console.log(error);
-      console.log(res);
+      if (error) addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
       dispatch(logIn(res));
       reset();
       navigate('/user');
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 

@@ -13,21 +13,23 @@ import userApiSlice, {
   useDeleteMyPetsMutation,
 } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
+import Toast from '../../hooks/toast';
 
 export const UserPetsItem = ({ pet = {} }) => {
   const { name, birth, breed, avatarURL, comment, _id } = pet;
 
   const [deleteMyPets, { isLoading }] = useDeleteMyPetsMutation();
   const dispatch = useDispatch();
+  const { addToast } = Toast();
 
   const onDeletePet = async ({ _id: petId }) => {
-    console.log(petId);
     try {
       const { error } = await deleteMyPets(petId);
-      if (error) return console.log(error);
+      if (error) addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: 'Deleted successfully', type: 'success' });
       dispatch(userApiSlice.util.invalidateTags(['user']));
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
   return (

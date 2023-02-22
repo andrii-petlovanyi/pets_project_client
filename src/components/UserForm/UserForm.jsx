@@ -23,6 +23,7 @@ import UserAvatar from './Avatar';
 import userSelectors from '../../redux/user/user-selectors';
 import { useSelector } from 'react-redux';
 import { useUpdateUserMutation } from '../../redux/user/userApiSlice';
+import { dateToString, stringToDate } from '../../services/dateFormat';
 
 const INITIAL_DISABLED = {
   name: true,
@@ -35,8 +36,8 @@ const INITIAL_DISABLED = {
 const UserForm = () => {
   const [isDisabled, setIsDisabled] = useState(INITIAL_DISABLED);
   const [updateUser] = useUpdateUserMutation();
-
   const user = useSelector(userSelectors.user);
+
   const {
     control,
     handleSubmit,
@@ -45,8 +46,7 @@ const UserForm = () => {
     defaultValues: {
       name: user.name,
       email: user.email,
-      birthday: new Date(user.birthday),
-      // birthday: new Date(user.birthday.split('.').reverse().join('-')),
+      birthday: stringToDate(user.birthday),
       phone: user.phone,
       city: user.city,
     },
@@ -54,23 +54,22 @@ const UserForm = () => {
   });
 
   const handleEdit = data => {
-    // console.log(data);
     setIsDisabled({ ...INITIAL_DISABLED, [data]: false });
   };
 
   const onSubmit = async data => {
     const newData = {
       ...data,
-      birthday: new Date(data.birthday).toISOString().split('T')[0],
-      // .split('-')
-      // .reverse()
-      // .join('.'),
+      birthday: dateToString(data.birthday),
     };
-    console.log(newData);
-    const { data: res, error } = await updateUser(newData);
-    console.log(res);
-    if (error) return console.log(error);
-    setIsDisabled({ ...INITIAL_DISABLED });
+    try {
+      const { data: res, error } = await updateUser(newData);
+      if (error) return console.log(error);
+      console.log(res);
+      setIsDisabled({ ...INITIAL_DISABLED });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -17,7 +17,7 @@ export const NavDesk = ({ ...props }) => {
       <Link variant={'headerLink'} as={NavLink} to="notices">
         Find pet
       </Link>
-      <Link variant={'headerLink'} as={NavLink} to="partners">
+      <Link variant={'headerLink'} as={NavLink} to="friends">
         Our friends
       </Link>
     </Box>
