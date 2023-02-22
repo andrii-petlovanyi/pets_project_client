@@ -26,12 +26,11 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import { birthdayRegExp } from '../../../services/validation';
+import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
 const schemaStep1 = yup.object().shape({
-  category: yup.string().oneOf(['lost-found', 'for-free', 'sell']),
   title: yup
     .string()
     .trim()
@@ -61,6 +60,7 @@ const schemaStep2 = yup.object().shape({
   location: yup
     .string()
     .trim()
+    .matches(locationRegExp, 'Location must be in format Country,City')
     .min(2, 'Minimal location length is 2 symbols')
     .max(30, 'Max location length is 30 symbols')
     .required('Location is required'),
@@ -81,7 +81,7 @@ const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [avatarError, setAvatarError] = useState('');
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
 
   const [addNotice, { isLoading }] = useAddNoticeMutation();
@@ -102,9 +102,10 @@ const ModalAddNew = () => {
     if (!data.avatarURL[0]) {
       return setAvatarError('Avatar is required');
     }
+    console.log(category);
     const formData = new FormData();
     formData.append('title', data.title);
-    formData.append('category', data.category);
+    formData.append('category', category);
     formData.append('petName', data.petName);
     formData.append('breed', data.breed);
     formData.append('location', data.location);
@@ -129,8 +130,7 @@ const ModalAddNew = () => {
     }
   };
 
-  const nextStep = e => {
-    setCategory(e?.category);
+  const nextStep = () => {
     setStep(step + 1);
   };
 
@@ -149,6 +149,9 @@ const ModalAddNew = () => {
         justifyContent={'center'}
         alignItems={'center'}
         gap={'12px'}
+        minW={'129px'}
+        h={'44px'}
+        ml={'auto'}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
@@ -180,23 +183,53 @@ const ModalAddNew = () => {
               as="form"
               onSubmit={handleSubmit(nextStep)}
             >
-              <FormControl id="category" isInvalid={errors.category}>
-                <FormLabel>Category</FormLabel>
-                <RadioGroup name="category">
-                  <Radio value="lost-found" {...register('category')}>
-                    Lost/Found
-                  </Radio>
-                  <Radio value="for-free" {...register('category')}>
-                    In Good Hands
-                  </Radio>
-                  <Radio value="sell" {...register('category')}>
-                    Sell
-                  </Radio>
-                </RadioGroup>
-                {errors.category && (
-                  <FormErrorMessage>{errors.category.message}</FormErrorMessage>
-                )}
-              </FormControl>
+              <Text variant={'noticeModalText'}>
+                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
+                amet, consectetur{' '}
+              </Text>
+              <Stack
+                display="flex"
+                flexWrap="wrap"
+                alignItems="baseline"
+                flexDirection="row"
+                gap="12px"
+              >
+                <Button
+                  w={{ base: '131px', lg: '162px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('lost/found')}
+                  variant={
+                    category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
+                  }
+                  {...register('selectedCategory')}
+                >
+                  lost/found
+                </Button>
+                <Button
+                  w={{ base: '155px', lg: '197px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('in good hands')}
+                  variant={
+                    category === 'in good hands' ? 'fullBGBtn' : 'outlineTabBtn'
+                  }
+                  {...register('selectedCategory')}
+                >
+                  in good hands
+                </Button>
+                <Button
+                  w={{ base: '81', lg: '91px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('sell')}
+                  variant={category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'}
+                  {...register('selectedCategory')}
+                >
+                  sell
+                </Button>
+              </Stack>
+
               <FormControl isInvalid={errors.title}>
                 <FormLabel htmlFor="title">Title of ad</FormLabel>
                 <Input
@@ -269,13 +302,37 @@ const ModalAddNew = () => {
               onSubmit={handleSubmit(onSubmit)}
             >
               <FormControl id="petSex" isInvalid={errors.petSex}>
-                <FormLabel>The sex*:</FormLabel>
+                <FormLabel>
+                  <Text variant={'noticesInputsHead'}>The sex*:</Text>
+                </FormLabel>
                 <RadioGroup name="petSex">
                   <Radio value="male" {...register('petSex')}>
-                    male
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="60"
+                      height="60"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="#23c2ef"
+                        d="M20 4v6h-2V7.425l-3.975 3.95q.475.7.725 1.488T15 14.5q0 2.3-1.6 3.9T9.5 20q-2.3 0-3.9-1.6T4 14.5q0-2.3 1.6-3.9T9.5 9q.825 0 1.625.237t1.475.738L16.575 6H14V4h6ZM9.5 11q-1.45 0-2.475 1.025T6 14.5q0 1.45 1.025 2.475T9.5 18q1.45 0 2.475-1.025T13 14.5q0-1.45-1.025-2.475T9.5 11Z"
+                      />
+                    </svg>
+                    <Text>male</Text>
                   </Radio>
                   <Radio value="female" {...register('petSex')}>
-                    female
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="60"
+                      height="60"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="#FF8787"
+                        d="M11 21v-2H9v-2h2v-2.1q-1.975-.35-3.238-1.888T6.5 9.45q0-2.275 1.613-3.862T12 4q2.275 0 3.888 1.588T17.5 9.45q0 2.025-1.263 3.563T13 14.9V17h2v2h-2v2h-2Zm1-8q1.45 0 2.475-1.025T15.5 9.5q0-1.45-1.025-2.475T12 6q-1.45 0-2.475 1.025T8.5 9.5q0 1.45 1.025 2.475T12 13Z"
+                      />
+                    </svg>
+                    <Text>female</Text>
                   </Radio>
                 </RadioGroup>
                 {errors.petSex && (
@@ -311,6 +368,7 @@ const ModalAddNew = () => {
                 mx={'auto'}
                 fontSize={{ base: '16px', md: '20px' }}
                 lineHeight={{ base: '22px', md: '27px' }}
+                variant={'noticesInputsHead'}
               >
                 Load the pets image:
               </Text>

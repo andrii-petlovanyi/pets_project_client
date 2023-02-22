@@ -9,19 +9,14 @@ import {
   Image,
   Text,
   Link,
-  MenuItem,
-  Menu,
-  MenuButton,
-  Portal,
-  MenuList,
 } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { ScheduleMenu } from './ScheduleMenu';
+import { ScheduleMenu } from './ScheduleMenu';
 
 export const FriendsCard = ({ friend = {} }) => {
-  const { title, url, imageUrl, address, email, phone, workDays } = friend;
-  const dayNames = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+  const { title, url, imageUrl, address, email, phone, workDays, _id } = friend;
+
   const result = getDay(new Date(Date.now())) - 1;
   console.log(result);
 
@@ -75,28 +70,7 @@ export const FriendsCard = ({ friend = {} }) => {
         >
           <Box>
             <Text>Time:</Text>
-            <Menu>
-              <MenuButton _active={{ color: 'mainOrange' }}>
-                {workDays?.length > 0 && workDays[result]?.isOpen
-                  ? ` ${workDays[result].from} - ${workDays[result].to}`
-                  : 'Closed'}
-              </MenuButton>
-
-              <Portal>
-                <MenuList>
-                  {workDays
-                    ? workDays.length > 0 &&
-                      workDays.map((day, index) => (
-                        <MenuItem key={index}>
-                          {day?.isOpen
-                            ? `${dayNames[index]} ${day.from} - ${day.to}`
-                            : 'Closed'}
-                        </MenuItem>
-                      ))
-                    : `  Work-days data are missing`}
-                </MenuList>
-              </Portal>
-            </Menu>
+            <ScheduleMenu workDays={workDays} key={_id} />
           </Box>
           <Box mt={'4px'}>
             <Text>Address:</Text>

@@ -1,6 +1,8 @@
 import { stringToDate } from './dateFormat';
 
 export function calculateAnimalAge(birthday) {
+  if (!birthday) return;
+
   const today = new Date();
 
   const diffMs = today.getTime() - stringToDate(birthday).getTime();
@@ -13,14 +15,14 @@ export function calculateAnimalAge(birthday) {
   if (age === 0) {
     const diffMonths = Math.round(diffYears * 12);
     if (diffMonths === 1) {
-      ageWords = '1 month old';
+      ageWords = '1 month';
     } else {
-      ageWords = `${diffMonths} months old`;
+      ageWords = `${diffMonths} months`;
     }
   } else if (age === 1) {
-    ageWords = '1 year old';
+    ageWords = '1 year';
   } else {
-    ageWords = `${age} years old`;
+    ageWords = `${age} years`;
   }
 
   ageWords = ageWords.replace(/\d+/, function (match) {
