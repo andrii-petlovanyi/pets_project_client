@@ -31,6 +31,7 @@ import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
 const schemaStep1 = yup.object().shape({
+
   title: yup
     .string()
     .trim()
@@ -102,9 +103,10 @@ const ModalAddNew = () => {
     if (!data.avatarURL[0]) {
       return setAvatarError('Avatar is required');
     }
+    console.log(category);
     const formData = new FormData();
     formData.append('title', data.title);
-    formData.append('category', data.category);
+    formData.append('category', category);
     formData.append('petName', data.petName);
     formData.append('breed', data.breed);
     formData.append('location', data.location);
@@ -148,6 +150,9 @@ const ModalAddNew = () => {
         justifyContent={'center'}
         alignItems={'center'}
         gap={'12px'}
+        minW={'129px'}
+        h={'44px'}
+        ml={'auto'}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
@@ -237,10 +242,44 @@ const ModalAddNew = () => {
                     sell
                   </Button>
                 </Stack>
+
                 {errors.category && (
                   <FormErrorMessage>{errors.category.message}</FormErrorMessage>
                 )}
-              </FormControl>
+              </FormControl> */}
+              <Box display={'flex'} gap={'10px'}>
+                <Button
+                  w={{ base: '131px', lg: '162px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('lost-found')}
+                  variant={
+                    category === 'lost-found' ? 'fullBGBtn' : 'outlineTabBtn'
+                  }
+                >
+                  lost/found
+                </Button>
+                <Button
+                  w={{ base: '131px', lg: '162px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('for-free')}
+                  variant={
+                    category === 'for-free' ? 'fullBGBtn' : 'outlineTabBtn'
+                  }
+                >
+                  for-fre
+                </Button>
+                <Button
+                  w={{ base: '131px', lg: '162px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('sell')}
+                  variant={category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'}
+                >
+                  sell
+                </Button>
+              </Box>
               <FormControl isInvalid={errors.title}>
                 <FormLabel htmlFor="title">Title of ad</FormLabel>
                 <Input
