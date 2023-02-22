@@ -31,7 +31,7 @@ import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
 const schemaStep1 = yup.object().shape({
-  category: yup.string().oneOf(['lost-found', 'for-free', 'sell']),
+  // category: yup.string().oneOf(['lost-found', 'for-free', 'sell']),
   title: yup
     .string()
     .trim()
@@ -81,7 +81,7 @@ const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [avatarError, setAvatarError] = useState('');
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
 
   const [addNotice, { isLoading }] = useAddNoticeMutation();
@@ -102,9 +102,10 @@ const ModalAddNew = () => {
     if (!data.avatarURL[0]) {
       return setAvatarError('Avatar is required');
     }
+    console.log(category);
     const formData = new FormData();
     formData.append('title', data.title);
-    formData.append('category', data.category);
+    formData.append('category', category);
     formData.append('petName', data.petName);
     formData.append('breed', data.breed);
     formData.append('location', data.location);
@@ -129,8 +130,7 @@ const ModalAddNew = () => {
     }
   };
 
-  const nextStep = e => {
-    setCategory(e?.category);
+  const nextStep = () => {
     setStep(step + 1);
   };
 
@@ -183,10 +183,10 @@ const ModalAddNew = () => {
               as="form"
               onSubmit={handleSubmit(nextStep)}
             >
-              <FormControl id="category" isInvalid={errors.category}>
+              {/* <FormControl id="category" isInvalid={errors.category}>
                 <FormLabel>Category</FormLabel>
                 <RadioGroup name="category">
-                  <Radio value="lost-found" {...register('category')}>
+                  <Radio s value="lost-found" {...register('category')}>
                     Lost/Found
                   </Radio>
                   <Radio value="for-free" {...register('category')}>
@@ -199,7 +199,40 @@ const ModalAddNew = () => {
                 {errors.category && (
                   <FormErrorMessage>{errors.category.message}</FormErrorMessage>
                 )}
-              </FormControl>
+              </FormControl> */}
+              <Box display={'flex'} gap={'10px'}>
+                <Button
+                  w={{ base: '131px', lg: '162px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('lost-found')}
+                  variant={
+                    category === 'lost-found' ? 'fullBGBtn' : 'outlineTabBtn'
+                  }
+                >
+                  lost/found
+                </Button>
+                <Button
+                  w={{ base: '131px', lg: '162px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('for-free')}
+                  variant={
+                    category === 'for-free' ? 'fullBGBtn' : 'outlineTabBtn'
+                  }
+                >
+                  for-fre
+                </Button>
+                <Button
+                  w={{ base: '131px', lg: '162px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('sell')}
+                  variant={category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'}
+                >
+                  sell
+                </Button>
+              </Box>
               <FormControl isInvalid={errors.title}>
                 <FormLabel htmlFor="title">Title of ad</FormLabel>
                 <Input
