@@ -16,7 +16,7 @@ export const ScheduleMenu = ({ workDays = [] }) => {
       </MenuButton>
 
       <Portal>
-        <MenuList>
+        <MenuList pl={'15px'}>
           {workDays
             ? workDays.length > 0 &&
               workDays.map((day, index) => (
@@ -26,7 +26,7 @@ export const ScheduleMenu = ({ workDays = [] }) => {
                     : 'Closed'}
                 </MenuItem>
               ))
-            : `  Work-days data are missing`}
+            : `Work-days data are missing`}
         </MenuList>
       </Portal>
     </Menu>
