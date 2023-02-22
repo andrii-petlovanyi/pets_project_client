@@ -22,9 +22,8 @@ import PropTypes from 'prop-types';
 export const FriendsCard = ({ friend = {} }) => {
   const { title, url, imageUrl, address, email, phone, workDays } = friend;
   const dayNames = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
-  const result = getDay(new Date(Date.now()))-1;
-  
- 
+  const result = getDay(new Date(Date.now())) - 1;
+  console.log(result);
 
   return (
     <Card
@@ -77,7 +76,7 @@ export const FriendsCard = ({ friend = {} }) => {
           <Box>
             <Text>Time:</Text>
             <Menu>
-              <MenuButton _active={{color: 'mainOrange' }}>
+              <MenuButton _active={{ color: 'mainOrange' }}>
                 {workDays?.length > 0 && workDays[result]?.isOpen
                   ? ` ${workDays[result].from} - ${workDays[result].to}`
                   : 'Closed'}
