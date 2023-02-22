@@ -33,7 +33,7 @@ const schemaStep1 = yup.object().shape({
     .trim()
     .email('Email must be in format: email@domain.com')
     .min(6, 'Minimal email length is 6 symbols')
-    .max(32, 'Max email length is 32 symbols')
+    .max(63, 'Max email length is 63 symbols')
     .required('Email is required'),
   password: yup
     .string()
