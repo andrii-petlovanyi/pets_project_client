@@ -32,6 +32,7 @@ import userApiSlice, {
 } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
 import { birthdayRegExp } from '../../services/validation';
+import Toast from '../../hooks/toast';
 
 const schemaStep1 = yup.object().shape({
   name: yup
@@ -69,6 +70,7 @@ const AddPets = () => {
 
   const [addMyPets, { isLoading }] = useAddMyPetsMutation();
   const dispatch = useDispatch();
+  const { addToast } = Toast();
 
   const {
     register,
@@ -95,14 +97,14 @@ const AddPets = () => {
 
     try {
       const { data: res, error } = await addMyPets(formData);
-      if (error) return console.log(error);
+      if (error) addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
       dispatch(userApiSlice.util.invalidateTags(['user']));
-      console.log(res);
       onClose();
       reset();
       setStep(1);
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 
