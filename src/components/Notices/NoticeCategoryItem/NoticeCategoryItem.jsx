@@ -23,7 +23,6 @@ import { useSelector } from 'react-redux';
 import userSelectors from '../../../redux/user/user-selectors';
 
 export const NoticeCategoryItem = ({ notice }) => {
-  console.log('notice:', notice);
   const { _id: userId } = useSelector(userSelectors.user);
 
   const { category, title, birth, breed, location, price, petImage, owner } =

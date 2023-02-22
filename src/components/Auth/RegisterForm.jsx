@@ -26,6 +26,7 @@ import {
   passRegexp,
   phoneRegExp,
 } from '../../services/validation';
+import Toast from '../../hooks/toast';
 
 const schemaStep1 = yup.object().shape({
   email: yup
@@ -81,6 +82,7 @@ const RegisterForm = () => {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { addToast } = Toast();
 
   const {
     register,
@@ -96,13 +98,14 @@ const RegisterForm = () => {
 
     try {
       const { data: res, error } = await registerUser(data);
-      if (error) return console.log(error);
-      console.log(res);
+      if (error) addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
+
       dispatch(userRegister(res.user));
       reset();
       navigate('/user');
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 

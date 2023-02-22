@@ -2,17 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Link } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
-import { useState } from "react";
-import { IconButton } from "@chakra-ui/react";
-import ModalAddNotice from '../ModalAddNotice/ModalAddNotice';
-import { HiPlus } from 'react-icons/hi';
-
+import ModalAddNew from '../ModalAddNotice/ModalAddNew';
 
 export const NoticesCategoriesNav = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+  // const handleOpenModal = () => setIsModalOpen(true);
+  // const handleCloseModal = () => setIsModalOpen(false);
   return (
     <div>
       <Box as="nav" display={'flex'} flexWrap={'wrap'} gap={'12px'}>
@@ -31,7 +27,9 @@ export const NoticesCategoriesNav = () => {
         <Link as={NavLink} to="own" variant={'tabLink'}>
           my ads
         </Link>
-        <Box
+
+        <ModalAddNew />
+        {/* <Box
           color={'textColor'}
           fontWeight={'500'}
           fontSize={'20px'}
@@ -44,8 +42,8 @@ export const NoticesCategoriesNav = () => {
         >
           Add pet
           <IconButton variant={'mainIB'} icon={<HiPlus />} />
-        </Box>
-        <ModalAddNotice isOpen={isModalOpen} onClose={handleCloseModal} />
+        </Box> */}
+        {/* <ModalAddNotice isOpen={isModalOpen} onClose={handleCloseModal} /> */}
       </Box>
     </div>
   );
