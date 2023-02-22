@@ -42,7 +42,6 @@ export const NoticeCategoryItem = ({ notice }) => {
   return (
     <Card
       maxW={{ base: '280px', lg: '336px', xl: '288px' }}
-      h="606"
       boxShadow="7px 4px 14px rgba(49, 21, 4, 0.07)"
       borderRadius="0px 0px 40px 40px"
     >
@@ -52,6 +51,7 @@ export const NoticeCategoryItem = ({ notice }) => {
             src={petImage ? petImage : '#'}
             w={{ base: '280px', lg: '336px', xl: '288px' }}
             h="288"
+            objectFit="cover"
             alt={title}
             position="relative"
           />
@@ -126,7 +126,6 @@ export const NoticeCategoryItem = ({ notice }) => {
             </Text>
             <Text ml="52px" fontSize="16px" fontWeight="500" lineHeight="22px">
               {calculateAnimalAge(birth)}
-              {/* {birth} */}
             </Text>
           </Flex>
           {category === 'sell' ? (
@@ -148,7 +147,12 @@ export const NoticeCategoryItem = ({ notice }) => {
           )}
         </Container>
       </CardBody>
-      <CardFooter display={'flex'} flexDirection={'column'} pb="30px">
+      <CardFooter
+        display={'flex'}
+        flexDirection={'column'}
+        h={'120px'}
+        justifyContent={'center'}
+      >
         <Button type="button" variant={'outlineCardBtn'} m="0 auto">
           Learn more
         </Button>

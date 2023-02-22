@@ -149,6 +149,9 @@ const ModalAddNew = () => {
         justifyContent={'center'}
         alignItems={'center'}
         gap={'12px'}
+        minW={'129px'}
+        h={'44px'}
+        ml={'auto'}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />

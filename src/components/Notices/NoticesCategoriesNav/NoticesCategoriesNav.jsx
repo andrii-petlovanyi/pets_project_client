@@ -3,14 +3,18 @@ import PropTypes from 'prop-types';
 import { Box, Link } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import ModalAddNew from '../ModalAddNotice/ModalAddNew';
+import { useSelector } from 'react-redux';
+import userSelectors from '../../../redux/user/user-selectors';
 
 export const NoticesCategoriesNav = () => {
+  const isAuth = useSelector(userSelectors.isAuth);
+
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
   // const handleOpenModal = () => setIsModalOpen(true);
   // const handleCloseModal = () => setIsModalOpen(false);
   return (
-    <div>
+    <Box display={'flex'} gap={'30px'} w="100%">
       <Box as="nav" display={'flex'} flexWrap={'wrap'} gap={'12px'}>
         <Link as={NavLink} to="sell" variant={'tabLink'}>
           sell
@@ -21,15 +25,22 @@ export const NoticesCategoriesNav = () => {
         <Link as={NavLink} to="for-free" variant={'tabLink'}>
           in good hands
         </Link>
-        <Link as={NavLink} to="favorite" variant={'tabLink'}>
-          favorite ads
-        </Link>
-        <Link as={NavLink} to="own" variant={'tabLink'}>
-          my ads
-        </Link>
+        {isAuth ? (
+          <>
+            <Link as={NavLink} to="favorite" variant={'tabLink'}>
+              favorite ads
+            </Link>
+            <Link as={NavLink} to="own" variant={'tabLink'}>
+              my ads
+            </Link>
+          </>
+        ) : (
+          ''
+        )}
 
-        <ModalAddNew />
-        {/* <Box
+        {/* <ModalAddNotice isOpen={isModalOpen} onClose={handleCloseModal} /> */}
+      </Box>
+      {/* <Box
           color={'textColor'}
           fontWeight={'500'}
           fontSize={'20px'}
@@ -43,9 +54,8 @@ export const NoticesCategoriesNav = () => {
           Add pet
           <IconButton variant={'mainIB'} icon={<HiPlus />} />
         </Box> */}
-        {/* <ModalAddNotice isOpen={isModalOpen} onClose={handleCloseModal} /> */}
-      </Box>
-    </div>
+      <ModalAddNew />
+    </Box>
   );
 };
 
