@@ -89,7 +89,7 @@ export const NavMob = ({ ...props }) => {
               <Link
                 variant={'headerLink'}
                 as={NavLink}
-                to="partners"
+                to="friends"
                 onClick={() => changeDisplay('none')}
               >
                 Our friends
