@@ -61,10 +61,12 @@ const UserForm = () => {
   const onSubmit = async data => {
     const newData = {
       ...data,
-      birthday: new Date(data.birthday).toISOString().split('T')[0],
-      // .split('-')
-      // .reverse()
-      // .join('.'),
+      birthday: new Date(data.birthday)
+        .toISOString()
+        .split('T')[0]
+        .split('-')
+        .reverse()
+        .join('.'),
     };
     console.log(newData);
     const { data: res, error } = await updateUser(newData);
