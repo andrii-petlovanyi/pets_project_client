@@ -90,7 +90,7 @@ const AddPets = () => {
     formData.append('breed', data.breed);
     formData.append('birth', data.birthday);
     formData.append('comment', data.comment);
-    formData.append('image', data.avatarURL[0]);
+    formData.append('avatarURL', data.avatarURL[0]);
 
     try {
       const { data: res, error } = await addMyPets(formData);
