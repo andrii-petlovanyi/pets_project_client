@@ -3,7 +3,7 @@ import { MenuItem, Menu, MenuButton, Portal, MenuList } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const ScheduleMenu = (workDays = []) => {
+export const ScheduleMenu = ({ workDays = [] }) => {
   const dayNames = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
   const result = getDay(new Date(Date.now())) - 1;
   console.log(result);

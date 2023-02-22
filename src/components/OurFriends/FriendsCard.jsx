@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import { ScheduleMenu } from './ScheduleMenu';
 
 export const FriendsCard = ({ friend = {} }) => {
-  const { title, url, imageUrl, address, email, phone, workDays } = friend;
+  const { title, url, imageUrl, address, email, phone, workDays, _id } = friend;
 
   const result = getDay(new Date(Date.now())) - 1;
   console.log(result);
@@ -70,7 +70,7 @@ export const FriendsCard = ({ friend = {} }) => {
         >
           <Box>
             <Text>Time:</Text>
-            <ScheduleMenu workDays={workDays} />
+            <ScheduleMenu workDays={workDays} key={_id} />
           </Box>
           <Box mt={'4px'}>
             <Text>Address:</Text>
