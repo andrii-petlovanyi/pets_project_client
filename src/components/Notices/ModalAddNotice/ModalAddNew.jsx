@@ -26,12 +26,11 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import { birthdayRegExp } from '../../../services/validation';
+import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
 const schemaStep1 = yup.object().shape({
-
   title: yup
     .string()
     .trim()
@@ -188,98 +187,49 @@ const ModalAddNew = () => {
                 Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
                 amet, consectetur{' '}
               </Text>
-              <FormControl id="category" isInvalid={errors.category}>
-                <Stack
-                  display="flex"
-                  flexWrap="wrap"
-                  alignItems="baseline"
-                  flexDirection="row"
-                  gap="12px"
-                >
-                  <Button
-                    w={{ base: '131px', lg: '162px' }}
-                    h={{ base: '35px', lg: '47px' }}
-                    fontSize={{ base: '14px', lg: '20px' }}
-                    value="lost-found"
-                    onClick={() => setCategory('lost/found')}
-                    variant={
-                      category === 'lost/found'
-                        ? 'fullBGBtn'
-                        : 'outlineTabBtn'
-                    }
-                    {...register('selectedCategory')}
-                  >
-                    lost/found
-                  </Button>
-                  <Button
-                    w={{ base: '155px', lg: '197px' }}
-                    h={{ base: '35px', lg: '47px' }}
-                    fontSize={{ base: '14px', lg: '20px' }}
-                    value="for-free"
-                    onClick={() => setCategory('in good hands')}
-                    variant={
-                      category === 'in good hands'
-                        ? 'fullBGBtn'
-                        : 'outlineTabBtn'
-                    }
-                    {...register('selectedCategory')}
-                  >
-                    in good hands
-                  </Button>
-                  <Button
-                    w={{ base: '81', lg: '91px' }}
-                    h={{ base: '35px', lg: '47px' }}
-                    fontSize={{ base: '14px', lg: '20px' }}
-                    value="sell"
-                    onClick={() => setCategory('sell')}
-                    variant={
-                      category === 'sell'
-                        ? 'fullBGBtn'
-                        : 'outlineTabBtn'
-                    }
-                    {...register('selectedCategory')}
-                  >
-                    sell
-                  </Button>
-                </Stack>
-
-                {errors.category && (
-                  <FormErrorMessage>{errors.category.message}</FormErrorMessage>
-                )}
-              </FormControl> */}
-              <Box display={'flex'} gap={'10px'}>
+              <Stack
+                display="flex"
+                flexWrap="wrap"
+                alignItems="baseline"
+                flexDirection="row"
+                gap="12px"
+              >
                 <Button
                   w={{ base: '131px', lg: '162px' }}
                   h={{ base: '35px', lg: '47px' }}
                   fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('lost-found')}
+                  onClick={() => setCategory('lost/found')}
                   variant={
-                    category === 'lost-found' ? 'fullBGBtn' : 'outlineTabBtn'
+                    category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
                   }
+                  {...register('selectedCategory')}
                 >
                   lost/found
                 </Button>
                 <Button
-                  w={{ base: '131px', lg: '162px' }}
+                  w={{ base: '155px', lg: '197px' }}
                   h={{ base: '35px', lg: '47px' }}
                   fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('for-free')}
+                  onClick={() => setCategory('in good hands')}
                   variant={
-                    category === 'for-free' ? 'fullBGBtn' : 'outlineTabBtn'
+                    category === 'in good hands' ? 'fullBGBtn' : 'outlineTabBtn'
                   }
+                  {...register('selectedCategory')}
                 >
-                  for-fre
+                  in good hands
                 </Button>
                 <Button
-                  w={{ base: '131px', lg: '162px' }}
+                  w={{ base: '81', lg: '91px' }}
                   h={{ base: '35px', lg: '47px' }}
                   fontSize={{ base: '14px', lg: '20px' }}
                   onClick={() => setCategory('sell')}
                   variant={category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'}
+                  {...register('selectedCategory')}
                 >
                   sell
                 </Button>
-              </Box>
+              </Stack>
+
               <FormControl isInvalid={errors.title}>
                 <FormLabel htmlFor="title">Title of ad</FormLabel>
                 <Input
@@ -352,10 +302,12 @@ const ModalAddNew = () => {
               onSubmit={handleSubmit(onSubmit)}
             >
               <FormControl id="petSex" isInvalid={errors.petSex}>
-                <FormLabel><Text variant={'noticesInputsHead'}>The sex*:</Text></FormLabel>
+                <FormLabel>
+                  <Text variant={'noticesInputsHead'}>The sex*:</Text>
+                </FormLabel>
                 <RadioGroup name="petSex">
                   <Radio value="male" {...register('petSex')}>
-                     <svg
+                    <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="60"
                       height="60"
@@ -369,7 +321,7 @@ const ModalAddNew = () => {
                     <Text>male</Text>
                   </Radio>
                   <Radio value="female" {...register('petSex')}>
-                     <svg
+                    <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="60"
                       height="60"

@@ -70,7 +70,7 @@ const AddPets = () => {
 
   const [addMyPets, { isLoading }] = useAddMyPetsMutation();
   const dispatch = useDispatch();
-  const { addToast } = Toast();gi
+  const { addToast } = Toast();
 
   const {
     register,
