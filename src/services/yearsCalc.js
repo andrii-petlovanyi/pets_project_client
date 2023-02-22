@@ -1,9 +1,9 @@
+import { stringToDate } from './dateFormat';
+
 export function calculateAnimalAge(birthday) {
   const today = new Date();
-  const [day, month, year] = String(birthday).split('.');
-  const date = new Date(year, month - 1, day);
-  const diffMs = today.getTime() - date.getTime();
-  console.log('diffMs:', diffMs);
+
+  const diffMs = today.getTime() - stringToDate(birthday).getTime();
 
   const diffYears = diffMs / (1000 * 60 * 60 * 24 * 365);
 
