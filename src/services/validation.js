@@ -30,4 +30,5 @@ export const userFormSchema = yup.object({
     .trim('The city cannot include leading and trailing spaces')
     .strict(true)
     .required(),
+  avatarURL: yup.string(),
 });

@@ -9,7 +9,7 @@ export const ButtonUserForm = ({ handleClick, name, flag }) => {
     <>
       <IconButton
         onClick={flag[name] ? () => handleClick(name) : () => handleClick()}
-        width="32px"
+        minWidth={'32px'}
         height="32px"
         ml="24px"
         background="mainColor"

@@ -76,17 +76,19 @@ const UserForm = () => {
     <>
       <Flex flexDirection={'column'} width={'100%'}>
         <Heading mb={'24px'}>My information:</Heading>
+        <UserAvatar />
         <FormControl
           onSubmit={handleSubmit(onSubmit)}
           display={'flex'}
+          // flexDirection={{ lg: 'column' }}
+          maxW={{ lg: '411' }}
           flexDirection={'column'}
-          maxW={'411'}
+          width={{ sm: '100%' }}
           p={'20px 16px 67px 16px'}
           background={'white'}
           boxShadow={'7px 4px 14px rgba(49, 21, 4, 0.07)'}
           borderRadius={'0px 40px 40px 0px'}
         >
-          <UserAvatar />
           <InputGroup
             display={'flex'}
             flexDirection={'column'}
