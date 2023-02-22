@@ -24,8 +24,8 @@ export const NoticesFavoritesList = () => {
       gap={'32px'}
     >
       {!isLoading ? (
-        notices?.favorites?.length > 0 &&
-        notices?.favorites?.map(notice => (
+        notices?.length > 0 &&
+        notices?.map(notice => (
           <NoticeCategoryItem key={notice._id} notice={notice} />
         ))
       ) : (
