@@ -45,7 +45,7 @@ const UserForm = () => {
     defaultValues: {
       name: user.name,
       email: user.email,
-      birthday: new Date(user.birthday),
+      // birthday: new Date(user.birthday),
       // birthday: new Date(user.birthday.split('.').reverse().join('-')),
       phone: user.phone,
       city: user.city,
