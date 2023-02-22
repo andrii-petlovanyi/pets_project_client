@@ -76,7 +76,7 @@ const UserForm = () => {
     <>
       <Flex flexDirection={'column'} width={'100%'}>
         <Heading mb={'24px'}>My information:</Heading>
-        <UserAvatar />
+
         <FormControl
           onSubmit={handleSubmit(onSubmit)}
           display={'flex'}
@@ -89,6 +89,7 @@ const UserForm = () => {
           boxShadow={'7px 4px 14px rgba(49, 21, 4, 0.07)'}
           borderRadius={'0px 40px 40px 0px'}
         >
+          <UserAvatar />
           <InputGroup
             display={'flex'}
             flexDirection={'column'}
@@ -136,7 +137,6 @@ const UserForm = () => {
               {errors.name?.message}
             </Text>
           </InputGroup>
-
           <InputGroup
             display={'flex'}
             flexDirection="column"
@@ -178,7 +178,6 @@ const UserForm = () => {
               {errors.email?.message}
             </Text>
           </InputGroup>
-
           <InputGroup
             display={'flex'}
             flexDirection="column"
@@ -231,7 +230,6 @@ const UserForm = () => {
               {errors.birthday?.message}
             </Text>
           </InputGroup>
-
           <InputGroup
             display={'flex'}
             flexDirection="column"
@@ -273,7 +271,6 @@ const UserForm = () => {
               {errors.phone?.message}
             </Text>
           </InputGroup>
-
           <InputGroup
             display={'flex'}
             flexDirection="column"
