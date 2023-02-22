@@ -5,6 +5,7 @@ const userApiSlice = createApi({
   reducerPath: 'userApiSlice',
   baseQuery: fetchBaseQuery({
     baseUrl: `${API_URL}/users`,
+    // baseUrl: `http://localhost:3002/api/users`,
 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
