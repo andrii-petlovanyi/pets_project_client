@@ -40,7 +40,7 @@ const noticesApiSlice = createApi({
       providesTags: ['notices'],
     }),
 
-    addNotices: builder.mutation({
+    addNotice: builder.mutation({
       query: notice => ({
         url: `/`,
         method: 'POST',
@@ -64,7 +64,7 @@ export const {
   useGetNoticesListQuery,
   useGetNoticeByIdQuery,
   useGetUserNoticesListQuery,
-  useAddNoticesMutation,
+  useAddNoticeMutation,
   useDeleteNoticeMutation,
 } = noticesApiSlice;
 
