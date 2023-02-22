@@ -84,18 +84,10 @@ export const NavTab = ({ ...props }) => {
               <Link
                 variant={'headerLink'}
                 as={NavLink}
-                to="partners"
+                to="friends"
                 onClick={() => changeDisplay('none')}
               >
                 Our friends
-              </Link>
-              <Link
-                variant={'headerLink'}
-                as={NavLink}
-                to="uikit"
-                onClick={() => changeDisplay('none')}
-              >
-                UI Kit
               </Link>
             </Flex>
           </Flex>

@@ -68,7 +68,7 @@ function App() {
                 <Route path="own" element={<NoticesOwnerList />} />
               </Route>
             </Route>
-            <Route path="partners" element={<OurFriends />} />
+            <Route path="friends" element={<OurFriends />} />
 
             <Route element={<PublicRoute />}>
               <Route path="login" element={<Login />} />

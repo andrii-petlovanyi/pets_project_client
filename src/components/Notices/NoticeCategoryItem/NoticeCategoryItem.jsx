@@ -57,6 +57,7 @@ export const NoticeCategoryItem = ({ notice }) => {
             position="relative"
           />
           <Text
+            lineHeight={{ base: '15px', lg: '16px' }}
             css={{
               position: 'absolute',
               top: 20,
