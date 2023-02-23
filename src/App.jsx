@@ -27,12 +27,15 @@ import PublicRoute from './components/Routes/PublicRoute';
 
 function App() {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const location = useLocation().pathname;
   const token = useSelector(userSelectors.getToken);
   const { data, isLoading } = useGetUserQuery(token, {
     skip: token === null,
   });
 
   useEffect(() => {
+    // if (location == '/') navigate('/notices/sell');
     if (!data) return;
 
     dispatch(refresh(data));
