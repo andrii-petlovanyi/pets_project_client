@@ -60,7 +60,8 @@ const LoginForm = () => {
   const onSubmit = async data => {
     try {
       const { data: res, error } = await logInUser(data);
-      if (error) addToast({ message: error.data.message, type: 'error' });
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
       addToast({ message: res.message, type: 'success' });
       dispatch(logIn(res));
       reset();

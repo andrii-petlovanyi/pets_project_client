@@ -10,7 +10,7 @@ export const NoticesOwnerList = () => {
 
   const { data, isLoading } = useGetUserNoticesListQuery({
     page: 1,
-    limit: 10,
+    limit: 12,
     search,
   });
   const { notices } = data || [];

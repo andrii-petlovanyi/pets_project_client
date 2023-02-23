@@ -11,7 +11,7 @@ export const NoticesCategoriesList = ({ category }) => {
 
   const { data, isLoading } = useGetNoticesListQuery({
     page: 1,
-    limit: 10,
+    limit: 12,
     search,
     category,
   });
