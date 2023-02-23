@@ -32,6 +32,7 @@ const noticeModalText = defineStyle({
   color: 'textColor',
   width: { base: '240px', lg: '443px' },
   height: { base: '66px', lg: '54px' },
+  margin: 'auto'
 });
 
 const noticesInputsHead = defineStyle({
@@ -45,6 +46,14 @@ const noticesInputsHead = defineStyle({
   marginBottom: { base: '8px', lg: '12px' },
 });
 
+const noticesPetSex = defineStyle({
+  fontFamily: 'Manrope',
+  fontStyle: 'normal',
+  fontHeight: '500',
+  fontSize: { base: '18px', lg: '20px' },
+  lineHeight: '26px',
+});
+
 export const textTheme = defineStyleConfig({
-  variants: { logo, textLabelUserForm, noticeModalText, noticesInputsHead },
+  variants: { logo, textLabelUserForm, noticeModalText, noticesInputsHead, noticesPetSex },
 });
