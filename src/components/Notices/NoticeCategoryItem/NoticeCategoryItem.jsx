@@ -28,6 +28,7 @@ import userApiSlice, {
   useDeleteFromFavoriteMutation,
 } from '../../../redux/user/userApiSlice';
 import Toast from '../../../hooks/toast';
+import LearnMore from '../../../pages/LearnMore';
 
 export const NoticeCategoryItem = ({ notice }) => {
   const { _id: userId, favorites } = useSelector(userSelectors.user);
@@ -200,7 +201,7 @@ export const NoticeCategoryItem = ({ notice }) => {
                 fontWeight="500"
                 lineHeight="22px"
               >
-                {price ? price : ''}
+                {price ? price : ''}$
               </Text>
             </Flex>
           ) : (
@@ -213,10 +214,9 @@ export const NoticeCategoryItem = ({ notice }) => {
         flexDirection={'column'}
         h={'120px'}
         justifyContent={'center'}
+        alignItems={'center'}
       >
-        <Button type="button" variant={'outlineCardBtn'} m="0 auto">
-          Learn more
-        </Button>
+        <LearnMore notice={notice} />
         {userId === owner ? (
           <Button
             onClick={deleteNotice}
