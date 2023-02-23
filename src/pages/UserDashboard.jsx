@@ -15,7 +15,7 @@ const UserDashboard = () => {
       <UserForm />
       {/* <UserAvatar /> */}
       <UserPetsData />
-      <LearnMore/>
+      <LearnMore />
     </Flex>
   );
 };
