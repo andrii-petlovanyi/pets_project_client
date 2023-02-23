@@ -22,7 +22,6 @@ import Toast from '../hooks/toast';
 import userSelectors from '../redux/user/user-selectors';
 
 
-
 // export const UserPetsItem = ({ pet = {} }) => {
 //   const { name, birth, breed, avatarURL, comment, _id } = pet;
 const LearnMore = ({ notice }) => {
@@ -85,6 +84,13 @@ const LearnMore = ({ notice }) => {
       case 'lost-found':
         return 'Lost/found';
     }
+  };
+
+  const handleClick = () => {
+    if (window.innerWidth <= 480) {
+      window.location.href = 'tel:{phone}';
+    }
+    window.location.href = "mailto:{email}"
   };
 
   return (
@@ -263,8 +269,9 @@ const LearnMore = ({ notice }) => {
             <Button
               variant={'outlineTabActive'}
               width={{ base: '240px', lg: '160px' }}
-              as="a"
-              href={{ base: 'phone', lg: 'email' }}
+              // as="a"
+              // href={{ base: 'phone', lg: 'email' }}
+              onClick={handleClick}
             >
               Contact
             </Button>
