@@ -13,7 +13,6 @@ const UserDashboard = () => {
       py={{ xl: '58px' }}
     >
       <UserForm />
-      {/* <UserAvatar /> */}
       <UserPetsData />
       <LearnMore />
     </Flex>
