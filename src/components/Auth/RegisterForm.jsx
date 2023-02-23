@@ -40,14 +40,14 @@ const schemaStep1 = yup.object().shape({
     .string()
     .trim()
     .matches(passRegexp, 'Password must be contain letters and numbers')
-    .min(8, 'Minimal password length is 8 symbols')
+    .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Password is required'),
   cpassword: yup
     .string()
     .trim()
     .matches(passRegexp, 'Password must be contain letters and numbers')
-    .min(8, 'Minimal password length is 8 symbols')
+    .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Please repeat password')
     .oneOf([yup.ref('password')], 'Password do not match'),
@@ -98,7 +98,8 @@ const RegisterForm = () => {
 
     try {
       const { data: res, error } = await registerUser(data);
-      if (error) addToast({ message: error.data.message, type: 'error' });
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
       addToast({ message: res.message, type: 'success' });
 
       dispatch(userRegister(res.user));

@@ -12,6 +12,8 @@ const friends = defineStyle({
 const tabLink = defineStyle({
   display: 'flex',
   justifyContent: 'center',
+  textAlign: 'center',
+  alignItems: 'center',
 
   background: 'white',
   color: 'textColor',

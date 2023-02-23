@@ -82,10 +82,10 @@ const AddPets = () => {
     resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
   });
 
-  const newImage = watch('avatarURL');
+  const newImage = watch('avatarPet');
 
   const onSubmit = async data => {
-    if (!data.avatarURL[0]) {
+    if (!data.avatarPet[0]) {
       return setAvatarError('Avatar is required');
     }
     const formData = new FormData();
@@ -93,7 +93,7 @@ const AddPets = () => {
     formData.append('breed', data.breed);
     formData.append('birth', data.birthday);
     formData.append('comment', data.comment);
-    formData.append('avatarURL', data.avatarURL[0]);
+    formData.append('avatarURL', data.avatarPet[0]);
 
     try {
       const { data: res, error } = await addMyPets(formData);
@@ -234,7 +234,7 @@ const AddPets = () => {
                 isInvalid={avatarError}
               >
                 <FormLabel
-                  htmlFor="avatarURL"
+                  htmlFor="avatarPet"
                   border={avatarError ? '1px solid red' : ''}
                   width={{ base: '208px', md: '182px' }}
                   height={{ base: '208px', md: '182px' }}
@@ -243,10 +243,10 @@ const AddPets = () => {
                   margin={'0'}
                 ></FormLabel>
                 <Input
-                  id="avatarURL"
+                  id="avatarPet"
                   display={'none'}
                   type="file"
-                  {...register('avatarURL')}
+                  {...register('avatarPet')}
                 />
                 {newImage && newImage[0] ? (
                   <Image

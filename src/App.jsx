@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from './layout/Layout';
 import './index.css';
 import {
@@ -27,12 +27,15 @@ import PublicRoute from './components/Routes/PublicRoute';
 
 function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation().pathname;
   const token = useSelector(userSelectors.getToken);
   const { data, isLoading } = useGetUserQuery(token, {
     skip: token === null,
   });
 
   useEffect(() => {
+    if (location == '/') navigate('/notices/sell');
     if (!data) return;
 
     dispatch(refresh(data));
@@ -44,7 +47,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route element={<PublicRoute />}>
-              <Route index element={<Home />} />
+              <Route path='/home' element={<Home />} />
             </Route>
             <Route element={<PrivateRoute />}>
               <Route path="/user" element={<UserDashboard />} />

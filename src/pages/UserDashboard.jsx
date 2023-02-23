@@ -1,7 +1,9 @@
 import { Flex } from '@chakra-ui/react';
 import React from 'react';
+// import UserAvatar from '../components/UserForm/Avatar';
 import UserForm from '../components/UserForm/UserForm';
 import UserPetsData from '../components/UserPets/PetsData';
+import LearnMore from './LearnMore';
 
 const UserDashboard = () => {
   return (
@@ -11,7 +13,9 @@ const UserDashboard = () => {
       py={{ xl: '58px' }}
     >
       <UserForm />
+      {/* <UserAvatar /> */}
       <UserPetsData />
+      <LearnMore/>
     </Flex>
   );
 };

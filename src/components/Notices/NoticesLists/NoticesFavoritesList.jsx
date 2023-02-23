@@ -10,7 +10,7 @@ export const NoticesFavoritesList = () => {
 
   const { data, isLoading } = useGetFavoritesListQuery({
     page: 1,
-    limit: 10,
+    limit: 12,
     search,
   });
   const { notices } = data || [];

@@ -61,7 +61,7 @@ const NewCard = ({ news = {} }) => {
         <Flex w={'395px'} justify={'space-between'}>
           <Text>{date}</Text>
           <Link href={url} isExternal color={'mainOrange'}>
-            View here
+            Read more
           </Link>
         </Flex>
       </CardFooter>

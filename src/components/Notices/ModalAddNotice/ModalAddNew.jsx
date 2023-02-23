@@ -31,7 +31,6 @@ import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
 const schemaStep1 = yup.object().shape({
-
   title: yup
     .string()
     .trim()
@@ -199,30 +198,33 @@ const ModalAddNew = () => {
                   w={{ base: '131px', lg: '162px' }}
                   h={{ base: '35px', lg: '47px' }}
                   fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('lost-found')}
+                  onClick={() => setCategory('lost/found')}
                   variant={
-                    category === 'lost-found' ? 'fullBGBtn' : 'outlineTabBtn'
+                    category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
                   }
+                  {...register('selectedCategory')}
                 >
                   lost/found
                 </Button>
                 <Button
-                  w={{ base: '131px', lg: '162px' }}
+                  w={{ base: '155px', lg: '197px' }}
                   h={{ base: '35px', lg: '47px' }}
                   fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('for-free')}
+                  onClick={() => setCategory('in good hands')}
                   variant={
-                    category === 'for-free' ? 'fullBGBtn' : 'outlineTabBtn'
+                    category === 'in good hands' ? 'fullBGBtn' : 'outlineTabBtn'
                   }
+                  {...register('selectedCategory')}
                 >
-                  In good hands
+                  in good hands
                 </Button>
                 <Button
-                  w={{ base: '131px', lg: '162px' }}
+                  w={{ base: '81', lg: '91px' }}
                   h={{ base: '35px', lg: '47px' }}
                   fontSize={{ base: '14px', lg: '20px' }}
                   onClick={() => setCategory('sell')}
                   variant={category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'}
+                  {...register('selectedCategory')}
                 >
                   sell
                 </Button>
