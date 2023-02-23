@@ -27,6 +27,7 @@ import userApiSlice, {
   useAddToFavoriteMutation,
   useDeleteFromFavoriteMutation,
 } from '../../../redux/user/userApiSlice';
+import Toast from '../../../hooks/toast';
 
 export const NoticeCategoryItem = ({ notice }) => {
   const { _id: userId, favorites } = useSelector(userSelectors.user);
@@ -47,6 +48,8 @@ export const NoticeCategoryItem = ({ notice }) => {
   const [removeFavorite] = useDeleteFromFavoriteMutation();
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
+  const { addToast } = Toast();
+
 
   const deleteNotice = async () => {
     try {
@@ -62,6 +65,9 @@ export const NoticeCategoryItem = ({ notice }) => {
 
   const changeFavorite = async () => {
     try {
+      if (!userId) {
+        addToast({ message: "Please, authorize to be able to use this feature" });
+      }
       if (isFavorite) {
         const { data, error } = await removeFavorite(noticeId);
         if (error) {
