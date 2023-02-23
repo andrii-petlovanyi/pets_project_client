@@ -13,18 +13,13 @@ export const userFormSchema = yup.object({
   name: yup
     .string()
     .trim('The name cannot include leading and trailing spaces')
-    .strict(true)
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
     .min(4, 'Need at least 4 characters')
-    .max(20)
+    .max(40)
     .required(),
   email: yup.string().email('Must be a valid email').required(),
   birthday: yup.string(),
-  phone: yup
-    .string()
-    .trim()
-    // .min(12)
-    // .max(15)
-    .matches(phoneRegExp, 'Phone number is not valid'),
+  phone: yup.string().trim().matches(phoneRegExp, 'Phone number is not valid'),
   city: yup
     .string()
     .trim('The city cannot include leading and trailing spaces')

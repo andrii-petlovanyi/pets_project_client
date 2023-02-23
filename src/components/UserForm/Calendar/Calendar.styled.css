@@ -1,10 +1,10 @@
-.date__picker input {
-  width: 216px;
+.react-datepicker__input-container input {
+  width: 100%;
   height: 32px;
   font-family: 'Manrope';
   font-weight: 400;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 12px;
+  line-height: 1.33;
   border: none;
   padding: 3px 12px;
   display: flex;
@@ -18,13 +18,20 @@
   cursor: auto;
 }
 
-.date__picker input:disabled {
-  width: 216px;
+@media screen and (min-width: 768px) {
+  .react-datepicker__input-container input {
+    font-size: 18px;
+    line-height: 1.38;
+  }
+}
+
+.react-datepicker__input-container input:disabled {
+  width: 100%;
   height: 32px;
   font-family: 'Manrope';
   font-weight: 400;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 12px;
+  line-height: 1.33;
   border: none;
   padding: 3px 12px;
   display: flex;
@@ -33,4 +40,11 @@
   background-color: white;
   opacity: 1;
   cursor: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .react-datepicker__input-container input:disabled {
+    font-size: 18px;
+    line-height: 1.38;
+  }
 }
