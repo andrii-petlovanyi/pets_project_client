@@ -3,6 +3,7 @@ import React from 'react';
 // import UserAvatar from '../components/UserForm/Avatar';
 import UserForm from '../components/UserForm/UserForm';
 import UserPetsData from '../components/UserPets/PetsData';
+import LearnMore from './LearnMore';
 
 const UserDashboard = () => {
   return (
@@ -14,6 +15,7 @@ const UserDashboard = () => {
       <UserForm />
       {/* <UserAvatar /> */}
       <UserPetsData />
+      <LearnMore/>
     </Flex>
   );
 };
