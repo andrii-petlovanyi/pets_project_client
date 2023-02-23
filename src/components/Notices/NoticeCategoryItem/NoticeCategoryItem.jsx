@@ -45,7 +45,7 @@ export const NoticeCategoryItem = ({ notice }) => {
   const [removeNotice] = useDeleteNoticeMutation();
   const [addFavorite] = useAddToFavoriteMutation();
   const [removeFavorite] = useDeleteFromFavoriteMutation();
-  const isFavorite = favorites.includes(noticeId);
+  const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
 
   const deleteNotice = async () => {
