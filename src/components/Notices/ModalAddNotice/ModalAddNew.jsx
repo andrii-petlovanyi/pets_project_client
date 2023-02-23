@@ -17,8 +17,8 @@ import {
   Image,
   Textarea,
   Icon,
-  RadioGroup,
-  Radio,
+  // RadioGroup,
+  // Radio,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -56,7 +56,6 @@ const schemaStep1 = yup.object().shape({
 });
 
 const schemaStep2 = yup.object().shape({
-  petSex: yup.string().trim().oneOf(['male', 'female']),
   location: yup
     .string()
     .trim()
@@ -83,6 +82,7 @@ const ModalAddNew = () => {
   const [avatarError, setAvatarError] = useState('');
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
+  const [petSex, setPetSex] = useState('male');
 
   const [addNotice, { isLoading }] = useAddNoticeMutation();
 
@@ -102,7 +102,6 @@ const ModalAddNew = () => {
     if (!data.avatarURL[0]) {
       return setAvatarError('Avatar is required');
     }
-    console.log(category);
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('category', category);
@@ -110,7 +109,7 @@ const ModalAddNew = () => {
     formData.append('breed', data.breed);
     formData.append('location', data.location);
     formData.append('birth', data.birth);
-    formData.append('petSex', data.petSex);
+    formData.append('petSex', petSex);
     formData.append('comments', data.comment);
     formData.append('petImage', data.avatarURL[0]);
 
@@ -187,13 +186,14 @@ const ModalAddNew = () => {
                 Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
                 amet, consectetur{' '}
               </Text>
+            <FormControl id="category" isInvalid={errors.category}>
               <Stack
-                display="flex"
-                flexWrap="wrap"
-                alignItems="baseline"
-                flexDirection="row"
-                gap="12px"
-              >
+                  display="flex"
+                  flexWrap="wrap"
+                  alignItems="baseline"
+                  flexDirection="row"
+                  gap="12px"
+                >
                 <Button
                   w={{ base: '131px', lg: '162px' }}
                   h={{ base: '35px', lg: '47px' }}
@@ -228,10 +228,10 @@ const ModalAddNew = () => {
                 >
                   sell
                 </Button>
-              </Stack>
-
+               </Stack>
+              </FormControl>
               <FormControl isInvalid={errors.title}>
-                <FormLabel htmlFor="title">Title of ad</FormLabel>
+                <FormLabel htmlFor="title"><Text variant={'noticesInputsHead'}>Title of ad</Text></FormLabel>
                 <Input
                   placeholder={'Type title'}
                   variant={'addNoticeForm'}
@@ -240,7 +240,7 @@ const ModalAddNew = () => {
                 <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.petName}>
-                <FormLabel htmlFor="petName">Name pet</FormLabel>
+                <FormLabel htmlFor="petName"><Text variant={'noticesInputsHead'}>Name pet</Text></FormLabel>
                 <Input
                   placeholder={'Type name pet'}
                   variant={'addNoticeForm'}
@@ -249,7 +249,7 @@ const ModalAddNew = () => {
                 <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.birth}>
-                <FormLabel htmlFor="birth">Date of birth</FormLabel>
+                <FormLabel htmlFor="birth"><Text variant={'noticesInputsHead'}>Date of birth</Text></FormLabel>
                 <Input
                   placeholder={'Type date of birth'}
                   variant={'addNoticeForm'}
@@ -262,7 +262,7 @@ const ModalAddNew = () => {
                 isInvalid={errors.breed}
                 mb={{ base: '28px', lg: '40px' }}
               >
-                <FormLabel htmlFor="breed">Breed</FormLabel>
+                <FormLabel htmlFor="breed"><Text variant={'noticesInputsHead'}>Breed</Text></FormLabel>
                 <Input
                   placeholder={'Type bread'}
                   variant={'addNoticeForm'}
@@ -305,8 +305,13 @@ const ModalAddNew = () => {
                 <FormLabel>
                   <Text variant={'noticesInputsHead'}>The sex*:</Text>
                 </FormLabel>
-                <RadioGroup name="petSex">
-                  <Radio value="male" {...register('petSex')}>
+                <Stack direction="row" spacing={4}>
+                  <Button
+                    textColor={petSex === 'male' && 'accentOrange'}
+                    variant={'noticePetSexBtn'}
+                    onClick={() => setPetSex('male')}
+                    {...register('petSex')}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="60"
@@ -318,9 +323,14 @@ const ModalAddNew = () => {
                         d="M20 4v6h-2V7.425l-3.975 3.95q.475.7.725 1.488T15 14.5q0 2.3-1.6 3.9T9.5 20q-2.3 0-3.9-1.6T4 14.5q0-2.3 1.6-3.9T9.5 9q.825 0 1.625.237t1.475.738L16.575 6H14V4h6ZM9.5 11q-1.45 0-2.475 1.025T6 14.5q0 1.45 1.025 2.475T9.5 18q1.45 0 2.475-1.025T13 14.5q0-1.45-1.025-2.475T9.5 11Z"
                       />
                     </svg>
-                    <Text>male</Text>
-                  </Radio>
-                  <Radio value="female" {...register('petSex')}>
+                    <Text>Male</Text>
+                  </Button>
+                  <Button
+                    textColor={petSex === 'female' && 'accentOrange'}
+                    variant={'noticePetSexBtn'}
+                    onClick={() => setPetSex('female')}
+                    {...register('petSex')}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="60"
@@ -332,9 +342,9 @@ const ModalAddNew = () => {
                         d="M11 21v-2H9v-2h2v-2.1q-1.975-.35-3.238-1.888T6.5 9.45q0-2.275 1.613-3.862T12 4q2.275 0 3.888 1.588T17.5 9.45q0 2.025-1.263 3.563T13 14.9V17h2v2h-2v2h-2Zm1-8q1.45 0 2.475-1.025T15.5 9.5q0-1.45-1.025-2.475T12 6q-1.45 0-2.475 1.025T8.5 9.5q0 1.45 1.025 2.475T12 13Z"
                       />
                     </svg>
-                    <Text>female</Text>
-                  </Radio>
-                </RadioGroup>
+                    <Text>Female</Text>
+                  </Button>
+                </Stack>
                 {errors.petSex && (
                   <FormErrorMessage>{errors.petSex.message}</FormErrorMessage>
                 )}
@@ -364,14 +374,9 @@ const ModalAddNew = () => {
                 </FormControl>
               )}
 
-              <Text
-                mx={'auto'}
-                fontSize={{ base: '16px', md: '20px' }}
-                lineHeight={{ base: '22px', md: '27px' }}
-                variant={'noticesInputsHead'}
-              >
-                Load the pets image:
-              </Text>
+              <FormLabel>
+                    <Text variant={'noticesInputsHead'}>Load the pet’s image:</Text>
+              </FormLabel>
               <FormControl
                 display={'flex'}
                 justifyContent={'center'}
@@ -434,6 +439,7 @@ const ModalAddNew = () => {
                   lineHeight={'26px'}
                   fontWeight={'500'}
                   fontFamily={'Manrope'}
+                  variant={'noticesInputsHead'}
                 >
                   Comments
                 </FormLabel>
