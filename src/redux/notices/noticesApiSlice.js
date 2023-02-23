@@ -29,7 +29,9 @@ const noticesApiSlice = createApi({
 
     getUserNoticesList: builder.query({
       query: ({ page = 1, limit = 10, search }) =>
-        `/?limit=${limit}&page=${page}${search ? '&search=' + search : ''}`,
+        `owner/?limit=${limit}&page=${page}${
+          search ? '&search=' + search : ''
+        }`,
       keepUnusedDataFor: 30,
       providesTags: ['notices'],
     }),
@@ -40,7 +42,7 @@ const noticesApiSlice = createApi({
       providesTags: ['notices'],
     }),
 
-    addNotices: builder.mutation({
+    addNotice: builder.mutation({
       query: notice => ({
         url: `/`,
         method: 'POST',
@@ -64,7 +66,7 @@ export const {
   useGetNoticesListQuery,
   useGetNoticeByIdQuery,
   useGetUserNoticesListQuery,
-  useAddNoticesMutation,
+  useAddNoticeMutation,
   useDeleteNoticeMutation,
 } = noticesApiSlice;
 

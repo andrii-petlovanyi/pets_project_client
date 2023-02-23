@@ -21,12 +21,14 @@ export const userFormSchema = yup.object({
   birthday: yup.string(),
   phone: yup
     .string()
-    .min(12)
-    .max(15)
+    .trim()
+    // .min(12)
+    // .max(15)
     .matches(phoneRegExp, 'Phone number is not valid'),
   city: yup
     .string()
     .trim('The city cannot include leading and trailing spaces')
     .strict(true)
     .required(),
+  avatarURL: yup.string(),
 });

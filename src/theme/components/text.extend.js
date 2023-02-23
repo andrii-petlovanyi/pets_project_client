@@ -21,6 +21,30 @@ const textLabelUserForm = defineStyle({
   color: 'textColor',
 });
 
+const noticeModalText = defineStyle({
+  fontFamily: 'Manrope',
+  fontStyle: 'normal',
+  fontHeight: '500',
+  fontSize: { base: '16px', lg: '20px' },
+  lineHeight: { base: '22px', lg: '27px' },
+  textAlign: 'center',
+  letterSpacing: ' -0.01em',
+  color: 'textColor',
+  width: { base: '240px', lg: '443px' },
+  height: { base: '66px', lg: '54px' },
+});
+
+const noticesInputsHead = defineStyle({
+  fontFamily: 'Manrope',
+  fontStyle: 'normal',
+  fontHeight: '500',
+  fontSize: { base: '18px', lg: '24px' },
+  lineHeight: '26px',
+  color: 'textColor',
+  marginTop: { base: '12px', lg: '24px' },
+  marginBottom: { base: '8px', lg: '12px' },
+});
+
 export const textTheme = defineStyleConfig({
-  variants: { logo, textLabelUserForm },
+  variants: { logo, textLabelUserForm, noticeModalText, noticesInputsHead },
 });

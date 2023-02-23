@@ -65,8 +65,13 @@ const News = () => {
           <AiOutlineSearch size={'24'} />
         </InputRightElement>
       </InputGroup>
-
-      <Flex gap={'31px'} flexWrap={'wrap'} justifyContent={'center'}>
+      <Flex
+        m={'0 auto'}
+        gap={'31px'}
+        flexWrap={'wrap'}
+        justifyContent={'center'}
+        w={{ base: '480px', lg: '768px', xl: '1280px' }}
+      >
         {!isLoading ? (
           news.length > 0 &&
           news.map(news => <NewCard key={news.title} news={news} />)

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useGetNoticesListQuery } from '../../../redux/notices/noticesApiSlice';
 import { useLocation } from 'react-router-dom';
 import { NoticeCategoryItem } from '../../Notices';
-import { Flex } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 
 export const NoticesCategoriesList = ({ category }) => {
   const params = useLocation();
@@ -18,22 +18,22 @@ export const NoticesCategoriesList = ({ category }) => {
   const { notices } = data || [];
 
   return (
-    // <div>
-    //   {!isLoading ? (
-    //     notices.length > 0 && notices.map(n => <h2 key={n._id}>{n.title}</h2>)
-    //   ) : (
-    //     <>Loading...</>
-    //   )}
-    // </div>
-    <Flex as={'ul'} gap={'20px'}>
+    <SimpleGrid
+      as={'ul'}
+      columns={{ base: 1, lg: 2, xl: 4 }}
+      mt={{ base: '30px', lg: '60px' }}
+      mb={{ base: '100px', xl: '200px' }}
+      gap={'32px'}
+    >
       {!isLoading ? (
-        notices?.map(notice => {
-          <NoticeCategoryItem key={notice._id} notice={notice} />;
-        })
+        notices?.length > 0 &&
+        notices?.map(notice => (
+          <NoticeCategoryItem key={notice._id} notice={notice} />
+        ))
       ) : (
         <>Loading...</>
       )}
-    </Flex>
+    </SimpleGrid>
   );
 };
 

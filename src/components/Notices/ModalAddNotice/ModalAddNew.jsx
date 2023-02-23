@@ -1,47 +1,49 @@
-import React from 'react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import {
   Box,
-  Icon,
-  Button,
   FormControl,
-  FormErrorMessage,
   FormLabel,
   Heading,
   IconButton,
-  Image,
-  Input,
   Modal,
   ModalContent,
   ModalOverlay,
   Stack,
-  Textarea,
   useDisclosure,
+  Input,
+  FormErrorMessage,
   Flex,
   Text,
+  Button,
+  Image,
+  Textarea,
+  Icon,
+  RadioGroup,
+  Radio,
 } from '@chakra-ui/react';
-
-import { TfiPlus } from 'react-icons/tfi';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import userApiSlice, {
-  useAddMyPetsMutation,
-} from '../../redux/user/userApiSlice';
-import { useDispatch } from 'react-redux';
-import { birthdayRegExp } from '../../services/validation';
-import Toast from '../../hooks/toast';
+import { birthdayRegExp, locationRegExp } from '../../../services/validation';
+import { TfiPlus } from 'react-icons/tfi';
+import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
 const schemaStep1 = yup.object().shape({
-  name: yup
+  title: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal title length is 2 symbols')
+    .max(32, 'Max title length is 32 symbols')
+    .required('Title is required'),
+  petName: yup
     .string()
     .trim()
     .min(2, 'Minimal pet name length is 2 symbols')
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
-  birthday: yup
+  birth: yup
     .string()
     .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
     .required('Birthday is required'),
@@ -54,6 +56,19 @@ const schemaStep1 = yup.object().shape({
 });
 
 const schemaStep2 = yup.object().shape({
+  petSex: yup.string().trim().oneOf(['male', 'female']),
+  location: yup
+    .string()
+    .trim()
+    .matches(locationRegExp, 'Location must be in format Country,City')
+    .min(2, 'Minimal location length is 2 symbols')
+    .max(30, 'Max location length is 30 symbols')
+    .required('Location is required'),
+  price: yup
+    .string()
+    .trim()
+    .min(1, 'Minimal price length is 1 symbols')
+    .max(100, 'Max price length is 100 symbols'),
   comment: yup
     .string()
     .trim()
@@ -62,15 +77,14 @@ const schemaStep2 = yup.object().shape({
     .required('Comment is required'),
 });
 
-const AddPets = () => {
+const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [avatarError, setAvatarError] = useState('');
+  const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
 
-  const [addMyPets, { isLoading }] = useAddMyPetsMutation();
-  const dispatch = useDispatch();
-  const { addToast } = Toast();
+  const [addNotice, { isLoading }] = useAddNoticeMutation();
 
   const {
     register,
@@ -88,23 +102,31 @@ const AddPets = () => {
     if (!data.avatarURL[0]) {
       return setAvatarError('Avatar is required');
     }
+    console.log(category);
     const formData = new FormData();
-    formData.append('name', data.name);
+    formData.append('title', data.title);
+    formData.append('category', category);
+    formData.append('petName', data.petName);
     formData.append('breed', data.breed);
-    formData.append('birth', data.birthday);
-    formData.append('comment', data.comment);
-    formData.append('avatarURL', data.avatarURL[0]);
+    formData.append('location', data.location);
+    formData.append('birth', data.birth);
+    formData.append('petSex', data.petSex);
+    formData.append('comments', data.comment);
+    formData.append('petImage', data.avatarURL[0]);
+
+    if (data.category == 'sell') {
+      formData.append('price', data.price);
+    }
 
     try {
-      const { data: res, error } = await addMyPets(formData);
-      if (error) addToast({ message: error.data.message, type: 'error' });
-      addToast({ message: res.message, type: 'success' });
-      dispatch(userApiSlice.util.invalidateTags(['user']));
+      const { data: res, error } = await addNotice(formData);
+      if (error) return console.log(error);
+      console.log(res);
       onClose();
       reset();
       setStep(1);
     } catch (error) {
-      addToast({ message: error.message, type: 'success' });
+      console.log(error);
     }
   };
 
@@ -127,6 +149,9 @@ const AddPets = () => {
         justifyContent={'center'}
         alignItems={'center'}
         gap={'12px'}
+        minW={'129px'}
+        h={'44px'}
+        ml={'auto'}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
@@ -158,24 +183,80 @@ const AddPets = () => {
               as="form"
               onSubmit={handleSubmit(nextStep)}
             >
-              <FormControl isInvalid={errors.name}>
-                <FormLabel htmlFor="name">Name pet</FormLabel>
+              <Text variant={'noticeModalText'}>
+                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
+                amet, consectetur{' '}
+              </Text>
+              <Stack
+                display="flex"
+                flexWrap="wrap"
+                alignItems="baseline"
+                flexDirection="row"
+                gap="12px"
+              >
+                <Button
+                  w={{ base: '131px', lg: '162px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('lost/found')}
+                  variant={
+                    category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
+                  }
+                  {...register('selectedCategory')}
+                >
+                  lost/found
+                </Button>
+                <Button
+                  w={{ base: '155px', lg: '197px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('in good hands')}
+                  variant={
+                    category === 'in good hands' ? 'fullBGBtn' : 'outlineTabBtn'
+                  }
+                  {...register('selectedCategory')}
+                >
+                  in good hands
+                </Button>
+                <Button
+                  w={{ base: '81', lg: '91px' }}
+                  h={{ base: '35px', lg: '47px' }}
+                  fontSize={{ base: '14px', lg: '20px' }}
+                  onClick={() => setCategory('sell')}
+                  variant={category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'}
+                  {...register('selectedCategory')}
+                >
+                  sell
+                </Button>
+              </Stack>
+
+              <FormControl isInvalid={errors.title}>
+                <FormLabel htmlFor="title">Title of ad</FormLabel>
                 <Input
-                  variant={'addPetsForm'}
-                  placeholder={'Type name pet'}
-                  {...register('name')}
+                  placeholder={'Type title'}
+                  variant={'addNoticeForm'}
+                  {...register('title')}
                 />
-                <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+                <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={errors.birthday}>
-                <FormLabel htmlFor="birthday">Date of birth</FormLabel>
+              <FormControl isInvalid={errors.petName}>
+                <FormLabel htmlFor="petName">Name pet</FormLabel>
                 <Input
-                  variant={'addPetsForm'}
-                  placeholder={'Type date of birth'}
-                  type="text"
-                  {...register('birthday')}
+                  placeholder={'Type name pet'}
+                  variant={'addNoticeForm'}
+                  {...register('petName')}
                 />
-                <FormErrorMessage>{errors.birthday?.message}</FormErrorMessage>
+                <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={errors.birth}>
+                <FormLabel htmlFor="birth">Date of birth</FormLabel>
+                <Input
+                  placeholder={'Type date of birth'}
+                  variant={'addNoticeForm'}
+                  type="text"
+                  {...register('birth')}
+                />
+                <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
               </FormControl>
               <FormControl
                 isInvalid={errors.breed}
@@ -183,8 +264,8 @@ const AddPets = () => {
               >
                 <FormLabel htmlFor="breed">Breed</FormLabel>
                 <Input
-                  variant={'addPetsForm'}
                   placeholder={'Type bread'}
+                  variant={'addNoticeForm'}
                   {...register('breed')}
                 />
                 <FormErrorMessage>{errors.breed?.message}</FormErrorMessage>
@@ -220,12 +301,76 @@ const AddPets = () => {
               as="form"
               onSubmit={handleSubmit(onSubmit)}
             >
+              <FormControl id="petSex" isInvalid={errors.petSex}>
+                <FormLabel>
+                  <Text variant={'noticesInputsHead'}>The sex*:</Text>
+                </FormLabel>
+                <RadioGroup name="petSex">
+                  <Radio value="male" {...register('petSex')}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="60"
+                      height="60"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="#23c2ef"
+                        d="M20 4v6h-2V7.425l-3.975 3.95q.475.7.725 1.488T15 14.5q0 2.3-1.6 3.9T9.5 20q-2.3 0-3.9-1.6T4 14.5q0-2.3 1.6-3.9T9.5 9q.825 0 1.625.237t1.475.738L16.575 6H14V4h6ZM9.5 11q-1.45 0-2.475 1.025T6 14.5q0 1.45 1.025 2.475T9.5 18q1.45 0 2.475-1.025T13 14.5q0-1.45-1.025-2.475T9.5 11Z"
+                      />
+                    </svg>
+                    <Text>male</Text>
+                  </Radio>
+                  <Radio value="female" {...register('petSex')}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="60"
+                      height="60"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="#FF8787"
+                        d="M11 21v-2H9v-2h2v-2.1q-1.975-.35-3.238-1.888T6.5 9.45q0-2.275 1.613-3.862T12 4q2.275 0 3.888 1.588T17.5 9.45q0 2.025-1.263 3.563T13 14.9V17h2v2h-2v2h-2Zm1-8q1.45 0 2.475-1.025T15.5 9.5q0-1.45-1.025-2.475T12 6q-1.45 0-2.475 1.025T8.5 9.5q0 1.45 1.025 2.475T12 13Z"
+                      />
+                    </svg>
+                    <Text>female</Text>
+                  </Radio>
+                </RadioGroup>
+                {errors.petSex && (
+                  <FormErrorMessage>{errors.petSex.message}</FormErrorMessage>
+                )}
+              </FormControl>
+              <FormControl isInvalid={errors.location}>
+                <FormLabel>
+                  <Text variant={'noticesInputsHead'}>Location*:</Text>
+                </FormLabel>
+                <Input
+                  {...register('location')}
+                  variant={'addNoticeForm'}
+                  placeholder="Type location"
+                />
+                <FormErrorMessage>{errors.location?.message}</FormErrorMessage>
+              </FormControl>
+              {category == 'sell' && (
+                <FormControl isInvalid={errors.price}>
+                  <FormLabel>
+                    <Text variant={'noticesInputsHead'}>Price*:</Text>
+                  </FormLabel>
+                  <Input
+                    {...register('price')}
+                    variant={'addNoticeForm'}
+                    placeholder="Type price"
+                  />
+                  <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
+                </FormControl>
+              )}
+
               <Text
                 mx={'auto'}
                 fontSize={{ base: '16px', md: '20px' }}
                 lineHeight={{ base: '22px', md: '27px' }}
+                variant={'noticesInputsHead'}
               >
-                Add photo and some comments
+                Load the pets image:
               </Text>
               <FormControl
                 display={'flex'}
@@ -325,4 +470,4 @@ const AddPets = () => {
   );
 };
 
-export default AddPets;
+export default ModalAddNew;
