@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input, InputGroup } from '@chakra-ui/input';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import Toast from '../../hooks/toast';
+
+import UserAvatar from './Avatar';
 import { calendarFunc } from './Calendar/Calendar';
 import { ButtonUserForm } from '../UserForm/IconButton';
 import { userFormSchema } from '../../services/validation';
-
-import './Calendar/Calendar.styled.css';
-
-import UserAvatar from './Avatar';
-import userSelectors from '../../redux/user/user-selectors';
-import { useSelector } from 'react-redux';
-import { useUpdateUserMutation } from '../../redux/user/userApiSlice';
 import { dateToString, stringToDate } from '../../services/dateFormat';
+import './Calendar/Calendar.styled.css';
+import userSelectors from '../../redux/user/user-selectors';
+import { useUpdateUserMutation } from '../../redux/user/userApiSlice';
 
 const INITIAL_DISABLED = {
   name: true,
@@ -76,11 +74,10 @@ const UserForm = () => {
         <FormControl
           onSubmit={handleSubmit(onSubmit)}
           display={'flex'}
-          flexDirection={{ base: 'column', md: 'row-reverse', lg: 'column' }}
-          maxW={{ lg: '411px' }}
-          // flexDirection={'column'}
+          flexDirection={{ base: 'column', lg: 'row-reverse', xl: 'column' }}
+          maxW={{ xl: '411px' }}
           width={'100%'}
-          p={'20px 16px 67px 16px'}
+          p={{ base: '16px 20px', lg: '24px 40px 24px 32px', xl: '16px 20px' }}
           background={'white'}
           boxShadow={'7px 4px 14px rgba(49, 21, 4, 0.07)'}
           borderRadius={'0px 40px 40px 0px'}
@@ -142,7 +139,6 @@ const UserForm = () => {
               alignItems={'center'}
               justifyContent={'space-around'}
               mb={'15'}
-              // width={{ base: '100%' }}
             >
               <FormLabel
                 htmlFor={'email'}

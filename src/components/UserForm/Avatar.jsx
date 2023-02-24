@@ -19,7 +19,6 @@ import UserPic from '../../assets/abstract_user.svg';
 import userApiSlice, {
   useUpdateUserMutation,
 } from '../../redux/user/userApiSlice';
-
 import userSelectors from '../../redux/user/user-selectors';
 
 const UserAvatar = () => {
@@ -125,7 +124,6 @@ const UserAvatar = () => {
           <Flex
             w={'100%'}
             display={'flex'}
-            // justifyContent={{ base: 'space-around', lg: 'flex-end' }}
             justifyContent={'flex-end'}
             position={'relative'}
             top={{ xl: '-18px' }}
