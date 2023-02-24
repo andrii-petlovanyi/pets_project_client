@@ -42,8 +42,7 @@ const noticesInputsHead = defineStyle({
   fontSize: { base: '18px', lg: '24px' },
   lineHeight: '26px',
   color: 'textColor',
-  marginTop: { base: '12px', lg: '24px' },
-  marginBottom: { base: '8px', lg: '12px' },
+  
 });
 
 const noticesPetSex = defineStyle({

@@ -17,8 +17,6 @@ import {
   Image,
   Textarea,
   Icon,
-  // RadioGroup,
-  // Radio,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -45,8 +43,7 @@ const schemaStep1 = yup.object().shape({
     .required('Pet name is required'),
   birth: yup
     .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
-    .required('Birthday is required'),
+    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
   breed: yup
     .string()
     .trim()
@@ -137,6 +134,12 @@ const ModalAddNew = () => {
     setStep(step - 1);
   };
 
+  const handleCLose = () => {
+    reset();
+    onClose();
+    setStep(1);
+  };
+
   return (
     <>
       <Box
@@ -156,7 +159,7 @@ const ModalAddNew = () => {
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} size={'custom'}>
+      <Modal isOpen={isOpen} onClose={handleCLose} size={'custom'}>
         <ModalOverlay />
         <ModalContent bg={'white'} borderRadius={{ base: '20px', md: '40px' }}>
           <IconButton
@@ -171,13 +174,13 @@ const ModalAddNew = () => {
             as={'h2'}
             variant={'modalAddTitle'}
             textAlign={'center'}
-            mb={{ base: '28px', lg: '40px' }}
+            mb={'10px'}
           >
             Add pet
           </Heading>
           {step === 1 && (
             <Stack
-              gap={{ base: '16px', md: '28px' }}
+              gap={{ base: '10px'}}
               w="100%"
               as="form"
               onSubmit={handleSubmit(nextStep)}
@@ -248,8 +251,11 @@ const ModalAddNew = () => {
                 />
                 <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={errors.birth}>
-                <FormLabel htmlFor="birth"><Text variant={'noticesInputsHead'}>Date of birth</Text></FormLabel>
+              {category !== 'lost/found' && (
+                <FormControl isInvalid={errors.birth}>
+                <FormLabel htmlFor="birth">
+                  <Text variant={'noticesInputsHead'}>Date of birth</Text>
+                </FormLabel>
                 <Input
                   placeholder={'Type date of birth'}
                   variant={'addNoticeForm'}
@@ -258,6 +264,7 @@ const ModalAddNew = () => {
                 />
                 <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
               </FormControl>
+              )}
               <FormControl
                 isInvalid={errors.breed}
                 mb={{ base: '28px', lg: '40px' }}
@@ -281,7 +288,7 @@ const ModalAddNew = () => {
                   width={{ base: '100%', lg: '180px' }}
                   h={{ base: '40px', lg: '44px' }}
                   variant={'outlineTabBtn'}
-                  onClick={onClose}
+                  onClick={handleCLose}
                 >
                   Cancel
                 </Button>
@@ -298,7 +305,7 @@ const ModalAddNew = () => {
           )}
           {step === 2 && (
             <Stack
-              gap={'20px'}
+              gap={{ base: '10px'}}
               w="100%"
               as="form"
               onSubmit={handleSubmit(onSubmit)}
@@ -387,8 +394,8 @@ const ModalAddNew = () => {
                 <FormLabel
                   htmlFor="avatarURL"
                   border={avatarError ? '1px solid red' : ''}
-                  width={{ base: '208px', md: '182px' }}
-                  height={{ base: '208px', md: '182px' }}
+                  width={{ base: '140px', md: '150px' }}
+                  height={{ base: '140px', md: '150px' }}
                   bg={'mainColor'}
                   borderRadius={'40px'}
                   margin={'0'}
@@ -396,37 +403,37 @@ const ModalAddNew = () => {
                   mr={'auto'}
                 >
                   <Input
-                  id="avatarURL"
-                  display={'none'}
-                  type="file"
-                  h={'100%'}
-                  {...register('avatarURL')}
-                />
-                {newImage && newImage[0] ? (
-                  <Image
-                    pointerEvents={'none'}
-                    borderRadius={'40px'}
-                    position={'absolute'}
-                    top={'50%'}
-                    left={'50%'}
-                    transform={'translate(-50%, -50%)'}
-                    width={{ base: '208px', md: '182px' }}
-                    height={{ base: '208px', md: '182px' }}
-                    src={URL.createObjectURL(newImage[0])}
-                    boxSize="182px"
-                    objectFit="cover"
+                    id="avatarURL"
+                    display={'none'}
+                    type="file"
+                    h={'100%'}
+                    {...register('avatarURL')}
                   />
-                ) : (
-                  <Icon
-                    as={TfiPlus}
-                    pointerEvents={'none'}
-                    position={'absolute'}
-                    top={'50%'}
-                    left={'50%'}
-                    transform={'translate(-50%, -50%)'}
-                    fontSize={'48px'}
-                  />
-                )}
+                  {newImage && newImage[0] ? (
+                    <Image
+                      pointerEvents={'none'}
+                      borderRadius={'40px'}
+                      position={'absolute'}
+                      top={'50%'}
+                      left={'50%'}
+                      transform={'translate(-50%, -50%)'}
+                      width={{ base: '140px', md: '150px' }}
+                      height={{ base: '140px', md: '150px' }}
+                      src={URL.createObjectURL(newImage[0])}
+                      boxSize="182px"
+                      objectFit="cover"
+                    />
+                  ) : (
+                    <Icon
+                      as={TfiPlus}
+                      pointerEvents={'none'}
+                      position={'absolute'}
+                      top={'50%'}
+                      left={'50%'}
+                      transform={'translate(-50%, -50%)'}
+                      fontSize={'48px'}
+                    />
+                  )}
                 </FormLabel>
                 <FormErrorMessage
                   position={'absolute'}
