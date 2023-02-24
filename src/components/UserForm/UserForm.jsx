@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import { MdPhotoCamera } from 'react-icons/md';
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input, InputGroup } from '@chakra-ui/input';
-import {
-  Box,
-  Flex,
-  Heading,
-  // Button, HStack, Image, Box, Icon,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import Toast from '../../hooks/toast';
 import { calendarFunc } from './Calendar/Calendar';
 import { ButtonUserForm } from '../UserForm/IconButton';
 import { userFormSchema } from '../../services/validation';
-// import Avatar from './Avatar';
+
 import './Calendar/Calendar.styled.css';
 
 import UserAvatar from './Avatar';
@@ -37,6 +32,7 @@ const UserForm = () => {
   const [isDisabled, setIsDisabled] = useState(INITIAL_DISABLED);
   const [updateUser] = useUpdateUserMutation();
   const user = useSelector(userSelectors.user);
+  const { addToast } = Toast();
 
   const {
     control,
@@ -64,11 +60,12 @@ const UserForm = () => {
     };
     try {
       const { data: res, error } = await updateUser(newData);
-      if (error) return console.log(error);
-      console.log(res);
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
       setIsDisabled({ ...INITIAL_DISABLED });
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 
