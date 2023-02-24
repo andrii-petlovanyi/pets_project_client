@@ -126,7 +126,7 @@ const AddPets = () => {
         display={'flex'}
         justifyContent={'center'}
         alignItems={'center'}
-        gap={'12px'}
+        gap={{ base: '12px', lg: '15px' }}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />

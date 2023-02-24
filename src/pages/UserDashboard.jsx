@@ -6,8 +6,8 @@ import UserPetsData from '../components/UserPets/PetsData';
 const UserDashboard = () => {
   return (
     <Flex
-      flexDirection={{ base: 'column', lg: 'row' }}
-      gap={{ base: '46px', lg: '20px', xl: '32px' }}
+      flexDirection={{ base: 'column', xl: 'row' }}
+      gap={{ base: '43px', lg: '20px', xl: '32px' }}
       py={{ xl: '58px' }}
     >
       <UserForm />
