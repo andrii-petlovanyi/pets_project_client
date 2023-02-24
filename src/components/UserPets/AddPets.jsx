@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -23,7 +23,8 @@ import {
   Flex,
   Text,
 } from '@chakra-ui/react';
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { TfiPlus } from 'react-icons/tfi';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
@@ -33,6 +34,8 @@ import userApiSlice, {
 import { useDispatch } from 'react-redux';
 import { birthdayRegExp } from '../../services/validation';
 import Toast from '../../hooks/toast';
+import { calendarFunc } from '../UserForm/Calendar/Calendar';
+import '../UserForm/Calendar/Calendar.styled.css';
 
 const schemaStep1 = yup.object().shape({
   name: yup
@@ -74,6 +77,7 @@ const AddPets = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     watch,
@@ -172,7 +176,7 @@ const AddPets = () => {
                 />
                 <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={errors.birthday}>
+              {/* <FormControl isInvalid={errors.birthday}>
                 <FormLabel htmlFor="birthday">Date of birth</FormLabel>
                 <Input
                   variant={'addPetsForm'}
@@ -181,7 +185,27 @@ const AddPets = () => {
                   {...register('birthday')}
                 />
                 <FormErrorMessage>{errors.birthday?.message}</FormErrorMessage>
-              </FormControl>
+              </FormControl> */}
+              <Text variant={'textLabelUserForm'}>Date of birth</Text>
+              <Controller
+                name="birthday"
+                control={control}
+                render={({ field }) => (
+                  <Box style={{ width: '216px', height: '32px' }}>
+                    <DatePicker
+                      renderCustomHeader={calendarFunc}
+                      // disabled={isDisabled.birthday}
+                      onChange={date => {
+                        field.onChange(date);
+                      }}
+                      selected={field.value}
+                      dateFormat="dd.MM.yyyy"
+                      maxDate={Date.now()}
+                      wrapperClassName="date__picker"
+                    />
+                  </Box>
+                )}
+              />
               <FormControl
                 isInvalid={errors.breed}
                 mb={{ base: '28px', lg: '40px' }}

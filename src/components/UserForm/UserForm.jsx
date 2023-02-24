@@ -206,7 +206,6 @@ const UserForm = () => {
                         renderCustomHeader={calendarFunc}
                         disabled={isDisabled.birthday}
                         onChange={date => {
-                          // console.log(console.log(field));
                           field.onChange(date);
                         }}
                         selected={field.value}
