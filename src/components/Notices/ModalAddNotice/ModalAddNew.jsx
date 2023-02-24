@@ -27,6 +27,7 @@ import { MdClose } from 'react-icons/md';
 import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
+import Toast from '../../../hooks/toast'
 
 const schemaStep1Off = yup.object().shape({
   title: yup
@@ -101,9 +102,9 @@ const ModalAddNew = () => {
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
   const [petSex, setPetSex] = useState('male');
-  console.log(category == 'lost-found');
 
   const [addNotice, { isLoading }] = useAddNoticeMutation();
+  const { addToast } = Toast();
 
   const {
     register,
@@ -133,7 +134,6 @@ const ModalAddNew = () => {
     formData.append('petName', data.petName);
     formData.append('breed', data.breed);
     formData.append('location', data.location);
-    // formData.append('birth', data.birth);
     formData.append('petSex', petSex);
     formData.append('comments', data.comment);
     formData.append('petImage', data.avatarURL[0]);
@@ -148,13 +148,13 @@ const ModalAddNew = () => {
 
     try {
       const { data: res, error } = await addNotice(formData);
-      if (error) return console.log(error);
-      console.log(res);
+      if (error) return addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
       onClose();
       reset();
       setStep(1);
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 

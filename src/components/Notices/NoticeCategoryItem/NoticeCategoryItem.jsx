@@ -217,7 +217,7 @@ export const NoticeCategoryItem = ({ notice }) => {
         justifyContent={'center'}
         alignItems={'center'}
       >
-        <LearnMore notice={notice} />
+        <LearnMore noticeId={notice._id} />
         {userId === owner ? (
           <Button
             onClick={deleteNotice}
