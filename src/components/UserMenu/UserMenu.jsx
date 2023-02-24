@@ -12,7 +12,7 @@ export const UserMenu = ({ changeDisplay = () => {} }) => {
     <Box
       display={'flex'}
       gap={'12px'}
-      marginRight={{ lg: '60px', xl: '0' }}
+      marginRight={{ lg: '20px', xl: '0' }}
       alignItems="center"
       flexWrap={' wrap'}
       justifyContent={'center'}
