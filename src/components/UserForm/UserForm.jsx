@@ -70,7 +70,16 @@ const UserForm = () => {
   return (
     <>
       <Flex flexDirection={'column'} width={'100%'}>
-        <Heading mb={'24px'}>My information:</Heading>
+        <Heading
+          mb={'24px'}
+          fontWeight={500}
+          fontSize={{ base: '20px', lg: '28px' }}
+          lineHeight={'1.4'}
+          letterSpacing={{ base: '0.04em', lg: '0' }}
+          color={{ base: 'black', lg: 'textColor' }}
+        >
+          My information:
+        </Heading>
         <FormControl
           onSubmit={handleSubmit(onSubmit)}
           display={'flex'}
@@ -79,11 +88,18 @@ const UserForm = () => {
           width={'100%'}
           p={{ base: '16px 20px', lg: '24px 40px 24px 32px', xl: '16px 20px' }}
           background={'white'}
-          boxShadow={'7px 4px 14px rgba(49, 21, 4, 0.07)'}
-          borderRadius={'0px 40px 40px 0px'}
+          boxShadow={{
+            base: '7px 4px 14px rgba(0, 0, 0, 0.11)',
+            lg: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+          }}
+          borderRadius={{ base: '20px', lg: '0px 40px 40px 0px' }}
         >
           <UserAvatar />
-          <Flex display={'flex'} flexDirection={'column'}>
+          <Flex
+            display={'flex'}
+            flexDirection={'column'}
+            mr={{ lg: '52px', xl: '0' }}
+          >
             <InputGroup
               display={'flex'}
               flexDirection={'column'}
@@ -211,7 +227,6 @@ const UserForm = () => {
                         selected={field.value}
                         dateFormat="dd.MM.yyyy"
                         maxDate={Date.now()}
-                        wrapperClassName="date__picker"
                       />
                     </Box>
                   )}

@@ -48,3 +48,33 @@
     line-height: 1.38;
   }
 }
+
+.date__picker input {
+  height: 40px;
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(27, 27, 27, 0.6);
+}
+.date__picker input::placeholder {
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(27, 27, 27, 0.6);
+}
+
+@media screen and (min-width: 768px) {
+  .date__picker input {
+    height: 48px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .date__picker input::placeholder {
+    height: 48px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}

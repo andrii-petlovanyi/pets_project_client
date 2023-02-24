@@ -16,7 +16,7 @@ const form = defineStyle({
     fontFamily: 'Manrope',
     fontWeight: '400',
     fontSize: '18px',
-    lineHeight: '25px',
+    lineHeight: '1.4',
     letterSpacing: '0.04em',
 
     _focus: {
@@ -30,7 +30,7 @@ const form = defineStyle({
       fontFamily: 'Manrope',
       fontWeight: '400',
       fontSize: '18px',
-      lineHeight: '25px',
+      lineHeight: '1.4',
       letterSpacing: '0.04em',
       color: 'labelColor',
     },
@@ -54,7 +54,7 @@ const userInfoActive = defineStyle({
     fontFamily: 'Manrope',
     fontWeight: '400',
     fontSize: { base: '12px', lg: '18px' },
-    lineHeight: { base: '1.33', lg: '1.38' },
+    lineHeight: { base: '1.3', lg: '1.4' },
     letterSpacing: '0.04em',
 
     _focus: {
@@ -72,7 +72,7 @@ const userInfoActive = defineStyle({
       fontFamily: 'Manrope',
       fontWeight: '400',
       fontSize: '18px',
-      lineHeight: '25px',
+      lineHeight: '1.4',
       letterSpacing: '0.04em',
       color: 'labelColor',
     },
@@ -95,10 +95,10 @@ const userInfoDisabled = defineStyle({
     fontFamily: 'Manrope',
     fontWeight: '400',
     fontSize: { base: '12px', lg: '18px' },
-    lineHeight: { base: '1.33', lg: '1.38' },
+    lineHeight: { base: '1.3', lg: '1.4' },
     letterSpacing: '0.04em',
 
-    pointerEvents: 'none',
+    // pointerEvents: 'none',
     _hover: {
       cursor: 'auto',
     },
@@ -127,7 +127,7 @@ const search = defineStyle({
     fontFamily: 'Inter',
     fontWeight: '500',
     fontSize: '20px',
-    lineHeight: '24px',
+    lineHeight: '1.2',
     letterSpacing: '0.04em',
 
     _focus: {
@@ -141,7 +141,7 @@ const search = defineStyle({
       fontFamily: 'Inter',
       fontWeight: '500',
       fontSize: '20px',
-      lineHeight: '24px',
+      lineHeight: '1.2',
       letterSpacing: '0.04em',
       color: 'labelColor',
     },
@@ -150,6 +150,7 @@ const search = defineStyle({
 
 const addPetsForm = defineStyle({
   field: {
+    height: { base: '40px', lg: '48px' },
     background: 'mainColor',
     border: '1px solid rgba(245, 146, 86, 0.5)',
     borderRadius: '40px',
@@ -159,20 +160,19 @@ const addPetsForm = defineStyle({
 
     fontFamily: 'Manrope',
     fontWeight: '400',
-    fontSize: '16px',
-    lineHeight: '26px',
-    /* identical to box height, or 166% */
+    fontSize: { base: '14px', lg: '16px' },
+    lineHeight: { base: '1.3', lg: '1.6' },
 
     display: 'flex',
     alignItems: 'center',
 
     _placeholder: {
-      color: 'labelColor',
+      color: 'placeholderColor',
 
       fontFamily: 'Manrope',
       fontWeight: '400',
-      fontSize: '16px',
-      lineHeight: '26px',
+      fontSize: { base: '14px', lg: '16px' },
+      lineHeight: { base: '1.3', lg: '1.6' },
     },
   },
 });
@@ -191,7 +191,7 @@ const addNoticeForm = defineStyle({
     fontFamily: 'Manrope',
     fontWeight: '400',
     fontSize: { base: '14px', lg: '16px' },
-    lineHeight: '26px',
+    lineHeight: { base: '1.8', lg: '1.6' },
 
     display: 'flex',
     alignItems: 'center',
@@ -202,7 +202,7 @@ const addNoticeForm = defineStyle({
       fontFamily: 'Manrope',
       fontWeight: '400',
       fontSize: { base: '14px', lg: '16px' },
-      lineHeight: '26px',
+      lineHeight: { base: '1.8', lg: '1.6' },
     },
   },
 });
@@ -220,7 +220,7 @@ const authForm = defineStyle({
     fontFamily: 'Manrope',
     fontWeight: '400',
     fontSize: () => ({ base: '14px', lg: '18px' }),
-    lineHeight: () => ({ base: '19px', lg: '25px' }),
+    lineHeight: () => ({ base: '1.3', lg: '1.4' }),
 
     _placeholder: {
       color: 'labelColor',

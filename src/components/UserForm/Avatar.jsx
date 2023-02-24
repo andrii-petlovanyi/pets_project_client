@@ -56,7 +56,7 @@ const UserAvatar = () => {
       justifyContent={'center'}
       flexDirection={'column'}
       alignItems="center"
-      mb={'32px'}
+      mb={{ base: '32px', lg: '0', xl: '18px' }}
     >
       <Box
         display={'flex'}
@@ -99,6 +99,7 @@ const UserAvatar = () => {
         top={{ xl: '-18px' }}
         left={{ xl: '-6px' }}
         mt={{ base: '12px', lg: '8px', xl: '0px' }}
+        // mb={{ base: '32px', lg: '24px', xl: '36px' }}
       >
         <FormLabel
           htmlFor="avatarURL"
@@ -112,7 +113,13 @@ const UserAvatar = () => {
             {...register('avatarURL')}
           />
           {!newImage && (
-            <Flex padding={'3px 6px'}>
+            <Flex
+              padding={'3px 6px'}
+              h={'32px'}
+              gap={'5px'}
+              alignItems={'center'}
+              justifyContent={'center'}
+            >
               <Icon as={MdPhotoCamera} boxSize={5} color={'#F59256'} />
               <Text fontWeight={'400'} fontSize={'12px'} lineHeight={'1.8'}>
                 Edit photo
@@ -126,9 +133,9 @@ const UserAvatar = () => {
             display={'flex'}
             justifyContent={'flex-end'}
             position={'relative'}
-            top={{ xl: '-18px' }}
-            left={{ xl: '-6px' }}
-            mt={{ base: '12px', lg: '8px', xl: '0px' }}
+            // top={{ xl: '-18px' }}
+            // left={{ xl: '-6px' }}
+            // mt={{ base: '12px', lg: '8px', xl: '0px' }}
           >
             <IconButton
               onClick={handleSubmit(onSubmit)}
