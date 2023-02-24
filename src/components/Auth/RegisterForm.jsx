@@ -24,7 +24,7 @@ import { register as userRegister } from '../../redux/user/userSlice';
 import {
   locationRegExp,
   passRegexp,
-  phoneRegExp,
+  // phoneRegExp,
 } from '../../services/validation';
 import Toast from '../../hooks/toast';
 
