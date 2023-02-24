@@ -23,32 +23,22 @@ import userApiSlice, {
 import { useDispatch, useSelector } from 'react-redux';
 import Toast from '../../../hooks/toast';
 import userSelectors from '../../../redux/user/user-selectors';
+import { useGetNoticeByIdQuery } from '../../../redux/notices/noticesApiSlice';
 
-const LearnMore = ({ notice = {} }) => {
+const LearnMore = ({ noticeId }) => {
   const isAuth = useSelector(userSelectors.isAuth);
 
   const { favorites } = useSelector(userSelectors.user);
-  const {
-    _id: noticeId,
-    category,
-    title,
-    petName,
-    birth,
-    breed,
-    location,
-    petSex,
-    email,
-    phone,
-    price,
-    petImage,
-    comments,
-  } = notice;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [addFavorite] = useAddToFavoriteMutation();
   const [removeFavorite] = useDeleteFromFavoriteMutation();
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
   const { addToast } = Toast();
+
+  const { data: res } = useGetNoticeByIdQuery(noticeId);
+  const { notice } = res || {};
 
   const changeFavorite = async () => {
     try {
@@ -114,7 +104,7 @@ const LearnMore = ({ notice = {} }) => {
         >
           <Flex display={'flex'} flexDirection={{ base: 'column', lg: 'row' }}>
             <Image
-              src={petImage ? petImage : '#'}
+              src={notice?.petImage ? notice?.petImage : '#'}
               objectFit="cover"
               height={{ base: '240px', lg: '328px' }}
               width={{ base: '240px', lg: '288px' }}
@@ -143,7 +133,7 @@ const LearnMore = ({ notice = {} }) => {
                 alignItems: 'center',
               }}
             >
-              {changeCategoryName(category)}
+              {changeCategoryName(notice?.category)}
             </Text>
             <Box
               flex={{ base: 'none', md: '' }}
@@ -162,7 +152,7 @@ const LearnMore = ({ notice = {} }) => {
                   maxW={'321px'}
                   pb={'0'}
                 >
-                  {title}
+                  {notice?.title}
                 </ModalHeader>
                 <ModalBody
                   fontFamily={'Manrope'}
@@ -181,7 +171,7 @@ const LearnMore = ({ notice = {} }) => {
                       fontWeight="500"
                       lineHeight="22px"
                     >
-                      {petName}
+                      {notice?.petName}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -194,7 +184,7 @@ const LearnMore = ({ notice = {} }) => {
                       fontWeight="500"
                       lineHeight="22px"
                     >
-                      {birth}
+                      {notice?.birth}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -207,7 +197,7 @@ const LearnMore = ({ notice = {} }) => {
                       fontWeight="500"
                       lineHeight="22px"
                     >
-                      {breed}
+                      {notice?.breed}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -220,7 +210,7 @@ const LearnMore = ({ notice = {} }) => {
                       fontWeight="500"
                       lineHeight="22px"
                     >
-                      {location}
+                      {notice?.location}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -233,7 +223,7 @@ const LearnMore = ({ notice = {} }) => {
                       fontWeight="500"
                       lineHeight="22px"
                     >
-                      {petSex}
+                      {notice?.petSex}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -246,7 +236,7 @@ const LearnMore = ({ notice = {} }) => {
                       fontWeight="500"
                       lineHeight="22px"
                     >
-                      {email}
+                      {notice?.owner?.email}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -259,10 +249,10 @@ const LearnMore = ({ notice = {} }) => {
                       fontWeight="500"
                       lineHeight="22px"
                     >
-                      {phone}
+                      {notice?.owner?.phone}
                     </Text>
                   </Flex>
-                  {!!price && (
+                  {!!notice?.price && (
                     <Flex mt="8px">
                       <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                         Price:
@@ -273,7 +263,7 @@ const LearnMore = ({ notice = {} }) => {
                         fontWeight="500"
                         lineHeight="22px"
                       >
-                        {price}$
+                        {notice?.price}$
                       </Text>
                     </Flex>
                   )}
@@ -282,7 +272,7 @@ const LearnMore = ({ notice = {} }) => {
             </Box>
           </Flex>
 
-          {!!comments && (
+          {!!notice?.comments && (
             <Flex mt={'28px'} mb={'32px'} pl={'20px'} pr={'24px'}>
               <Text
                 fontSize="16px"
@@ -293,7 +283,7 @@ const LearnMore = ({ notice = {} }) => {
                 Comments:
               </Text>
               <Text fontWeight="500" ml={'5px'}>
-                {comments}
+                {notice?.comments}
               </Text>
             </Flex>
           )}
@@ -337,6 +327,6 @@ const LearnMore = ({ notice = {} }) => {
 };
 
 LearnMore.propTypes = {
-  notice: PropTypes.object,
+  noticeId: PropTypes.string,
 };
 export default LearnMore;
