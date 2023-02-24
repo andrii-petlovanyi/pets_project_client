@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Flex, IconButton, Link } from '@chakra-ui/react';
 import { GrFormClose } from 'react-icons/gr';
 import { HiMenu } from 'react-icons/hi';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Logo } from '../Logo/Logo';
 import { IconContext } from 'react-icons';
 import { AuthNav } from '../AuthNav/AuthNav';
@@ -14,8 +14,13 @@ import { useSelector } from 'react-redux';
 
 export const NavMob = ({ ...props }) => {
   const { isAuth } = userSelectors;
+  const location = useLocation().pathname;
   const isLoggedIn = useSelector(isAuth);
   const [display, changeDisplay] = useState('none');
+
+  useEffect(() => {
+    changeDisplay('none');
+  }, [location]);
 
   {
     return (
