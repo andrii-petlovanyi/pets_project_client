@@ -24,7 +24,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import { birthdayRegExp, locationRegExp } from '../../../services/validation';
+import {  birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
@@ -42,8 +42,8 @@ const schemaStep1 = yup.object().shape({
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
   birth: yup
-    .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
+     .string()
+     .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
   breed: yup
     .string()
     .trim()
@@ -105,13 +105,17 @@ const ModalAddNew = () => {
     formData.append('petName', data.petName);
     formData.append('breed', data.breed);
     formData.append('location', data.location);
-    formData.append('birth', data.birth);
+    // formData.append('birth', data.birth);
     formData.append('petSex', petSex);
     formData.append('comments', data.comment);
     formData.append('petImage', data.avatarURL[0]);
 
     if (data.category == 'sell') {
       formData.append('price', data.price);
+    }
+
+    if (data.category === 'sell' || data.category === 'for-free')  {
+      formData.append('birth', data.birth);
     }
 
     try {
@@ -201,9 +205,9 @@ const ModalAddNew = () => {
                     w={{ base: '131px', lg: '162px' }}
                     h={{ base: '35px', lg: '47px' }}
                     fontSize={{ base: '14px', lg: '20px' }}
-                    onClick={() => setCategory('lost/found')}
+                    onClick={() => setCategory('lost-found')}
                     variant={
-                      category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
+                      category === 'lost-found' ? 'fullBGBtn' : 'outlineTabBtn'
                     }
                     {...register('selectedCategory')}
                   >
@@ -213,9 +217,9 @@ const ModalAddNew = () => {
                     w={{ base: '155px', lg: '197px' }}
                     h={{ base: '35px', lg: '47px' }}
                     fontSize={{ base: '14px', lg: '20px' }}
-                    onClick={() => setCategory('in good hands')}
+                    onClick={() => setCategory('for-free')}
                     variant={
-                      category === 'in good hands'
+                      category === 'for-free'
                         ? 'fullBGBtn'
                         : 'outlineTabBtn'
                     }
@@ -259,7 +263,7 @@ const ModalAddNew = () => {
                 />
                 <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
               </FormControl>
-              {category !== 'lost/found' && (
+              {category !== 'lost-found' && (
                 <FormControl isInvalid={errors.birth}>
                 <FormLabel htmlFor="birth">
                   <Text variant={'noticesInputsHead'}>Date of birth</Text>
