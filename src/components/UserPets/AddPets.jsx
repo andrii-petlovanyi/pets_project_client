@@ -116,6 +116,11 @@ const AddPets = () => {
     setStep(step - 1);
   };
 
+  const handleClose = () => {
+    onClose();
+    reset();
+  };
+
   return (
     <>
       <Box
@@ -126,13 +131,13 @@ const AddPets = () => {
         display={'flex'}
         justifyContent={'center'}
         alignItems={'center'}
-        gap={'12px'}
+        gap={{ base: '12px', lg: '15px' }}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} size={'custom'}>
+      <Modal isOpen={isOpen} onClose={handleClose} size={'custom'}>
         <ModalOverlay />
         <ModalContent bg={'white'} borderRadius={{ base: '20px', md: '40px' }}>
           <IconButton

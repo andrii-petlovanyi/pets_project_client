@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Flex, IconButton, Link } from '@chakra-ui/react';
 import { GrFormClose } from 'react-icons/gr';
 import { HiMenu } from 'react-icons/hi';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Logo } from '../Logo/Logo';
 import { IconContext } from 'react-icons';
 import { AuthNav } from '../AuthNav/AuthNav';
@@ -14,13 +14,23 @@ import { useSelector } from 'react-redux';
 
 export const NavMob = ({ ...props }) => {
   const { isAuth } = userSelectors;
+  const location = useLocation().pathname;
   const isLoggedIn = useSelector(isAuth);
   const [display, changeDisplay] = useState('none');
+
+  useEffect(() => {
+    changeDisplay('none');
+  }, [location]);
 
   {
     return (
       <Flex {...props}>
-        <Flex position="fixed" top="1rem" right="1rem" align="center">
+        <Flex
+          top="1rem"
+          right="1.5rem"
+          align="center"
+          justifyСontent="space-between"
+        >
           <IconButton
             aria-label="Open Menu"
             icon={<HiMenu size="40px" />}
@@ -43,7 +53,7 @@ export const NavMob = ({ ...props }) => {
           overflowY="auto"
           flexDir="column"
         >
-          <Flex pt="16px" pr="20px" pl="16px" flexDir="column">
+          <Flex padding={{ base: '16px 20px' }} flexDir="column">
             <Flex justify="space-between" alignItems="center" mb="46px">
               <Logo />
               <IconButton

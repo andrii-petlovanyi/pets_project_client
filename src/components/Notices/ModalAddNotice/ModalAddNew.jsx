@@ -17,8 +17,6 @@ import {
   Image,
   Textarea,
   Icon,
-  // RadioGroup,
-  // Radio,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -29,6 +27,27 @@ import { MdClose } from 'react-icons/md';
 import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
+
+const schemaStep1Off = yup.object().shape({
+  title: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal title length is 2 symbols')
+    .max(32, 'Max title length is 32 symbols')
+    .required('Title is required'),
+  petName: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal pet name length is 2 symbols')
+    .max(32, 'Max pet name length is 32 symbols')
+    .required('Pet name is required'),
+  breed: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal breed length is 2 symbols')
+    .max(32, 'Max breed length is 32 symbols')
+    .required('Breed is required'),
+});
 
 const schemaStep1 = yup.object().shape({
   title: yup
@@ -45,8 +64,7 @@ const schemaStep1 = yup.object().shape({
     .required('Pet name is required'),
   birth: yup
     .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
-    .required('Birthday is required'),
+    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
   breed: yup
     .string()
     .trim()
@@ -83,6 +101,7 @@ const ModalAddNew = () => {
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
   const [petSex, setPetSex] = useState('male');
+  console.log(category == 'lost-found');
 
   const [addNotice, { isLoading }] = useAddNoticeMutation();
 
@@ -93,7 +112,13 @@ const ModalAddNew = () => {
     watch,
     reset,
   } = useForm({
-    resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
+    resolver: yupResolver(
+      step === 1
+        ? category == 'lost-found'
+          ? schemaStep1Off
+          : schemaStep1
+        : schemaStep2
+    ),
   });
 
   const newImage = watch('avatarURL');
@@ -108,13 +133,17 @@ const ModalAddNew = () => {
     formData.append('petName', data.petName);
     formData.append('breed', data.breed);
     formData.append('location', data.location);
-    formData.append('birth', data.birth);
+    // formData.append('birth', data.birth);
     formData.append('petSex', petSex);
     formData.append('comments', data.comment);
     formData.append('petImage', data.avatarURL[0]);
 
-    if (data.category == 'sell') {
+    if (category == 'sell') {
       formData.append('price', data.price);
+    }
+
+    if (category === 'sell' || category === 'for-free') {
+      formData.append('birth', data.birth);
     }
 
     try {
@@ -177,13 +206,13 @@ const ModalAddNew = () => {
             as={'h2'}
             variant={'modalAddTitle'}
             textAlign={'center'}
-            mb={{ base: '28px', lg: '40px' }}
+            mb={'10px'}
           >
             Add pet
           </Heading>
           {step === 1 && (
             <Stack
-              gap={{ base: '16px', md: '28px' }}
+              gap={{ base: '10px' }}
               w="100%"
               as="form"
               onSubmit={handleSubmit(nextStep)}
@@ -204,9 +233,9 @@ const ModalAddNew = () => {
                     w={{ base: '131px', lg: '162px' }}
                     h={{ base: '35px', lg: '47px' }}
                     fontSize={{ base: '14px', lg: '20px' }}
-                    onClick={() => setCategory('lost/found')}
+                    onClick={() => setCategory('lost-found')}
                     variant={
-                      category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
+                      category === 'lost-found' ? 'fullBGBtn' : 'outlineTabBtn'
                     }
                     {...register('selectedCategory')}
                   >
@@ -216,11 +245,9 @@ const ModalAddNew = () => {
                     w={{ base: '155px', lg: '197px' }}
                     h={{ base: '35px', lg: '47px' }}
                     fontSize={{ base: '14px', lg: '20px' }}
-                    onClick={() => setCategory('in good hands')}
+                    onClick={() => setCategory('for-free')}
                     variant={
-                      category === 'in good hands'
-                        ? 'fullBGBtn'
-                        : 'outlineTabBtn'
+                      category === 'for-free' ? 'fullBGBtn' : 'outlineTabBtn'
                     }
                     {...register('selectedCategory')}
                   >
@@ -262,18 +289,20 @@ const ModalAddNew = () => {
                 />
                 <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={errors.birth}>
-                <FormLabel htmlFor="birth">
-                  <Text variant={'noticesInputsHead'}>Date of birth</Text>
-                </FormLabel>
-                <Input
-                  placeholder={'Type date of birth'}
-                  variant={'addNoticeForm'}
-                  type="text"
-                  {...register('birth')}
-                />
-                <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
-              </FormControl>
+              {category != 'lost-found' && (
+                <FormControl isInvalid={errors.birth}>
+                  <FormLabel htmlFor="birth">
+                    <Text variant={'noticesInputsHead'}>Date of birth</Text>
+                  </FormLabel>
+                  <Input
+                    placeholder={'Type date of birth'}
+                    variant={'addNoticeForm'}
+                    type="text"
+                    {...register('birth')}
+                  />
+                  <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
+                </FormControl>
+              )}
               <FormControl
                 isInvalid={errors.breed}
                 mb={{ base: '28px', lg: '40px' }}
@@ -316,7 +345,7 @@ const ModalAddNew = () => {
           )}
           {step === 2 && (
             <Stack
-              gap={'20px'}
+              gap={{ base: '10px' }}
               w="100%"
               as="form"
               onSubmit={handleSubmit(onSubmit)}
@@ -405,8 +434,8 @@ const ModalAddNew = () => {
                 <FormLabel
                   htmlFor="avatarURL"
                   border={avatarError ? '1px solid red' : ''}
-                  width={{ base: '208px', md: '182px' }}
-                  height={{ base: '208px', md: '182px' }}
+                  width={{ base: '140px', md: '150px' }}
+                  height={{ base: '140px', md: '150px' }}
                   bg={'mainColor'}
                   borderRadius={'40px'}
                   margin={'0'}
@@ -428,8 +457,8 @@ const ModalAddNew = () => {
                       top={'50%'}
                       left={'50%'}
                       transform={'translate(-50%, -50%)'}
-                      width={{ base: '208px', md: '182px' }}
-                      height={{ base: '208px', md: '182px' }}
+                      width={{ base: '140px', md: '150px' }}
+                      height={{ base: '140px', md: '150px' }}
                       src={URL.createObjectURL(newImage[0])}
                       boxSize="182px"
                       objectFit="cover"
