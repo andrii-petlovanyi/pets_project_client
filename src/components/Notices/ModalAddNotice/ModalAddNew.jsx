@@ -28,6 +28,27 @@ import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
+const schemaStep1Off = yup.object().shape({
+  title: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal title length is 2 symbols')
+    .max(32, 'Max title length is 32 symbols')
+    .required('Title is required'),
+  petName: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal pet name length is 2 symbols')
+    .max(32, 'Max pet name length is 32 symbols')
+    .required('Pet name is required'),
+  breed: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal breed length is 2 symbols')
+    .max(32, 'Max breed length is 32 symbols')
+    .required('Breed is required'),
+});
+
 const schemaStep1 = yup.object().shape({
   title: yup
     .string()
@@ -80,6 +101,7 @@ const ModalAddNew = () => {
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
   const [petSex, setPetSex] = useState('male');
+  console.log(category == 'lost-found');
 
   const [addNotice, { isLoading }] = useAddNoticeMutation();
 
@@ -90,7 +112,13 @@ const ModalAddNew = () => {
     watch,
     reset,
   } = useForm({
-    resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
+    resolver: yupResolver(
+      step === 1
+        ? category == 'lost-found'
+          ? schemaStep1Off
+          : schemaStep1
+        : schemaStep2
+    ),
   });
 
   const newImage = watch('avatarURL');
