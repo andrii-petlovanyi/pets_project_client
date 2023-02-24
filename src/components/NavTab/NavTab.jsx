@@ -4,7 +4,6 @@ import { Flex, IconButton, Link } from '@chakra-ui/react';
 import { GrFormClose } from 'react-icons/gr';
 import { NavLink } from 'react-router-dom';
 import { Logo } from '../Logo/Logo';
-// import { IconContext } from 'react-icons';
 import { AuthNav } from '../AuthNav/AuthNav';
 import userSelectors from '../../redux/user/user-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
@@ -19,7 +18,7 @@ export const NavTab = ({ ...props }) => {
     <>
       <Flex {...props}>
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
-        <Flex position="fixed" right="1rem" align="center">
+        <Flex right="1.5rem" align="center">
           <IconButton
             aria-label="Open Menu"
             size="lg"
@@ -42,7 +41,13 @@ export const NavTab = ({ ...props }) => {
           overflowY="auto"
           flexDir="column"
         >
-          <Flex pt="24px" pr="32px" pl="32px" flexDir="column">
+          <Flex
+            padding={{ lg: '24px 32px' }}
+            pt="24px"
+            pr="32px"
+            pl="32px"
+            flexDir="column"
+          >
             <Flex justify="space-between" alignItems="center" mb="88px">
               <Logo />
               <IconButton
