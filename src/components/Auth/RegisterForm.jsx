@@ -42,13 +42,16 @@ const schemaStep1 = yup.object().shape({
     .matches(passRegexp, 'Password must be contain letters and numbers')
     .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
+    .matches( /^([a-zA-Z0-9])+$/u,'Please, only letters and numbers')
     .required('Password is required'),
+
   cpassword: yup
     .string()
     .trim()
     .matches(passRegexp, 'Password must be contain letters and numbers')
     .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
+    .matches( /^([a-zA-Z0-9])+$/u,'Please, only letters and numbers')
     .required('Please repeat password')
     .oneOf([yup.ref('password')], 'Password do not match'),
 });
@@ -67,11 +70,9 @@ const schemaStep2 = yup.object().shape({
     .min(3, 'Minimal city length is 3 symbols')
     .max(32, 'Max city length is 32 symbols')
     .required('City is required'),
-  phone: yup
-    .string()
-    .trim()
-    .matches(phoneRegExp, 'Phone number must be in format +380990001122')
-    .required('Phone number is required'),
+
+  phone: yup.string().min(12, 'Minimal phone number length is 12 symbols').max(13, 'Max phone number length is 13 symbols').required('Phone number is required'),
+
 });
 
 const RegisterForm = () => {
