@@ -24,7 +24,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import {  birthdayRegExp, locationRegExp } from '../../../services/validation';
+import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 
@@ -42,8 +42,8 @@ const schemaStep1 = yup.object().shape({
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
   birth: yup
-     .string()
-     .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
+    .string()
+    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
   breed: yup
     .string()
     .trim()
@@ -110,11 +110,11 @@ const ModalAddNew = () => {
     formData.append('comments', data.comment);
     formData.append('petImage', data.avatarURL[0]);
 
-    if (data.category == 'sell') {
+    if (category == 'sell') {
       formData.append('price', data.price);
     }
 
-    if (data.category === 'sell' || data.category === 'for-free')  {
+    if (category === 'sell' || category === 'for-free') {
       formData.append('birth', data.birth);
     }
 
@@ -184,7 +184,7 @@ const ModalAddNew = () => {
           </Heading>
           {step === 1 && (
             <Stack
-              gap={{ base: '10px'}}
+              gap={{ base: '10px' }}
               w="100%"
               as="form"
               onSubmit={handleSubmit(nextStep)}
@@ -219,9 +219,7 @@ const ModalAddNew = () => {
                     fontSize={{ base: '14px', lg: '20px' }}
                     onClick={() => setCategory('for-free')}
                     variant={
-                      category === 'for-free'
-                        ? 'fullBGBtn'
-                        : 'outlineTabBtn'
+                      category === 'for-free' ? 'fullBGBtn' : 'outlineTabBtn'
                     }
                     {...register('selectedCategory')}
                   >
@@ -263,19 +261,19 @@ const ModalAddNew = () => {
                 />
                 <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
               </FormControl>
-              {category !== 'lost-found' && (
+              {category != 'lost-found' && (
                 <FormControl isInvalid={errors.birth}>
-                <FormLabel htmlFor="birth">
-                  <Text variant={'noticesInputsHead'}>Date of birth</Text>
-                </FormLabel>
-                <Input
-                  placeholder={'Type date of birth'}
-                  variant={'addNoticeForm'}
-                  type="text"
-                  {...register('birth')}
-                />
-                <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
-              </FormControl>
+                  <FormLabel htmlFor="birth">
+                    <Text variant={'noticesInputsHead'}>Date of birth</Text>
+                  </FormLabel>
+                  <Input
+                    placeholder={'Type date of birth'}
+                    variant={'addNoticeForm'}
+                    type="text"
+                    {...register('birth')}
+                  />
+                  <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
+                </FormControl>
               )}
               <FormControl
                 isInvalid={errors.breed}
@@ -319,7 +317,7 @@ const ModalAddNew = () => {
           )}
           {step === 2 && (
             <Stack
-              gap={{ base: '10px'}}
+              gap={{ base: '10px' }}
               w="100%"
               as="form"
               onSubmit={handleSubmit(onSubmit)}
