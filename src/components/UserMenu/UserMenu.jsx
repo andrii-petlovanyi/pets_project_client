@@ -27,7 +27,7 @@ export const UserMenu = ({ changeDisplay = () => {} }) => {
         <HiUserCircle size={'28px'} />
         {name}
       </Button>
-      <LogOut />
+      <LogOut changeDisplay={changeDisplay} />
     </Box>
   );
 };

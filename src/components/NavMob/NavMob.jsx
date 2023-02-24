@@ -66,7 +66,7 @@ export const NavMob = ({ ...props }) => {
               {isLoggedIn ? (
                 <UserMenu changeDisplay={changeDisplay} />
               ) : (
-                <AuthNav gap={{ mb: '12px' }} />
+                <AuthNav changeDisplay={changeDisplay} gap={{ mb: '12px' }} />
               )}
             </Flex>
             <Flex flexDir="column" align="center" gap="40px">

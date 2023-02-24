@@ -12,11 +12,11 @@ const logo = defineStyle({
 const textLabelUserForm = defineStyle({
   mb: '0',
   mr: '0',
-  width: '107px',
+  width: { base: '64px', lg: '107px' },
   fontFamily: 'Manrope',
   fontWeight: '500',
-  fontSize: '18px',
-  lineHeight: '1.4',
+  fontSize: { base: '12px', lg: '18px' },
+  lineHeight: { base: '1.33', lg: '1.4' },
   letterSpacing: '0.04em',
   color: 'textColor',
 });
@@ -32,7 +32,7 @@ const noticeModalText = defineStyle({
   color: 'textColor',
   width: { base: '240px', lg: '443px' },
   height: { base: '66px', lg: '54px' },
-  margin: 'auto'
+  margin: 'auto',
 });
 
 const noticesInputsHead = defineStyle({
@@ -54,5 +54,11 @@ const noticesPetSex = defineStyle({
 });
 
 export const textTheme = defineStyleConfig({
-  variants: { logo, textLabelUserForm, noticeModalText, noticesInputsHead, noticesPetSex },
+  variants: {
+    logo,
+    textLabelUserForm,
+    noticeModalText,
+    noticesInputsHead,
+    noticesPetSex,
+  },
 });

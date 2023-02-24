@@ -53,8 +53,8 @@ const userInfoActive = defineStyle({
 
     fontFamily: 'Manrope',
     fontWeight: '400',
-    fontSize: '18px',
-    lineHeight: '25px',
+    fontSize: { base: '12px', lg: '18px' },
+    lineHeight: { base: '1.33', lg: '1.38' },
     letterSpacing: '0.04em',
 
     _focus: {
@@ -94,8 +94,8 @@ const userInfoDisabled = defineStyle({
 
     fontFamily: 'Manrope',
     fontWeight: '400',
-    fontSize: '18px',
-    lineHeight: '25px',
+    fontSize: { base: '12px', lg: '18px' },
+    lineHeight: { base: '1.33', lg: '1.38' },
     letterSpacing: '0.04em',
 
     pointerEvents: 'none',
@@ -187,13 +187,11 @@ const addNoticeForm = defineStyle({
     height: { base: '40px', lg: '48px' },
 
     backgroundColor: 'mainColor',
-    
 
     fontFamily: 'Manrope',
     fontWeight: '400',
-    fontSize:{base: '14px', lg: '16px' },
+    fontSize: { base: '14px', lg: '16px' },
     lineHeight: '26px',
-
 
     display: 'flex',
     alignItems: 'center',
@@ -203,9 +201,9 @@ const addNoticeForm = defineStyle({
 
       fontFamily: 'Manrope',
       fontWeight: '400',
-      fontSize:{base: '14px', lg: '16px' },
+      fontSize: { base: '14px', lg: '16px' },
       lineHeight: '26px',
-   },
+    },
   },
 });
 

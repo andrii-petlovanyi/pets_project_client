@@ -189,52 +189,58 @@ const ModalAddNew = () => {
                 Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
                 amet, consectetur{' '}
               </Text>
-            <FormControl id="category" isInvalid={errors.category}>
-              <Stack
+              <FormControl id="category" isInvalid={errors.category}>
+                <Stack
                   display="flex"
                   flexWrap="wrap"
                   alignItems="baseline"
                   flexDirection="row"
                   gap="12px"
                 >
-                <Button
-                  w={{ base: '131px', lg: '162px' }}
-                  h={{ base: '35px', lg: '47px' }}
-                  fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('lost/found')}
-                  variant={
-                    category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
-                  }
-                  {...register('selectedCategory')}
-                >
-                  lost/found
-                </Button>
-                <Button
-                  w={{ base: '155px', lg: '197px' }}
-                  h={{ base: '35px', lg: '47px' }}
-                  fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('in good hands')}
-                  variant={
-                    category === 'in good hands' ? 'fullBGBtn' : 'outlineTabBtn'
-                  }
-                  {...register('selectedCategory')}
-                >
-                  in good hands
-                </Button>
-                <Button
-                  w={{ base: '81', lg: '91px' }}
-                  h={{ base: '35px', lg: '47px' }}
-                  fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('sell')}
-                  variant={category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'}
-                  {...register('selectedCategory')}
-                >
-                  sell
-                </Button>
-               </Stack>
+                  <Button
+                    w={{ base: '131px', lg: '162px' }}
+                    h={{ base: '35px', lg: '47px' }}
+                    fontSize={{ base: '14px', lg: '20px' }}
+                    onClick={() => setCategory('lost/found')}
+                    variant={
+                      category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
+                    }
+                    {...register('selectedCategory')}
+                  >
+                    lost/found
+                  </Button>
+                  <Button
+                    w={{ base: '155px', lg: '197px' }}
+                    h={{ base: '35px', lg: '47px' }}
+                    fontSize={{ base: '14px', lg: '20px' }}
+                    onClick={() => setCategory('in good hands')}
+                    variant={
+                      category === 'in good hands'
+                        ? 'fullBGBtn'
+                        : 'outlineTabBtn'
+                    }
+                    {...register('selectedCategory')}
+                  >
+                    in good hands
+                  </Button>
+                  <Button
+                    w={{ base: '81', lg: '91px' }}
+                    h={{ base: '35px', lg: '47px' }}
+                    fontSize={{ base: '14px', lg: '20px' }}
+                    onClick={() => setCategory('sell')}
+                    variant={
+                      category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'
+                    }
+                    {...register('selectedCategory')}
+                  >
+                    sell
+                  </Button>
+                </Stack>
               </FormControl>
               <FormControl isInvalid={errors.title}>
-                <FormLabel htmlFor="title"><Text variant={'noticesInputsHead'}>Title of ad</Text></FormLabel>
+                <FormLabel htmlFor="title">
+                  <Text variant={'noticesInputsHead'}>Title of ad</Text>
+                </FormLabel>
                 <Input
                   placeholder={'Type title'}
                   variant={'addNoticeForm'}
@@ -243,7 +249,9 @@ const ModalAddNew = () => {
                 <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.petName}>
-                <FormLabel htmlFor="petName"><Text variant={'noticesInputsHead'}>Name pet</Text></FormLabel>
+                <FormLabel htmlFor="petName">
+                  <Text variant={'noticesInputsHead'}>Name pet</Text>
+                </FormLabel>
                 <Input
                   placeholder={'Type name pet'}
                   variant={'addNoticeForm'}
@@ -269,7 +277,9 @@ const ModalAddNew = () => {
                 isInvalid={errors.breed}
                 mb={{ base: '28px', lg: '40px' }}
               >
-                <FormLabel htmlFor="breed"><Text variant={'noticesInputsHead'}>Breed</Text></FormLabel>
+                <FormLabel htmlFor="breed">
+                  <Text variant={'noticesInputsHead'}>Breed</Text>
+                </FormLabel>
                 <Input
                   placeholder={'Type bread'}
                   variant={'addNoticeForm'}
@@ -384,7 +394,7 @@ const ModalAddNew = () => {
               )}
 
               <FormLabel>
-                    <Text variant={'noticesInputsHead'}>Load the pet’s image:</Text>
+                <Text variant={'noticesInputsHead'}>Load the pet’s image:</Text>
               </FormLabel>
               <FormControl
                 display={'flex'}

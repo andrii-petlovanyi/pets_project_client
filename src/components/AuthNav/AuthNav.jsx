@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Flex } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
-export const AuthNav = () => {
+export const AuthNav = ({ changeDisplay }) => {
   return (
     <>
       <Flex
@@ -10,13 +11,27 @@ export const AuthNav = () => {
         marginRight={{ lg: '60px', xl: '0' }}
         flexWrap={'wrap'}
       >
-        <Button as={Link} to="login" variant={'fullBGBtn'}>
+        <Button
+          as={Link}
+          to="login"
+          variant="fullBGBtn"
+          onClick={() => changeDisplay('none')}
+        >
           Login
         </Button>
-        <Button as={Link} to="register" variant={'outlineTabBtn'}>
+        <Button
+          as={Link}
+          to="register"
+          variant={'outlineTabBtn'}
+          onClick={() => changeDisplay('none')}
+        >
           Registration
         </Button>
       </Flex>
     </>
   );
+};
+
+AuthNav.propTypes = {
+  changeDisplay: PropTypes.func,
 };
