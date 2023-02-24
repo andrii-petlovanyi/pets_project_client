@@ -183,7 +183,7 @@ const addNoticeForm = defineStyle({
     border: '1px solid #F5925680',
     borderRadius: '40px',
     filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
-    width: { base: '240px', lg: '448px' },
+    width: { base: '100%', lg: '448px' },
     height: { base: '40px', lg: '48px' },
 
     backgroundColor: 'mainColor',
