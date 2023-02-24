@@ -14,7 +14,7 @@ export const Header = () => {
   const isLoggedIn = useSelector(isAuth);
 
   return (
-    <Flex as={'header'} paddingTop={{ base: '16px', lg: '24px', xl: '16px' }}>
+    <Flex as={'header'}>
       <Flex mr={{ xl: '80px' }}>
         <Logo />
       </Flex>

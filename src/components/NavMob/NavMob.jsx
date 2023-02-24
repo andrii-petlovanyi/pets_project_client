@@ -25,7 +25,12 @@ export const NavMob = ({ ...props }) => {
   {
     return (
       <Flex {...props}>
-        <Flex position="fixed" top="1rem" right="1rem" align="center">
+        <Flex
+          top="1rem"
+          right="1.5rem"
+          align="center"
+          justifyСontent="space-between"
+        >
           <IconButton
             aria-label="Open Menu"
             icon={<HiMenu size="40px" />}
@@ -48,7 +53,7 @@ export const NavMob = ({ ...props }) => {
           overflowY="auto"
           flexDir="column"
         >
-          <Flex pt="16px" pr="20px" pl="16px" flexDir="column">
+          <Flex padding={{ base: '16px 20px' }} flexDir="column">
             <Flex justify="space-between" alignItems="center" mb="46px">
               <Logo />
               <IconButton
