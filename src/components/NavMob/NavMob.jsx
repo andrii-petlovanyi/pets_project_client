@@ -29,7 +29,7 @@ export const NavMob = ({ ...props }) => {
           top="1rem"
           right="1.5rem"
           align="center"
-          justifyСontent="space-between"
+          justifyContent="space-between"
         >
           <IconButton
             aria-label="Open Menu"

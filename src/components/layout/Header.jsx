@@ -21,7 +21,7 @@ export const Header = () => {
       <NavDesk display={{ base: 'none', xl: 'flex' }} />
       <NavMob display={{ base: 'flex', lg: 'none' }} />
       <Flex
-        marginLeft={'auto'}
+        ml={'auto'}
         alignItems={'center'}
         display={{ base: 'none', xl: 'flex' }}
       >
@@ -29,7 +29,7 @@ export const Header = () => {
       </Flex>
       <NavTab
         display={{ base: 'none', lg: 'flex', xl: 'none' }}
-        marginLeft={'auto'}
+        ml={'auto'}
         alignItems={'center'}
       />
     </Flex>
