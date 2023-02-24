@@ -21,23 +21,35 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { register as userRegister } from '../../redux/user/userSlice';
+import {
+  locationRegExp,
+  passRegexp,
+  phoneRegExp,
+} from '../../services/validation';
+import Toast from '../../hooks/toast';
 
 const schemaStep1 = yup.object().shape({
   email: yup
     .string()
+    .trim()
+    .email('Email must be in format: email@domain.com')
     .min(6, 'Minimal email length is 6 symbols')
-    .max(32, 'Max email length is 32 symbols')
+    .max(63, 'Max email length is 63 symbols')
     .required('Email is required'),
   password: yup
     .string()
-    .min(8, 'Minimal password length is 8 symbols')
+    .trim()
+    .matches(passRegexp, 'Password must be contain letters and numbers')
+    .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
     .matches( /^([a-zA-Z0-9])+$/u,'Please, only letters and numbers')
     .required('Password is required'),
 
   cpassword: yup
     .string()
-    .min(8, 'Minimal password length is 8 symbols')
+    .trim()
+    .matches(passRegexp, 'Password must be contain letters and numbers')
+    .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
     .matches( /^([a-zA-Z0-9])+$/u,'Please, only letters and numbers')
     .required('Please repeat password')
@@ -47,25 +59,31 @@ const schemaStep1 = yup.object().shape({
 const schemaStep2 = yup.object().shape({
   name: yup
     .string()
+    .trim()
     .min(3, 'Minimal name length is 3 symbols')
     .max(32, 'Max name length is 32 symbols')
     .required('Name is required'),
   city: yup
     .string()
+    .trim()
+    .matches(locationRegExp, 'City must be in format: City, Region')
     .min(3, 'Minimal city length is 3 symbols')
     .max(32, 'Max city length is 32 symbols')
     .required('City is required'),
+
   phone: yup.string().min(12, 'Minimal phone number length is 12 symbols').max(13, 'Max phone number length is 13 symbols').required('Phone number is required'),
+
 });
 
 const RegisterForm = () => {
   const [step, setStep] = useState(1);
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  const [showPass1, setShowPass1] = useState(false);
+  const [showPass2, setShowPass2] = useState(false);
 
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { addToast } = Toast();
 
   const {
     register,
@@ -81,13 +99,15 @@ const RegisterForm = () => {
 
     try {
       const { data: res, error } = await registerUser(data);
-      if (error) return console.log(error);
-      console.log(res);
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
+
       dispatch(userRegister(res.user));
       reset();
       navigate('/user');
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 
@@ -133,17 +153,16 @@ const RegisterForm = () => {
                 <Input
                   variant={'authForm'}
                   placeholder={'Password'}
-                  type={show ? 'text' : 'password'}
+                  type={showPass1 ? 'text' : 'password'}
                   {...register('password')}
                 />
                 <InputRightElement>
                   <IconButton
                     mt={{ base: '0', lg: '10px' }}
                     mr={'10px'}
-                    // fontSize={'20px'}
                     variant={'authFormIcon'}
-                    icon={show ? <BiShow /> : <BiHide />}
-                    onClick={handleClick}
+                    icon={showPass1 ? <BiShow /> : <BiHide />}
+                    onClick={() => setShowPass1(!showPass1)}
                   />
                 </InputRightElement>
               </InputGroup>
@@ -154,17 +173,16 @@ const RegisterForm = () => {
                 <Input
                   variant={'authForm'}
                   placeholder={'Confirm password'}
-                  type={show ? 'text' : 'password'}
+                  type={showPass2 ? 'text' : 'password'}
                   {...register('cpassword')}
                 />
                 <InputRightElement>
                   <IconButton
                     mt={{ base: '0', lg: '10px' }}
                     mr={'10px'}
-                    // fontSize={'20px'}
                     variant={'authFormIcon'}
-                    icon={show ? <BiShow /> : <BiHide />}
-                    onClick={handleClick}
+                    icon={showPass2 ? <BiShow /> : <BiHide />}
+                    onClick={() => setShowPass2(!showPass2)}
                   />
                 </InputRightElement>
               </InputGroup>

@@ -44,17 +44,17 @@ const userInfoActive = defineStyle({
     padding: '3px 12px',
     width: '216px',
     height: '32px',
+
     borderRadius: '40px',
     border: '1px solid',
     borderColor: 'rgba(245, 146, 86, 0.5)',
-
-    color: 'textColor',
+    color: 'black',
     backgroundColor: 'mainColor',
 
     fontFamily: 'Manrope',
     fontWeight: '400',
-    fontSize: '18px',
-    lineHeight: '25px',
+    fontSize: { base: '12px', lg: '18px' },
+    lineHeight: { base: '1.33', lg: '1.38' },
     letterSpacing: '0.04em',
 
     _focus: {
@@ -63,6 +63,10 @@ const userInfoActive = defineStyle({
     },
     _hover: {
       borderColor: 'accentOrange',
+    },
+
+    _disabled: {
+      opacity: 1,
     },
     _placeholder: {
       fontFamily: 'Manrope',
@@ -77,25 +81,29 @@ const userInfoActive = defineStyle({
 
 const userInfoDisabled = defineStyle({
   field: {
-    width: '216px',
-    height: '32px',
-    fontFamily: 'Manrope',
-    fontWeight: '400',
-    fontSize: '18px',
-    lineHeight: '25px',
-    border: 'none',
-    backgroundColor: 'white',
-    padding: '3px 12px',
-
     display: 'flex',
     alignItems: 'center',
+    width: '216px',
+    height: '32px',
+    padding: '3px 12px',
 
-    color: 'textColor',
-    opacity: '1',
+    backgroundColor: 'white',
+    color: 'black',
+
+    border: 'none',
+
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: { base: '12px', lg: '18px' },
+    lineHeight: { base: '1.33', lg: '1.38' },
+    letterSpacing: '0.04em',
 
     pointerEvents: 'none',
     _hover: {
       cursor: 'auto',
+    },
+    _disabled: {
+      opacity: 1,
     },
   },
 });
@@ -169,6 +177,36 @@ const addPetsForm = defineStyle({
   },
 });
 
+const addNoticeForm = defineStyle({
+  field: {
+    background: 'mainColor',
+    border: '1px solid #F5925680',
+    borderRadius: '40px',
+    filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
+    width: { base: '240px', lg: '448px' },
+    height: { base: '40px', lg: '48px' },
+
+    backgroundColor: 'mainColor',
+
+    fontFamily: 'Manrope',
+    fontWeight: '400',
+    fontSize: { base: '14px', lg: '16px' },
+    lineHeight: '26px',
+
+    display: 'flex',
+    alignItems: 'center',
+
+    _placeholder: {
+      color: 'labelColor',
+
+      fontFamily: 'Manrope',
+      fontWeight: '400',
+      fontSize: { base: '14px', lg: '16px' },
+      lineHeight: '26px',
+    },
+  },
+});
+
 const authForm = defineStyle({
   field: {
     height: () => ({ base: '40px', lg: '52px' }),
@@ -198,5 +236,6 @@ export const inputTheme = defineStyleConfig({
     userInfoDisabled,
     addPetsForm,
     authForm,
+    addNoticeForm,
   },
 });

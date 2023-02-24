@@ -1,144 +1,175 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { GoCheck } from 'react-icons/go';
+import { MdOutlineDeleteOutline } from 'react-icons/md';
+import { MdPhotoCamera } from 'react-icons/md';
 import {
-  //   Button,
+  Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
-  HStack,
+  IconButton,
+  Image,
   Input,
 } from '@chakra-ui/react';
-import { MdPhotoCamera } from 'react-icons/md';
-import { Image, Box, Icon, Text } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
-const Avatar = () => {
-  const [imagePreview, setImagePreview] = useState(null);
-  const {
-    register,
-    // handleSubmit,
-    //   formState: { errors },
-  } = useForm();
+import { Box, Icon, Text } from '@chakra-ui/react';
+import Toast from '../../hooks/toast';
+import UserPic from '../../assets/abstract_user.svg';
+import userApiSlice, {
+  useUpdateUserMutation,
+} from '../../redux/user/userApiSlice';
 
-  const handleImageChange = event => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setImagePreview(reader.result);
-      };
-      console.log(file);
+import userSelectors from '../../redux/user/user-selectors';
+
+const UserAvatar = () => {
+  const [avatarError, setAvatarError] = useState('');
+  const user = useSelector(userSelectors.user);
+  const [updateUser] = useUpdateUserMutation();
+  const dispatch = useDispatch();
+  const { addToast } = Toast();
+
+  const { handleSubmit, register, watch, reset } = useForm();
+  console.log(user);
+  const newImage = watch('avatarURL');
+
+  const onSubmit = async data => {
+    console.log(data);
+    if (!data.avatarURL[0]) {
+      console.log(data.avatarURL[0]);
+      return setAvatarError('Avatar is required');
+    }
+    const formData = new FormData();
+    formData.append('avatarURL', data.avatarURL[0]);
+    try {
+      const { data: res, error } = await updateUser(formData);
+      if (error) addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
+      dispatch(userApiSlice.util.invalidateTags(['user']));
+      console.log(res);
+      reset({ avatarURL: null });
+    } catch (error) {
+      addToast({ message: error.message, type: 'success' });
     }
   };
+
   return (
     <FormControl
+      isInvalid={avatarError}
       display={'flex'}
       justifyContent={'center'}
       flexDirection={'column'}
       alignItems="center"
-      position={'relative'}
+      mb={'32px'}
     >
       <Box
         display={'flex'}
-        alignItems={'flex-end'}
-        justifyContent={'flex-end'}
-        mb={'32px'}
+        alignItems={'center'}
+        justifyContent={'center'}
         w={'233px'}
         h={'233px'}
+        backgroundColor={'#d9d7d7'}
+        borderRadius={'50%'}
       >
         <Image
           borderRadius="full"
-          fallbackSrc="https://via.placeholder.com/233"
-          src={imagePreview}
-          width={'233px'}
+          src={
+            newImage && newImage[0]
+              ? URL.createObjectURL(newImage[0])
+              : user.avatarURL
+              ? user.avatarURL
+              : UserPic
+          }
+          width={'233x'}
           height={'233px'}
           boxSize="233px"
           objectFit="cover"
         />
+
+        <FormErrorMessage
+          position={'absolute'}
+          bottom={'-20px'}
+          left={'50%'}
+          transform={'translateX(-50%)'}
+        >
+          {avatarError}
+        </FormErrorMessage>
       </Box>
-      <FormLabel
-        htmlFor="image"
-        // width={'182px'}
-        // height={'182px'}
-        // bg={'mainColor'}
-        // borderRadius={'40px'}
-        margin={'0'}
-        style={{ cursor: 'pointer' }}
+      <Flex
+        w={'100%'}
+        display={'flex'}
+        justifyContent={'flex-end'}
+        position={'relative'}
+        top={{ xl: '-18px' }}
+        left={{ xl: '-6px' }}
+        mt={{ base: '12px', lg: '8px', xl: '0px' }}
       >
-        <Input
-          id="image"
-          display={'none'}
-          type="file"
-          {...register('image')}
-          onChange={handleImageChange}
-        />
-        {!imagePreview && (
-          // <Icon
-          //   as={MdPhotoCamera}
-          //   pointerEvents={'none'}
-          //   position={'absolute'}
-          //   //   top={'50%'}
-          //   //   left={'50%'}
-          //   //   transform={'translate(-50%, -50%)'}
-          //   fontSize={'48px'}
-          // />
-          <HStack>
-            {/* <Button
-              display={'flex'}
-              justifyContent={'flex-start'}
-              alignItems={'center'}
-              padding={'0px'}
-              position="relative"
-              right={'11px'}
-              backgroundColor={'white'}
-              w={'100%'}
-            > */}
-            <Icon as={MdPhotoCamera} boxSize={5} color={'#F59256'} />
-            <Text fontWeight={'400'} fontSize={'12px'} lineHeight={'1.8'}>
-              Edit photo
-            </Text>
-            {/* </Button> */}
-          </HStack>
+        <FormLabel
+          htmlFor="avatarURL"
+          margin={'0'}
+          style={{ cursor: 'pointer' }}
+        >
+          <Input
+            id="avatarURL"
+            display={'none'}
+            type="file"
+            {...register('avatarURL')}
+          />
+          {!newImage && (
+            <Flex padding={'3px 6px'}>
+              <Icon as={MdPhotoCamera} boxSize={5} color={'#F59256'} />
+              <Text fontWeight={'400'} fontSize={'12px'} lineHeight={'1.8'}>
+                Edit photo
+              </Text>
+            </Flex>
+          )}
+        </FormLabel>
+        {newImage && (
+          <Flex
+            w={'100%'}
+            display={'flex'}
+            // justifyContent={{ base: 'space-around', lg: 'flex-end' }}
+            justifyContent={'flex-end'}
+            position={'relative'}
+            top={{ xl: '-18px' }}
+            left={{ xl: '-6px' }}
+            mt={{ base: '12px', lg: '8px', xl: '0px' }}
+          >
+            <IconButton
+              onClick={handleSubmit(onSubmit)}
+              minWidth={'32px'}
+              height="32px"
+              ml="0px"
+              background="mainColor"
+              backdropFilter="blur(2px)"
+              borderRadius="50px"
+              border="none"
+              icon={<Icon as={GoCheck} boxSize={5} color={'mainOrange'} />}
+            />
+            <IconButton
+              onClick={() => {
+                reset({ avatarURL: null });
+              }}
+              minWidth={'32px'}
+              height="32px"
+              ml="8px"
+              background="mainColor"
+              backdropFilter="blur(2px)"
+              borderRadius="50px"
+              border="none"
+              icon={
+                <Icon
+                  as={MdOutlineDeleteOutline}
+                  boxSize={5}
+                  color={'mainOrange'}
+                />
+              }
+            />
+          </Flex>
         )}
-      </FormLabel>{' '}
-      {imagePreview && (
-        <>
-          <button
-            onClick={() => {
-              console.log(imagePreview);
-            }}
-          >
-            V
-          </button>
-          <button
-            onClick={() => {
-              setImagePreview(null);
-            }}
-          >
-            X
-          </button>
-        </>
-      )}
+      </Flex>
     </FormControl>
   );
 };
 
-export default Avatar;
-
-{
-  /* <HStack>
-              <Button
-                display={'flex'}
-                justifyContent={'flex-start'}
-                alignItems={'center'}
-                padding={'0px'}
-                position="relative"
-                right={'11px'}
-                backgroundColor={'white'}
-                w={'100%'}
-              >
-                <Icon as={MdPhotoCamera} boxSize={5} color={'#F59256'} />
-                <Text fontWeight={'400'} fontSize={'12px'} lineHeight={'1.8'}>
-                  Edit photo
-                </Text>
-              </Button>
-            </HStack> */
-}
+export default UserAvatar;

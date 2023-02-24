@@ -27,16 +27,39 @@ import {
 import { TfiPlus } from 'react-icons/tfi';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import { useAddMyPetsMutation } from '../../redux/user/userApiSlice';
+import userApiSlice, {
+  useAddMyPetsMutation,
+} from '../../redux/user/userApiSlice';
+import { useDispatch } from 'react-redux';
+import { birthdayRegExp } from '../../services/validation';
+import Toast from '../../hooks/toast';
 
 const schemaStep1 = yup.object().shape({
-  name: yup.string().required('Pet name is required'),
-  birthday: yup.string().required('Birthday is required'),
-  breed: yup.string().required('Breed is required'),
+  name: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal pet name length is 2 symbols')
+    .max(32, 'Max pet name length is 32 symbols')
+    .required('Pet name is required'),
+  birthday: yup
+    .string()
+    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
+    .required('Birthday is required'),
+  breed: yup
+    .string()
+    .trim()
+    .min(2, 'Minimal breed length is 2 symbols')
+    .max(32, 'Max breed length is 32 symbols')
+    .required('Breed is required'),
 });
 
 const schemaStep2 = yup.object().shape({
-  comment: yup.string().required('Comment is required'),
+  comment: yup
+    .string()
+    .trim()
+    .min(10, 'Minimal password length is 10 symbols')
+    .max(320, 'Max password length is 320 symbols')
+    .required('Comment is required'),
 });
 
 const AddPets = () => {
@@ -46,6 +69,8 @@ const AddPets = () => {
   const [step, setStep] = useState(1);
 
   const [addMyPets, { isLoading }] = useAddMyPetsMutation();
+  const dispatch = useDispatch();
+  const { addToast } = Toast();
 
   const {
     register,
@@ -56,10 +81,11 @@ const AddPets = () => {
   } = useForm({
     resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
   });
-  const newImage = watch('avatarURL');
+
+  const newImage = watch('avatarPet');
 
   const onSubmit = async data => {
-    if (!data.avatarURL[0]) {
+    if (!data.avatarPet[0]) {
       return setAvatarError('Avatar is required');
     }
     const formData = new FormData();
@@ -67,17 +93,18 @@ const AddPets = () => {
     formData.append('breed', data.breed);
     formData.append('birth', data.birthday);
     formData.append('comment', data.comment);
-    formData.append('image', data.avatarURL[0]);
+    formData.append('avatarURL', data.avatarPet[0]);
 
     try {
       const { data: res, error } = await addMyPets(formData);
-      if (error) return console.log(error);
-      console.log(res);
+      if (error) addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
+      dispatch(userApiSlice.util.invalidateTags(['user']));
       onClose();
       reset();
       setStep(1);
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 
@@ -207,7 +234,7 @@ const AddPets = () => {
                 isInvalid={avatarError}
               >
                 <FormLabel
-                  htmlFor="avatarURL"
+                  htmlFor="avatarPet"
                   border={avatarError ? '1px solid red' : ''}
                   width={{ base: '208px', md: '182px' }}
                   height={{ base: '208px', md: '182px' }}
@@ -216,10 +243,10 @@ const AddPets = () => {
                   margin={'0'}
                 ></FormLabel>
                 <Input
-                  id="avatarURL"
+                  id="avatarPet"
                   display={'none'}
                   type="file"
-                  {...register('avatarURL')}
+                  {...register('avatarPet')}
                 />
                 {newImage && newImage[0] ? (
                   <Image

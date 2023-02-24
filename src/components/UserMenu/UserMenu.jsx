@@ -14,6 +14,8 @@ export const UserMenu = ({ changeDisplay = () => {} }) => {
       gap={'12px'}
       marginRight={{ lg: '60px', xl: '0' }}
       alignItems="center"
+      flexWrap={' wrap'}
+      justifyContent={'center'}
     >
       <Button
         as={NavLink}

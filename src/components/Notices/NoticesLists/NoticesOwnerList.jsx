@@ -1,7 +1,8 @@
 import React from 'react';
 import { useGetUserNoticesListQuery } from '../../../redux/notices/noticesApiSlice';
 import { useLocation } from 'react-router-dom';
-// import { NoticeCategoryItem } from '../../Notices';
+import { SimpleGrid } from '@chakra-ui/layout';
+import { NoticeCategoryItem } from '../../Notices';
 
 export const NoticesOwnerList = () => {
   const params = useLocation();
@@ -9,27 +10,27 @@ export const NoticesOwnerList = () => {
 
   const { data, isLoading } = useGetUserNoticesListQuery({
     page: 1,
-    limit: 10,
+    limit: 12,
     search,
   });
   const { notices } = data || [];
 
   return (
-    <div>
+    <SimpleGrid
+      as={'ul'}
+      columns={{ base: 1, lg: 2, xl: 4 }}
+      mt={{ base: '30px', lg: '60px' }}
+      mb={{ base: '100px', xl: '200px' }}
+      gap={'32px'}
+    >
       {!isLoading ? (
-        notices?.length > 0 && notices.map(n => <h2 key={n._id}>{n.title}</h2>)
+        notices?.length > 0 &&
+        notices?.map(notice => (
+          <NoticeCategoryItem key={notice._id} notice={notice} />
+        ))
       ) : (
         <>Loading...</>
       )}
-    </div>
-    // <ul>
-    //   {notices?.map(notice => (
-    //     <NoticeCategoryItem key={notice._id} notice={notice} />
-    //   ))}
-    // </ul>
+    </SimpleGrid>
   );
 };
-
-// {
-//   itemList;
-// }

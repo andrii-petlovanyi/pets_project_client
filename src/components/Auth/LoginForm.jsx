@@ -21,15 +21,19 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { useLogInUserMutation } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/user/userSlice';
+import Toast from '../../hooks/toast';
 
 const schema = yup.object().shape({
   email: yup
     .string()
+    .trim()
+    .email('Email must be in format: email@domain.com')
     .min(6, 'Minimal email length is 6 symbols')
     .max(32, 'Max email length is 32 symbols')
     .required('Email is required'),
   password: yup
     .string()
+    .trim()
     .min(8, 'Minimal password length is 8 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Password is required'),
@@ -42,6 +46,7 @@ const LoginForm = () => {
   const [logInUser, { isLoading }] = useLogInUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { addToast } = Toast();
 
   const {
     register,
@@ -55,13 +60,14 @@ const LoginForm = () => {
   const onSubmit = async data => {
     try {
       const { data: res, error } = await logInUser(data);
-      if (error) return console.log(error);
-      console.log(res);
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
       dispatch(logIn(res));
       reset();
       navigate('/user');
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 

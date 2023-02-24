@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Flex, IconButton, Link } from '@chakra-ui/react';
-// import { HamburgerIcon } from '@chakra-ui/icons';
 import { GrFormClose } from 'react-icons/gr';
 import { HiMenu } from 'react-icons/hi';
 
@@ -90,18 +89,10 @@ export const NavMob = ({ ...props }) => {
               <Link
                 variant={'headerLink'}
                 as={NavLink}
-                to="partners"
+                to="friends"
                 onClick={() => changeDisplay('none')}
               >
                 Our friends
-              </Link>
-              <Link
-                variant={'headerLink'}
-                as={NavLink}
-                to="uikit"
-                onClick={() => changeDisplay('none')}
-              >
-                UI Kit
               </Link>
             </Flex>
           </Flex>

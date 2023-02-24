@@ -13,29 +13,81 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import {
-  //   MdOutlineDeleteOutline,
+  MdFavorite,
+  MdOutlineDeleteOutline,
   MdOutlineFavoriteBorder,
 } from 'react-icons/md';
 import PropTypes from 'prop-types';
+import { calculateAnimalAge } from '../../../services/yearsCalc';
 
-import notice from '../notice.json';
-// import { useSelector } from 'react-redux';
-// import userSelectors from '../../../redux/user/user-selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import userSelectors from '../../../redux/user/user-selectors';
+import { useDeleteNoticeMutation } from '../../../redux/notices/noticesApiSlice';
+import userApiSlice, {
+  useAddToFavoriteMutation,
+  useDeleteFromFavoriteMutation,
+} from '../../../redux/user/userApiSlice';
+import Toast from '../../../hooks/toast';
+import LearnMore from '../../../pages/LearnMore';
 
-export const NoticeCategoryItem = () => {
-  console.log('noticeItem:', notice);
-  //   const {_id: userId } = useSelector(userSelectors.user);
-
+export const NoticeCategoryItem = ({ notice }) => {
+  const { _id: userId, favorites } = useSelector(userSelectors.user);
   const {
+    _id: noticeId,
     category,
     title,
-    // birth,
+    birth,
     breed,
     location,
     price,
     petImage,
-    // owner,
+    owner,
   } = notice;
+
+  const [removeNotice] = useDeleteNoticeMutation();
+  const [addFavorite] = useAddToFavoriteMutation();
+  const [removeFavorite] = useDeleteFromFavoriteMutation();
+  const isFavorite = favorites?.includes(noticeId);
+  const dispatch = useDispatch();
+  const { addToast } = Toast();
+
+
+  const deleteNotice = async () => {
+    try {
+      const { data, error } = await removeNotice(noticeId);
+      if (error) {
+        console.log('error:', error.message);
+      }
+      console.log('data:', data);
+    } catch (error) {
+      console.log('error:', error);
+    }
+  };
+
+  const changeFavorite = async () => {
+    try {
+      if (!userId) {
+        addToast({ message: "Please, authorize to be able to use this feature" });
+      }
+      if (isFavorite) {
+        const { data, error } = await removeFavorite(noticeId);
+        if (error) {
+          console.log('error:', error.message);
+        }
+        console.log('data:', data);
+        dispatch(userApiSlice.util.invalidateTags(['user']));
+      } else {
+        const { data, error } = await addFavorite(noticeId);
+        if (error) {
+          console.log('error:', error.message);
+        }
+        console.log('data:', data);
+        dispatch(userApiSlice.util.invalidateTags(['user']));
+      }
+    } catch (error) {
+      console.log('error:', error);
+    }
+  };
 
   const changeCategoryName = category => {
     switch (category) {
@@ -51,7 +103,6 @@ export const NoticeCategoryItem = () => {
   return (
     <Card
       maxW={{ base: '280px', lg: '336px', xl: '288px' }}
-      h="606"
       boxShadow="7px 4px 14px rgba(49, 21, 4, 0.07)"
       borderRadius="0px 0px 40px 40px"
     >
@@ -61,10 +112,12 @@ export const NoticeCategoryItem = () => {
             src={petImage ? petImage : '#'}
             w={{ base: '280px', lg: '336px', xl: '288px' }}
             h="288"
+            objectFit="cover"
             alt={title}
             position="relative"
           />
           <Text
+            lineHeight={{ base: '15px', lg: '16px' }}
             css={{
               position: 'absolute',
               top: 20,
@@ -84,9 +137,10 @@ export const NoticeCategoryItem = () => {
             {changeCategoryName(category)}
           </Text>
           <IconButton
+            onClick={changeFavorite}
             type="button"
             variant={'cardFavIB'}
-            icon={<MdOutlineFavoriteBorder />}
+            icon={isFavorite ? <MdFavorite /> : <MdOutlineFavoriteBorder />}
             css={{
               position: 'absolute',
               right: 12,
@@ -133,7 +187,7 @@ export const NoticeCategoryItem = () => {
               Age:
             </Text>
             <Text ml="52px" fontSize="16px" fontWeight="500" lineHeight="22px">
-              one year
+              {calculateAnimalAge(birth)}
             </Text>
           </Flex>
           {category === 'sell' ? (
@@ -147,7 +201,7 @@ export const NoticeCategoryItem = () => {
                 fontWeight="500"
                 lineHeight="22px"
               >
-                {price ? price : ''}
+                {price ? price : ''}$
               </Text>
             </Flex>
           ) : (
@@ -155,18 +209,28 @@ export const NoticeCategoryItem = () => {
           )}
         </Container>
       </CardBody>
-      <CardFooter pb="30px">
-        <Button type="button" variant={'outlineCardBtn'} m="0 auto">
-          Learn more
-        </Button>
-        {/* {userId === owner ? (
-          <Button type="button" m="0 auto" mt="12px" variant={'outlineCardBtn'}>
+      <CardFooter
+        display={'flex'}
+        flexDirection={'column'}
+        h={'120px'}
+        justifyContent={'center'}
+        alignItems={'center'}
+      >
+        <LearnMore notice={notice} />
+        {userId === owner ? (
+          <Button
+            onClick={deleteNotice}
+            type="button"
+            m="0 auto"
+            mt="12px"
+            variant={'outlineCardBtn'}
+          >
             <Text mr={'13px'}>Delete</Text>{' '}
             <MdOutlineDeleteOutline size={'20px'} />
           </Button>
         ) : (
           ''
-        )} */}
+        )}
       </CardFooter>
     </Card>
   );

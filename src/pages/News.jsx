@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { useGetNewsListQuery } from '../redux/news/newsApisSlice';
 import { AiOutlineSearch } from 'react-icons/ai';
 import NewCard from '../components/News/NewCard';
+import NewsLoader from '../components/Loaders/News';
 
 const News = () => {
   const [search, setSearch] = useState('');
@@ -30,16 +31,15 @@ const News = () => {
     <>
       <Heading
         textAlign={'center'}
-        mr={'auto'}
-        ml={'auto'}
+        mx={'auto'}
         mt={{ base: '42px', lg: '88px', xl: '61px' }}
-        mb={{ base: '28px', lg: '40px', xl: '40px' }}
+        // mb={{ base: '28px', lg: '40px', xl: '40px' }}
         fontSize={{ base: '24px', lg: '48px' }}
       >
         News
       </Heading>
       <InputGroup
-        m={{ base: '20px auto' }}
+        mx={{ base: 'auto' }}
         as="form"
         maxW={{ base: '280px', lg: '608px' }}
         display={'flex'}
@@ -65,13 +65,24 @@ const News = () => {
           <AiOutlineSearch size={'24'} />
         </InputRightElement>
       </InputGroup>
-
-      <Flex gap={'31px'} flexWrap={'wrap'} justifyContent={'center'}>
+      <Flex
+        m={'0 auto'}
+        gap={'31px'}
+        flexWrap={'wrap'}
+        justifyContent={'center'}
+        w={{ base: '480px', lg: '768px', xl: '1280px' }}
+      >
         {!isLoading ? (
           news.length > 0 &&
           news.map(news => <NewCard key={news.title} news={news} />)
         ) : (
-          <>Loading...</>
+          <>
+            {Array(9)
+              .fill(0)
+              .map((_, index) => (
+                <NewsLoader key={index} />
+              ))}
+          </>
         )}
       </Flex>
     </>

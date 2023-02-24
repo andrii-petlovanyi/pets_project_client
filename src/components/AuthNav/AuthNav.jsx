@@ -11,6 +11,7 @@ export const AuthNav = () => {
         marginRight={{ lg: '60px', xl: '0' }}
         flexWrap={'wrap'}
       >
+
         <Button as={Link} to="login" variant="fullBGBtn" onClick={refresh()}>
           Login
         </Button>

@@ -12,10 +12,13 @@ const friends = defineStyle({
 const tabLink = defineStyle({
   display: 'flex',
   justifyContent: 'center',
+  textAlign: 'center',
+  alignItems: 'center',
 
   background: 'white',
   color: 'textColor',
 
+  height: () => ({ base: '35px', lg: '47px' }),
   border: '2px solid',
   borderColor: 'mainOrange',
   borderRadius: '40px',
