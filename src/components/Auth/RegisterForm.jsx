@@ -75,10 +75,7 @@ const schemaStep2 = yup.object().shape({
     .required('City is required'),
 
   phone: yup.string().min(12, 'Minimal phone number length is 12 symbols').max(13, 'Max phone number length is 13 symbols')
-  .matches(
-    /^([a-zA-Z-. a-zA-Z])+$/u
-    ,'Please, use only letters numbers')
-    .required('Phone number is required'),
+  .matches(/^([+0-9])+$/u,'Please, use only numbers').required('Phone number is required'),
 
 });
 
