@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -23,6 +23,9 @@ import {
   Flex,
   Text,
 } from '@chakra-ui/react';
+import { dateToString, stringToDate } from '../../services/dateFormat';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import { TfiPlus } from 'react-icons/tfi';
 import { HiPlus } from 'react-icons/hi';
@@ -33,6 +36,8 @@ import userApiSlice, {
 import { useDispatch } from 'react-redux';
 import { birthdayRegExp } from '../../services/validation';
 import Toast from '../../hooks/toast';
+import { calendarFunc } from '../UserForm/Calendar/Calendar';
+import '../UserForm/Calendar/Calendar.styled.css';
 
 const schemaStep1 = yup.object().shape({
   name: yup
@@ -77,8 +82,12 @@ const AddPets = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    control,
     reset,
   } = useForm({
+    // defaultValues: {
+    //   birthday: stringToDate(user.birthday),
+    // },
     resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
   });
 
@@ -174,11 +183,25 @@ const AddPets = () => {
               </FormControl>
               <FormControl isInvalid={errors.birthday}>
                 <FormLabel htmlFor="birthday">Date of birth</FormLabel>
-                <Input
-                  variant={'addPetsForm'}
-                  placeholder={'Type date of birth'}
-                  type="text"
-                  {...register('birthday')}
+                <Controller
+                  name="birthday"
+                  control={control}
+                  render={({ field }) => (
+                    <Box style={{ height: '48px' }} variant={'addPetsForm'}>
+                      <DatePicker
+                        renderCustomHeader={calendarFunc}
+                        onChange={date => {
+                          console.log(date);
+                          field.onChange(dateToString(date));
+                        }}
+                        selected={field.value && stringToDate(field.value)}
+                        dateFormat="dd.MM.yyyy"
+                        maxDate={Date.now()}
+                        wrapperClassName="date__picker"
+                        placeholderText={'Type date of birth'}
+                      />
+                    </Box>
+                  )}
                 />
                 <FormErrorMessage>{errors.birthday?.message}</FormErrorMessage>
               </FormControl>

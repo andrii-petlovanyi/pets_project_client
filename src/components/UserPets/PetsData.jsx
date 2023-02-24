@@ -14,8 +14,8 @@ export const UserPetsData = () => {
         <Heading
           fontWeight={500}
           fontSize={{ base: '20px', lg: '28px' }}
-          lineHeight={{ base: '27px', lg: '38px' }}
-          letterSpacing={'0.04em'}
+          lineHeight={'1.4'}
+          letterSpacing={{ base: '0.04em', lg: '0' }}
           color={{ base: 'black', lg: 'textColor' }}
         >
           My pets:
