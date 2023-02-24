@@ -14,14 +14,14 @@ export const Header = () => {
   const isLoggedIn = useSelector(isAuth);
 
   return (
-    <Flex as={'header'}>
+    <Flex as={'header'} justifyContent={{ base: 'space-between' }}>
       <Flex mr={{ xl: '80px' }}>
         <Logo />
       </Flex>
       <NavDesk display={{ base: 'none', xl: 'flex' }} />
       <NavMob display={{ base: 'flex', lg: 'none' }} />
       <Flex
-        marginLeft={'auto'}
+        ml={'auto'}
         alignItems={'center'}
         display={{ base: 'none', xl: 'flex' }}
       >
@@ -29,7 +29,7 @@ export const Header = () => {
       </Flex>
       <NavTab
         display={{ base: 'none', lg: 'flex', xl: 'none' }}
-        marginLeft={'auto'}
+        ml={'auto'}
         alignItems={'center'}
       />
     </Flex>
