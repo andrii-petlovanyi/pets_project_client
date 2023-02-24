@@ -129,7 +129,7 @@ const LearnMore = ({ noticeId }) => {
                 fontWeight: '500',
                 letterSpacing: '0.04em',
                 display: 'flex',
-                justifyContent: 'center',
+                // justifyContent: 'center',
                 alignItems: 'center',
               }}
             >

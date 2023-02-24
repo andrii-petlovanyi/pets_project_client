@@ -7,7 +7,7 @@ export const AuthNav = () => {
     <>
       <Flex
         gap={{ base: '12px', xl: '20px' }}
-        marginRight={{ lg: '20px', xl: '0' }}
+        mr={{ lg: '20px', xl: '0' }}
         flexWrap={'wrap'}
       >
         <Button as={NavLink} to="/login" variant="fullBGBtn">
