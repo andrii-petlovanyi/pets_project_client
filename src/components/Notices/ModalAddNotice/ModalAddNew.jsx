@@ -137,6 +137,12 @@ const ModalAddNew = () => {
     setStep(step - 1);
   };
 
+  const handleCLose = () => {
+    reset();
+    onClose();
+    setStep(1);
+  };
+
   return (
     <>
       <Box
@@ -156,7 +162,7 @@ const ModalAddNew = () => {
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} size={'custom'}>
+      <Modal isOpen={isOpen} onClose={handleCLose} size={'custom'}>
         <ModalOverlay />
         <ModalContent bg={'white'} borderRadius={{ base: '20px', md: '40px' }}>
           <IconButton
@@ -186,52 +192,58 @@ const ModalAddNew = () => {
                 Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
                 amet, consectetur{' '}
               </Text>
-            <FormControl id="category" isInvalid={errors.category}>
-              <Stack
+              <FormControl id="category" isInvalid={errors.category}>
+                <Stack
                   display="flex"
                   flexWrap="wrap"
                   alignItems="baseline"
                   flexDirection="row"
                   gap="12px"
                 >
-                <Button
-                  w={{ base: '131px', lg: '162px' }}
-                  h={{ base: '35px', lg: '47px' }}
-                  fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('lost/found')}
-                  variant={
-                    category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
-                  }
-                  {...register('selectedCategory')}
-                >
-                  lost/found
-                </Button>
-                <Button
-                  w={{ base: '155px', lg: '197px' }}
-                  h={{ base: '35px', lg: '47px' }}
-                  fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('in good hands')}
-                  variant={
-                    category === 'in good hands' ? 'fullBGBtn' : 'outlineTabBtn'
-                  }
-                  {...register('selectedCategory')}
-                >
-                  in good hands
-                </Button>
-                <Button
-                  w={{ base: '81', lg: '91px' }}
-                  h={{ base: '35px', lg: '47px' }}
-                  fontSize={{ base: '14px', lg: '20px' }}
-                  onClick={() => setCategory('sell')}
-                  variant={category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'}
-                  {...register('selectedCategory')}
-                >
-                  sell
-                </Button>
-               </Stack>
+                  <Button
+                    w={{ base: '131px', lg: '162px' }}
+                    h={{ base: '35px', lg: '47px' }}
+                    fontSize={{ base: '14px', lg: '20px' }}
+                    onClick={() => setCategory('lost/found')}
+                    variant={
+                      category === 'lost/found' ? 'fullBGBtn' : 'outlineTabBtn'
+                    }
+                    {...register('selectedCategory')}
+                  >
+                    lost/found
+                  </Button>
+                  <Button
+                    w={{ base: '155px', lg: '197px' }}
+                    h={{ base: '35px', lg: '47px' }}
+                    fontSize={{ base: '14px', lg: '20px' }}
+                    onClick={() => setCategory('in good hands')}
+                    variant={
+                      category === 'in good hands'
+                        ? 'fullBGBtn'
+                        : 'outlineTabBtn'
+                    }
+                    {...register('selectedCategory')}
+                  >
+                    in good hands
+                  </Button>
+                  <Button
+                    w={{ base: '81', lg: '91px' }}
+                    h={{ base: '35px', lg: '47px' }}
+                    fontSize={{ base: '14px', lg: '20px' }}
+                    onClick={() => setCategory('sell')}
+                    variant={
+                      category === 'sell' ? 'fullBGBtn' : 'outlineTabBtn'
+                    }
+                    {...register('selectedCategory')}
+                  >
+                    sell
+                  </Button>
+                </Stack>
               </FormControl>
               <FormControl isInvalid={errors.title}>
-                <FormLabel htmlFor="title"><Text variant={'noticesInputsHead'}>Title of ad</Text></FormLabel>
+                <FormLabel htmlFor="title">
+                  <Text variant={'noticesInputsHead'}>Title of ad</Text>
+                </FormLabel>
                 <Input
                   placeholder={'Type title'}
                   variant={'addNoticeForm'}
@@ -240,7 +252,9 @@ const ModalAddNew = () => {
                 <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.petName}>
-                <FormLabel htmlFor="petName"><Text variant={'noticesInputsHead'}>Name pet</Text></FormLabel>
+                <FormLabel htmlFor="petName">
+                  <Text variant={'noticesInputsHead'}>Name pet</Text>
+                </FormLabel>
                 <Input
                   placeholder={'Type name pet'}
                   variant={'addNoticeForm'}
@@ -249,7 +263,9 @@ const ModalAddNew = () => {
                 <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.birth}>
-                <FormLabel htmlFor="birth"><Text variant={'noticesInputsHead'}>Date of birth</Text></FormLabel>
+                <FormLabel htmlFor="birth">
+                  <Text variant={'noticesInputsHead'}>Date of birth</Text>
+                </FormLabel>
                 <Input
                   placeholder={'Type date of birth'}
                   variant={'addNoticeForm'}
@@ -262,7 +278,9 @@ const ModalAddNew = () => {
                 isInvalid={errors.breed}
                 mb={{ base: '28px', lg: '40px' }}
               >
-                <FormLabel htmlFor="breed"><Text variant={'noticesInputsHead'}>Breed</Text></FormLabel>
+                <FormLabel htmlFor="breed">
+                  <Text variant={'noticesInputsHead'}>Breed</Text>
+                </FormLabel>
                 <Input
                   placeholder={'Type bread'}
                   variant={'addNoticeForm'}
@@ -281,7 +299,7 @@ const ModalAddNew = () => {
                   width={{ base: '100%', lg: '180px' }}
                   h={{ base: '40px', lg: '44px' }}
                   variant={'outlineTabBtn'}
-                  onClick={onClose}
+                  onClick={handleCLose}
                 >
                   Cancel
                 </Button>
@@ -377,7 +395,7 @@ const ModalAddNew = () => {
               )}
 
               <FormLabel>
-                    <Text variant={'noticesInputsHead'}>Load the pet’s image:</Text>
+                <Text variant={'noticesInputsHead'}>Load the pet’s image:</Text>
               </FormLabel>
               <FormControl
                 display={'flex'}
@@ -396,37 +414,37 @@ const ModalAddNew = () => {
                   mr={'auto'}
                 >
                   <Input
-                  id="avatarURL"
-                  display={'none'}
-                  type="file"
-                  h={'100%'}
-                  {...register('avatarURL')}
-                />
-                {newImage && newImage[0] ? (
-                  <Image
-                    pointerEvents={'none'}
-                    borderRadius={'40px'}
-                    position={'absolute'}
-                    top={'50%'}
-                    left={'50%'}
-                    transform={'translate(-50%, -50%)'}
-                    width={{ base: '208px', md: '182px' }}
-                    height={{ base: '208px', md: '182px' }}
-                    src={URL.createObjectURL(newImage[0])}
-                    boxSize="182px"
-                    objectFit="cover"
+                    id="avatarURL"
+                    display={'none'}
+                    type="file"
+                    h={'100%'}
+                    {...register('avatarURL')}
                   />
-                ) : (
-                  <Icon
-                    as={TfiPlus}
-                    pointerEvents={'none'}
-                    position={'absolute'}
-                    top={'50%'}
-                    left={'50%'}
-                    transform={'translate(-50%, -50%)'}
-                    fontSize={'48px'}
-                  />
-                )}
+                  {newImage && newImage[0] ? (
+                    <Image
+                      pointerEvents={'none'}
+                      borderRadius={'40px'}
+                      position={'absolute'}
+                      top={'50%'}
+                      left={'50%'}
+                      transform={'translate(-50%, -50%)'}
+                      width={{ base: '208px', md: '182px' }}
+                      height={{ base: '208px', md: '182px' }}
+                      src={URL.createObjectURL(newImage[0])}
+                      boxSize="182px"
+                      objectFit="cover"
+                    />
+                  ) : (
+                    <Icon
+                      as={TfiPlus}
+                      pointerEvents={'none'}
+                      position={'absolute'}
+                      top={'50%'}
+                      left={'50%'}
+                      transform={'translate(-50%, -50%)'}
+                      fontSize={'48px'}
+                    />
+                  )}
                 </FormLabel>
                 <FormErrorMessage
                   position={'absolute'}

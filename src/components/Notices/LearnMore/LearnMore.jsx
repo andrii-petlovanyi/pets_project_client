@@ -16,15 +16,15 @@ import {
 } from '@chakra-ui/react';
 import { MdFavorite } from 'react-icons/md';
 import PropTypes from 'prop-types';
-import userApiSlice, { useAddToFavoriteMutation, useDeleteFromFavoriteMutation } from '../redux/user/userApiSlice';
+import userApiSlice, {
+  useAddToFavoriteMutation,
+  useDeleteFromFavoriteMutation,
+} from '../../../redux/user/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Toast from '../hooks/toast';
-import userSelectors from '../redux/user/user-selectors';
+import Toast from '../../../hooks/toast';
+import userSelectors from '../../../redux/user/user-selectors';
 
-
-// export const UserPetsItem = ({ pet = {} }) => {
-//   const { name, birth, breed, avatarURL, comment, _id } = pet;
-const LearnMore = ({ notice }) => {
+const LearnMore = ({ notice = {} }) => {
   const isAuth = useSelector(userSelectors.isAuth);
 
   const { favorites } = useSelector(userSelectors.user);
@@ -53,7 +53,9 @@ const LearnMore = ({ notice }) => {
   const changeFavorite = async () => {
     try {
       if (!isAuth) {
-        addToast({ message: "Please, authorize to be able to use this feature" });
+        addToast({
+          message: 'Please, authorize to be able to use this feature',
+        });
       }
       if (isFavorite) {
         const { data, error } = await removeFavorite(noticeId);
@@ -90,7 +92,7 @@ const LearnMore = ({ notice }) => {
     if (window.innerWidth <= 480) {
       window.location.href = 'tel:{phone}';
     }
-    window.location.href = "mailto:{email}"
+    window.location.href = 'mailto:{email}';
   };
 
   return (
@@ -158,7 +160,7 @@ const LearnMore = ({ notice }) => {
                   fontSize={{ base: '24px', lg: '28px' }}
                   lineHeight={{ base: '33px', lg: '38px' }}
                   maxW={'321px'}
-                  pb={"0"}
+                  pb={'0'}
                 >
                   {title}
                 </ModalHeader>
@@ -173,7 +175,12 @@ const LearnMore = ({ notice }) => {
                     <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                       Name:
                     </Text>
-                    <Text ml="71px" fontSize="16px" fontWeight="500" lineHeight="22px">
+                    <Text
+                      ml="71px"
+                      fontSize="16px"
+                      fontWeight="500"
+                      lineHeight="22px"
+                    >
                       {petName}
                     </Text>
                   </Flex>
@@ -181,7 +188,12 @@ const LearnMore = ({ notice }) => {
                     <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                       Birthday:
                     </Text>
-                    <Text ml="51px" fontSize="16px" fontWeight="500" lineHeight="22px">
+                    <Text
+                      ml="51px"
+                      fontSize="16px"
+                      fontWeight="500"
+                      lineHeight="22px"
+                    >
                       {birth}
                     </Text>
                   </Flex>
@@ -189,7 +201,12 @@ const LearnMore = ({ notice }) => {
                     <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                       Breed:
                     </Text>
-                    <Text ml="70px" fontSize="16px" fontWeight="500" lineHeight="22px">
+                    <Text
+                      ml="70px"
+                      fontSize="16px"
+                      fontWeight="500"
+                      lineHeight="22px"
+                    >
                       {breed}
                     </Text>
                   </Flex>
@@ -197,7 +214,12 @@ const LearnMore = ({ notice }) => {
                     <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                       Place:
                     </Text>
-                    <Text ml="73px" fontSize="16px" fontWeight="500" lineHeight="22px">
+                    <Text
+                      ml="73px"
+                      fontSize="16px"
+                      fontWeight="500"
+                      lineHeight="22px"
+                    >
                       {location}
                     </Text>
                   </Flex>
@@ -205,7 +227,12 @@ const LearnMore = ({ notice }) => {
                     <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                       The sex:
                     </Text>
-                    <Text ml="56px" fontSize="16px" fontWeight="500" lineHeight="22px">
+                    <Text
+                      ml="56px"
+                      fontSize="16px"
+                      fontWeight="500"
+                      lineHeight="22px"
+                    >
                       {petSex}
                     </Text>
                   </Flex>
@@ -213,7 +240,12 @@ const LearnMore = ({ notice }) => {
                     <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                       Email:
                     </Text>
-                    <Text ml="74px" fontSize="16px" fontWeight="500" lineHeight="22px">
+                    <Text
+                      ml="74px"
+                      fontSize="16px"
+                      fontWeight="500"
+                      lineHeight="22px"
+                    >
                       {email}
                     </Text>
                   </Flex>
@@ -221,50 +253,72 @@ const LearnMore = ({ notice }) => {
                     <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                       Phone:
                     </Text>
-                    <Text ml="66px" fontSize="16px" fontWeight="500" lineHeight="22px">
+                    <Text
+                      ml="66px"
+                      fontSize="16px"
+                      fontWeight="500"
+                      lineHeight="22px"
+                    >
                       {phone}
                     </Text>
                   </Flex>
-                  <Flex mt="8px">
-                    <Text fontSize="16px" fontWeight="600" lineHeight="22px">
-                      Price:
-                    </Text>
-                    <Text ml="76px" fontSize="16px" fontWeight="500" lineHeight="22px">
-                      {price}$
-                    </Text>
-                  </Flex>
+                  {!!price && (
+                    <Flex mt="8px">
+                      <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                        Price:
+                      </Text>
+                      <Text
+                        ml="76px"
+                        fontSize="16px"
+                        fontWeight="500"
+                        lineHeight="22px"
+                      >
+                        {price}$
+                      </Text>
+                    </Flex>
+                  )}
                 </ModalBody>
               </Box>
             </Box>
           </Flex>
 
-          <Flex mt={'28px'}
-            mb={"32px"}
-            pl={'20px'}
-            pr={"24px"}>
-            <Text fontSize="16px" fontWeight="600" lineHeight="24px" letterSpacing="0.04em">Comments:</Text>
-            <Text fontWeight="500" ml={'5px'}>{comments}</Text>
-          </Flex>
+          {!!comments && (
+            <Flex mt={'28px'} mb={'32px'} pl={'20px'} pr={'24px'}>
+              <Text
+                fontSize="16px"
+                fontWeight="600"
+                lineHeight="24px"
+                letterSpacing="0.04em"
+              >
+                Comments:
+              </Text>
+              <Text fontWeight="500" ml={'5px'}>
+                {comments}
+              </Text>
+            </Flex>
+          )}
           <ModalFooter
             gap={'12px'}
             display={'flex'}
             flexDirection={{ base: 'column', lg: 'row' }}
-            pb={"32px"}
-            pr={"40px"}
+            pb={'32px'}
+            pr={'40px'}
             pt={'0'}
           >
             <Button
               rightIcon={<MdFavorite />}
               variant={'outlineTabBtn'}
               textColor={'#F59256'}
-              width={!isFavorite ? { base: '240px', lg: "160px" } : { lg: "240px" }}
+              width={
+                !isFavorite ? { base: '240px', lg: '160px' } : { lg: '240px' }
+              }
               onClick={changeFavorite}
             >
-              {!isFavorite ? <Text mr={'13px'}>
-                Add to
-              </Text> : <Text mr={'13px'}>
-                Remove from
-              </Text>}
+              {!isFavorite ? (
+                <Text mr={'13px'}>Add to</Text>
+              ) : (
+                <Text mr={'13px'}>Remove from</Text>
+              )}
             </Button>
             <Button
               variant={'outlineTabActive'}
@@ -280,7 +334,7 @@ const LearnMore = ({ notice }) => {
       </Modal>
     </>
   );
-}
+};
 
 LearnMore.propTypes = {
   notice: PropTypes.object,

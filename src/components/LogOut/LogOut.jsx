@@ -6,7 +6,7 @@ import { useLogOutUserMutation } from '../../redux/user/userApiSlice';
 import { logOut } from '../../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 
-export const LogOut = () => {
+export const LogOut = ({ changeDisplay }) => {
   const [logOutUser] = useLogOutUserMutation();
   const dispatch = useDispatch();
 
@@ -14,6 +14,7 @@ export const LogOut = () => {
     try {
       await logOutUser();
       dispatch(logOut());
+      changeDisplay('none');
     } catch (error) {
       console.error(error);
     }
@@ -34,4 +35,5 @@ export const LogOut = () => {
 
 LogOut.propTypes = {
   handleLogOut: PropTypes.func,
+  changeDisplay: PropTypes.func,
 };

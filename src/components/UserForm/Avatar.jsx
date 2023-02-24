@@ -30,11 +30,9 @@ const UserAvatar = () => {
   const { addToast } = Toast();
 
   const { handleSubmit, register, watch, reset } = useForm();
-  console.log(user);
   const newImage = watch('avatarURL');
 
   const onSubmit = async data => {
-    console.log(data);
     if (!data.avatarURL[0]) {
       console.log(data.avatarURL[0]);
       return setAvatarError('Avatar is required');
@@ -46,7 +44,6 @@ const UserAvatar = () => {
       if (error) addToast({ message: error.data.message, type: 'error' });
       addToast({ message: res.message, type: 'success' });
       dispatch(userApiSlice.util.invalidateTags(['user']));
-      console.log(res);
       reset({ avatarURL: null });
     } catch (error) {
       addToast({ message: error.message, type: 'success' });
