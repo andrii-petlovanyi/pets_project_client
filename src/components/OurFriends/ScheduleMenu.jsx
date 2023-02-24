@@ -10,9 +10,11 @@ export const ScheduleMenu = ({ workDays = [] }) => {
   return (
     <Menu>
       <MenuButton _active={{ color: 'mainOrange' }}>
-        {workDays?.length > 0 && workDays[result]?.isOpen
-          ? ` ${workDays[result].from} - ${workDays[result].to}`
-          : 'Closed'}
+        {workDays?.length > 0
+          ? workDays[result]?.isOpen
+            ? ` ${workDays[result].from} - ${workDays[result].to}`
+            : 'Closed'
+          : '--------------------'}
       </MenuButton>
 
       <Portal>
@@ -22,7 +24,7 @@ export const ScheduleMenu = ({ workDays = [] }) => {
               workDays.map((day, index) => (
                 <MenuItem key={index}>
                   {day?.isOpen
-                    ? `${dayNames[index]} ${day.from} - ${day.to}`
+                    ? `${dayNames[index]}   ${day.from} - ${day.to}`
                     : 'Closed'}
                 </MenuItem>
               ))
