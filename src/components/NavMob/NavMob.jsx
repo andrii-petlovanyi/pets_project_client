@@ -25,12 +25,7 @@ export const NavMob = ({ ...props }) => {
   {
     return (
       <Flex {...props}>
-        <Flex
-          top="1rem"
-          right="1.5rem"
-          align="center"
-          justifyContent="space-between"
-        >
+        <Flex top="1rem" right="1.5rem" align="center">
           <IconButton
             aria-label="Open Menu"
             icon={<HiMenu size="40px" />}
