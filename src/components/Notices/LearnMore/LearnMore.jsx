@@ -282,6 +282,7 @@ const LearnMore = ({ noticeId }) => {
                   fontWeight="600"
                   lineHeight="24px"
                   letterSpacing="0.04em"
+                  wordBreak={'break-word'}
                 >
                   Comments:{' '}
                 </Box>

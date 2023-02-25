@@ -44,20 +44,26 @@ export const NoticeCategoryItem = ({ notice }) => {
     owner,
   } = notice;
 
-  const [removeNotice] = useDeleteNoticeMutation();
+  const [deleteNotice] = useDeleteNoticeMutation();
   const [addFavorite] = useAddToFavoriteMutation();
   const [removeFavorite] = useDeleteFromFavoriteMutation();
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
   const { addToast } = Toast();
 
-  const deleteNotice = async () => {
+  const removeNotice = async () => {
     try {
-      const { data, error } = await removeNotice(noticeId);
+      const { data, error } = await deleteNotice(noticeId);
       if (error) {
         console.log('error:', error.message);
+        return;
       }
+      addToast({
+        message: 'Notice was removed successfully',
+        type: 'success',
+      });
       console.log('data:', data);
+      dispatch(userApiSlice.util.invalidateTags(['user']));
     } catch (error) {
       console.log('error:', error);
     }
@@ -68,13 +74,23 @@ export const NoticeCategoryItem = ({ notice }) => {
       if (!userId) {
         addToast({
           message: 'Please, authorize to be able to use this feature',
+          type: 'success',
         });
+        return;
       }
       if (isFavorite) {
         const { data, error } = await removeFavorite(noticeId);
         if (error) {
           console.log('error:', error.message);
+          return;
         }
+
+        addToast({
+          message:
+            'The notice was removed successfully from the favorites list!',
+          type: 'success',
+        });
+
         console.log('data:', data);
         dispatch(userApiSlice.util.invalidateTags(['user']));
       } else {
@@ -82,6 +98,10 @@ export const NoticeCategoryItem = ({ notice }) => {
         if (error) {
           console.log('error:', error.message);
         }
+        addToast({
+          message: 'The notice was added successfully to the favorites list!',
+          type: 'success',
+        });
         console.log('data:', data);
         dispatch(userApiSlice.util.invalidateTags(['user']));
       }
@@ -164,6 +184,7 @@ export const NoticeCategoryItem = ({ notice }) => {
             fontWeight="700"
             lineHeight="38px"
             letterSpacing="-0.01em"
+            wordBreak={'break-word'}
           >
             {title}
           </Heading>
@@ -218,9 +239,9 @@ export const NoticeCategoryItem = ({ notice }) => {
         alignItems={'center'}
       >
         <LearnMore noticeId={notice._id} />
-        {userId === owner ? (
+        {userId === owner && (
           <Button
-            onClick={deleteNotice}
+            onClick={removeNotice}
             type="button"
             m="0 auto"
             mt="12px"
@@ -229,8 +250,6 @@ export const NoticeCategoryItem = ({ notice }) => {
             <Text mr={'13px'}>Delete</Text>{' '}
             <MdOutlineDeleteOutline size={'20px'} />
           </Button>
-        ) : (
-          ''
         )}
       </CardFooter>
     </Card>
