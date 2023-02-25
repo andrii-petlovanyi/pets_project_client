@@ -13,6 +13,7 @@ export function PaginationBar({ currentPage, countPage, setPage, ...props }) {
           onClick={() => setPage(currentPage - 1)}
           variant={'outlineTabActive'}
           p={'10px 10px'}
+          w={'40px'}
         >
           <AiOutlineLeft />
         </Button>
@@ -61,6 +62,7 @@ export function PaginationBar({ currentPage, countPage, setPage, ...props }) {
       {currentPage !== countPage && (
         <Button
           p={'10px 10px'}
+          w={'40px'}
           onClick={() => setPage(currentPage + 1)}
           variant={'outlineTabActive'}
         >
