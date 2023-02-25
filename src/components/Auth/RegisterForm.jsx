@@ -42,7 +42,7 @@ const schemaStep1 = yup.object().shape({
     .matches(passRegexp, 'Password must be contain letters and numbers')
     .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
-    .matches( /^([a-zA-Z0-9])+$/u,'Please, only letters and numbers')
+    .matches( /^([a-zA-Z0-9])+$/u,'Please, use only letters and numbers')
     .required('Password is required'),
 
   cpassword: yup
@@ -51,7 +51,7 @@ const schemaStep1 = yup.object().shape({
     .matches(passRegexp, 'Password must be contain letters and numbers')
     .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
-    .matches( /^([a-zA-Z0-9])+$/u,'Please, only letters and numbers')
+    .matches( /^([a-zA-Z0-9])+$/u,'Please, use only letters and numbers')
     .required('Please repeat password')
     .oneOf([yup.ref('password')], 'Password do not match'),
 });
@@ -59,6 +59,9 @@ const schemaStep1 = yup.object().shape({
 const schemaStep2 = yup.object().shape({
   name: yup
     .string()
+    .matches(
+      /^([a-zA-Z-. a-zA-Z])+$/u
+      ,'Please, use only letters, space or dash')
     .trim()
     .min(3, 'Minimal name length is 3 symbols')
     .max(32, 'Max name length is 32 symbols')
@@ -71,7 +74,8 @@ const schemaStep2 = yup.object().shape({
     .max(32, 'Max city length is 32 symbols')
     .required('City is required'),
 
-  phone: yup.string().min(12, 'Minimal phone number length is 12 symbols').max(13, 'Max phone number length is 13 symbols').required('Phone number is required'),
+  phone: yup.string().min(12, 'Minimal phone number length is 12 symbols').max(13, 'Max phone number length is 13 symbols')
+  .matches(/^([+0-9])+$/u,'Please, use only numbers').required('Phone number is required'),
 
 });
 
