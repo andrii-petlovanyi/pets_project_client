@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import {
   Box,
   FormControl,
@@ -18,16 +22,17 @@ import {
   Textarea,
   Icon,
 } from '@chakra-ui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { dateToString, stringToDate } from '../../../services/dateFormat';
+import { locationRegExp } from '../../../services/validation';
+// import { birthRegExp, locationRegExp } from '../../../services/validation';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
-import Toast from '../../../hooks/toast'
+import Toast from '../../../hooks/toast';
+import { calendarFunc } from '../../UserForm/Calendar/Calendar';
 
 const schemaStep1Off = yup.object().shape({
   title: yup
@@ -63,9 +68,7 @@ const schemaStep1 = yup.object().shape({
     .min(2, 'Minimal pet name length is 2 symbols')
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
-  birth: yup
-    .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
+  birth: yup.string(),
   breed: yup
     .string()
     .trim()
@@ -108,6 +111,7 @@ const ModalAddNew = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     watch,
@@ -132,6 +136,7 @@ const ModalAddNew = () => {
     formData.append('title', data.title);
     formData.append('category', category);
     formData.append('petName', data.petName);
+    formData.append('birth', data.birth);
     formData.append('breed', data.breed);
     formData.append('location', data.location);
     formData.append('petSex', petSex);
@@ -148,7 +153,8 @@ const ModalAddNew = () => {
 
     try {
       const { data: res, error } = await addNotice(formData);
-      if (error) return addToast({ message: error.data.message, type: 'error' });
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
       addToast({ message: res.message, type: 'success' });
       onClose();
       reset();
@@ -294,11 +300,31 @@ const ModalAddNew = () => {
                   <FormLabel htmlFor="birth">
                     <Text variant={'noticesInputsHead'}>Date of birth</Text>
                   </FormLabel>
-                  <Input
+                  {/* <Input
                     placeholder={'Type date of birth'}
                     variant={'addNoticeForm'}
                     type="text"
                     {...register('birth')}
+                  /> */}
+                  <Controller
+                    name="birth"
+                    control={control}
+                    render={({ field }) => (
+                      <Box style={{ height: '48px' }} variant={'addNoticeForm'}>
+                        <DatePicker
+                          renderCustomHeader={calendarFunc}
+                          onChange={date => {
+                            console.log(date);
+                            field.onChange(dateToString(date));
+                          }}
+                          selected={field.value && stringToDate(field.value)}
+                          dateFormat="dd.MM.yyyy"
+                          maxDate={Date.now()}
+                          wrapperClassName="date__picker"
+                          placeholderText={'Type date of birth'}
+                        />
+                      </Box>
+                    )}
                   />
                   <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
                 </FormControl>
