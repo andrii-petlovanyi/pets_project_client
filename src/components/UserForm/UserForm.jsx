@@ -11,7 +11,7 @@ import Toast from '../../hooks/toast';
 
 import UserAvatar from './Avatar';
 import { calendarFunc } from './Calendar/Calendar';
-import { ButtonUserForm } from '../UserForm/IconButton';
+import { ButtonUserForm } from './ButtonUserForm';
 import { userFormSchema } from '../../services/validation';
 import { dateToString, stringToDate } from '../../services/dateFormat';
 import './Calendar/Calendar.styled.css';
@@ -28,19 +28,20 @@ const INITIAL_DISABLED = {
 
 const UserForm = ({ ...props }) => {
   const [isDisabled, setIsDisabled] = useState(INITIAL_DISABLED);
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
   const user = useSelector(userSelectors.user);
   const { addToast } = Toast();
 
   const {
     control,
-    handleSubmit,
+    // handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
       name: user.name,
       email: user.email,
-      birthday: user.birthday ? stringToDate(user.birthday) : null,
+      birthday: user.birthday ? stringToDate(user.birthday) : '',
       phone: user.phone,
       city: user.city,
     },
@@ -51,19 +52,37 @@ const UserForm = ({ ...props }) => {
     setIsDisabled({ ...INITIAL_DISABLED, [data]: false });
   };
 
-  const onSubmit = async data => {
+  // const onSubmit = async data => {
+  //   const newData = {
+  //     ...data,
+  //     birthday: dateToString(data.birthday),
+  //   };
+  //   try {
+  //     const { data: res, error } = await updateUser(newData);
+  //     if (error)
+  //       return addToast({ message: error.data.message, type: 'error' });
+  //     addToast({ message: res.message, type: 'success' });
+  //     setIsDisabled({ ...INITIAL_DISABLED });
+  //   } catch (error) {
+  //     addToast({ message: error.message, type: 'success' });
+  //   }
+  // };
+
+  const onSubmit = async (data, name) => {
+    name === 'birthday' && (data = dateToString(data));
     const newData = {
-      ...data,
-      birthday: dateToString(data.birthday),
+      [name]: data,
     };
+
     try {
+      await userFormSchema.validate(newData);
       const { data: res, error } = await updateUser(newData);
       if (error)
         return addToast({ message: error.data.message, type: 'error' });
       addToast({ message: res.message, type: 'success' });
       setIsDisabled({ ...INITIAL_DISABLED });
     } catch (error) {
-      addToast({ message: error.message, type: 'success' });
+      addToast({ message: error.message, type: 'error' });
     }
   };
 
@@ -85,7 +104,7 @@ const UserForm = ({ ...props }) => {
           My information:
         </Heading>
         <FormControl
-          onSubmit={handleSubmit(onSubmit)}
+          // onSubmit={handleSubmit(onSubmit)}
           display={'flex'}
           flexDirection={{ base: 'column', lg: 'row-reverse', xl: 'column' }}
           maxW={{ xl: '411px' }}
@@ -143,9 +162,11 @@ const UserForm = ({ ...props }) => {
                   />
                 ) : (
                   <ButtonUserForm
-                    handleClick={handleSubmit(onSubmit)}
+                    handleClick={onSubmit}
                     name={'name'}
                     flag={isDisabled}
+                    getValues={getValues}
+                    isLoading={isLoading}
                   />
                 )}
               </FormLabel>
@@ -191,9 +212,11 @@ const UserForm = ({ ...props }) => {
                   />
                 ) : (
                   <ButtonUserForm
-                    handleClick={handleSubmit(onSubmit)}
+                    handleClick={onSubmit}
                     name={'email'}
                     flag={isDisabled}
+                    getValues={getValues}
+                    isLoading={isLoading}
                   />
                 )}
               </FormLabel>
@@ -243,9 +266,11 @@ const UserForm = ({ ...props }) => {
                   />
                 ) : (
                   <ButtonUserForm
-                    handleClick={handleSubmit(onSubmit)}
+                    handleClick={onSubmit}
                     name={'birthday'}
                     flag={isDisabled}
+                    getValues={getValues}
+                    isLoading={isLoading}
                   />
                 )}
               </FormLabel>
@@ -291,9 +316,11 @@ const UserForm = ({ ...props }) => {
                   />
                 ) : (
                   <ButtonUserForm
-                    handleClick={handleSubmit(onSubmit)}
+                    handleClick={onSubmit}
                     name={'phone'}
                     flag={isDisabled}
+                    getValues={getValues}
+                    isLoading={isLoading}
                   />
                 )}
               </FormLabel>
@@ -338,9 +365,11 @@ const UserForm = ({ ...props }) => {
                   />
                 ) : (
                   <ButtonUserForm
-                    handleClick={handleSubmit(onSubmit)}
+                    handleClick={onSubmit}
                     name={'city'}
                     flag={isDisabled}
+                    getValues={getValues}
+                    isLoading={isLoading}
                   />
                 )}
               </FormLabel>

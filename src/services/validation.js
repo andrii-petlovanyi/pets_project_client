@@ -13,17 +13,22 @@ export const userFormSchema = yup.object({
   name: yup
     .string()
     .trim('The name cannot include leading and trailing spaces')
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .matches(/^[a-zA-Zа-яА-Я\s]*$/, 'Please enter valid name')
     .min(4, 'Need at least 4 characters')
-    .max(40)
-    .required(),
-  email: yup.string().email('Must be a valid email').required(),
-  birthday: yup.string(),
-  phone: yup.string().trim().matches(phoneRegExp, 'Phone number is not valid'),
+    .max(40),
+  email: yup.string().email('Must be a valid email'),
+  birthday: yup.string().nullable(true),
+  phone: yup
+    .string()
+    .trim()
+    .min(9)
+    .max(13)
+    .matches(phoneRegExp, 'Phone number is not valid'),
   city: yup
     .string()
-    .trim('The city cannot include leading and trailing spaces')
-    .strict(true)
-    .required(),
+    .trim()
+    .matches(locationRegExp, 'City must be in format: City, Region')
+    .min(3, 'Minimal city length is 3 symbols')
+    .max(32, 'Max city length is 32 symbols'),
   avatarURL: yup.string(),
 });
