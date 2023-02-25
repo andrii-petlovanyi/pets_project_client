@@ -13,8 +13,6 @@ export function PaginationBar({ currentPage, countPage, setPage, ...props }) {
           onClick={() => setPage(currentPage - 1)}
           variant={'outlineTabActive'}
           p={'10px 10px'}
-          w={'40px'}
-          h={'40px'}
         >
           <AiOutlineLeft />
         </Button>
@@ -24,8 +22,6 @@ export function PaginationBar({ currentPage, countPage, setPage, ...props }) {
           onClick={() => setPage(1)}
           variant={'outlineTabBtn'}
           p={'10px 10px'}
-          w={'40px'}
-          h={'40px'}
         >
           1
         </Button>
@@ -36,18 +32,11 @@ export function PaginationBar({ currentPage, countPage, setPage, ...props }) {
           onClick={() => setPage(currentPage - 1)}
           variant={'outlineTabBtn'}
           p={'10px 10px'}
-          w={'40px'}
-          h={'40px'}
         >
           {currentPage - 1}
         </Button>
       )}
-      <Button
-        variant={'outlineTabActive'}
-        p={'10px 10px'}
-        w={'40px'}
-        h={'40px'}
-      >
+      <Button variant={'outlineTabActive'} p={'10px 10px'}>
         {currentPage}
       </Button>
       {currentPage < countPage && (
@@ -55,8 +44,6 @@ export function PaginationBar({ currentPage, countPage, setPage, ...props }) {
           onClick={() => setPage(currentPage + 1)}
           variant={'outlineTabBtn'}
           p={'10px 10px'}
-          w={'40px'}
-          h={'40px'}
         >
           {currentPage + 1}
         </Button>
@@ -65,8 +52,6 @@ export function PaginationBar({ currentPage, countPage, setPage, ...props }) {
       {currentPage < countPage - 1 && (
         <Button
           p={'10px 10px'}
-          w={'40px'}
-          h={'40px'}
           onClick={() => setPage(countPage)}
           variant={'outlineTabBtn'}
         >
@@ -76,8 +61,6 @@ export function PaginationBar({ currentPage, countPage, setPage, ...props }) {
       {currentPage !== countPage && (
         <Button
           p={'10px 10px'}
-          w={'40px'}
-          h={'40px'}
           onClick={() => setPage(currentPage + 1)}
           variant={'outlineTabActive'}
         >
