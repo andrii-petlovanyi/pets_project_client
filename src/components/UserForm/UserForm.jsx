@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import { MdPhotoCamera } from 'react-icons/md';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input, InputGroup } from '@chakra-ui/input';
-import {
-  Box,
-  Flex,
-  Heading,
-  // Button, HStack, Image, Box, Icon,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import Toast from '../../hooks/toast';
+
+import UserAvatar from './Avatar';
 import { calendarFunc } from './Calendar/Calendar';
 import { ButtonUserForm } from '../UserForm/IconButton';
 import { userFormSchema } from '../../services/validation';
-// import Avatar from './Avatar';
-import './Calendar/Calendar.styled.css';
-
-import UserAvatar from './Avatar';
-import userSelectors from '../../redux/user/user-selectors';
-import { useSelector } from 'react-redux';
-import { useUpdateUserMutation } from '../../redux/user/userApiSlice';
 import { dateToString, stringToDate } from '../../services/dateFormat';
+import './Calendar/Calendar.styled.css';
+import userSelectors from '../../redux/user/user-selectors';
+import { useUpdateUserMutation } from '../../redux/user/userApiSlice';
 
 const INITIAL_DISABLED = {
   name: true,
@@ -33,10 +26,11 @@ const INITIAL_DISABLED = {
   city: true,
 };
 
-const UserForm = () => {
+const UserForm = ({ ...props }) => {
   const [isDisabled, setIsDisabled] = useState(INITIAL_DISABLED);
   const [updateUser] = useUpdateUserMutation();
   const user = useSelector(userSelectors.user);
+  const { addToast } = Toast();
 
   const {
     control,
@@ -46,7 +40,7 @@ const UserForm = () => {
     defaultValues: {
       name: user.name,
       email: user.email,
-      birthday: stringToDate(user.birthday),
+      birthday: user.birthday ? stringToDate(user.birthday) : null,
       phone: user.phone,
       city: user.city,
     },
@@ -64,32 +58,52 @@ const UserForm = () => {
     };
     try {
       const { data: res, error } = await updateUser(newData);
-      if (error) return console.log(error);
-      console.log(res);
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
+      addToast({ message: res.message, type: 'success' });
       setIsDisabled({ ...INITIAL_DISABLED });
     } catch (error) {
-      console.log(error);
+      addToast({ message: error.message, type: 'success' });
     }
   };
 
   return (
     <>
-      <Flex flexDirection={'column'} width={'100%'}>
-        <Heading mb={'24px'}>My information:</Heading>
+      <Flex
+        flexDirection={'column'}
+        width={{ base: '100%', xl: 'calc(100vw / 3)' }}
+        {...props}
+      >
+        <Heading
+          mb={'24px'}
+          fontWeight={500}
+          fontSize={{ base: '20px', lg: '28px' }}
+          lineHeight={'1.4'}
+          letterSpacing={{ base: '0.04em', lg: '0' }}
+          color={{ base: 'black', lg: 'textColor' }}
+        >
+          My information:
+        </Heading>
         <FormControl
           onSubmit={handleSubmit(onSubmit)}
           display={'flex'}
-          flexDirection={{ base: 'column', md: 'row-reverse', lg: 'column' }}
-          maxW={{ lg: '411px' }}
-          // flexDirection={'column'}
+          flexDirection={{ base: 'column', lg: 'row-reverse', xl: 'column' }}
+          maxW={{ xl: '411px' }}
           width={'100%'}
-          p={'20px 16px 67px 16px'}
+          p={{ base: '16px 20px', lg: '24px 40px 24px 32px', xl: '16px 20px' }}
           background={'white'}
-          boxShadow={'7px 4px 14px rgba(49, 21, 4, 0.07)'}
-          borderRadius={'0px 40px 40px 0px'}
+          boxShadow={{
+            base: '7px 4px 14px rgba(0, 0, 0, 0.11)',
+            lg: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+          }}
+          borderRadius={{ base: '20px', lg: '0px 40px 40px 0px' }}
         >
           <UserAvatar />
-          <Flex display={'flex'} flexDirection={'column'}>
+          <Flex
+            display={'flex'}
+            flexDirection={'column'}
+            mr={{ lg: '52px', xl: '0' }}
+          >
             <InputGroup
               display={'flex'}
               flexDirection={'column'}
@@ -145,7 +159,6 @@ const UserForm = () => {
               alignItems={'center'}
               justifyContent={'space-around'}
               mb={'15'}
-              // width={{ base: '100%' }}
             >
               <FormLabel
                 htmlFor={'email'}
@@ -213,13 +226,11 @@ const UserForm = () => {
                         renderCustomHeader={calendarFunc}
                         disabled={isDisabled.birthday}
                         onChange={date => {
-                          // console.log(console.log(field));
                           field.onChange(date);
                         }}
                         selected={field.value}
                         dateFormat="dd.MM.yyyy"
                         maxDate={Date.now()}
-                        wrapperClassName="date__picker"
                       />
                     </Box>
                   )}

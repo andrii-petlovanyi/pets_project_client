@@ -23,32 +23,22 @@ import userApiSlice, {
 import { useDispatch, useSelector } from 'react-redux';
 import Toast from '../../../hooks/toast';
 import userSelectors from '../../../redux/user/user-selectors';
+import { useGetNoticeByIdQuery } from '../../../redux/notices/noticesApiSlice';
 
-const LearnMore = ({ notice = {} }) => {
+const LearnMore = ({ noticeId }) => {
   const isAuth = useSelector(userSelectors.isAuth);
 
   const { favorites } = useSelector(userSelectors.user);
-  const {
-    _id: noticeId,
-    category,
-    title,
-    petName,
-    birth,
-    breed,
-    location,
-    petSex,
-    email,
-    phone,
-    price,
-    petImage,
-    comments,
-  } = notice;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [addFavorite] = useAddToFavoriteMutation();
   const [removeFavorite] = useDeleteFromFavoriteMutation();
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
   const { addToast } = Toast();
+
+  const { data: res } = useGetNoticeByIdQuery(noticeId);
+  const { notice } = res || {};
 
   const changeFavorite = async () => {
     try {
@@ -111,10 +101,11 @@ const LearnMore = ({ notice = {} }) => {
           width={'100%'}
           borderRadius={{ base: '20px', lg: '40px' }}
           padding={{ base: '0', lg: '' }}
+          overflow={'hidden'}
         >
           <Flex display={'flex'} flexDirection={{ base: 'column', lg: 'row' }}>
             <Image
-              src={petImage ? petImage : '#'}
+              src={notice?.petImage ? notice?.petImage : '#'}
               objectFit="cover"
               height={{ base: '240px', lg: '328px' }}
               width={{ base: '240px', lg: '288px' }}
@@ -126,9 +117,9 @@ const LearnMore = ({ notice = {} }) => {
             />
             <Text
               lineHeight={{ base: '15px', lg: '16px' }}
+              top={{ base: '80px', lg: '52px' }}
               css={{
                 position: 'absolute',
-                top: 52,
                 left: 20,
                 borderRadius: '0 14px 14px 0',
                 background: 'rgba(255, 255, 255, 0.6)',
@@ -139,11 +130,11 @@ const LearnMore = ({ notice = {} }) => {
                 fontWeight: '500',
                 letterSpacing: '0.04em',
                 display: 'flex',
-                justifyContent: 'center',
+                // justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
-              {changeCategoryName(category)}
+              {changeCategoryName(notice?.category)}
             </Text>
             <Box
               flex={{ base: 'none', md: '' }}
@@ -162,12 +153,12 @@ const LearnMore = ({ notice = {} }) => {
                   maxW={'321px'}
                   pb={'0'}
                 >
-                  {title}
+                  {notice?.title}
                 </ModalHeader>
                 <ModalBody
                   fontFamily={'Manrope'}
                   fontStyle={'normal'}
-                  fontWeight={'600'}
+                  fontWeight="600"
                   fontSize={{ base: '14px', lg: '16px' }}
                   lineHeight={{ base: '19px', lg: '22px' }}
                 >
@@ -176,12 +167,12 @@ const LearnMore = ({ notice = {} }) => {
                       Name:
                     </Text>
                     <Text
-                      ml="71px"
-                      fontSize="16px"
+                      ml={{ base: '74px', lg: '71px' }}
+                      fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
-                      lineHeight="22px"
+                      lineHeight={{ base: '19px', lg: '22px' }}
                     >
-                      {petName}
+                      {notice?.petName}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -189,12 +180,12 @@ const LearnMore = ({ notice = {} }) => {
                       Birthday:
                     </Text>
                     <Text
-                      ml="51px"
-                      fontSize="16px"
+                      ml={{ base: '57px', lg: '51px' }}
+                      fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
-                      lineHeight="22px"
+                      lineHeight={{ base: '19px', lg: '22px' }}
                     >
-                      {birth}
+                      {notice?.birth}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -202,12 +193,12 @@ const LearnMore = ({ notice = {} }) => {
                       Breed:
                     </Text>
                     <Text
-                      ml="70px"
-                      fontSize="16px"
+                      ml={{ base: '74px', lg: '70px' }}
+                      fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
-                      lineHeight="22px"
+                      lineHeight={{ base: '19px', lg: '22px' }}
                     >
-                      {breed}
+                      {notice?.breed}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -215,12 +206,12 @@ const LearnMore = ({ notice = {} }) => {
                       Place:
                     </Text>
                     <Text
-                      ml="73px"
-                      fontSize="16px"
+                      ml={{ base: '77px', lg: '73px' }}
+                      fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
-                      lineHeight="22px"
+                      lineHeight={{ base: '19px', lg: '22px' }}
                     >
-                      {location}
+                      {notice?.location}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -228,12 +219,12 @@ const LearnMore = ({ notice = {} }) => {
                       The sex:
                     </Text>
                     <Text
-                      ml="56px"
-                      fontSize="16px"
+                      ml={{ base: '61px', lg: '56px' }}
+                      fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
-                      lineHeight="22px"
+                      lineHeight={{ base: '19px', lg: '22px' }}
                     >
-                      {petSex}
+                      {notice?.petSex}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -241,12 +232,12 @@ const LearnMore = ({ notice = {} }) => {
                       Email:
                     </Text>
                     <Text
-                      ml="74px"
-                      fontSize="16px"
+                      ml={{ base: '77px', lg: '74px' }}
+                      fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
-                      lineHeight="22px"
+                      lineHeight={{ base: '19px', lg: '22px' }}
                     >
-                      {email}
+                      {notice?.owner?.email}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
@@ -254,26 +245,26 @@ const LearnMore = ({ notice = {} }) => {
                       Phone:
                     </Text>
                     <Text
-                      ml="66px"
-                      fontSize="16px"
+                      ml={{ base: '70px', lg: '66px' }}
+                      fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
-                      lineHeight="22px"
+                      lineHeight={{ base: '19px', lg: '22px' }}
                     >
-                      {phone}
+                      {notice?.owner?.phone}
                     </Text>
                   </Flex>
-                  {!!price && (
+                  {!!notice?.price && (
                     <Flex mt="8px">
                       <Text fontSize="16px" fontWeight="600" lineHeight="22px">
                         Price:
                       </Text>
                       <Text
-                        ml="76px"
-                        fontSize="16px"
+                        ml={{ base: '79px', lg: '76px' }}
+                        fontSize={{ base: '14px', lg: '16px' }}
                         fontWeight="500"
-                        lineHeight="22px"
+                        lineHeight={{ base: '19px', lg: '22px' }}
                       >
-                        {price}$
+                        {notice?.price}₴
                       </Text>
                     </Flex>
                   )}
@@ -282,18 +273,19 @@ const LearnMore = ({ notice = {} }) => {
             </Box>
           </Flex>
 
-          {!!comments && (
+          {!!notice?.comments && (
             <Flex mt={'28px'} mb={'32px'} pl={'20px'} pr={'24px'}>
-              <Text
-                fontSize="16px"
-                fontWeight="600"
-                lineHeight="24px"
-                letterSpacing="0.04em"
-              >
-                Comments:
-              </Text>
-              <Text fontWeight="500" ml={'5px'}>
-                {comments}
+              <Text fontWeight="500">
+                <Box
+                  as="span"
+                  fontSize="16px"
+                  fontWeight="600"
+                  lineHeight="24px"
+                  letterSpacing="0.04em"
+                >
+                  Comments:{' '}
+                </Box>
+                {notice?.comments}
               </Text>
             </Flex>
           )}
@@ -337,6 +329,6 @@ const LearnMore = ({ notice = {} }) => {
 };
 
 LearnMore.propTypes = {
-  notice: PropTypes.object,
+  noticeId: PropTypes.string,
 };
 export default LearnMore;

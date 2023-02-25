@@ -7,13 +7,14 @@ import UserPetsItem from './PetsItem';
 
 export const UserPetsList = () => {
   const { pets } = useSelector(userSelectors.user);
-  console.log(pets);
 
   return (
     <Flex
       width={'100%'}
-      flexDirection={'column'}
+      flexDirection={{ base: 'row', lg: 'column' }}
+      flexWrap={'wrap'}
       gap={{ base: '20px', xl: '22px' }}
+      justifyContent={'center'}
     >
       {pets?.length > 0
         ? pets.map(pet => <UserPetsItem key={pet.avatarURL} pet={pet} />)

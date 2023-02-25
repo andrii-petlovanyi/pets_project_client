@@ -15,7 +15,7 @@ const outlineTabBtn = defineStyle({
   fontFamily: 'Manrope',
   fontWeight: '500',
   fontSize: '20px',
-  lineHeight: '27p',
+  lineHeight: '27px',
   letterSpacing: '0.04em',
 
   _hover: {
@@ -40,6 +40,10 @@ const outlineTabActive = defineStyle({
   fontSize: '20px',
   lineHeight: '27p',
   letterSpacing: '0.04em',
+  _hover: {
+    borderColor: 'accentOrange',
+    background: 'accentOrange',
+  },
 });
 
 const fullBGBtn = defineStyle({
@@ -199,11 +203,10 @@ const noticePetSexBtn = defineStyle({
   justifyContent: 'center',
   alignItems: 'center',
   padding: '0px',
-  
 
   _hover: {
     textColor: 'accentOrange',
- },
+  },
 });
 
 const authFormIcon = defineStyle({

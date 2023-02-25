@@ -202,7 +202,7 @@ export const NoticeCategoryItem = ({ notice }) => {
                 fontWeight="500"
                 lineHeight="22px"
               >
-                {price ? price : ''}$
+                {price ? `${price} ₴` : ''}
               </Text>
             </Flex>
           ) : (
@@ -217,7 +217,7 @@ export const NoticeCategoryItem = ({ notice }) => {
         justifyContent={'center'}
         alignItems={'center'}
       >
-        <LearnMore notice={notice} />
+        <LearnMore noticeId={notice._id} />
         {userId === owner ? (
           <Button
             onClick={deleteNotice}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -23,6 +23,9 @@ import {
   Flex,
   Text,
 } from '@chakra-ui/react';
+import { dateToString, stringToDate } from '../../services/dateFormat';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import { TfiPlus } from 'react-icons/tfi';
 import { HiPlus } from 'react-icons/hi';
@@ -31,8 +34,9 @@ import userApiSlice, {
   useAddMyPetsMutation,
 } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
-import { birthdayRegExp } from '../../services/validation';
 import Toast from '../../hooks/toast';
+import { calendarFunc } from '../UserForm/Calendar/Calendar';
+import '../UserForm/Calendar/Calendar.styled.css';
 
 const schemaStep1 = yup.object().shape({
   name: yup
@@ -41,10 +45,7 @@ const schemaStep1 = yup.object().shape({
     .min(2, 'Minimal pet name length is 2 symbols')
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
-  birthday: yup
-    .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
-    .required('Birthday is required'),
+  birthday: yup.string().required('Birthday is required'),
   breed: yup
     .string()
     .trim()
@@ -77,12 +78,13 @@ const AddPets = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    control,
     reset,
   } = useForm({
     resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
   });
 
-  const newImage = watch('avatarPet');
+  let newImage = watch('avatarPet');
 
   const onSubmit = async data => {
     if (!data.avatarPet[0]) {
@@ -102,6 +104,7 @@ const AddPets = () => {
       dispatch(userApiSlice.util.invalidateTags(['user']));
       onClose();
       reset();
+      reset({ avatarPet: null, comment: null });
       setStep(1);
     } catch (error) {
       addToast({ message: error.message, type: 'success' });
@@ -174,11 +177,24 @@ const AddPets = () => {
               </FormControl>
               <FormControl isInvalid={errors.birthday}>
                 <FormLabel htmlFor="birthday">Date of birth</FormLabel>
-                <Input
-                  variant={'addPetsForm'}
-                  placeholder={'Type date of birth'}
-                  type="text"
-                  {...register('birthday')}
+                <Controller
+                  name="birthday"
+                  control={control}
+                  render={({ field }) => (
+                    <Box style={{ height: '48px' }} variant={'addPetsForm'}>
+                      <DatePicker
+                        renderCustomHeader={calendarFunc}
+                        onChange={date => {
+                          field.onChange(dateToString(date));
+                        }}
+                        selected={field.value && stringToDate(field.value)}
+                        dateFormat="dd.MM.yyyy"
+                        maxDate={Date.now()}
+                        wrapperClassName="date__picker"
+                        placeholderText={'Type date of birth'}
+                      />
+                    </Box>
+                  )}
                 />
                 <FormErrorMessage>{errors.birthday?.message}</FormErrorMessage>
               </FormControl>

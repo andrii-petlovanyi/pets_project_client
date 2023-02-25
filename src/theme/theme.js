@@ -29,6 +29,7 @@ const colors = {
   thirdTextColor: '#181C27',
   accentTextColor: '#212121',
   labelColor: 'rgba(17, 17, 17, 0.6)',
+  placeholderColor: 'rgba(27, 27, 27, 0.6)',
 
   blurBadge: 'rgba(255, 255, 255, 0.6)',
   backdropFilter: 'blur(10px)',
