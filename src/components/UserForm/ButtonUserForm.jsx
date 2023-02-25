@@ -4,11 +4,23 @@ import { RiPencilFill } from 'react-icons/ri';
 import { GoCheck } from 'react-icons/go';
 import PropTypes from 'prop-types';
 
-export const ButtonUserForm = ({ handleClick, name, flag }) => {
+export const ButtonUserForm = ({
+  handleClick,
+  name,
+  flag,
+  getValues,
+  isLoading,
+}) => {
   return (
     <>
       <IconButton
-        onClick={flag[name] ? () => handleClick(name) : () => handleClick()}
+        // onClick={flag[name] ? () => handleClick(name) : () => handleClick()}
+        onClick={
+          flag[name]
+            ? () => handleClick(name)
+            : () => handleClick(getValues(name), name)
+        }
+        isLoading={isLoading}
         minWidth={'32px'}
         height="32px"
         ml="24px"
@@ -46,4 +58,6 @@ ButtonUserForm.propTypes = {
     phone: PropTypes.bool,
     city: PropTypes.bool.isRequired,
   }),
+  getValues: PropTypes.func,
+  isLoading: PropTypes.bool,
 };

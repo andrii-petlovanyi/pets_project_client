@@ -74,9 +74,12 @@ const schemaStep2 = yup.object().shape({
     .max(32, 'Max city length is 32 symbols')
     .required('City is required'),
 
-  phone: yup.string().min(12, 'Minimal phone number length is 12 symbols').max(13, 'Max phone number length is 13 symbols')
-  .matches(/^([+0-9])+$/u,'Please, use only numbers').required('Phone number is required'),
-
+  phone: yup
+    .string()
+    .min(12, 'Minimal phone number length is 12 symbols')
+    .max(13, 'Max phone number length is 13 symbols')
+    .matches(/^([+0-9])+$/u, 'Please, use only numbers')
+    .required('Phone number is required'),
 });
 
 const RegisterForm = () => {

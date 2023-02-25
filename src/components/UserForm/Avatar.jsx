@@ -24,11 +24,13 @@ import userSelectors from '../../redux/user/user-selectors';
 const UserAvatar = () => {
   const [avatarError, setAvatarError] = useState('');
   const user = useSelector(userSelectors.user);
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
   const dispatch = useDispatch();
   const { addToast } = Toast();
 
-  const { handleSubmit, register, watch, reset } = useForm();
+  const { handleSubmit, register, watch, reset } = useForm({
+    defaultValues: { avatarURL: null },
+  });
   const newImage = watch('avatarURL');
 
   const onSubmit = async data => {
@@ -99,7 +101,6 @@ const UserAvatar = () => {
         top={{ xl: '-18px' }}
         left={{ xl: '-6px' }}
         mt={{ base: '12px', lg: '8px', xl: '0px' }}
-        // mb={{ base: '32px', lg: '24px', xl: '36px' }}
       >
         <FormLabel
           htmlFor="avatarURL"
@@ -146,27 +147,30 @@ const UserAvatar = () => {
               backdropFilter="blur(2px)"
               borderRadius="50px"
               border="none"
+              isLoading={isLoading}
               icon={<Icon as={GoCheck} boxSize={5} color={'mainOrange'} />}
             />
-            <IconButton
-              onClick={() => {
-                reset({ avatarURL: null });
-              }}
-              minWidth={'32px'}
-              height="32px"
-              ml="8px"
-              background="mainColor"
-              backdropFilter="blur(2px)"
-              borderRadius="50px"
-              border="none"
-              icon={
-                <Icon
-                  as={MdOutlineDeleteOutline}
-                  boxSize={5}
-                  color={'mainOrange'}
-                />
-              }
-            />
+            {!isLoading && (
+              <IconButton
+                onClick={() => {
+                  reset({ avatarURL: null });
+                }}
+                minWidth={'32px'}
+                height="32px"
+                ml="8px"
+                background="mainColor"
+                backdropFilter="blur(2px)"
+                borderRadius="50px"
+                border="none"
+                icon={
+                  <Icon
+                    as={MdOutlineDeleteOutline}
+                    boxSize={5}
+                    color={'mainOrange'}
+                  />
+                }
+              />
+            )}
           </Flex>
         )}
       </Flex>

@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import {
   Box,
   FormControl,
@@ -18,16 +22,16 @@ import {
   Textarea,
   Icon,
 } from '@chakra-ui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { dateToString, stringToDate } from '../../../services/dateFormat';
+import { locationRegExp } from '../../../services/validation';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
-import Toast from '../../../hooks/toast'
+import Toast from '../../../hooks/toast';
+import { calendarFunc } from '../../UserForm/Calendar/Calendar';
 
 const schemaStep1Off = yup.object().shape({
   title: yup
@@ -65,7 +69,7 @@ const schemaStep1 = yup.object().shape({
     .required('Pet name is required'),
   birth: yup
     .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
+    .required('Birthday is required'),
   breed: yup
     .string()
     .trim()
@@ -95,10 +99,9 @@ const schemaStep2 = yup.object().shape({
     .required('Comment is required'),
 });
 
-const ModalAddNew = () => {
+export const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [avatarError, setAvatarError] = useState('');
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
   const [petSex, setPetSex] = useState('male');
@@ -108,6 +111,7 @@ const ModalAddNew = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     watch,
@@ -125,9 +129,6 @@ const ModalAddNew = () => {
   const newImage = watch('avatarURL');
 
   const onSubmit = async data => {
-    if (!data.avatarURL[0]) {
-      return setAvatarError('Avatar is required');
-    }
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('category', category);
@@ -136,19 +137,26 @@ const ModalAddNew = () => {
     formData.append('location', data.location);
     formData.append('petSex', petSex);
     formData.append('comments', data.comment);
-    formData.append('petImage', data.avatarURL[0]);
+
+    if (data.avatarURL[0]) {
+      formData.append('petImage', data.avatarURL[0]);
+    }
 
     if (category == 'sell') {
       formData.append('price', data.price);
     }
 
     if (category === 'sell' || category === 'for-free') {
+      console.log(data.birth);
       formData.append('birth', data.birth);
     }
 
     try {
       const { data: res, error } = await addNotice(formData);
-      if (error) return addToast({ message: error.data.message, type: 'error' });
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
       addToast({ message: res.message, type: 'success' });
       onClose();
       reset();
@@ -186,6 +194,10 @@ const ModalAddNew = () => {
         minW={'129px'}
         h={'44px'}
         ml={'auto'}
+        pos={{ base: 'fixed', lg: 'initial' }}
+        zIndex={{ base: 1, lg: 0 }}
+        bottom={{ base: '20px' }}
+        right={{ base: '20px' }}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
@@ -269,7 +281,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.title}>
                 <FormLabel htmlFor="title">
-                  <Text variant={'noticesInputsHead'}>Title of ad</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Title of ad <span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type title'}
@@ -280,7 +294,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.petName}>
                 <FormLabel htmlFor="petName">
-                  <Text variant={'noticesInputsHead'}>Name pet</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Name pet<span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type name pet'}
@@ -292,13 +308,30 @@ const ModalAddNew = () => {
               {category != 'lost-found' && (
                 <FormControl isInvalid={errors.birth}>
                   <FormLabel htmlFor="birth">
-                    <Text variant={'noticesInputsHead'}>Date of birth</Text>
+                    <Text variant={'noticesInputsHead'}>
+                      Date of birth<span style={{ color: '#F59256' }}>*</span>
+                    </Text>
                   </FormLabel>
-                  <Input
-                    placeholder={'Type date of birth'}
-                    variant={'addNoticeForm'}
-                    type="text"
-                    {...register('birth')}
+
+                  <Controller
+                    name="birth"
+                    control={control}
+                    render={({ field }) => (
+                      <Box style={{ height: '48px' }} variant={'addPetsForm'}>
+                        <DatePicker
+                          renderCustomHeader={calendarFunc}
+                          onChange={date => {
+                            console.log(date);
+                            field.onChange(dateToString(date));
+                          }}
+                          selected={field.value && stringToDate(field.value)}
+                          dateFormat="dd.MM.yyyy"
+                          maxDate={Date.now()}
+                          wrapperClassName="date__picker"
+                          placeholderText={'Type date of birth'}
+                        />
+                      </Box>
+                    )}
                   />
                   <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
                 </FormControl>
@@ -308,7 +341,9 @@ const ModalAddNew = () => {
                 mb={{ base: '28px', lg: '40px' }}
               >
                 <FormLabel htmlFor="breed">
-                  <Text variant={'noticesInputsHead'}>Breed</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Breed<span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type bread'}
@@ -352,7 +387,9 @@ const ModalAddNew = () => {
             >
               <FormControl id="petSex" isInvalid={errors.petSex}>
                 <FormLabel>
-                  <Text variant={'noticesInputsHead'}>The sex*:</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    The sex<span style={{ color: '#F59256' }}>*</span>:
+                  </Text>
                 </FormLabel>
                 <Stack direction="row" spacing={4}>
                   <Button
@@ -400,7 +437,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.location}>
                 <FormLabel>
-                  <Text variant={'noticesInputsHead'}>Location*:</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Location<span style={{ color: '#F59256' }}>*</span>:
+                  </Text>
                 </FormLabel>
                 <Input
                   {...register('location')}
@@ -412,7 +451,9 @@ const ModalAddNew = () => {
               {category == 'sell' && (
                 <FormControl isInvalid={errors.price}>
                   <FormLabel>
-                    <Text variant={'noticesInputsHead'}>Price*:</Text>
+                    <Text variant={'noticesInputsHead'}>
+                      Price<span style={{ color: '#F59256' }}>*</span>:
+                    </Text>
                   </FormLabel>
                   <Input
                     {...register('price')}
@@ -426,14 +467,9 @@ const ModalAddNew = () => {
               <FormLabel>
                 <Text variant={'noticesInputsHead'}>Load the pet’s image:</Text>
               </FormLabel>
-              <FormControl
-                display={'flex'}
-                justifyContent={'center'}
-                isInvalid={avatarError}
-              >
+              <FormControl display={'flex'} justifyContent={'center'}>
                 <FormLabel
                   htmlFor="avatarURL"
-                  border={avatarError ? '1px solid red' : ''}
                   width={{ base: '140px', md: '150px' }}
                   height={{ base: '140px', md: '150px' }}
                   bg={'mainColor'}
@@ -475,14 +511,6 @@ const ModalAddNew = () => {
                     />
                   )}
                 </FormLabel>
-                <FormErrorMessage
-                  position={'absolute'}
-                  bottom={'-20px'}
-                  left={'50%'}
-                  transform={'translateX(-50%)'}
-                >
-                  {avatarError}
-                </FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.comment}>
                 <FormLabel
@@ -493,7 +521,7 @@ const ModalAddNew = () => {
                   fontFamily={'Manrope'}
                   variant={'noticesInputsHead'}
                 >
-                  Comments
+                  Comments<span style={{ color: '#F59256' }}>*</span>
                 </FormLabel>
                 <Textarea variant={'addForm'} {...register('comment')} />
                 <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
@@ -529,5 +557,3 @@ const ModalAddNew = () => {
     </>
   );
 };
-
-export default ModalAddNew;

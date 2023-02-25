@@ -4,3 +4,5 @@ export { NoticesCategoriesNav } from './NoticesCategoriesNav/NoticesCategoriesNa
 export { NoticeCategoryItem } from './NoticeCategoryItem/NoticeCategoryItem';
 export { NoticesFavoritesList } from './NoticesLists/NoticesFavoritesList';
 export { NoticesOwnerList } from './NoticesLists/NoticesOwnerList';
+export { ModalAddNew } from './ModalAddNotice/ModalAddNew';
+export { LearnMore } from './LearnMore/LearnMore';

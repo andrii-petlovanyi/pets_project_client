@@ -34,12 +34,13 @@ export const UserPetsItem = ({ pet = {} }) => {
   };
   return (
     <Card
-      width={'100%'}
+      width={{ base: '280px', lg: '100%' }}
       direction={{ base: 'column', lg: 'row' }}
       pt={'16px'}
       padding={'20px'}
       borderRadius={{ base: '20px', lg: '40px' }}
       boxShadow={'secondShadow'}
+      maxW={'821px'}
     >
       <Image
         borderRadius={{ base: '20px', lg: '40px' }}
@@ -81,6 +82,7 @@ export const UserPetsItem = ({ pet = {} }) => {
             fontSize={{ base: '14px', lg: '16px' }}
             lineHeight={{ base: '19px', lg: '22px' }}
             letterSpacing={'0.04em'}
+            wordBreak={'break-word'}
           >
             Comment: {comment}
           </Text>

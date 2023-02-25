@@ -2,14 +2,18 @@ import React from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 export const NoticesSearch = ({ onSubmit }) => {
+  const params = useLocation();
+  let search = decodeURI(params.search).split('=').at(-1);
+
   const [, setSearchParams] = useSearchParams();
 
   const onInputChange = e => {
     e.preventDefault();
     const { value } = e.target;
+
     setSearchParams({ search: value });
   };
 
@@ -23,6 +27,7 @@ export const NoticesSearch = ({ onSubmit }) => {
     >
       <Input
         variant={'search'}
+        value={search}
         onChange={onInputChange}
         type="text"
         title="Input part of notice title"
