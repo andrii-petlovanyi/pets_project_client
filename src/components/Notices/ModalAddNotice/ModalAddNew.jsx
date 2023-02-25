@@ -67,7 +67,9 @@ const schemaStep1 = yup.object().shape({
     .min(2, 'Minimal pet name length is 2 symbols')
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
-  birth: yup.string(),
+  birth: yup
+    .string()
+    .required('Birthday is required'),
   breed: yup
     .string()
     .trim()
