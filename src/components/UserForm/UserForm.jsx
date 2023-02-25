@@ -26,7 +26,7 @@ const INITIAL_DISABLED = {
   city: true,
 };
 
-const UserForm = () => {
+const UserForm = ({ ...props }) => {
   const [isDisabled, setIsDisabled] = useState(INITIAL_DISABLED);
   const [updateUser] = useUpdateUserMutation();
   const user = useSelector(userSelectors.user);
@@ -69,7 +69,11 @@ const UserForm = () => {
 
   return (
     <>
-      <Flex flexDirection={'column'} width={'100%'}>
+      <Flex
+        flexDirection={'column'}
+        width={{ base: '100%', xl: 'calc(100vw / 3)' }}
+        {...props}
+      >
         <Heading
           mb={'24px'}
           fontWeight={500}

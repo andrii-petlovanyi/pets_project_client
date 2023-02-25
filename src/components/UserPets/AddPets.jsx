@@ -85,7 +85,7 @@ const AddPets = () => {
     resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
   });
 
-  const newImage = watch('avatarPet');
+  let newImage = watch('avatarPet');
 
   const onSubmit = async data => {
     if (!data.avatarPet[0]) {
@@ -105,6 +105,7 @@ const AddPets = () => {
       dispatch(userApiSlice.util.invalidateTags(['user']));
       onClose();
       reset();
+      reset({ avatarPet: null, comment: null });
       setStep(1);
     } catch (error) {
       addToast({ message: error.message, type: 'success' });
