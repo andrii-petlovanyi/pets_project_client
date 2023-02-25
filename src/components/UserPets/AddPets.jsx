@@ -34,7 +34,6 @@ import userApiSlice, {
   useAddMyPetsMutation,
 } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
-// import { birthdayRegExp } from '../../services/validation';
 import Toast from '../../hooks/toast';
 import { calendarFunc } from '../UserForm/Calendar/Calendar';
 import '../UserForm/Calendar/Calendar.styled.css';

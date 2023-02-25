@@ -132,7 +132,6 @@ const ModalAddNew = () => {
     formData.append('title', data.title);
     formData.append('category', category);
     formData.append('petName', data.petName);
-    formData.append('birth', data.birth);
     formData.append('breed', data.breed);
     formData.append('location', data.location);
     formData.append('petSex', petSex);
@@ -305,12 +304,7 @@ const ModalAddNew = () => {
                   <FormLabel htmlFor="birth">
                     <Text variant={'noticesInputsHead'}>Date of birth</Text>
                   </FormLabel>
-                  {/* <Input
-                    placeholder={'Type date of birth'}
-                    variant={'addNoticeForm'}
-                    type="text"
-                    {...register('birth')}
-                  /> */}
+
                   <Controller
                     name="birth"
                     control={control}
