@@ -101,6 +101,7 @@ const LearnMore = ({ noticeId }) => {
           width={'100%'}
           borderRadius={{ base: '20px', lg: '40px' }}
           padding={{ base: '0', lg: '' }}
+          overflow={'hidden'}
         >
           <Flex display={'flex'} flexDirection={{ base: 'column', lg: 'row' }}>
             <Image
@@ -263,7 +264,7 @@ const LearnMore = ({ noticeId }) => {
                         fontWeight="500"
                         lineHeight={{ base: '19px', lg: '22px' }}
                       >
-                        {notice?.price}$
+                        {notice?.price}₴
                       </Text>
                     </Flex>
                   )}
@@ -274,15 +275,16 @@ const LearnMore = ({ noticeId }) => {
 
           {!!notice?.comments && (
             <Flex mt={'28px'} mb={'32px'} pl={'20px'} pr={'24px'}>
-              <Text
-                fontSize="16px"
-                fontWeight="600"
-                lineHeight="24px"
-                letterSpacing="0.04em"
-              >
-                Comments:
-              </Text>
-              <Text fontWeight="500" ml={'5px'}>
+              <Text fontWeight="500">
+                <Box
+                  as="span"
+                  fontSize="16px"
+                  fontWeight="600"
+                  lineHeight="24px"
+                  letterSpacing="0.04em"
+                >
+                  Comments:{' '}
+                </Box>
                 {notice?.comments}
               </Text>
             </Flex>

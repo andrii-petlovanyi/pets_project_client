@@ -34,7 +34,7 @@ export const UserPetsItem = ({ pet = {} }) => {
   };
   return (
     <Card
-      width={'100%'}
+      width={{ base: '280px', lg: '100%' }}
       direction={{ base: 'column', lg: 'row' }}
       pt={'16px'}
       padding={'20px'}

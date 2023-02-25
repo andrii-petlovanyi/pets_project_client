@@ -3,9 +3,13 @@ import { Flex, Heading } from '@chakra-ui/react';
 import UserPetsList from './PetsList';
 import AddPets from './AddPets';
 
-export const UserPetsData = () => {
+export const UserPetsData = ({ ...props }) => {
   return (
-    <Flex flexDirection={'column'} width={'100%'}>
+    <Flex
+      flexDirection={'column'}
+      width={{ base: '100%', xl: 'calc((100vw / 3) * 2)' }}
+      {...props}
+    >
       <Flex
         justifyContent={'space-between'}
         alignItems={'center'}
