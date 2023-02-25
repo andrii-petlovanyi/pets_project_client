@@ -97,7 +97,7 @@ const schemaStep2 = yup.object().shape({
     .required('Comment is required'),
 });
 
-const ModalAddNew = () => {
+export const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [category, setCategory] = useState('sell');
@@ -279,7 +279,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.title}>
                 <FormLabel htmlFor="title">
-                  <Text variant={'noticesInputsHead'}>Title of ad <span style={{ color: '#F59256' }}>*</span></Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Title of ad <span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type title'}
@@ -290,7 +292,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.petName}>
                 <FormLabel htmlFor="petName">
-                  <Text variant={'noticesInputsHead'}>Name pet<span style={{ color: '#F59256' }}>*</span></Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Name pet<span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type name pet'}
@@ -302,7 +306,9 @@ const ModalAddNew = () => {
               {category != 'lost-found' && (
                 <FormControl isInvalid={errors.birth}>
                   <FormLabel htmlFor="birth">
-                    <Text variant={'noticesInputsHead'}>Date of birth<span style={{ color: '#F59256' }}>*</span></Text>
+                    <Text variant={'noticesInputsHead'}>
+                      Date of birth<span style={{ color: '#F59256' }}>*</span>
+                    </Text>
                   </FormLabel>
 
                   <Controller
@@ -333,7 +339,9 @@ const ModalAddNew = () => {
                 mb={{ base: '28px', lg: '40px' }}
               >
                 <FormLabel htmlFor="breed">
-                  <Text variant={'noticesInputsHead'}>Breed<span style={{ color: '#F59256' }}>*</span></Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Breed<span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type bread'}
@@ -377,7 +385,9 @@ const ModalAddNew = () => {
             >
               <FormControl id="petSex" isInvalid={errors.petSex}>
                 <FormLabel>
-                  <Text variant={'noticesInputsHead'}>The sex<span style={{ color: '#F59256' }}>*</span>:</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    The sex<span style={{ color: '#F59256' }}>*</span>:
+                  </Text>
                 </FormLabel>
                 <Stack direction="row" spacing={4}>
                   <Button
@@ -425,7 +435,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.location}>
                 <FormLabel>
-                  <Text variant={'noticesInputsHead'}>Location<span style={{ color: '#F59256' }}>*</span>:</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Location<span style={{ color: '#F59256' }}>*</span>:
+                  </Text>
                 </FormLabel>
                 <Input
                   {...register('location')}
@@ -437,7 +449,9 @@ const ModalAddNew = () => {
               {category == 'sell' && (
                 <FormControl isInvalid={errors.price}>
                   <FormLabel>
-                    <Text variant={'noticesInputsHead'}>Price<span style={{ color: '#F59256' }}>*</span>:</Text>
+                    <Text variant={'noticesInputsHead'}>
+                      Price<span style={{ color: '#F59256' }}>*</span>:
+                    </Text>
                   </FormLabel>
                   <Input
                     {...register('price')}
@@ -541,5 +555,3 @@ const ModalAddNew = () => {
     </>
   );
 };
-
-export default ModalAddNew;

@@ -28,7 +28,8 @@ import userApiSlice, {
   useDeleteFromFavoriteMutation,
 } from '../../../redux/user/userApiSlice';
 import Toast from '../../../hooks/toast';
-import LearnMore from '../LearnMore/LearnMore';
+import { LearnMore } from '../../Notices';
+import { useNavigate } from 'react-router';
 
 export const NoticeCategoryItem = ({ notice }) => {
   const { _id: userId, favorites } = useSelector(userSelectors.user);
@@ -50,6 +51,7 @@ export const NoticeCategoryItem = ({ notice }) => {
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
   const { addToast } = Toast();
+  const navigate = useNavigate();
 
   const removeNotice = async () => {
     try {
@@ -63,7 +65,7 @@ export const NoticeCategoryItem = ({ notice }) => {
         type: 'success',
       });
       console.log('data:', data);
-      dispatch(userApiSlice.util.invalidateTags(['user']));
+      dispatch(userApiSlice.util.invalidateTags(['favorites']));
     } catch (error) {
       console.log('error:', error);
     }
@@ -74,8 +76,9 @@ export const NoticeCategoryItem = ({ notice }) => {
       if (!userId) {
         addToast({
           message: 'Please, authorize to be able to use this feature',
-          type: 'success',
+          type: 'warning',
         });
+        navigate('/login');
         return;
       }
       if (isFavorite) {
@@ -212,7 +215,7 @@ export const NoticeCategoryItem = ({ notice }) => {
               {calculateAnimalAge(birth)}
             </Text>
           </Flex>
-          {category === 'sell' ? (
+          {category === 'sell' && (
             <Flex mt="8px">
               <Text fontSize="16px" fontWeight="500" lineHeight="22px">
                 Price:
@@ -226,8 +229,6 @@ export const NoticeCategoryItem = ({ notice }) => {
                 {price ? `${price} ₴` : ''}
               </Text>
             </Flex>
-          ) : (
-            ''
           )}
         </Container>
       </CardBody>
