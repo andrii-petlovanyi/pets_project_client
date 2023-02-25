@@ -70,7 +70,7 @@ const News = () => {
         gap={'31px'}
         flexWrap={'wrap'}
         justifyContent={'center'}
-        w={{ base: '480px', lg: '768px', xl: '1280px' }}
+        w={{ base: '100%', lg: '768px', xl: '1280px' }}
       >
         {!isLoading ? (
           news.length > 0 &&

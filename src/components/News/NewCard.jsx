@@ -42,7 +42,7 @@ const NewCard = ({ news = {} }) => {
           h={'66px'}
           overflow={'hidden'}
         >
-          {title.length > 20 ? title.slice(0, 50) + '...' : title}
+          {title.length > 40 ? title.slice(0, 40) + '...' : title}
         </Heading>
       </CardHeader>
       <CardBody p={'0px'} h={'110px'} mb={{ base: '5', lg: '10' }}>
@@ -52,7 +52,7 @@ const NewCard = ({ news = {} }) => {
           h={'110px'}
           overflow={'hidden'}
         >
-          {description.length > 20
+          {description.length > 255
             ? description.slice(0, 225) + '...'
             : description}
         </Text>
