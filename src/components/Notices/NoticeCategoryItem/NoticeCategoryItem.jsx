@@ -202,7 +202,7 @@ export const NoticeCategoryItem = ({ notice }) => {
                 fontWeight="500"
                 lineHeight="22px"
               >
-                {price ? price : ''}$
+                {price ? `${price} ₴` : ''}
               </Text>
             </Flex>
           ) : (
