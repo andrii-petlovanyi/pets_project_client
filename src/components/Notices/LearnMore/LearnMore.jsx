@@ -24,8 +24,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Toast from '../../../hooks/toast';
 import userSelectors from '../../../redux/user/user-selectors';
 import { useGetNoticeByIdQuery } from '../../../redux/notices/noticesApiSlice';
+import { useNavigate } from 'react-router';
 
-const LearnMore = ({ noticeId }) => {
+export const LearnMore = ({ noticeId }) => {
   const isAuth = useSelector(userSelectors.isAuth);
 
   const { favorites } = useSelector(userSelectors.user);
@@ -36,6 +37,7 @@ const LearnMore = ({ noticeId }) => {
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
   const { addToast } = Toast();
+  const navigate = useNavigate();
 
   const { data: res } = useGetNoticeByIdQuery(noticeId);
   const { notice } = res || {};
@@ -45,21 +47,42 @@ const LearnMore = ({ noticeId }) => {
       if (!isAuth) {
         addToast({
           message: 'Please, authorize to be able to use this feature',
+          type: 'warning',
         });
+
+        navigate('/login');
+        return;
       }
       if (isFavorite) {
         const { data, error } = await removeFavorite(noticeId);
+
         if (error) {
           console.log('error:', error.message);
         }
+
         console.log('data:', data);
+
+        addToast({
+          message:
+            'The notice was removed successfully from the favorites list!',
+          type: 'success',
+        });
+
         dispatch(userApiSlice.util.invalidateTags(['user']));
       } else {
         const { data, error } = await addFavorite(noticeId);
+
         if (error) {
           console.log('error:', error.message);
         }
+
         console.log('data:', data);
+
+        addToast({
+          message: 'The notice was added successfully to the favorites list!',
+          type: 'success',
+        });
+
         dispatch(userApiSlice.util.invalidateTags(['user']));
       }
     } catch (error) {
@@ -282,6 +305,7 @@ const LearnMore = ({ noticeId }) => {
                   fontWeight="600"
                   lineHeight={{ base: '19px', lg: '22px' }}
                   letterSpacing="0.04em"
+                  wordBreak={'break-word'}
                 >
                   Comments:{' '}
                 </Box>
@@ -331,4 +355,3 @@ const LearnMore = ({ noticeId }) => {
 LearnMore.propTypes = {
   noticeId: PropTypes.string,
 };
-export default LearnMore;
