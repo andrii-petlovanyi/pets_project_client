@@ -39,19 +39,19 @@ const schemaStep1 = yup.object().shape({
   password: yup
     .string()
     .trim()
-    .matches(passRegexp, 'Password must be contain letters and numbers')
+    .matches(passRegexp, 'Please, use only letters or letters and numbers')
     .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
-    .matches(/^([a-zA-Z0-9])+$/u, 'Please, use only letters and numbers')
+    .matches( /^([a-zA-Z0-9])+$/u,'Please, use only letters or letters and numbers')
     .required('Password is required'),
 
   cpassword: yup
     .string()
     .trim()
-    .matches(passRegexp, 'Password must be contain letters and numbers')
+    .matches(passRegexp, 'Please, use only letters or letters and numbers')
     .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
-    .matches(/^([a-zA-Z0-9])+$/u, 'Please, use only letters and numbers')
+    .matches( /^([a-zA-Z0-9])+$/u,'Please, use only letters or letters and numbers')
     .required('Please repeat password')
     .oneOf([yup.ref('password')], 'Password do not match'),
 });
@@ -60,9 +60,8 @@ const schemaStep2 = yup.object().shape({
   name: yup
     .string()
     .matches(
-      /^([a-zA-Z-. a-zA-Z])+$/u,
-      'Please, use only letters, space or dash'
-    )
+      /^([а-яА-Яa-zA-Z-. a-zA-Zі])+$/
+      ,'Please, use only letters, space or dash')
     .trim()
     .min(3, 'Minimal name length is 3 symbols')
     .max(32, 'Max name length is 32 symbols')
@@ -78,8 +77,8 @@ const schemaStep2 = yup.object().shape({
   phone: yup
     .string()
     .min(12, 'Minimal phone number length is 12 symbols')
-    .max(13, 'Max phone number length is 13 symbols')
-    .matches(/^([+0-9])+$/u, 'Please, use only numbers')
+    .max(12, 'Max phone number length is 12 symbols')
+    .matches(/^([0-9])+$/u, 'Please, use only numbers')
     .required('Phone number is required'),
 });
 
