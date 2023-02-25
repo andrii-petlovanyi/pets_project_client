@@ -34,7 +34,6 @@ import userApiSlice, {
   useAddMyPetsMutation,
 } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
-import { birthdayRegExp } from '../../services/validation';
 import Toast from '../../hooks/toast';
 import { calendarFunc } from '../UserForm/Calendar/Calendar';
 import '../UserForm/Calendar/Calendar.styled.css';
@@ -46,10 +45,7 @@ const schemaStep1 = yup.object().shape({
     .min(2, 'Minimal pet name length is 2 symbols')
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
-  birthday: yup
-    .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
-    .required('Birthday is required'),
+  birthday: yup.string().required('Birthday is required'),
   breed: yup
     .string()
     .trim()
@@ -85,9 +81,6 @@ const AddPets = () => {
     control,
     reset,
   } = useForm({
-    // defaultValues: {
-    //   birthday: stringToDate(user.birthday),
-    // },
     resolver: yupResolver(step === 1 ? schemaStep1 : schemaStep2),
   });
 
@@ -192,7 +185,6 @@ const AddPets = () => {
                       <DatePicker
                         renderCustomHeader={calendarFunc}
                         onChange={date => {
-                          console.log(date);
                           field.onChange(dateToString(date));
                         }}
                         selected={field.value && stringToDate(field.value)}
