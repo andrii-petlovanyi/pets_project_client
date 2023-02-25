@@ -30,6 +30,7 @@ import userApiSlice, {
 import Toast from '../../../hooks/toast';
 import { LearnMore } from '../../Notices';
 import { useNavigate } from 'react-router';
+import placeholder from '../../../assets/placeholder.webp';
 
 export const NoticeCategoryItem = ({ notice }) => {
   const { _id: userId, favorites } = useSelector(userSelectors.user);
@@ -133,7 +134,7 @@ export const NoticeCategoryItem = ({ notice }) => {
       <CardBody p="0">
         <Box>
           <Image
-            src={petImage ? petImage : '#'}
+            src={petImage ? petImage : placeholder}
             w={{ base: '280px', lg: '336px', xl: '288px' }}
             h="288"
             objectFit="cover"

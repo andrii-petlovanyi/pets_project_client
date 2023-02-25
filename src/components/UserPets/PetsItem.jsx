@@ -14,6 +14,7 @@ import userApiSlice, {
 } from '../../redux/user/userApiSlice';
 import { useDispatch } from 'react-redux';
 import Toast from '../../hooks/toast';
+import placeholder from '../../assets/placeholder.webp';
 
 export const UserPetsItem = ({ pet = {} }) => {
   const { name, birth, breed, avatarURL, comment, _id } = pet;
@@ -48,7 +49,7 @@ export const UserPetsItem = ({ pet = {} }) => {
         width={{ base: '240px', lg: '161px' }}
         mx="auto"
         objectFit={'cover'}
-        src={avatarURL}
+        src={avatarURL ? avatarURL : placeholder}
         alt={breed}
       />
       <CardBody p={0} ml={{ lg: '32px' }} mt={{ base: '20px', lg: '0' }}>
