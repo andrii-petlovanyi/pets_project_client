@@ -54,7 +54,7 @@ export const PopoverLogOut = ({ handleLogOut, display }) => {
                   borderRadius={'5px'}
                 >
                   <Text fontSize="16px" color="textColor">
-                    you really wanted to exit?
+                    You really want to exit?
                   </Text>
                   <Box
                     display="flex"
