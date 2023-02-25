@@ -28,6 +28,7 @@ import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 import Toast from '../../../hooks/toast'
+import { isBefore } from 'date-fns';
 
 const schemaStep1Off = yup.object().shape({
   title: yup
@@ -65,7 +66,11 @@ const schemaStep1 = yup.object().shape({
     .required('Pet name is required'),
   birth: yup
     .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
+    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
+    .test('date', 'Birth date must be earlier than today', (value) => {
+    const date = new Date(value);
+    return isBefore(date, new Date());
+  }),
   breed: yup
     .string()
     .trim()
@@ -186,6 +191,10 @@ const ModalAddNew = () => {
         minW={'129px'}
         h={'44px'}
         ml={'auto'}
+        pos={{ base: "fixed", lg: 'initial' }}
+        zIndex={{base: 1, lg: 0}}
+        bottom={{base: '20px'}}
+        right={{ base: '20px' }}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
