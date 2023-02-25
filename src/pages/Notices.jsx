@@ -22,7 +22,7 @@ const Notices = () => {
 
   useEffect(() => {
     if (location.length == 2) {
-      navigate('/sell');
+      navigate('sell');
     }
   }, [location]);
 
