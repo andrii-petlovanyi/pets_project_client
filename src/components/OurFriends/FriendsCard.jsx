@@ -1,4 +1,4 @@
-import { getDay } from 'date-fns';
+// import { getDay } from 'date-fns';
 
 import {
   Box,
@@ -17,8 +17,8 @@ import { ScheduleMenu } from './ScheduleMenu';
 export const FriendsCard = ({ friend = {} }) => {
   const { title, url, imageUrl, address, email, phone, workDays, _id } = friend;
 
-  const result = getDay(new Date(Date.now())) - 1;
-  console.log(result);
+  // const result = getDay(new Date(Date.now())) - 1;
+  // console.log(result);
 
   return (
     <Card
