@@ -20,7 +20,9 @@ export const NoticesCategoriesList = ({ category }) => {
   });
 
   const { notices, totalCount } = data || [];
+
   useEffect(() => {
+    setPage(1);
     setTotalCount(totalCount);
   }, [totalCount]);
 
