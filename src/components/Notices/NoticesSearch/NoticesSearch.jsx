@@ -6,7 +6,8 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 
 export const NoticesSearch = ({ onSubmit }) => {
   const params = useLocation();
-  let search = params.search.split('=').at(-1);
+  let search = decodeURI(params.search).split('=').at(-1);
+  console.log('search:', search);
 
   const [, setSearchParams] = useSearchParams();
 

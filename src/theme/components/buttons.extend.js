@@ -27,11 +27,11 @@ const outlineTabActive = defineStyle({
   display: 'flex',
   alignItems: 'center',
 
-  background: 'accentOrange',
+  background: 'mainOrange',
   color: 'white',
 
   border: '2px solid',
-  borderColor: 'accentOrange',
+  borderColor: 'mainOrange',
   borderRadius: '40px',
   padding: '10px 28px',
 
@@ -40,6 +40,10 @@ const outlineTabActive = defineStyle({
   fontSize: '20px',
   lineHeight: '27p',
   letterSpacing: '0.04em',
+  _hover: {
+    borderColor: 'accentOrange',
+    background: 'accentOrange',
+  },
 });
 
 const fullBGBtn = defineStyle({
