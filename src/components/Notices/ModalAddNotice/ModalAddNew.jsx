@@ -29,7 +29,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { dateToString, stringToDate } from '../../../services/dateFormat';
 import { locationRegExp } from '../../../services/validation';
-// import { birthRegExp, locationRegExp } from '../../../services/validation';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 import Toast from '../../../hooks/toast';
 import { calendarFunc } from '../../UserForm/Calendar/Calendar';
@@ -146,6 +145,7 @@ const ModalAddNew = () => {
     }
 
     if (category === 'sell' || category === 'for-free') {
+      console.log(data.birth);
       formData.append('birth', data.birth);
     }
 

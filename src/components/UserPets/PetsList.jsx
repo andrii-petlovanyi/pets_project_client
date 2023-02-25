@@ -7,7 +7,6 @@ import UserPetsItem from './PetsItem';
 
 export const UserPetsList = () => {
   const { pets } = useSelector(userSelectors.user);
-  console.log(pets);
 
   return (
     <Flex
