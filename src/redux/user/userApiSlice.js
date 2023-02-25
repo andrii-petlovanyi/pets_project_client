@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { API_URL } from '../../services/apiUrl';
+import { API_URL } from '../../services/apiUrl';
 
 const userApiSlice = createApi({
   reducerPath: 'userApiSlice',
   baseQuery: fetchBaseQuery({
-    // baseUrl: `${API_URL}/users`,
-    baseUrl: `http://localhost:3002/api/users`,
+    baseUrl: `${API_URL}/users`,
+    // baseUrl: `http://localhost:3002/api/users`,
 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
