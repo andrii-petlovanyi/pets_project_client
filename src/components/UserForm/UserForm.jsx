@@ -40,7 +40,7 @@ const UserForm = ({ ...props }) => {
     defaultValues: {
       name: user.name,
       email: user.email,
-      birthday: stringToDate(user.birthday),
+      birthday: user.birthday ? stringToDate(user.birthday) : null,
       phone: user.phone,
       city: user.city,
     },
