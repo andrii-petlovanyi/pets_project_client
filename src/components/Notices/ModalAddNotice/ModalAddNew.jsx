@@ -27,7 +27,8 @@ import { MdClose } from 'react-icons/md';
 import { birthdayRegExp, locationRegExp } from '../../../services/validation';
 import { TfiPlus } from 'react-icons/tfi';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
-import Toast from '../../../hooks/toast'
+import Toast from '../../../hooks/toast';
+import { isBefore } from 'date-fns';
 
 const schemaStep1Off = yup.object().shape({
   title: yup
@@ -65,7 +66,11 @@ const schemaStep1 = yup.object().shape({
     .required('Pet name is required'),
   birth: yup
     .string()
-    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000'),
+    .matches(birthdayRegExp, 'Birthday must be in format: 01.01.2000')
+    .test('date', 'Birth date must be earlier than today', value => {
+      const date = new Date(value);
+      return isBefore(date, new Date());
+    }),
   breed: yup
     .string()
     .trim()
@@ -98,7 +103,6 @@ const schemaStep2 = yup.object().shape({
 const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [avatarError, setAvatarError] = useState('');
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
   const [petSex, setPetSex] = useState('male');
@@ -125,9 +129,6 @@ const ModalAddNew = () => {
   const newImage = watch('avatarURL');
 
   const onSubmit = async data => {
-    if (!data.avatarURL[0]) {
-      return setAvatarError('Avatar is required');
-    }
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('category', category);
@@ -136,7 +137,10 @@ const ModalAddNew = () => {
     formData.append('location', data.location);
     formData.append('petSex', petSex);
     formData.append('comments', data.comment);
-    formData.append('petImage', data.avatarURL[0]);
+
+    if (data.avatarURL[0]) {
+      formData.append('petImage', data.avatarURL[0]);
+    }
 
     if (category == 'sell') {
       formData.append('price', data.price);
@@ -148,7 +152,8 @@ const ModalAddNew = () => {
 
     try {
       const { data: res, error } = await addNotice(formData);
-      if (error) return addToast({ message: error.data.message, type: 'error' });
+      if (error)
+        return addToast({ message: error.data.message, type: 'error' });
       addToast({ message: res.message, type: 'success' });
       onClose();
       reset();
@@ -186,6 +191,10 @@ const ModalAddNew = () => {
         minW={'129px'}
         h={'44px'}
         ml={'auto'}
+        pos={{ base: 'fixed', lg: 'initial' }}
+        zIndex={{ base: 1, lg: 0 }}
+        bottom={{ base: '20px' }}
+        right={{ base: '20px' }}
       >
         Add pet
         <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
@@ -426,14 +435,9 @@ const ModalAddNew = () => {
               <FormLabel>
                 <Text variant={'noticesInputsHead'}>Load the pet’s image:</Text>
               </FormLabel>
-              <FormControl
-                display={'flex'}
-                justifyContent={'center'}
-                isInvalid={avatarError}
-              >
+              <FormControl display={'flex'} justifyContent={'center'}>
                 <FormLabel
                   htmlFor="avatarURL"
-                  border={avatarError ? '1px solid red' : ''}
                   width={{ base: '140px', md: '150px' }}
                   height={{ base: '140px', md: '150px' }}
                   bg={'mainColor'}
@@ -475,14 +479,6 @@ const ModalAddNew = () => {
                     />
                   )}
                 </FormLabel>
-                <FormErrorMessage
-                  position={'absolute'}
-                  bottom={'-20px'}
-                  left={'50%'}
-                  transform={'translateX(-50%)'}
-                >
-                  {avatarError}
-                </FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.comment}>
                 <FormLabel
