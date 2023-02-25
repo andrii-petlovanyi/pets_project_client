@@ -130,7 +130,7 @@ const LearnMore = ({ noticeId }) => {
                 fontWeight: '500',
                 letterSpacing: '0.04em',
                 display: 'flex',
-                // justifyContent: 'center',
+                justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
@@ -278,9 +278,9 @@ const LearnMore = ({ noticeId }) => {
               <Text fontWeight="500">
                 <Box
                   as="span"
-                  fontSize="16px"
+                  fontSize={{ base: '14px', lg: '16px' }}
                   fontWeight="600"
-                  lineHeight="24px"
+                  lineHeight={{ base: '19px', lg: '22px' }}
                   letterSpacing="0.04em"
                 >
                   Comments:{' '}
