@@ -4,7 +4,7 @@ export const locationRegExp = /^\p{L}{3,},\s*\p{L}{3,}$/u;
 export const phoneRegExp =
   /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 
-export const passRegexp = /^(?=.*[a-zA-Z]).{7,}$/;
+export const passRegexp = /^[^\s]*$/u;
 export const priceRegexp = /^[1-9]\d*(\.\d+)?$/;
 export const nameRegexp = /^[-а-яА-ЯёЁa-zA-Z\s]+$/;
 

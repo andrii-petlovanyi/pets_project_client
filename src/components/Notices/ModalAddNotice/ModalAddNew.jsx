@@ -188,6 +188,17 @@ export const ModalAddNew = () => {
     onOpen();
   };
 
+  const onChooseTitle = () => {
+    switch (category) {
+      case 'for-free':
+        return 'If you want to give your pet in good hands without paying you can create an advertisement. Please write information about the pet below';
+      case 'lost-found':
+        return 'If you lost or found a pet you can create an advertisement. Please write information about the pet below';
+      default:
+        return 'If you want to sell a pet you can create an advertisement. Please write information about the pet below';
+    }
+  };
+
   return (
     <>
       <Box
@@ -241,9 +252,8 @@ export const ModalAddNew = () => {
               as="form"
               onSubmit={handleSubmit(nextStep)}
             >
-              <Text variant={'noticeModalText'}>
-                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
-                amet, consectetur{' '}
+              <Text variant={'noticeModalText'} pb={'75px'}>
+                {onChooseTitle()}
               </Text>
               <FormControl id="category" isInvalid={errors.category}>
                 <Stack
@@ -534,6 +544,7 @@ export const ModalAddNew = () => {
                   fontWeight={'500'}
                   fontFamily={'Manrope'}
                   variant={'noticesInputsHead'}
+                  wordBreak={'break-word'}
                 >
                   Comments<span style={{ color: '#F59256' }}>*</span>
                 </FormLabel>

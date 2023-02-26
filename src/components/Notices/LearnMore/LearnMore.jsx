@@ -300,7 +300,7 @@ export const LearnMore = ({ noticeId }) => {
 
           {!!notice?.comments && (
             <Flex mt={'28px'} mb={'32px'} pl={'20px'} pr={'24px'}>
-              <Text fontWeight="500">
+              <Text fontWeight="500" wordBreak={'break-word'}>
                 <Box
                   as="span"
                   fontSize={{ base: '14px', lg: '16px' }}
