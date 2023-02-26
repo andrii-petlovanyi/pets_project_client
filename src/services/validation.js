@@ -5,9 +5,7 @@ export const phoneRegExp =
   /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 
 export const passRegexp = /^(?=.*[a-zA-Z]).{7,}$/;
-// export const birthdayRegExp = /^\d{2}\.\d{2}\.\d{4}$/;
-// export const birthDay =
-//   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
+export const priceRegexp = /^[1-9]\d*(\.\d+)?$/;
 
 export const userFormSchema = yup.object({
   name: yup
