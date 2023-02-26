@@ -32,6 +32,9 @@ import { locationRegExp } from '../../../services/validation';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 import Toast from '../../../hooks/toast';
 import { calendarFunc } from '../../UserForm/Calendar/Calendar';
+import userSelectors from '../../../redux/user/user-selectors';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const schemaStep1Off = yup.object().shape({
   title: yup
@@ -59,20 +62,20 @@ const schemaStep1 = yup.object().shape({
     .string()
     .trim()
     .min(2, 'Minimal title length is 2 symbols')
-    .max(32, 'Max title length is 32 symbols')
+    .max(48, 'Max title length is 48 symbols')
     .required('Title is required'),
   petName: yup
     .string()
     .trim()
     .min(2, 'Minimal pet name length is 2 symbols')
-    .max(32, 'Max pet name length is 32 symbols')
+    .max(16, 'Max pet name length is 16 symbols')
     .required('Pet name is required'),
-  birth: yup.string(),
+  birth: yup.string().required('Birthday is required'),
   breed: yup
     .string()
     .trim()
     .min(2, 'Minimal breed length is 2 symbols')
-    .max(32, 'Max breed length is 32 symbols')
+    .max(16, 'Max breed length is 16 symbols')
     .required('Breed is required'),
 });
 
@@ -88,18 +91,19 @@ const schemaStep2 = yup.object().shape({
     .string()
     .trim()
     .min(1, 'Minimal price length is 1 symbols')
-    .max(100, 'Max price length is 100 symbols'),
+    .max(10, 'Max price length is 100 symbols'),
   comment: yup
     .string()
     .trim()
-    .min(10, 'Minimal password length is 10 symbols')
-    .max(320, 'Max password length is 320 symbols')
+    .min(8, 'Minimal password length is 8 symbols')
+    .max(120, 'Max password length is 120 symbols')
     .required('Comment is required'),
 });
 
-const ModalAddNew = () => {
+export const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const isAuth = useSelector(userSelectors.isAuth);
+  const navigate = useNavigate();
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
   const [petSex, setPetSex] = useState('male');
@@ -178,6 +182,11 @@ const ModalAddNew = () => {
     setStep(1);
   };
 
+  const handleClick = () => {
+    if (!isAuth) return navigate('/login');
+    onOpen();
+  };
+
   return (
     <>
       <Box
@@ -198,7 +207,11 @@ const ModalAddNew = () => {
         right={{ base: '20px' }}
       >
         Add pet
-        <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
+        <IconButton
+          onClick={handleClick}
+          variant={'mainIB'}
+          icon={<HiPlus />}
+        />
       </Box>
 
       <Modal isOpen={isOpen} onClose={handleCLose} size={'custom'}>
@@ -279,7 +292,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.title}>
                 <FormLabel htmlFor="title">
-                  <Text variant={'noticesInputsHead'}>Title of ad</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Title of ad <span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type title'}
@@ -290,7 +305,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.petName}>
                 <FormLabel htmlFor="petName">
-                  <Text variant={'noticesInputsHead'}>Name pet</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Name pet<span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type name pet'}
@@ -302,14 +319,16 @@ const ModalAddNew = () => {
               {category != 'lost-found' && (
                 <FormControl isInvalid={errors.birth}>
                   <FormLabel htmlFor="birth">
-                    <Text variant={'noticesInputsHead'}>Date of birth</Text>
+                    <Text variant={'noticesInputsHead'}>
+                      Date of birth<span style={{ color: '#F59256' }}>*</span>
+                    </Text>
                   </FormLabel>
 
                   <Controller
                     name="birth"
                     control={control}
                     render={({ field }) => (
-                      <Box style={{ height: '48px' }} variant={'addNoticeForm'}>
+                      <Box style={{ height: '48px' }} variant={'addPetsForm'}>
                         <DatePicker
                           renderCustomHeader={calendarFunc}
                           onChange={date => {
@@ -333,7 +352,9 @@ const ModalAddNew = () => {
                 mb={{ base: '28px', lg: '40px' }}
               >
                 <FormLabel htmlFor="breed">
-                  <Text variant={'noticesInputsHead'}>Breed</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Breed<span style={{ color: '#F59256' }}>*</span>
+                  </Text>
                 </FormLabel>
                 <Input
                   placeholder={'Type bread'}
@@ -377,7 +398,9 @@ const ModalAddNew = () => {
             >
               <FormControl id="petSex" isInvalid={errors.petSex}>
                 <FormLabel>
-                  <Text variant={'noticesInputsHead'}>The sex*:</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    The sex<span style={{ color: '#F59256' }}>*</span>:
+                  </Text>
                 </FormLabel>
                 <Stack direction="row" spacing={4}>
                   <Button
@@ -425,7 +448,9 @@ const ModalAddNew = () => {
               </FormControl>
               <FormControl isInvalid={errors.location}>
                 <FormLabel>
-                  <Text variant={'noticesInputsHead'}>Location*:</Text>
+                  <Text variant={'noticesInputsHead'}>
+                    Location<span style={{ color: '#F59256' }}>*</span>:
+                  </Text>
                 </FormLabel>
                 <Input
                   {...register('location')}
@@ -437,12 +462,16 @@ const ModalAddNew = () => {
               {category == 'sell' && (
                 <FormControl isInvalid={errors.price}>
                   <FormLabel>
-                    <Text variant={'noticesInputsHead'}>Price*:</Text>
+                    <Text variant={'noticesInputsHead'}>
+                      Price<span style={{ color: '#F59256' }}>*</span>:
+                    </Text>
                   </FormLabel>
                   <Input
                     {...register('price')}
                     variant={'addNoticeForm'}
                     placeholder="Type price"
+                    required
+                    title="Price field id required"
                   />
                   <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
                 </FormControl>
@@ -505,7 +534,7 @@ const ModalAddNew = () => {
                   fontFamily={'Manrope'}
                   variant={'noticesInputsHead'}
                 >
-                  Comments
+                  Comments<span style={{ color: '#F59256' }}>*</span>
                 </FormLabel>
                 <Textarea variant={'addForm'} {...register('comment')} />
                 <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
@@ -541,5 +570,3 @@ const ModalAddNew = () => {
     </>
   );
 };
-
-export default ModalAddNew;

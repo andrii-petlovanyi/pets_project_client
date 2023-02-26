@@ -24,8 +24,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Toast from '../../../hooks/toast';
 import userSelectors from '../../../redux/user/user-selectors';
 import { useGetNoticeByIdQuery } from '../../../redux/notices/noticesApiSlice';
+import { useNavigate } from 'react-router';
+import placeholder from '../../../assets/placeholder.webp';
 
-const LearnMore = ({ noticeId }) => {
+export const LearnMore = ({ noticeId }) => {
   const isAuth = useSelector(userSelectors.isAuth);
 
   const { favorites } = useSelector(userSelectors.user);
@@ -36,6 +38,7 @@ const LearnMore = ({ noticeId }) => {
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
   const { addToast } = Toast();
+  const navigate = useNavigate();
 
   const { data: res } = useGetNoticeByIdQuery(noticeId);
   const { notice } = res || {};
@@ -45,21 +48,42 @@ const LearnMore = ({ noticeId }) => {
       if (!isAuth) {
         addToast({
           message: 'Please, authorize to be able to use this feature',
+          type: 'warning',
         });
+
+        navigate('/login');
+        return;
       }
       if (isFavorite) {
         const { data, error } = await removeFavorite(noticeId);
+
         if (error) {
           console.log('error:', error.message);
         }
+
         console.log('data:', data);
+
+        addToast({
+          message:
+            'The notice was removed successfully from the favorites list!',
+          type: 'success',
+        });
+
         dispatch(userApiSlice.util.invalidateTags(['user']));
       } else {
         const { data, error } = await addFavorite(noticeId);
+
         if (error) {
           console.log('error:', error.message);
         }
+
         console.log('data:', data);
+
+        addToast({
+          message: 'The notice was added successfully to the favorites list!',
+          type: 'success',
+        });
+
         dispatch(userApiSlice.util.invalidateTags(['user']));
       }
     } catch (error) {
@@ -105,7 +129,7 @@ const LearnMore = ({ noticeId }) => {
         >
           <Flex display={'flex'} flexDirection={{ base: 'column', lg: 'row' }}>
             <Image
-              src={notice?.petImage ? notice?.petImage : '#'}
+              src={notice?.petImage ? notice?.petImage : placeholder}
               objectFit="cover"
               height={{ base: '240px', lg: '328px' }}
               width={{ base: '240px', lg: '288px' }}
@@ -130,7 +154,7 @@ const LearnMore = ({ noticeId }) => {
                 fontWeight: '500',
                 letterSpacing: '0.04em',
                 display: 'flex',
-                // justifyContent: 'center',
+                justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
@@ -278,10 +302,11 @@ const LearnMore = ({ noticeId }) => {
               <Text fontWeight="500">
                 <Box
                   as="span"
-                  fontSize="16px"
+                  fontSize={{ base: '14px', lg: '16px' }}
                   fontWeight="600"
-                  lineHeight="24px"
+                  lineHeight={{ base: '19px', lg: '22px' }}
                   letterSpacing="0.04em"
+                  wordBreak={'break-word'}
                 >
                   Comments:{' '}
                 </Box>
@@ -331,4 +356,3 @@ const LearnMore = ({ noticeId }) => {
 LearnMore.propTypes = {
   noticeId: PropTypes.string,
 };
-export default LearnMore;

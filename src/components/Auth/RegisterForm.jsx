@@ -39,19 +39,25 @@ const schemaStep1 = yup.object().shape({
   password: yup
     .string()
     .trim()
-    .matches(passRegexp, 'Password must be contain letters and numbers')
+    .matches(passRegexp, 'Please, use only letters or letters and numbers')
     .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
-    .matches(/^([a-zA-Z0-9])+$/u, 'Please, use only letters and numbers')
+    .matches(
+      /^([a-zA-Z0-9])+$/u,
+      'Please, use only letters or letters and numbers'
+    )
     .required('Password is required'),
 
   cpassword: yup
     .string()
     .trim()
-    .matches(passRegexp, 'Password must be contain letters and numbers')
+    .matches(passRegexp, 'Please, use only letters or letters and numbers')
     .min(7, 'Minimal password length is 7 symbols')
     .max(32, 'Max password length is 32 symbols')
-    .matches(/^([a-zA-Z0-9])+$/u, 'Please, use only letters and numbers')
+    .matches(
+      /^([a-zA-Z0-9])+$/u,
+      'Please, use only letters or letters and numbers'
+    )
     .required('Please repeat password')
     .oneOf([yup.ref('password')], 'Password do not match'),
 });
@@ -60,7 +66,7 @@ const schemaStep2 = yup.object().shape({
   name: yup
     .string()
     .matches(
-      /^([a-zA-Z-. a-zA-Z])+$/u,
+      /^([а-яА-Яa-zA-Z-. a-zA-Zі])+$/,
       'Please, use only letters, space or dash'
     )
     .trim()
@@ -77,9 +83,9 @@ const schemaStep2 = yup.object().shape({
 
   phone: yup
     .string()
-    .min(12, 'Minimal phone number length is 12 symbols')
+    .min(13, 'Minimal phone number length is 13 symbols')
     .max(13, 'Max phone number length is 13 symbols')
-    .matches(/^([+0-9])+$/u, 'Please, use only numbers')
+    .matches(/^\+380\d{9}$/u, 'Please, use only  +  and numbers')
     .required('Phone number is required'),
 });
 
@@ -169,6 +175,7 @@ const RegisterForm = () => {
                     mt={{ base: '0', lg: '10px' }}
                     mr={'10px'}
                     variant={'authFormIcon'}
+                    tabIndex={'-1'}
                     icon={showPass1 ? <BiShow /> : <BiHide />}
                     onClick={() => setShowPass1(!showPass1)}
                   />
@@ -189,6 +196,7 @@ const RegisterForm = () => {
                     mt={{ base: '0', lg: '10px' }}
                     mr={'10px'}
                     variant={'authFormIcon'}
+                    tabIndex={'-1'}
                     icon={showPass2 ? <BiShow /> : <BiHide />}
                     onClick={() => setShowPass2(!showPass2)}
                   />
@@ -234,8 +242,10 @@ const RegisterForm = () => {
             <FormControl isInvalid={errors.phone}>
               <Input
                 variant={'authForm'}
-                type={'text'}
+                type={'tel'}
                 placeholder={'Phone'}
+                // pattern={'^\\+380\\d{9}$'}
+                title={'Phone must be started +380xxxxxxxxx'}
                 {...register('phone')}
               />
               <FormErrorMessage>{errors.phone?.message}</FormErrorMessage>
