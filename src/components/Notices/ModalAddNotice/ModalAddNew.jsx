@@ -62,20 +62,20 @@ const schemaStep1 = yup.object().shape({
     .string()
     .trim()
     .min(2, 'Minimal title length is 2 symbols')
-    .max(32, 'Max title length is 32 symbols')
+    .max(48, 'Max title length is 48 symbols')
     .required('Title is required'),
   petName: yup
     .string()
     .trim()
     .min(2, 'Minimal pet name length is 2 symbols')
-    .max(32, 'Max pet name length is 32 symbols')
+    .max(16, 'Max pet name length is 16 symbols')
     .required('Pet name is required'),
   birth: yup.string().required('Birthday is required'),
   breed: yup
     .string()
     .trim()
     .min(2, 'Minimal breed length is 2 symbols')
-    .max(32, 'Max breed length is 32 symbols')
+    .max(16, 'Max breed length is 16 symbols')
     .required('Breed is required'),
 });
 
@@ -91,12 +91,12 @@ const schemaStep2 = yup.object().shape({
     .string()
     .trim()
     .min(1, 'Minimal price length is 1 symbols')
-    .max(100, 'Max price length is 100 symbols'),
+    .max(10, 'Max price length is 100 symbols'),
   comment: yup
     .string()
     .trim()
-    .min(10, 'Minimal password length is 10 symbols')
-    .max(320, 'Max password length is 320 symbols')
+    .min(8, 'Minimal password length is 8 symbols')
+    .max(120, 'Max password length is 120 symbols')
     .required('Comment is required'),
 });
 
@@ -182,6 +182,11 @@ export const ModalAddNew = () => {
     setStep(1);
   };
 
+  const handleClick = () => {
+    if (!isAuth) return navigate('/login');
+    onOpen();
+  };
+
   return (
     <>
       <Box
@@ -203,7 +208,7 @@ export const ModalAddNew = () => {
       >
         Add pet
         <IconButton
-          onClick={isAuth ? () => onOpen : () => navigate('/login')}
+          onClick={handleClick}
           variant={'mainIB'}
           icon={<HiPlus />}
         />
@@ -465,6 +470,8 @@ export const ModalAddNew = () => {
                     {...register('price')}
                     variant={'addNoticeForm'}
                     placeholder="Type price"
+                    required
+                    title="Price field id required"
                   />
                   <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
                 </FormControl>
