@@ -6,12 +6,13 @@ export const phoneRegExp =
 
 export const passRegexp = /^(?=.*[a-zA-Z]).{7,}$/;
 export const priceRegexp = /^[1-9]\d*(\.\d+)?$/;
+export const nameRegexp = /^[-а-яА-ЯёЁa-zA-Z\s]+$/;
 
 export const userFormSchema = yup.object({
   name: yup
     .string()
     .trim('The name cannot include leading and trailing spaces')
-    .matches(/[a-zA-Zа-яА-Я\s]*$/, 'Please enter valid name')
+    .matches(nameRegexp, 'Please enter valid name')
     .min(4, 'Need at least 4 characters')
     .max(40),
   email: yup.string().email('Must be a valid email'),
