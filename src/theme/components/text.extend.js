@@ -31,7 +31,7 @@ const noticeModalText = defineStyle({
   letterSpacing: ' -0.01em',
   color: 'textColor',
   width: { base: '240px', lg: '443px' },
-  height: { base: '66px', lg: '54px' },
+  // height: { base: '66px', lg: '54px' },
   margin: 'auto',
 });
 
