@@ -186,26 +186,37 @@ export const LearnMore = ({ noticeId }) => {
                   fontWeight="600"
                   fontSize={{ base: '14px', lg: '16px' }}
                   lineHeight={{ base: '19px', lg: '22px' }}
+                  p={0}
                 >
                   <Flex mt="20px">
-                    <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="600"
+                      lineHeight="22px"
+                      w={{ base: '118px', lg: '121px' }}
+                    >
                       Name:
                     </Text>
                     <Text
-                      ml={{ base: '74px', lg: '71px' }}
                       fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
                       lineHeight={{ base: '19px', lg: '22px' }}
+                      wordBreak={'break-word'}
+                      w={'calc(100% - 118px)'}
                     >
                       {notice?.petName}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
-                    <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="600"
+                      lineHeight="22px"
+                      w={{ base: '118px', lg: '121px' }}
+                    >
                       Birthday:
                     </Text>
                     <Text
-                      ml={{ base: '57px', lg: '51px' }}
                       fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
                       lineHeight={{ base: '19px', lg: '22px' }}
@@ -214,33 +225,50 @@ export const LearnMore = ({ noticeId }) => {
                     </Text>
                   </Flex>
                   <Flex mt="8px">
-                    <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="600"
+                      lineHeight="22px"
+                      w={{ base: '118px', lg: '121px' }}
+                    >
                       Breed:
                     </Text>
                     <Text
-                      ml={{ base: '74px', lg: '70px' }}
                       fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
                       lineHeight={{ base: '19px', lg: '22px' }}
+                      wordBreak={'break-word'}
+                      w={'calc(100% - 118px)'}
                     >
                       {notice?.breed}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
-                    <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="600"
+                      lineHeight="22px"
+                      w={{ base: '118px', lg: '121px' }}
+                    >
                       Place:
                     </Text>
                     <Text
-                      ml={{ base: '77px', lg: '73px' }}
                       fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
                       lineHeight={{ base: '19px', lg: '22px' }}
+                      wordBreak={'break-word'}
+                      w={'calc(100% - 118px)'}
                     >
                       {notice?.location}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
-                    <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="600"
+                      lineHeight="22px"
+                      w={{ base: '118px', lg: '121px' }}
+                    >
                       Sex:
                     </Text>
                     <Text
@@ -253,24 +281,34 @@ export const LearnMore = ({ noticeId }) => {
                     </Text>
                   </Flex>
                   <Flex mt="8px">
-                    <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="600"
+                      lineHeight="22px"
+                      w={{ base: '118px', lg: '121px' }}
+                    >
                       Email:
                     </Text>
                     <Text
-                      ml={{ base: '77px', lg: '74px' }}
                       fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
                       lineHeight={{ base: '19px', lg: '22px' }}
+                      wordBreak={'break-all'}
+                      w={'calc(100% - 118px)'}
                     >
                       {notice?.owner?.email}
                     </Text>
                   </Flex>
                   <Flex mt="8px">
-                    <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="600"
+                      lineHeight="22px"
+                      w={{ base: '118px', lg: '121px' }}
+                    >
                       Phone:
                     </Text>
                     <Text
-                      ml={{ base: '70px', lg: '66px' }}
                       fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
                       lineHeight={{ base: '19px', lg: '22px' }}
@@ -280,14 +318,20 @@ export const LearnMore = ({ noticeId }) => {
                   </Flex>
                   {!!notice?.price && (
                     <Flex mt="8px">
-                      <Text fontSize="16px" fontWeight="600" lineHeight="22px">
+                      <Text
+                        fontSize="16px"
+                        fontWeight="600"
+                        lineHeight="22px"
+                        w={{ base: '118px', lg: '121px' }}
+                      >
                         Price:
                       </Text>
                       <Text
-                        ml={{ base: '79px', lg: '76px' }}
                         fontSize={{ base: '14px', lg: '16px' }}
                         fontWeight="500"
                         lineHeight={{ base: '19px', lg: '22px' }}
+                        wordBreak={'break-word'}
+                        w={'calc(100% - 118px)'}
                       >
                         {notice?.price}₴
                       </Text>
