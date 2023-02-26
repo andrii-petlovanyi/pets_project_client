@@ -351,6 +351,7 @@ export const ModalAddNew = () => {
                           maxDate={Date.now()}
                           wrapperClassName="date__picker"
                           placeholderText={'Type date of birth'}
+                          popperPlacement={'top'}
                         />
                       </Box>
                     )}
