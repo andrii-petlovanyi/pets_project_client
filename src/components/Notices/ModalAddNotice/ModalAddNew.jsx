@@ -28,7 +28,7 @@ import { TfiPlus } from 'react-icons/tfi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { dateToString, stringToDate } from '../../../services/dateFormat';
-import { locationRegExp } from '../../../services/validation';
+import { locationRegExp, priceRegexp } from '../../../services/validation';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 import Toast from '../../../hooks/toast';
 import { calendarFunc } from '../../UserForm/Calendar/Calendar';
@@ -90,6 +90,7 @@ const schemaStep2 = yup.object().shape({
   price: yup
     .string()
     .trim()
+    .matches(priceRegexp, 'Price must be greater than zero')
     .min(1, 'Minimal price length is 1 symbols')
     .max(10, 'Max price length is 100 symbols'),
   comment: yup
@@ -187,6 +188,17 @@ export const ModalAddNew = () => {
     onOpen();
   };
 
+  const onChooseTitle = () => {
+    switch (category) {
+      case 'for-free':
+        return 'If you want to give your pet in good hands without paying you can create an advertisement. Please write information about the pet below';
+      case 'lost-found':
+        return 'If you lost or found a pet you can create an advertisement. Please write information about the pet below';
+      default:
+        return 'If you want to sell a pet you can create an advertisement. Please write information about the pet below';
+    }
+  };
+
   return (
     <>
       <Box
@@ -240,9 +252,8 @@ export const ModalAddNew = () => {
               as="form"
               onSubmit={handleSubmit(nextStep)}
             >
-              <Text variant={'noticeModalText'}>
-                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
-                amet, consectetur{' '}
+              <Text variant={'noticeModalText'} pb={'75px'}>
+                {onChooseTitle()}
               </Text>
               <FormControl id="category" isInvalid={errors.category}>
                 <Stack
@@ -399,7 +410,7 @@ export const ModalAddNew = () => {
               <FormControl id="petSex" isInvalid={errors.petSex}>
                 <FormLabel>
                   <Text variant={'noticesInputsHead'}>
-                    The sex<span style={{ color: '#F59256' }}>*</span>:
+                    Sex<span style={{ color: '#F59256' }}>*</span>:
                   </Text>
                 </FormLabel>
                 <Stack direction="row" spacing={4}>
@@ -533,6 +544,7 @@ export const ModalAddNew = () => {
                   fontWeight={'500'}
                   fontFamily={'Manrope'}
                   variant={'noticesInputsHead'}
+                  wordBreak={'break-word'}
                 >
                   Comments<span style={{ color: '#F59256' }}>*</span>
                 </FormLabel>
