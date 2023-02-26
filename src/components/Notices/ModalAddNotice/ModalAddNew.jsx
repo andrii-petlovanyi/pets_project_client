@@ -28,7 +28,7 @@ import { TfiPlus } from 'react-icons/tfi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { dateToString, stringToDate } from '../../../services/dateFormat';
-import { locationRegExp } from '../../../services/validation';
+import { locationRegExp, priceRegexp } from '../../../services/validation';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 import Toast from '../../../hooks/toast';
 import { calendarFunc } from '../../UserForm/Calendar/Calendar';
@@ -90,6 +90,7 @@ const schemaStep2 = yup.object().shape({
   price: yup
     .string()
     .trim()
+    .matches(priceRegexp, 'Price must be greater than zero')
     .min(1, 'Minimal price length is 1 symbols')
     .max(10, 'Max price length is 100 symbols'),
   comment: yup

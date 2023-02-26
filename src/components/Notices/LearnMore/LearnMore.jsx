@@ -103,10 +103,11 @@ export const LearnMore = ({ noticeId }) => {
   };
 
   const handleClick = () => {
-    if (window.innerWidth <= 480) {
+    if (window.innerWidth < 768) {
       window.location.href = `tel:${notice?.owner?.phone}`;
+    } else {
+      window.location.href = `mailto:${notice?.owner?.email}`;
     }
-    window.location.href = `mailto:${notice?.owner?.email}`;
   };
 
   return (
