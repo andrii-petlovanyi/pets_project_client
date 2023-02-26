@@ -410,7 +410,7 @@ export const ModalAddNew = () => {
               <FormControl id="petSex" isInvalid={errors.petSex}>
                 <FormLabel>
                   <Text variant={'noticesInputsHead'}>
-                    The sex<span style={{ color: '#F59256' }}>*</span>:
+                    Sex<span style={{ color: '#F59256' }}>*</span>:
                   </Text>
                 </FormLabel>
                 <Stack direction="row" spacing={4}>

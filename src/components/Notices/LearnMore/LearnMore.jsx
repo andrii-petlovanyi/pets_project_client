@@ -241,7 +241,7 @@ export const LearnMore = ({ noticeId }) => {
                   </Flex>
                   <Flex mt="8px">
                     <Text fontSize="16px" fontWeight="600" lineHeight="22px">
-                      The sex:
+                      Sex:
                     </Text>
                     <Text
                       ml={{ base: '61px', lg: '56px' }}
