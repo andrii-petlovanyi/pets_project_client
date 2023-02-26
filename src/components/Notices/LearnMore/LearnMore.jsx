@@ -272,7 +272,6 @@ export const LearnMore = ({ noticeId }) => {
                       Sex:
                     </Text>
                     <Text
-                      ml={{ base: '61px', lg: '56px' }}
                       fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
                       lineHeight={{ base: '19px', lg: '22px' }}
