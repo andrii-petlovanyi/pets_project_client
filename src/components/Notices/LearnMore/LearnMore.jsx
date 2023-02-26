@@ -25,6 +25,7 @@ import Toast from '../../../hooks/toast';
 import userSelectors from '../../../redux/user/user-selectors';
 import { useGetNoticeByIdQuery } from '../../../redux/notices/noticesApiSlice';
 import { useNavigate } from 'react-router';
+import placeholder from '../../../assets/placeholder.webp';
 
 export const LearnMore = ({ noticeId }) => {
   const isAuth = useSelector(userSelectors.isAuth);
@@ -128,7 +129,7 @@ export const LearnMore = ({ noticeId }) => {
         >
           <Flex display={'flex'} flexDirection={{ base: 'column', lg: 'row' }}>
             <Image
-              src={notice?.petImage ? notice?.petImage : '#'}
+              src={notice?.petImage ? notice?.petImage : placeholder}
               objectFit="cover"
               height={{ base: '240px', lg: '328px' }}
               width={{ base: '240px', lg: '288px' }}

@@ -32,6 +32,9 @@ import { locationRegExp } from '../../../services/validation';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
 import Toast from '../../../hooks/toast';
 import { calendarFunc } from '../../UserForm/Calendar/Calendar';
+import userSelectors from '../../../redux/user/user-selectors';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const schemaStep1Off = yup.object().shape({
   title: yup
@@ -67,9 +70,7 @@ const schemaStep1 = yup.object().shape({
     .min(2, 'Minimal pet name length is 2 symbols')
     .max(32, 'Max pet name length is 32 symbols')
     .required('Pet name is required'),
-  birth: yup
-    .string()
-    .required('Birthday is required'),
+  birth: yup.string().required('Birthday is required'),
   breed: yup
     .string()
     .trim()
@@ -101,7 +102,8 @@ const schemaStep2 = yup.object().shape({
 
 export const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const isAuth = useSelector(userSelectors.isAuth);
+  const navigate = useNavigate();
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
   const [petSex, setPetSex] = useState('male');
@@ -200,7 +202,11 @@ export const ModalAddNew = () => {
         right={{ base: '20px' }}
       >
         Add pet
-        <IconButton onClick={onOpen} variant={'mainIB'} icon={<HiPlus />} />
+        <IconButton
+          onClick={isAuth ? () => onOpen : () => navigate('/login')}
+          variant={'mainIB'}
+          icon={<HiPlus />}
+        />
       </Box>
 
       <Modal isOpen={isOpen} onClose={handleCLose} size={'custom'}>
