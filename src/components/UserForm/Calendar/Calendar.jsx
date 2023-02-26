@@ -45,6 +45,7 @@ export const calendarFunc = ({
       margin: 10,
       display: 'flex',
       justifyContent: 'center',
+      zIndex: 100,
     }}
   >
     <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
