@@ -43,14 +43,14 @@ const schemaStep1 = yup.object().shape({
     .string()
     .trim()
     .min(2, 'Minimal pet name length is 2 symbols')
-    .max(32, 'Max pet name length is 32 symbols')
+    .max(16, 'Max pet name length is 16 symbols')
     .required('Pet name is required'),
   birthday: yup.string().required('Birthday is required'),
   breed: yup
     .string()
     .trim()
     .min(2, 'Minimal breed length is 2 symbols')
-    .max(32, 'Max breed length is 32 symbols')
+    .max(16, 'Max breed length is 16 symbols')
     .required('Breed is required'),
 });
 
@@ -58,8 +58,8 @@ const schemaStep2 = yup.object().shape({
   comment: yup
     .string()
     .trim()
-    .min(10, 'Minimal password length is 10 symbols')
-    .max(320, 'Max password length is 320 symbols')
+    .min(8, 'Minimal password length is 8 symbols')
+    .max(120, 'Max password length is 120 symbols')
     .required('Comment is required'),
 });
 

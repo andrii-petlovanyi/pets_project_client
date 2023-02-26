@@ -245,7 +245,7 @@ const RegisterForm = () => {
                 type={'tel'}
                 placeholder={'Phone'}
                 // pattern={'^\\+380\\d{9}$'}
-                title={'Phone must be in the format +380990000000'}
+                title={'Phone must be started +380xxxxxxxxx'}
                 {...register('phone')}
               />
               <FormErrorMessage>{errors.phone?.message}</FormErrorMessage>
