@@ -24,7 +24,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Toast from '../../../hooks/toast';
 import userSelectors from '../../../redux/user/user-selectors';
 import { useGetNoticeByIdQuery } from '../../../redux/notices/noticesApiSlice';
-import { useNavigate } from 'react-router';
 import placeholder from '../../../assets/placeholder.webp';
 
 export const LearnMore = ({ noticeId }) => {
@@ -38,7 +37,6 @@ export const LearnMore = ({ noticeId }) => {
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
   const { addToast } = Toast();
-  const navigate = useNavigate();
 
   const { data: res } = useGetNoticeByIdQuery(noticeId);
   const { notice } = res || {};
@@ -51,7 +49,6 @@ export const LearnMore = ({ noticeId }) => {
           type: 'warning',
         });
 
-        navigate('/login');
         return;
       }
       if (isFavorite) {
@@ -272,7 +269,6 @@ export const LearnMore = ({ noticeId }) => {
                       Sex:
                     </Text>
                     <Text
-
                       fontSize={{ base: '14px', lg: '16px' }}
                       fontWeight="500"
                       lineHeight={{ base: '19px', lg: '22px' }}

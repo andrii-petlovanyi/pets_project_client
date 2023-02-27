@@ -29,7 +29,6 @@ import userApiSlice, {
 } from '../../../redux/user/userApiSlice';
 import Toast from '../../../hooks/toast';
 import { LearnMore } from '../../Notices';
-import { useNavigate } from 'react-router';
 import placeholder from '../../../assets/placeholder.webp';
 
 export const NoticeCategoryItem = ({ notice }) => {
@@ -52,7 +51,6 @@ export const NoticeCategoryItem = ({ notice }) => {
   const isFavorite = favorites?.includes(noticeId);
   const dispatch = useDispatch();
   const { addToast } = Toast();
-  const navigate = useNavigate();
 
   const removeNotice = async () => {
     try {
@@ -79,7 +77,6 @@ export const NoticeCategoryItem = ({ notice }) => {
           message: 'Please, authorize to be able to use this feature',
           type: 'warning',
         });
-        navigate('/login');
         return;
       }
       if (isFavorite) {

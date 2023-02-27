@@ -26,7 +26,7 @@ import { HiPlus } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
 import { TfiPlus } from 'react-icons/tfi';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+
 import { dateToString, stringToDate } from '../../../services/dateFormat';
 import { locationRegExp, priceRegexp } from '../../../services/validation';
 import { useAddNoticeMutation } from '../../../redux/notices/noticesApiSlice';
@@ -34,7 +34,8 @@ import Toast from '../../../hooks/toast';
 import { calendarFunc } from '../../UserForm/Calendar/Calendar';
 import userSelectors from '../../../redux/user/user-selectors';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 const schemaStep1Off = yup.object().shape({
   title: yup
@@ -104,7 +105,6 @@ const schemaStep2 = yup.object().shape({
 export const ModalAddNew = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isAuth = useSelector(userSelectors.isAuth);
-  const navigate = useNavigate();
   const [category, setCategory] = useState('sell');
   const [step, setStep] = useState(1);
   const [petSex, setPetSex] = useState('male');
@@ -185,8 +185,10 @@ export const ModalAddNew = () => {
 
   const handleClick = () => {
     if (!isAuth) {
-      navigate('/login');
-      addToast({ message: 'please authorize', type: 'error' });
+      addToast({
+        message: 'You are not logged in! Please log in',
+        type: 'warning',
+      });
       return;
     }
     onOpen();
@@ -251,7 +253,7 @@ export const ModalAddNew = () => {
           </Heading>
           {step === 1 && (
             <Stack
-              gap={{ base: '10px' }}
+              gap={{ base: '15px' }}
               w="100%"
               as="form"
               onSubmit={handleSubmit(nextStep)}
@@ -314,7 +316,9 @@ export const ModalAddNew = () => {
                   variant={'addNoticeForm'}
                   {...register('title')}
                 />
-                <FormErrorMessage position="absolute" bottom="-20px">{errors.title?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.title?.message}
+                </FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.petName}>
                 <FormLabel htmlFor="petName">
@@ -327,7 +331,9 @@ export const ModalAddNew = () => {
                   variant={'addNoticeForm'}
                   {...register('petName')}
                 />
-                <FormErrorMessage position="absolute" bottom="-20px">{errors.petName?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.petName?.message}
+                </FormErrorMessage>
               </FormControl>
               {category != 'lost-found' && (
                 <FormControl isInvalid={errors.birth}>
@@ -341,11 +347,10 @@ export const ModalAddNew = () => {
                     name="birth"
                     control={control}
                     render={({ field }) => (
-                      <Box style={{ height: '48px' }} variant={'addPetsForm'}>
+                      <Box height={'48px'} variant={'addPetsForm'}>
                         <DatePicker
                           renderCustomHeader={calendarFunc}
                           onChange={date => {
-                            console.log(date);
                             field.onChange(dateToString(date));
                           }}
                           selected={field.value && stringToDate(field.value)}
@@ -358,7 +363,9 @@ export const ModalAddNew = () => {
                       </Box>
                     )}
                   />
-                  <FormErrorMessage position="absolute" bottom="-20px">{errors.birth?.message}</FormErrorMessage>
+                  <FormErrorMessage position="absolute" bottom="-20px">
+                    {errors.birth?.message}
+                  </FormErrorMessage>
                 </FormControl>
               )}
               <FormControl
@@ -375,7 +382,9 @@ export const ModalAddNew = () => {
                   variant={'addNoticeForm'}
                   {...register('breed')}
                 />
-                <FormErrorMessage position="absolute" bottom="-20px">{errors.breed?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.breed?.message}
+                </FormErrorMessage>
               </FormControl>
               <Flex
                 pt={'20px'}
@@ -405,7 +414,7 @@ export const ModalAddNew = () => {
           )}
           {step === 2 && (
             <Stack
-              gap={{ base: '10px' }}
+              gap={{ base: '15px' }}
               w="100%"
               as="form"
               onSubmit={handleSubmit(onSubmit)}
@@ -457,7 +466,9 @@ export const ModalAddNew = () => {
                   </Button>
                 </Stack>
                 {errors.petSex && (
-                  <FormErrorMessage position="absolute" bottom="-20px">{errors.petSex.message}</FormErrorMessage>
+                  <FormErrorMessage position="absolute" bottom="-20px">
+                    {errors.petSex.message}
+                  </FormErrorMessage>
                 )}
               </FormControl>
               <FormControl isInvalid={errors.location}>
@@ -471,7 +482,9 @@ export const ModalAddNew = () => {
                   variant={'addNoticeForm'}
                   placeholder="Type location"
                 />
-                <FormErrorMessage position="absolute" bottom="-20px">{errors.location?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.location?.message}
+                </FormErrorMessage>
               </FormControl>
               {category == 'sell' && (
                 <FormControl isInvalid={errors.price}>
@@ -487,7 +500,9 @@ export const ModalAddNew = () => {
                     required
                     title="Price field id required"
                   />
-                  <FormErrorMessage position="absolute" bottom="-20px">{errors.price?.message}</FormErrorMessage>
+                  <FormErrorMessage position="absolute" bottom="-20px">
+                    {errors.price?.message}
+                  </FormErrorMessage>
                 </FormControl>
               )}
 
@@ -552,7 +567,9 @@ export const ModalAddNew = () => {
                   Comments<span style={{ color: '#F59256' }}>*</span>
                 </FormLabel>
                 <Textarea variant={'addForm'} {...register('comment')} />
-                <FormErrorMessage position="absolute" bottom="-20px">{errors.comment?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.comment?.message}
+                </FormErrorMessage>
               </FormControl>
               <Flex
                 pt={'20px'}
