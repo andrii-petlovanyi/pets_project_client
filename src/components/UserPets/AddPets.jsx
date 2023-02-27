@@ -149,7 +149,7 @@ const AddPets = () => {
             right={{ base: '20px', xl: '24px' }}
             icon={<MdClose />}
             variant={'secondIB'}
-            onClick={onClose}
+            onClick={handleClose}
           />
           <Heading
             as={'h2'}
@@ -166,16 +166,18 @@ const AddPets = () => {
               as="form"
               onSubmit={handleSubmit(nextStep)}
             >
-              <FormControl isInvalid={errors.name}>
+              <FormControl isInvalid={errors.name} position="relative">
                 <FormLabel htmlFor="name">Name pet</FormLabel>
                 <Input
                   variant={'addPetsForm'}
                   placeholder={'Type name pet'}
                   {...register('name')}
                 />
-                <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.name?.message}
+                </FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={errors.birthday}>
+              <FormControl isInvalid={errors.birthday} position="relative">
                 <FormLabel htmlFor="birthday">Date of birth</FormLabel>
                 <Controller
                   name="birthday"
@@ -197,11 +199,14 @@ const AddPets = () => {
                     </Box>
                   )}
                 />
-                <FormErrorMessage>{errors.birthday?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.birthday?.message}
+                </FormErrorMessage>
               </FormControl>
               <FormControl
                 isInvalid={errors.breed}
                 mb={{ base: '28px', lg: '40px' }}
+                position="relative"
               >
                 <FormLabel htmlFor="breed">Breed</FormLabel>
                 <Input
@@ -209,7 +214,9 @@ const AddPets = () => {
                   placeholder={'Type bread'}
                   {...register('breed')}
                 />
-                <FormErrorMessage>{errors.breed?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.breed?.message}
+                </FormErrorMessage>
               </FormControl>
               <Flex
                 pt={'20px'}
@@ -304,7 +311,7 @@ const AddPets = () => {
                   {avatarError}
                 </FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={errors.comment}>
+              <FormControl isInvalid={errors.comment} position="relative">
                 <FormLabel
                   htmlFor="comments"
                   fontSize={{ base: '18px', md: '24' }}
@@ -315,7 +322,9 @@ const AddPets = () => {
                   Comments
                 </FormLabel>
                 <Textarea variant={'addForm'} {...register('comment')} />
-                <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">
+                  {errors.comment?.message}
+                </FormErrorMessage>
               </FormControl>
               <Flex
                 pt={'20px'}

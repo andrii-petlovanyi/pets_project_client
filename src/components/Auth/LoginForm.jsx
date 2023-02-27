@@ -34,7 +34,7 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .trim()
-    .min(8, 'Minimal password length is 8 symbols')
+    .min(7, 'Minimal password length is 8 symbols')
     .max(32, 'Max password length is 32 symbols')
     .required('Password is required'),
 });
@@ -91,15 +91,17 @@ const LoginForm = () => {
           as="form"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <FormControl isInvalid={errors.email}>
+          <FormControl isInvalid={errors.email} position="relative">
             <Input
               variant={'authForm'}
               placeholder={'Email'}
               {...register('email')}
             />
-            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+            <FormErrorMessage position="absolute" bottom="-20px">
+              {errors?.email?.message}
+            </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.password}>
+          <FormControl isInvalid={errors.password} position="relative">
             <InputGroup>
               <Input
                 variant={'authForm'}
@@ -117,7 +119,9 @@ const LoginForm = () => {
                 />
               </InputRightElement>
             </InputGroup>
-            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+            <FormErrorMessage position="absolute" bottom="-20px">
+              {errors.password?.message}
+            </FormErrorMessage>
           </FormControl>
 
           <Button

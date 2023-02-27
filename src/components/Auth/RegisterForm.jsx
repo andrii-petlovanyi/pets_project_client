@@ -146,15 +146,17 @@ const RegisterForm = () => {
             as="form"
             onSubmit={handleSubmit(nextStep)}
           >
-            <FormControl isInvalid={errors.email}>
+            <FormControl isInvalid={errors.email} position="relative">
               <Input
                 variant={'authForm'}
                 placeholder={'Email'}
                 {...register('email')}
               />
-              <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+              <FormErrorMessage position="absolute" bottom="-20px">
+                {errors.email?.message}
+              </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.password}>
+            <FormControl isInvalid={errors.password} position="relative">
               <InputGroup>
                 <Input
                   variant={'authForm'}
@@ -173,9 +175,11 @@ const RegisterForm = () => {
                   />
                 </InputRightElement>
               </InputGroup>
-              <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+              <FormErrorMessage position="absolute" bottom="-20px">
+                {errors.password?.message}
+              </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.cpassword}>
+            <FormControl isInvalid={errors.cpassword} position="relative">
               <InputGroup>
                 <Input
                   variant={'authForm'}
@@ -194,7 +198,9 @@ const RegisterForm = () => {
                   />
                 </InputRightElement>
               </InputGroup>
-              <FormErrorMessage>{errors.cpassword?.message}</FormErrorMessage>
+              <FormErrorMessage position="absolute" bottom="-20px">
+                {errors.cpassword?.message}
+              </FormErrorMessage>
             </FormControl>
 
             <Button

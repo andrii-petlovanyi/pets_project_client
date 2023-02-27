@@ -25,7 +25,9 @@ const News = () => {
     setSearch(e.target.value);
   };
 
-  const { news } = data || [];
+  let news =
+    data?.news?.slice().sort((a, b) => new Date(b.date) - new Date(a.date)) ||
+    [];
 
   return (
     <>
