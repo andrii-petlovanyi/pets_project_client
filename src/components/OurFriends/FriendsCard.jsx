@@ -74,15 +74,22 @@ export const FriendsCard = ({ friend = {} }) => {
           </Box>
           <Box mt={'4px'}>
             <Text>Address:</Text>
-            <Text>{address || '-------------------'}</Text>
+            <Link _hover={{ color: 'mainOrange' }}>
+              {address || '-------------------'}
+            </Link>
           </Box>
           <Box mt={'4px'}>
             <Text>Email:</Text>
-            <Text> {email || '-------------------'} </Text>
+            <Link _hover={{ color: 'mainOrange' }} href="mailto:">
+              {' '}
+              {email || '-------------------'}{' '}
+            </Link>
           </Box>
           <Box mt={'4px'}>
             <Text>Phone:</Text>
-            <Text>{phone || '-------------------'}</Text>
+            <Link _hover={{ color: 'mainOrange' }} href="tel:">
+              {phone || '-------------------'}
+            </Link>
           </Box>
         </CardBody>
       </Flex>

@@ -9,7 +9,10 @@ export const ScheduleMenu = ({ workDays = [] }) => {
   console.log(result);
   return (
     <Menu>
-      <MenuButton _active={{ color: 'mainOrange' }}>
+      <MenuButton
+        _active={{ color: 'mainOrange' }}
+        _hover={{ color: 'mainOrange' }}
+      >
         {workDays?.length > 0
           ? workDays[result]?.isOpen
             ? ` ${workDays[result].from} - ${workDays[result].to}`
