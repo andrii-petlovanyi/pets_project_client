@@ -190,6 +190,7 @@ const AddPets = () => {
                         selected={field.value && stringToDate(field.value)}
                         dateFormat="dd.MM.yyyy"
                         maxDate={Date.now()}
+                        popperPlacement={'top'}
                         wrapperClassName="date__picker"
                         placeholderText={'Type date of birth'}
                       />

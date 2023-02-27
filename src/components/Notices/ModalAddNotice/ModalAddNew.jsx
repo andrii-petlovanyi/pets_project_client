@@ -252,9 +252,7 @@ export const ModalAddNew = () => {
               as="form"
               onSubmit={handleSubmit(nextStep)}
             >
-              <Text variant={'noticeModalText'} pb={'75px'}>
-                {onChooseTitle()}
-              </Text>
+              <Text variant={'noticeModalText'}>{onChooseTitle()}</Text>
               <FormControl id="category" isInvalid={errors.category}>
                 <Stack
                   display="flex"
@@ -351,6 +349,7 @@ export const ModalAddNew = () => {
                           maxDate={Date.now()}
                           wrapperClassName="date__picker"
                           placeholderText={'Type date of birth'}
+                          popperPlacement={'top'}
                         />
                       </Box>
                     )}

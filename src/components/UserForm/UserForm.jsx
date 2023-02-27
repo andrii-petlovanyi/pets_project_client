@@ -10,7 +10,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import Toast from '../../hooks/toast';
 
 import UserAvatar from './Avatar';
-import { calendarFunc } from './Calendar/Calendar';
+import { calendarFunc } from './Calendar/Calendar.jsx';
 import { ButtonUserForm } from './ButtonUserForm';
 import { userFormSchema } from '../../services/validation';
 import { dateToString, stringToDate } from '../../services/dateFormat';
@@ -244,7 +244,7 @@ const UserForm = ({ ...props }) => {
                   name="birthday"
                   control={control}
                   render={({ field }) => (
-                    <Box style={{ width: '216px', height: '32px' }}>
+                    <Box width={'216px'} height={'32px'}>
                       <DatePicker
                         renderCustomHeader={calendarFunc}
                         disabled={isDisabled.birthday}
@@ -254,6 +254,7 @@ const UserForm = ({ ...props }) => {
                         selected={field.value}
                         dateFormat="dd.MM.yyyy"
                         maxDate={Date.now()}
+                        popperPlacement={'top'}
                       />
                     </Box>
                   )}
