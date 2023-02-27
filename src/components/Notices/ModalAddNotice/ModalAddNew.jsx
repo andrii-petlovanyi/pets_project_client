@@ -342,12 +342,16 @@ export const ModalAddNew = () => {
                       Date of birth<span style={{ color: '#F59256' }}>*</span>
                     </Text>
                   </FormLabel>
-
                   <Controller
                     name="birth"
                     control={control}
                     render={({ field }) => (
-                      <Box height={'48px'} variant={'addPetsForm'}>
+                      <Box
+                        height={'48px'}
+                        variant={'addNoticeForm'}
+                        filter={'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))'}
+                        borderRadius={'40px'}
+                      >
                         <DatePicker
                           renderCustomHeader={calendarFunc}
                           onChange={date => {

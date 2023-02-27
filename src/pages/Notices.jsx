@@ -7,6 +7,8 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
+import '../components/UserForm/Calendar/Calendar.styled.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Notices = () => {
   const navigate = useNavigate();
