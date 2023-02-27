@@ -80,14 +80,14 @@ export const FriendsCard = ({ friend = {} }) => {
           </Box>
           <Box mt={'4px'}>
             <Text>Email:</Text>
-            <Link _hover={{ color: 'mainOrange' }} href="mailto:">
+            <Link _hover={{ color: 'mainOrange' }} href={`mailto:${email}`}>
               {' '}
               {email || '-------------------'}{' '}
             </Link>
           </Box>
           <Box mt={'4px'}>
             <Text>Phone:</Text>
-            <Link _hover={{ color: 'mainOrange' }} href="tel:">
+            <Link _hover={{ color: 'mainOrange' }} href={`tel:${phone}`}>
               {phone || '-------------------'}
             </Link>
           </Box>
