@@ -184,7 +184,11 @@ export const ModalAddNew = () => {
   };
 
   const handleClick = () => {
-    if (!isAuth) return navigate('/login');
+    if (!isAuth) {
+      navigate('/login');
+      addToast({ message: 'please authorize', type: 'error' });
+      return;
+    }
     onOpen();
   };
 
@@ -310,7 +314,7 @@ export const ModalAddNew = () => {
                   variant={'addNoticeForm'}
                   {...register('title')}
                 />
-                <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">{errors.title?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors.petName}>
                 <FormLabel htmlFor="petName">
@@ -323,7 +327,7 @@ export const ModalAddNew = () => {
                   variant={'addNoticeForm'}
                   {...register('petName')}
                 />
-                <FormErrorMessage>{errors.petName?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">{errors.petName?.message}</FormErrorMessage>
               </FormControl>
               {category != 'lost-found' && (
                 <FormControl isInvalid={errors.birth}>
@@ -354,7 +358,7 @@ export const ModalAddNew = () => {
                       </Box>
                     )}
                   />
-                  <FormErrorMessage>{errors.birth?.message}</FormErrorMessage>
+                  <FormErrorMessage position="absolute" bottom="-20px">{errors.birth?.message}</FormErrorMessage>
                 </FormControl>
               )}
               <FormControl
@@ -371,7 +375,7 @@ export const ModalAddNew = () => {
                   variant={'addNoticeForm'}
                   {...register('breed')}
                 />
-                <FormErrorMessage>{errors.breed?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">{errors.breed?.message}</FormErrorMessage>
               </FormControl>
               <Flex
                 pt={'20px'}
@@ -453,7 +457,7 @@ export const ModalAddNew = () => {
                   </Button>
                 </Stack>
                 {errors.petSex && (
-                  <FormErrorMessage>{errors.petSex.message}</FormErrorMessage>
+                  <FormErrorMessage position="absolute" bottom="-20px">{errors.petSex.message}</FormErrorMessage>
                 )}
               </FormControl>
               <FormControl isInvalid={errors.location}>
@@ -467,7 +471,7 @@ export const ModalAddNew = () => {
                   variant={'addNoticeForm'}
                   placeholder="Type location"
                 />
-                <FormErrorMessage>{errors.location?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">{errors.location?.message}</FormErrorMessage>
               </FormControl>
               {category == 'sell' && (
                 <FormControl isInvalid={errors.price}>
@@ -483,7 +487,7 @@ export const ModalAddNew = () => {
                     required
                     title="Price field id required"
                   />
-                  <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
+                  <FormErrorMessage position="absolute" bottom="-20px">{errors.price?.message}</FormErrorMessage>
                 </FormControl>
               )}
 
@@ -548,7 +552,7 @@ export const ModalAddNew = () => {
                   Comments<span style={{ color: '#F59256' }}>*</span>
                 </FormLabel>
                 <Textarea variant={'addForm'} {...register('comment')} />
-                <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
+                <FormErrorMessage position="absolute" bottom="-20px">{errors.comment?.message}</FormErrorMessage>
               </FormControl>
               <Flex
                 pt={'20px'}
