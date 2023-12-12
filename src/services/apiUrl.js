@@ -1,1 +1,1 @@
-export const API_URL = 'https://pets.tryapi.site/api';
+export const API_URL = 'https://pets.tryapp.pp.ua/api';
